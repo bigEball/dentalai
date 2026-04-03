@@ -258,7 +258,7 @@ export default function SettingsPage() {
     <div className="max-w-3xl">
       <div className="mb-6">
         <h1 className="text-xl font-semibold text-gray-900">Settings</h1>
-        <p className="mt-1 text-sm text-gray-500">Configure DentalAI integrations and preferences</p>
+        <p className="mt-1 text-sm text-gray-500">Configure Smart Dental AI integrations and preferences</p>
       </div>
 
       <div className="space-y-5">
@@ -270,7 +270,7 @@ export default function SettingsPage() {
             </div>
             <div>
               <h2 className="text-sm font-semibold text-gray-900">Operating Mode</h2>
-              <p className="text-xs text-gray-500 mt-0.5">Choose how DentalAI connects to your practice</p>
+              <p className="text-xs text-gray-500 mt-0.5">Choose how Smart Dental AI connects to your practice</p>
             </div>
           </div>
 

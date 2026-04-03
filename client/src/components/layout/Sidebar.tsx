@@ -83,11 +83,11 @@ export default function Sidebar() {
         <div className="flex items-center gap-2.5">
           <img
             src="/logo.jpg"
-            alt="DentalAI"
+            alt="Smart Dental AI Services"
             className="h-9 w-9 rounded-lg object-cover flex-shrink-0"
           />
           <div>
-            <p className="text-sm font-semibold text-white leading-none">DentalAI</p>
+            <p className="text-sm font-semibold text-white leading-none">Smart Dental AI</p>
             <p className="text-[10px] text-gray-500 mt-0.5">AI Operations Layer</p>
           </div>
         </div>

@@ -80,7 +80,7 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`DentalAI server running on http://localhost:${PORT}`);
+  console.log(`Smart Dental AI server running on http://localhost:${PORT}`);
 });
 
 export default app;

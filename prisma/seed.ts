@@ -5,7 +5,7 @@ process.env['DATABASE_URL'] = 'file:../data/dentalai.db';
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('Seeding DentalAI database...');
+  console.log('Seeding Smart Dental AI database...');
 
   // ─── Providers ────────────────────────────────────────────────────────────
   const providers = await Promise.all([

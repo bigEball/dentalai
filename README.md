@@ -1,4 +1,4 @@
-# DentalAI — Intelligent Dental Operations Platform
+# Smart Dental AI Services
 
 An AI-powered operations layer for dental offices running Open Dental. Built as a polished local MVP demonstrating intelligent automation for clinical notes, insurance, billing, recall, and radiograph review.
 
@@ -28,7 +28,7 @@ The app will be available at:
 - **Backend API**: http://localhost:3001
 
 ### Demo Login
-- **Email**: `demo@dentalai.com`
+- **Email**: `demo@smartdentalai.com`
 - **Password**: `demo`
 
 ---
@@ -162,7 +162,7 @@ npm run db:seed
 - [ ] Build an Open Dental API adapter in `server/src/integrations/openDental/`
 - [ ] Scheduled sync job (cron) to pull patients, appointments, claims
 - [ ] Webhook listener for real-time appointment events
-- [ ] Map Open Dental procedure codes to DentalAI claim data
+- [ ] Map Open Dental procedure codes to Smart Dental AI claim data
 
 ### Phase 3 — Real AI
 - [ ] Replace mock SOAP generator with OpenAI/Anthropic API call

@@ -1,11 +1,11 @@
 services:
   - type: web
-    name: dentalai
+    name: smart-dental-ai
     runtime: node
     buildCommand: npm run build
     startCommand: npm start
     disk:
-      name: dentalai-data
+      name: smart-dental-ai-data
       mountPath: /opt/render/project/src/data
       sizeGB: 1
     envVars:

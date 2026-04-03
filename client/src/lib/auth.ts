@@ -11,13 +11,13 @@ export interface AuthUser {
 const DEMO_USER: AuthUser = {
   id: 'demo-user',
   name: 'Dr. Sarah Mitchell',
-  email: 'demo@dentalai.com',
+  email: 'demo@smartdentalai.com',
   role: 'admin',
   office: 'Bright Smiles Dental',
 };
 
 const DEMO_CREDENTIALS = {
-  email: 'demo@dentalai.com',
+  email: 'demo@smartdentalai.com',
   password: 'demo',
 };
 
