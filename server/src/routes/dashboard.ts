@@ -19,6 +19,13 @@ router.get('/stats', async (_req: Request, res: Response) => {
       allClaims,
       allBalances,
       approvedThisMonth,
+      treatmentPlansProposed,
+      pendingPreAuths,
+      allInventory,
+      pendingFollowUps,
+      pendingForms,
+      activePaymentPlans,
+      openReferrals,
     ] = await Promise.all([
       // Total pending claims (pending + submitted)
       prisma.insuranceClaim.count({
@@ -65,6 +72,41 @@ router.get('/stats', async (_req: Request, res: Response) => {
           submittedDate: { gte: firstOfMonth },
         },
       }),
+
+      // Treatment plans proposed
+      prisma.treatmentPlan.count({
+        where: { status: 'proposed' },
+      }),
+
+      // Pending pre-authorizations
+      prisma.preAuthorization.count({
+        where: { status: 'submitted' },
+      }),
+
+      // All inventory items (for low stock check)
+      prisma.inventoryItem.findMany({
+        select: { currentStock: true, minStock: true },
+      }),
+
+      // Pending follow-ups
+      prisma.followUp.count({
+        where: { status: 'pending' },
+      }),
+
+      // Pending forms
+      prisma.patientForm.count({
+        where: { status: 'pending' },
+      }),
+
+      // Active payment plans
+      prisma.paymentPlan.count({
+        where: { status: 'active' },
+      }),
+
+      // Open referrals
+      prisma.referral.count({
+        where: { status: { in: ['pending', 'sent'] } },
+      }),
     ]);
 
     // Claims grouped by status
@@ -93,6 +135,9 @@ router.get('/stats', async (_req: Request, res: Response) => {
       })(),
     }));
 
+    // Low stock count (Prisma can't compare two columns, so filter in memory)
+    const lowStockItems = allInventory.filter((item) => item.currentStock <= item.minStock).length;
+
     res.json({
       totalPendingClaims: pendingClaimsCount,
       totalOutstandingBalance: balanceAgg._sum.amount ?? 0,
@@ -102,6 +147,13 @@ router.get('/stats', async (_req: Request, res: Response) => {
       claimsByStatus,
       balancesByCollectionStatus,
       recoveredRevenueThisMonth: approvedThisMonth._sum.approvedAmount ?? 0,
+      treatmentPlansProposed,
+      pendingPreAuths,
+      lowStockItems,
+      pendingFollowUps,
+      pendingForms,
+      activePaymentPlans,
+      openReferrals,
     });
   } catch (err) {
     console.error(err);

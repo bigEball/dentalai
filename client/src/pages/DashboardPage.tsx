@@ -111,6 +111,13 @@ const MOCK_STATS: DashboardStats = {
     collections: 1,
   },
   recoveredRevenueThisMonth: 51300,
+  treatmentPlansProposed: 6,
+  pendingPreAuths: 3,
+  lowStockItems: 2,
+  pendingFollowUps: 4,
+  pendingForms: 1,
+  activePaymentPlans: 5,
+  openReferrals: 2,
 };
 
 const MOCK_TOP_BALANCES = [

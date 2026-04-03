@@ -32,6 +32,14 @@ model Patient {
   balances        Balance[]
   recallTasks     RecallTask[]
   radiographs     RadiographStudy[]
+  treatmentPlans  TreatmentPlan[]
+  paymentPlans    PaymentPlan[]
+  forms           PatientForm[]
+  referrals       Referral[]
+  communications  Communication[]
+  followUps       FollowUp[]
+  perioExams      PerioExam[]
+  preAuths        PreAuthorization[]
   provider        Provider?         @relation(fields: [providerId], references: [id])
 }
 
@@ -43,9 +51,12 @@ model Provider {
   specialty String
   createdAt DateTime @default(now())
 
-  patients      Patient[]
-  appointments  Appointment[]
-  clinicalNotes ClinicalNote[]
+  patients       Patient[]
+  appointments   Appointment[]
+  clinicalNotes  ClinicalNote[]
+  treatmentPlans TreatmentPlan[] @relation("TreatmentPlanProvider")
+  referrals      Referral[]      @relation("ReferralProvider")
+  perioExams     PerioExam[]     @relation("PerioExamProvider")
 }
 
 model Appointment {
@@ -64,6 +75,7 @@ model Appointment {
   provider      Provider         @relation(fields: [providerId], references: [id])
   clinicalNotes ClinicalNote[]
   claims        InsuranceClaim[]
+  followUps     FollowUp[]
 }
 
 model ClinicalNote {
@@ -106,8 +118,9 @@ model InsurancePlan {
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
 
-  patient Patient          @relation(fields: [patientId], references: [id])
-  claims  InsuranceClaim[]
+  patient  Patient            @relation(fields: [patientId], references: [id])
+  claims   InsuranceClaim[]
+  preAuths PreAuthorization[]
 }
 
 model InsuranceClaim {
@@ -177,6 +190,209 @@ model RadiographStudy {
   createdAt     DateTime @default(now())
 
   patient Patient @relation(fields: [patientId], references: [id])
+}
+
+model TreatmentPlan {
+  id              String   @id @default(cuid())
+  patientId       String
+  providerId      String
+  title           String
+  status          String   @default("proposed") // proposed, accepted, in_progress, completed, declined
+  presentedDate   String
+  acceptedDate    String?
+  totalEstimate   Float
+  insuranceEst    Float    @default(0)
+  patientEst      Float    @default(0)
+  priority        String   @default("standard") // urgent, high, standard, elective
+  notes           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  patient  Patient             @relation(fields: [patientId], references: [id])
+  provider Provider            @relation("TreatmentPlanProvider", fields: [providerId], references: [id])
+  items    TreatmentPlanItem[]
+}
+
+model TreatmentPlanItem {
+  id              String  @id @default(cuid())
+  treatmentPlanId String
+  procedureCode   String
+  description     String
+  toothNumber     String?
+  surface         String?
+  estimatedCost   Float
+  insuranceCoverage Float @default(0)
+  patientCost     Float   @default(0)
+  status          String  @default("pending") // pending, scheduled, completed
+  sequence        Int     @default(1)
+
+  treatmentPlan TreatmentPlan @relation(fields: [treatmentPlanId], references: [id])
+}
+
+model PaymentPlan {
+  id              String   @id @default(cuid())
+  patientId       String
+  totalAmount     Float
+  downPayment     Float    @default(0)
+  remainingAmount Float
+  monthlyPayment  Float
+  totalInstallments Int
+  paidInstallments  Int    @default(0)
+  interestRate    Float    @default(0)
+  startDate       String
+  status          String   @default("active") // active, completed, defaulted, cancelled
+  notes           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  patient      Patient                  @relation(fields: [patientId], references: [id])
+  installments PaymentPlanInstallment[]
+}
+
+model PaymentPlanInstallment {
+  id            String   @id @default(cuid())
+  paymentPlanId String
+  installmentNo Int
+  amount        Float
+  dueDate       String
+  paidDate      String?
+  status        String   @default("pending") // pending, paid, overdue, missed
+  createdAt     DateTime @default(now())
+
+  paymentPlan PaymentPlan @relation(fields: [paymentPlanId], references: [id])
+}
+
+model PatientForm {
+  id          String   @id @default(cuid())
+  patientId   String?
+  formType    String   // health_history, consent, financial, hipaa, new_patient
+  title       String
+  status      String   @default("pending") // pending, submitted, reviewed
+  submittedAt String?
+  reviewedBy  String?
+  reviewedAt  String?
+  formData    String?  // JSON string of form field values
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  patient Patient? @relation(fields: [patientId], references: [id])
+}
+
+model Referral {
+  id              String   @id @default(cuid())
+  patientId       String
+  referringProvId String
+  referredToName  String
+  referredToSpecialty String
+  referredToPhone String?
+  referredToEmail String?
+  reason          String
+  urgency         String   @default("routine") // urgent, soon, routine
+  status          String   @default("pending") // pending, sent, scheduled, completed, declined
+  sentDate        String?
+  appointmentDate String?
+  reportReceived  Boolean  @default(false)
+  reportNotes     String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  patient         Patient  @relation(fields: [patientId], references: [id])
+  referringProvider Provider @relation("ReferralProvider", fields: [referringProvId], references: [id])
+}
+
+model InventoryItem {
+  id            String   @id @default(cuid())
+  name          String
+  category      String   // restorative, preventive, surgical, orthodontic, office, ppe
+  sku           String?
+  currentStock  Int
+  minStock      Int
+  maxStock      Int
+  unit          String   @default("units") // units, boxes, packs, rolls
+  unitCost      Float
+  supplier      String?
+  lastOrderDate String?
+  expiryDate    String?
+  location      String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Communication {
+  id          String   @id @default(cuid())
+  patientId   String
+  channel     String   // sms, email, phone, portal
+  direction   String   // inbound, outbound
+  subject     String?
+  body        String
+  status      String   @default("sent") // draft, sent, delivered, failed, read
+  sentAt      String?
+  readAt      String?
+  sentBy      String   @default("system") // system, provider name
+  metadata    String?  // JSON - template used, campaign id, etc
+  createdAt   DateTime @default(now())
+
+  patient Patient @relation(fields: [patientId], references: [id])
+}
+
+model FollowUp {
+  id            String   @id @default(cuid())
+  patientId     String
+  appointmentId String?
+  procedureType String
+  procedureDate String
+  followUpDate  String
+  status        String   @default("pending") // pending, sent, responded, completed
+  channel       String   @default("sms") // sms, email, phone
+  message       String
+  response      String?
+  respondedAt   String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  patient     Patient      @relation(fields: [patientId], references: [id])
+  appointment Appointment? @relation(fields: [appointmentId], references: [id])
+}
+
+model PerioExam {
+  id          String   @id @default(cuid())
+  patientId   String
+  providerId  String
+  examDate    String
+  pocketDepths String  // JSON: {"1":{"B":[3,2,3],"L":[2,2,3]},...} per tooth buccal/lingual
+  recession    String? // JSON same format
+  bleeding     String? // JSON: {"1":{"B":[0,1,0],"L":[0,0,0]},...} 0/1
+  furcation    String? // JSON for furcation involvement
+  mobility     String? // JSON: {"14":1,"15":2,...}
+  plaque       String? // JSON same format as bleeding
+  notes        String?
+  createdAt    DateTime @default(now())
+
+  patient  Patient  @relation(fields: [patientId], references: [id])
+  provider Provider @relation("PerioExamProvider", fields: [providerId], references: [id])
+}
+
+model PreAuthorization {
+  id              String   @id @default(cuid())
+  patientId       String
+  insurancePlanId String
+  procedureCodes  String
+  toothNumbers    String?
+  estimatedCost   Float
+  reason          String
+  status          String   @default("draft") // draft, submitted, approved, denied, expired
+  submittedDate   String?
+  responseDate    String?
+  approvedAmount  Float?
+  denialReason    String?
+  expiryDate      String?
+  authNumber      String?
+  notes           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  patient       Patient       @relation(fields: [patientId], references: [id])
+  insurancePlan InsurancePlan @relation(fields: [insurancePlanId], references: [id])
 }
 
 model ActivityLog {

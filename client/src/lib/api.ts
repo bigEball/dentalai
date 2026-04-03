@@ -1,6 +1,8 @@
 import axios from 'axios';
 import type {
   Patient,
+  Provider,
+  Appointment,
   ClinicalNote,
   InsurancePlan,
   InsuranceClaim,
@@ -9,6 +11,16 @@ import type {
   RadiographStudy,
   DashboardStats,
   ActivityLog,
+  TreatmentPlan,
+  TreatmentPlanItem,
+  PaymentPlan,
+  PatientForm,
+  Referral,
+  InventoryItem,
+  Communication,
+  FollowUp,
+  PerioExam,
+  PreAuthorization,
 } from '@/types';
 
 const api = axios.create({
@@ -203,6 +215,308 @@ export async function uploadRadiograph(file: File, patientId: string, type: stri
     headers: { 'Content-Type': 'multipart/form-data' },
     timeout: 60000,
   });
+  return data;
+}
+
+// ─── Treatment Plans ─────────────────────────────────────────────────────────
+
+export async function getTreatmentPlans(params?: { status?: string; patientId?: string }): Promise<{ plans: TreatmentPlan[]; total: number }> {
+  const { data } = await api.get<TreatmentPlan[]>('/treatment-plans', { params });
+  return { plans: data, total: data.length };
+}
+
+export async function getTreatmentPlan(id: string): Promise<TreatmentPlan> {
+  const { data } = await api.get<TreatmentPlan>(`/treatment-plans/${id}`);
+  return data;
+}
+
+export async function createTreatmentPlan(payload: Partial<TreatmentPlan> & { items?: Partial<TreatmentPlanItem>[] }): Promise<TreatmentPlan> {
+  const { data } = await api.post<TreatmentPlan>('/treatment-plans', payload);
+  return data;
+}
+
+export async function updateTreatmentPlan(id: string, payload: Partial<TreatmentPlan>): Promise<TreatmentPlan> {
+  const { data } = await api.patch<TreatmentPlan>(`/treatment-plans/${id}`, payload);
+  return data;
+}
+
+export async function acceptTreatmentPlan(id: string): Promise<TreatmentPlan> {
+  const { data } = await api.patch<TreatmentPlan>(`/treatment-plans/${id}/accept`);
+  return data;
+}
+
+export async function declineTreatmentPlan(id: string): Promise<TreatmentPlan> {
+  const { data } = await api.patch<TreatmentPlan>(`/treatment-plans/${id}/decline`);
+  return data;
+}
+
+// ─── Calendar ────────────────────────────────────────────────────────────────
+
+export async function getCalendarAppointments(params?: { start?: string; end?: string; providerId?: string }): Promise<{ appointments: Appointment[]; total: number }> {
+  const { data } = await api.get<Appointment[]>('/calendar', { params });
+  return { appointments: data, total: data.length };
+}
+
+export async function getCalendarProviders(): Promise<Provider[]> {
+  const { data } = await api.get<Provider[]>('/calendar/providers');
+  return data;
+}
+
+export async function getAvailability(params: { providerId: string; date: string }): Promise<{ slots: string[] }> {
+  const { data } = await api.get<{ slots: string[] }>('/calendar/availability', { params });
+  return data;
+}
+
+// ─── Reports ─────────────────────────────────────────────────────────────────
+
+export async function getProductionReport(params?: { start?: string; end?: string }): Promise<Record<string, unknown>> {
+  const { data } = await api.get<Record<string, unknown>>('/reports/production', { params });
+  return data;
+}
+
+export async function getCollectionsReport(): Promise<Record<string, unknown>> {
+  const { data } = await api.get<Record<string, unknown>>('/reports/collections');
+  return data;
+}
+
+export async function getCaseAcceptanceReport(): Promise<Record<string, unknown>> {
+  const { data } = await api.get<Record<string, unknown>>('/reports/case-acceptance');
+  return data;
+}
+
+export async function getHygieneReport(): Promise<Record<string, unknown>> {
+  const { data } = await api.get<Record<string, unknown>>('/reports/hygiene');
+  return data;
+}
+
+export async function getAgingARReport(): Promise<Record<string, unknown>> {
+  const { data } = await api.get<Record<string, unknown>>('/reports/aging-ar');
+  return data;
+}
+
+// ─── Communications ──────────────────────────────────────────────────────────
+
+export async function getCommunications(params?: { patientId?: string; channel?: string }): Promise<{ communications: Communication[]; total: number }> {
+  const { data } = await api.get<Communication[]>('/communications', { params });
+  return { communications: data, total: data.length };
+}
+
+export async function getCommunication(id: string): Promise<Communication> {
+  const { data } = await api.get<Communication>(`/communications/${id}`);
+  return data;
+}
+
+export async function sendCommunication(payload: Partial<Communication>): Promise<Communication> {
+  const { data } = await api.post<Communication>('/communications', payload);
+  return data;
+}
+
+export async function sendBulkCommunication(payload: { patientIds: string[]; channel: string; subject?: string; body: string }): Promise<{ success: boolean; sent: number }> {
+  const { data } = await api.post<{ success: boolean; sent: number }>('/communications/bulk', payload);
+  return data;
+}
+
+// ─── Pre-Authorization ──────────────────────────────────────────────────────
+
+export async function getPreAuths(params?: { status?: string }): Promise<{ preAuths: PreAuthorization[]; total: number }> {
+  const { data } = await api.get<PreAuthorization[]>('/pre-authorizations', { params });
+  return { preAuths: data, total: data.length };
+}
+
+export async function getPreAuth(id: string): Promise<PreAuthorization> {
+  const { data } = await api.get<PreAuthorization>(`/pre-authorizations/${id}`);
+  return data;
+}
+
+export async function createPreAuth(payload: Partial<PreAuthorization>): Promise<PreAuthorization> {
+  const { data } = await api.post<PreAuthorization>('/pre-authorizations', payload);
+  return data;
+}
+
+export async function updatePreAuth(id: string, payload: Partial<PreAuthorization>): Promise<PreAuthorization> {
+  const { data } = await api.patch<PreAuthorization>(`/pre-authorizations/${id}`, payload);
+  return data;
+}
+
+export async function submitPreAuth(id: string): Promise<PreAuthorization> {
+  const { data } = await api.patch<PreAuthorization>(`/pre-authorizations/${id}/submit`);
+  return data;
+}
+
+// ─── Payment Plans ───────────────────────────────────────────────────────────
+
+export async function getPaymentPlans(params?: { status?: string }): Promise<{ plans: PaymentPlan[]; total: number }> {
+  const { data } = await api.get<PaymentPlan[]>('/payment-plans', { params });
+  return { plans: data, total: data.length };
+}
+
+export async function getPaymentPlan(id: string): Promise<PaymentPlan> {
+  const { data } = await api.get<PaymentPlan>(`/payment-plans/${id}`);
+  return data;
+}
+
+export async function createPaymentPlan(payload: { patientId: string; totalAmount: number; downPayment?: number; monthlyPayment: number; startDate: string; interestRate?: number; notes?: string }): Promise<PaymentPlan> {
+  const { data } = await api.post<PaymentPlan>('/payment-plans', payload);
+  return data;
+}
+
+export async function payInstallment(id: string): Promise<PaymentPlan> {
+  const { data } = await api.patch<PaymentPlan>(`/payment-plans/${id}/pay-installment`);
+  return data;
+}
+
+export async function cancelPaymentPlan(id: string): Promise<PaymentPlan> {
+  const { data } = await api.patch<PaymentPlan>(`/payment-plans/${id}/cancel`);
+  return data;
+}
+
+// ─── Forms ───────────────────────────────────────────────────────────────────
+
+export async function getForms(params?: { status?: string; formType?: string }): Promise<{ forms: PatientForm[]; total: number }> {
+  const { data } = await api.get<PatientForm[]>('/forms', { params });
+  return { forms: data, total: data.length };
+}
+
+export async function getForm(id: string): Promise<PatientForm> {
+  const { data } = await api.get<PatientForm>(`/forms/${id}`);
+  return data;
+}
+
+export async function createForm(payload: Partial<PatientForm>): Promise<PatientForm> {
+  const { data } = await api.post<PatientForm>('/forms', payload);
+  return data;
+}
+
+export async function submitForm(id: string): Promise<PatientForm> {
+  const { data } = await api.patch<PatientForm>(`/forms/${id}/submit`);
+  return data;
+}
+
+export async function reviewForm(id: string, reviewedBy: string): Promise<PatientForm> {
+  const { data } = await api.patch<PatientForm>(`/forms/${id}/review`, { reviewedBy });
+  return data;
+}
+
+// ─── Follow-Ups ──────────────────────────────────────────────────────────────
+
+export async function getFollowUps(params?: { status?: string }): Promise<{ followUps: FollowUp[]; total: number }> {
+  const { data } = await api.get<FollowUp[]>('/follow-ups', { params });
+  return { followUps: data, total: data.length };
+}
+
+export async function getFollowUp(id: string): Promise<FollowUp> {
+  const { data } = await api.get<FollowUp>(`/follow-ups/${id}`);
+  return data;
+}
+
+export async function createFollowUp(payload: Partial<FollowUp>): Promise<FollowUp> {
+  const { data } = await api.post<FollowUp>('/follow-ups', payload);
+  return data;
+}
+
+export async function sendFollowUp(id: string): Promise<FollowUp> {
+  const { data } = await api.patch<FollowUp>(`/follow-ups/${id}/send`);
+  return data;
+}
+
+export async function respondFollowUp(id: string, response: string): Promise<FollowUp> {
+  const { data } = await api.patch<FollowUp>(`/follow-ups/${id}/respond`, { response });
+  return data;
+}
+
+export async function completeFollowUp(id: string): Promise<FollowUp> {
+  const { data } = await api.patch<FollowUp>(`/follow-ups/${id}/complete`);
+  return data;
+}
+
+// ─── Referrals ───────────────────────────────────────────────────────────────
+
+export async function getReferrals(params?: { status?: string }): Promise<{ referrals: Referral[]; total: number }> {
+  const { data } = await api.get<Referral[]>('/referrals', { params });
+  return { referrals: data, total: data.length };
+}
+
+export async function getReferral(id: string): Promise<Referral> {
+  const { data } = await api.get<Referral>(`/referrals/${id}`);
+  return data;
+}
+
+export async function createReferral(payload: Partial<Referral>): Promise<Referral> {
+  const { data } = await api.post<Referral>('/referrals', payload);
+  return data;
+}
+
+export async function updateReferral(id: string, payload: Partial<Referral>): Promise<Referral> {
+  const { data } = await api.patch<Referral>(`/referrals/${id}`, payload);
+  return data;
+}
+
+export async function sendReferral(id: string): Promise<Referral> {
+  const { data } = await api.patch<Referral>(`/referrals/${id}/send`);
+  return data;
+}
+
+export async function scheduleReferral(id: string, appointmentDate: string): Promise<Referral> {
+  const { data } = await api.patch<Referral>(`/referrals/${id}/schedule`, { appointmentDate });
+  return data;
+}
+
+export async function completeReferral(id: string, reportNotes?: string): Promise<Referral> {
+  const { data } = await api.patch<Referral>(`/referrals/${id}/complete`, { reportNotes });
+  return data;
+}
+
+// ─── Inventory ───────────────────────────────────────────────────────────────
+
+export async function getInventory(params?: { category?: string; lowStock?: boolean }): Promise<{ items: InventoryItem[]; total: number }> {
+  const { data } = await api.get<InventoryItem[]>('/inventory', { params });
+  return { items: data, total: data.length };
+}
+
+export async function getInventoryItem(id: string): Promise<InventoryItem> {
+  const { data } = await api.get<InventoryItem>(`/inventory/${id}`);
+  return data;
+}
+
+export async function createInventoryItem(payload: Partial<InventoryItem>): Promise<InventoryItem> {
+  const { data } = await api.post<InventoryItem>('/inventory', payload);
+  return data;
+}
+
+export async function updateInventoryItem(id: string, payload: Partial<InventoryItem>): Promise<InventoryItem> {
+  const { data } = await api.patch<InventoryItem>(`/inventory/${id}`, payload);
+  return data;
+}
+
+export async function restockItem(id: string, quantity: number): Promise<InventoryItem> {
+  const { data } = await api.patch<InventoryItem>(`/inventory/${id}/restock`, { quantity });
+  return data;
+}
+
+export async function getInventoryAlerts(): Promise<InventoryItem[]> {
+  const { data } = await api.get<InventoryItem[]>('/inventory/alerts');
+  return data;
+}
+
+// ─── Perio ───────────────────────────────────────────────────────────────────
+
+export async function getPerioExams(params?: { patientId?: string }): Promise<{ exams: PerioExam[]; total: number }> {
+  const { data } = await api.get<PerioExam[]>('/perio', { params });
+  return { exams: data, total: data.length };
+}
+
+export async function getPerioExam(id: string): Promise<PerioExam> {
+  const { data } = await api.get<PerioExam>(`/perio/${id}`);
+  return data;
+}
+
+export async function createPerioExam(payload: Partial<PerioExam>): Promise<PerioExam> {
+  const { data } = await api.post<PerioExam>('/perio', payload);
+  return data;
+}
+
+export async function comparePerioExams(patientId: string): Promise<{ exams: PerioExam[]; comparison: Record<string, unknown> }> {
+  const { data } = await api.get<{ exams: PerioExam[]; comparison: Record<string, unknown> }>(`/perio/patient/${patientId}/compare`);
   return data;
 }
 

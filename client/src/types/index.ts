@@ -162,4 +162,184 @@ export interface DashboardStats {
   claimsByStatus: Record<string, number>;
   balancesByCollectionStatus: Record<string, number>;
   recoveredRevenueThisMonth: number;
+  treatmentPlansProposed: number;
+  pendingPreAuths: number;
+  lowStockItems: number;
+  pendingFollowUps: number;
+  pendingForms: number;
+  activePaymentPlans: number;
+  openReferrals: number;
+}
+
+export interface TreatmentPlan {
+  id: string;
+  patientId: string;
+  providerId: string;
+  title: string;
+  status: 'proposed' | 'accepted' | 'in_progress' | 'completed' | 'declined';
+  presentedDate: string;
+  acceptedDate?: string | null;
+  totalEstimate: number;
+  insuranceEst: number;
+  patientEst: number;
+  priority: 'urgent' | 'high' | 'standard' | 'elective';
+  notes?: string | null;
+  items?: TreatmentPlanItem[];
+  patient?: Patient;
+  provider?: Provider;
+}
+
+export interface TreatmentPlanItem {
+  id: string;
+  treatmentPlanId: string;
+  procedureCode: string;
+  description: string;
+  toothNumber?: string | null;
+  surface?: string | null;
+  estimatedCost: number;
+  insuranceCoverage: number;
+  patientCost: number;
+  status: 'pending' | 'scheduled' | 'completed';
+  sequence: number;
+}
+
+export interface PaymentPlan {
+  id: string;
+  patientId: string;
+  totalAmount: number;
+  downPayment: number;
+  remainingAmount: number;
+  monthlyPayment: number;
+  totalInstallments: number;
+  paidInstallments: number;
+  interestRate: number;
+  startDate: string;
+  status: 'active' | 'completed' | 'defaulted' | 'cancelled';
+  notes?: string | null;
+  patient?: Patient;
+  installments?: PaymentPlanInstallment[];
+}
+
+export interface PaymentPlanInstallment {
+  id: string;
+  paymentPlanId: string;
+  installmentNo: number;
+  amount: number;
+  dueDate: string;
+  paidDate?: string | null;
+  status: 'pending' | 'paid' | 'overdue' | 'missed';
+}
+
+export interface PatientForm {
+  id: string;
+  patientId?: string | null;
+  formType: 'health_history' | 'consent' | 'financial' | 'hipaa' | 'new_patient';
+  title: string;
+  status: 'pending' | 'submitted' | 'reviewed';
+  submittedAt?: string | null;
+  reviewedBy?: string | null;
+  reviewedAt?: string | null;
+  formData?: string | null;
+  patient?: Patient;
+}
+
+export interface Referral {
+  id: string;
+  patientId: string;
+  referringProvId: string;
+  referredToName: string;
+  referredToSpecialty: string;
+  referredToPhone?: string | null;
+  referredToEmail?: string | null;
+  reason: string;
+  urgency: 'urgent' | 'soon' | 'routine';
+  status: 'pending' | 'sent' | 'scheduled' | 'completed' | 'declined';
+  sentDate?: string | null;
+  appointmentDate?: string | null;
+  reportReceived: boolean;
+  reportNotes?: string | null;
+  patient?: Patient;
+  referringProvider?: Provider;
+}
+
+export interface InventoryItem {
+  id: string;
+  name: string;
+  category: 'restorative' | 'preventive' | 'surgical' | 'orthodontic' | 'office' | 'ppe';
+  sku?: string | null;
+  currentStock: number;
+  minStock: number;
+  maxStock: number;
+  unit: string;
+  unitCost: number;
+  supplier?: string | null;
+  lastOrderDate?: string | null;
+  expiryDate?: string | null;
+  location?: string | null;
+}
+
+export interface Communication {
+  id: string;
+  patientId: string;
+  channel: 'sms' | 'email' | 'phone' | 'portal';
+  direction: 'inbound' | 'outbound';
+  subject?: string | null;
+  body: string;
+  status: 'draft' | 'sent' | 'delivered' | 'failed' | 'read';
+  sentAt?: string | null;
+  readAt?: string | null;
+  sentBy: string;
+  metadata?: string | null;
+  patient?: Patient;
+}
+
+export interface FollowUp {
+  id: string;
+  patientId: string;
+  appointmentId?: string | null;
+  procedureType: string;
+  procedureDate: string;
+  followUpDate: string;
+  status: 'pending' | 'sent' | 'responded' | 'completed';
+  channel: 'sms' | 'email' | 'phone';
+  message: string;
+  response?: string | null;
+  respondedAt?: string | null;
+  patient?: Patient;
+}
+
+export interface PerioExam {
+  id: string;
+  patientId: string;
+  providerId: string;
+  examDate: string;
+  pocketDepths: string | Record<string, unknown>;
+  recession?: string | null;
+  bleeding?: string | null;
+  furcation?: string | null;
+  mobility?: string | null;
+  plaque?: string | null;
+  notes?: string | null;
+  patient?: Patient;
+  provider?: Provider;
+}
+
+export interface PreAuthorization {
+  id: string;
+  patientId: string;
+  insurancePlanId: string;
+  procedureCodes: string;
+  toothNumbers?: string | null;
+  estimatedCost: number;
+  reason: string;
+  status: 'draft' | 'submitted' | 'approved' | 'denied' | 'expired';
+  submittedDate?: string | null;
+  responseDate?: string | null;
+  approvedAmount?: number | null;
+  denialReason?: string | null;
+  expiryDate?: string | null;
+  authNumber?: string | null;
+  notes?: string | null;
+  patient?: Patient;
+  insurancePlan?: InsurancePlan;
 }

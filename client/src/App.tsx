@@ -11,6 +11,18 @@ import BillingPage from '@/pages/BillingPage';
 import RecallPage from '@/pages/RecallPage';
 import RadiographsPage from '@/pages/RadiographsPage';
 import SettingsPage from '@/pages/SettingsPage';
+import CompliancePage from '@/pages/CompliancePage';
+import TreatmentPlansPage from '@/pages/TreatmentPlansPage';
+import CalendarPage from '@/pages/CalendarPage';
+import ReportsPage from '@/pages/ReportsPage';
+import CommunicationsPage from '@/pages/CommunicationsPage';
+import PreauthPage from '@/pages/PreauthPage';
+import PaymentPlansPage from '@/pages/PaymentPlansPage';
+import FormsPage from '@/pages/FormsPage';
+import FollowUpsPage from '@/pages/FollowUpsPage';
+import ReferralsPage from '@/pages/ReferralsPage';
+import InventoryPage from '@/pages/InventoryPage';
+import PerioChartPage from '@/pages/PerioChartPage';
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth();
@@ -39,6 +51,18 @@ function AppRoutes() {
         <Route path="billing" element={<BillingPage />} />
         <Route path="recall" element={<RecallPage />} />
         <Route path="radiographs" element={<RadiographsPage />} />
+        <Route path="treatment-plans" element={<TreatmentPlansPage />} />
+        <Route path="calendar" element={<CalendarPage />} />
+        <Route path="reports" element={<ReportsPage />} />
+        <Route path="communications" element={<CommunicationsPage />} />
+        <Route path="preauth" element={<PreauthPage />} />
+        <Route path="payment-plans" element={<PaymentPlansPage />} />
+        <Route path="forms" element={<FormsPage />} />
+        <Route path="follow-ups" element={<FollowUpsPage />} />
+        <Route path="referrals" element={<ReferralsPage />} />
+        <Route path="inventory" element={<InventoryPage />} />
+        <Route path="perio" element={<PerioChartPage />} />
+        <Route path="compliance" element={<CompliancePage />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/dashboard" replace />} />

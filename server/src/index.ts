@@ -13,6 +13,17 @@ import radiographsRouter from './routes/radiographs';
 import dashboardRouter from './routes/dashboard';
 import activityRouter from './routes/activity';
 import settingsRouter from './routes/settings';
+import treatmentPlansRouter from './routes/treatmentPlans';
+import calendarRouter from './routes/calendar';
+import reportsRouter from './routes/reports';
+import communicationsRouter from './routes/communications';
+import preauthRouter from './routes/preauth';
+import paymentPlansRouter from './routes/paymentPlans';
+import formsRouter from './routes/forms';
+import followupsRouter from './routes/followups';
+import referralsRouter from './routes/referrals';
+import inventoryRouter from './routes/inventory';
+import perioRouter from './routes/perio';
 
 const app = express();
 const PORT = process.env.PORT ?? 3001;
@@ -59,6 +70,17 @@ app.use('/api/v1/radiographs', radiographsRouter);
 app.use('/api/v1/dashboard', dashboardRouter);
 app.use('/api/v1/activity', activityRouter);
 app.use('/api/v1/settings', settingsRouter);
+app.use('/api/v1/treatment-plans', treatmentPlansRouter);
+app.use('/api/v1/calendar', calendarRouter);
+app.use('/api/v1/reports', reportsRouter);
+app.use('/api/v1/communications', communicationsRouter);
+app.use('/api/v1/preauth', preauthRouter);
+app.use('/api/v1/payment-plans', paymentPlansRouter);
+app.use('/api/v1/forms', formsRouter);
+app.use('/api/v1/followups', followupsRouter);
+app.use('/api/v1/referrals', referralsRouter);
+app.use('/api/v1/inventory', inventoryRouter);
+app.use('/api/v1/perio', perioRouter);
 
 // SPA fallback — serve index.html for non-API routes in production
 if (process.env.NODE_ENV === 'production') {

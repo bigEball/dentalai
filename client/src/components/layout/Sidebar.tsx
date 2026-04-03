@@ -10,6 +10,17 @@ import {
   Scan,
   Settings,
   LogOut,
+  ClipboardList,
+  Calendar,
+  BarChart3,
+  MessageSquare,
+  ShieldCheck,
+  CreditCard,
+  FileCheck,
+  Bell,
+  ArrowRightLeft,
+  Package,
+  Activity,
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { getInitials } from '@/lib/utils';
@@ -19,17 +30,32 @@ import type { SystemStatus } from '@/lib/api';
 const MAIN_NAV = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/patients', label: 'Patients', icon: Users },
+  { to: '/calendar', label: 'Calendar', icon: Calendar },
 ];
 
 const AI_NAV = [
   { to: '/notes', label: 'AI Notes', icon: FileText },
+  { to: '/treatment-plans', label: 'Treatment Plans', icon: ClipboardList },
   { to: '/insurance', label: 'Insurance', icon: Shield },
+  { to: '/preauth', label: 'Pre-Auth', icon: ShieldCheck },
   { to: '/billing', label: 'Billing', icon: DollarSign },
+  { to: '/payment-plans', label: 'Payment Plans', icon: CreditCard },
   { to: '/recall', label: 'Recall', icon: RefreshCw },
   { to: '/radiographs', label: 'Radiographs', icon: Scan },
+  { to: '/perio', label: 'Perio Chart', icon: Activity },
+];
+
+const OFFICE_NAV = [
+  { to: '/communications', label: 'Communications', icon: MessageSquare },
+  { to: '/follow-ups', label: 'Follow-Ups', icon: Bell },
+  { to: '/referrals', label: 'Referrals', icon: ArrowRightLeft },
+  { to: '/forms', label: 'Patient Forms', icon: FileCheck },
+  { to: '/inventory', label: 'Inventory', icon: Package },
+  { to: '/reports', label: 'Reports', icon: BarChart3 },
 ];
 
 const SYSTEM_NAV = [
+  { to: '/compliance', label: 'Compliance', icon: Shield },
   { to: '/settings', label: 'Settings', icon: Settings },
 ];
 
@@ -97,6 +123,7 @@ export default function Sidebar() {
       <div className="flex-1 overflow-y-auto px-3 py-4">
         <NavSection label="Main" items={MAIN_NAV} />
         <NavSection label="AI Modules" items={AI_NAV} />
+        <NavSection label="Office" items={OFFICE_NAV} />
         <NavSection label="System" items={SYSTEM_NAV} />
       </div>
 
