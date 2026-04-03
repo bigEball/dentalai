@@ -20,7 +20,7 @@ const PORT = process.env.PORT ?? 3001;
 // Middleware
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
     credentials: true,
   })
 );
@@ -29,6 +29,12 @@ app.use(express.json());
 // Serve uploaded files statically
 const uploadsPath = path.resolve(__dirname, '../../data/uploads');
 app.use('/uploads', express.static(uploadsPath));
+
+// Serve client build in production
+if (process.env.NODE_ENV === 'production') {
+  const clientPath = path.resolve(__dirname, '../../client/dist');
+  app.use(express.static(clientPath));
+}
 
 // Request logger
 app.use((req: Request, _res: Response, next: NextFunction) => {
@@ -54,7 +60,15 @@ app.use('/api/v1/dashboard', dashboardRouter);
 app.use('/api/v1/activity', activityRouter);
 app.use('/api/v1/settings', settingsRouter);
 
-// 404 handler
+// SPA fallback — serve index.html for non-API routes in production
+if (process.env.NODE_ENV === 'production') {
+  const clientPath = path.resolve(__dirname, '../../client/dist');
+  app.get('*', (_req: Request, res: Response) => {
+    res.sendFile(path.join(clientPath, 'index.html'));
+  });
+}
+
+// 404 handler (API routes only in production)
 app.use((_req: Request, res: Response) => {
   res.status(404).json({ error: 'Not found' });
 });

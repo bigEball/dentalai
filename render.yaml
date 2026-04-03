@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: dentalai
+    runtime: node
+    buildCommand: npm run build
+    startCommand: npm start
+    disk:
+      name: dentalai-data
+      mountPath: /opt/render/project/src/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        value: file:../data/dentalai.db
