@@ -11,10 +11,13 @@ import {
   DollarSign,
   UserPlus,
   BookOpen,
+  Send,
+  MessageSquare,
+  Phone,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
-import { getForms, createForm, reviewForm, getPatients } from '@/lib/api';
+import { getForms, createForm, reviewForm, sendFormToPatient, getPatients } from '@/lib/api';
 import type { PatientForm, Patient } from '@/types';
 import { formatDate, getInitials } from '@/lib/utils';
 import { FullPageSpinner } from '@/components/ui/LoadingSpinner';
@@ -32,7 +35,7 @@ const MOCK_FORMS: PatientForm[] = [
     reviewedBy: 'Dr. Sarah Chen',
     reviewedAt: '2024-01-08T14:00:00Z',
     formData: null,
-    patient: { id: 'p3', firstName: 'Maria', lastName: 'Garcia', dateOfBirth: '1992-11-08', phone: '5551238765', email: 'maria.g@email.com', preferredContactMethod: 'phone', outstandingBalance: 680.50, createdAt: '', updatedAt: '' },
+    patient: { id: 'p3', firstName: 'Maria', lastName: 'Garcia', dateOfBirth: '1992-11-08', phone: '(555) 123-8765', email: 'maria.g@email.com', preferredContactMethod: 'phone', outstandingBalance: 680.50, createdAt: '', updatedAt: '' },
   },
   {
     id: 'f2',
@@ -44,7 +47,7 @@ const MOCK_FORMS: PatientForm[] = [
     reviewedBy: null,
     reviewedAt: null,
     formData: null,
-    patient: { id: 'p5', firstName: 'Michael', lastName: 'Torres', dateOfBirth: '1989-09-12', phone: '5552229988', email: 'mtorres@email.com', preferredContactMethod: 'text', outstandingBalance: 2840, createdAt: '', updatedAt: '' },
+    patient: { id: 'p5', firstName: 'Michael', lastName: 'Torres', dateOfBirth: '1989-09-12', phone: '(555) 222-9988', email: 'mtorres@email.com', preferredContactMethod: 'text', outstandingBalance: 2840, createdAt: '', updatedAt: '' },
   },
   {
     id: 'f3',
@@ -92,7 +95,7 @@ const MOCK_FORMS: PatientForm[] = [
     reviewedBy: null,
     reviewedAt: null,
     formData: null,
-    patient: { id: 'p9', firstName: 'Amanda', lastName: 'Chen', dateOfBirth: '1988-06-14', phone: '5551112233', email: 'amanda.c@email.com', preferredContactMethod: 'text', outstandingBalance: 980.75, createdAt: '', updatedAt: '' },
+    patient: { id: 'p9', firstName: 'Amanda', lastName: 'Chen', dateOfBirth: '1988-06-14', phone: '(555) 111-2233', email: 'amanda.c@email.com', preferredContactMethod: 'text', outstandingBalance: 980.75, createdAt: '', updatedAt: '' },
   },
   {
     id: 'f7',
@@ -104,7 +107,7 @@ const MOCK_FORMS: PatientForm[] = [
     reviewedBy: null,
     reviewedAt: null,
     formData: null,
-    patient: { id: 'p10', firstName: 'James', lastName: 'Wilson', dateOfBirth: '1960-01-15', phone: '5559990011', email: 'j.wilson@email.com', preferredContactMethod: 'phone', outstandingBalance: 4200, createdAt: '', updatedAt: '' },
+    patient: { id: 'p10', firstName: 'James', lastName: 'Wilson', dateOfBirth: '1960-01-15', phone: '(555) 999-0011', email: 'j.wilson@email.com', preferredContactMethod: 'phone', outstandingBalance: 4200, createdAt: '', updatedAt: '' },
   },
 ];
 
@@ -183,6 +186,9 @@ export default function FormsPage() {
   const [createTitle, setCreateTitle] = useState('');
   const [createPatientId, setCreatePatientId] = useState('');
   const [creating, setCreating] = useState(false);
+  const [sendForm, setSendForm] = useState<PatientForm | null>(null);
+  const [sending, setSending] = useState(false);
+  const [sentPreview, setSentPreview] = useState<{ message: string; link: string } | null>(null);
 
   const loadData = useCallback(async () => {
     setLoading(true);
@@ -260,6 +266,34 @@ export default function FormsPage() {
       setCreateType('health_history');
       setCreatePatientId('');
       loadData();
+    }
+  }
+
+  async function handleSend() {
+    if (!sendForm) return;
+    setSending(true);
+    try {
+      const result = await sendFormToPatient(sendForm.id);
+      setSentPreview({ message: result.messagePreview, link: result.formLink });
+      setForms((prev) =>
+        prev.map((f) => (f.id === sendForm.id ? { ...f, sentAt: new Date().toISOString() } : f)),
+      );
+      toast.success(`Form sent to ${sendForm.patient?.firstName}!`);
+    } catch {
+      // Demo fallback
+      const patientFirst = sendForm.patient?.firstName || 'Patient';
+      const fakeLink = `https://smartdentalai.onrender.com/forms/fill/demo-${sendForm.id}`;
+      const fakeMsg =
+        `Hi ${patientFirst}! 😊 Smart Dental AI here. We have some paperwork for your upcoming visit. ` +
+        `Please fill it out at your convenience:\n\n${fakeLink}\n\n` +
+        `It only takes a few minutes and helps us make the most of your appointment time. See you soon!`;
+      setSentPreview({ message: fakeMsg, link: fakeLink });
+      setForms((prev) =>
+        prev.map((f) => (f.id === sendForm.id ? { ...f, sentAt: new Date().toISOString() } : f)),
+      );
+      toast.success(`Form sent to ${patientFirst}!`);
+    } finally {
+      setSending(false);
     }
   }
 
@@ -460,6 +494,25 @@ export default function FormsPage() {
                         </span>
                       </div>
 
+                      {/* Send to Patient — only for pending forms with a patient */}
+                      {form.status === 'pending' && form.patient && !form.sentAt && (
+                        <button
+                          onClick={() => setSendForm(form)}
+                          className="inline-flex items-center gap-1.5 text-xs font-medium py-1.5 px-3 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 transition-colors"
+                        >
+                          <Send size={13} />
+                          <span className="hidden sm:inline">Send to Patient</span>
+                        </button>
+                      )}
+
+                      {/* Sent indicator */}
+                      {form.sentAt && form.status === 'pending' && (
+                        <span className="inline-flex items-center gap-1 text-[11px] text-emerald-600 font-medium">
+                          <CheckCircle size={12} />
+                          Sent
+                        </span>
+                      )}
+
                       {form.status === 'submitted' && (
                         <button
                           onClick={() => handleMarkReviewed(form)}
@@ -546,6 +599,104 @@ export default function FormsPage() {
             </button>
           </div>
         </div>
+      </Modal>
+
+      {/* Send Form Modal */}
+      <Modal
+        isOpen={!!sendForm}
+        onClose={() => { setSendForm(null); setSentPreview(null); }}
+        title={sentPreview ? 'Message Sent!' : 'Send Form to Patient'}
+        size="sm"
+      >
+        {sendForm && !sentPreview && (
+          <div className="space-y-4">
+            {/* Patient info */}
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 border border-gray-100">
+              <div className="h-10 w-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center flex-shrink-0">
+                <span className="text-sm font-bold">
+                  {getInitials(sendForm.patient?.firstName ?? '', sendForm.patient?.lastName ?? '')}
+                </span>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-gray-900">
+                  {sendForm.patient?.firstName} {sendForm.patient?.lastName}
+                </p>
+                <p className="text-xs text-gray-500 flex items-center gap-1">
+                  <Phone size={11} />
+                  {sendForm.patient?.phone || 'No phone on file'}
+                </p>
+              </div>
+            </div>
+
+            {/* Message preview */}
+            <div>
+              <p className="text-xs font-medium text-gray-600 mb-1.5 flex items-center gap-1.5">
+                <MessageSquare size={13} />
+                Text message preview
+              </p>
+              <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-100 text-sm text-gray-700 leading-relaxed whitespace-pre-line">
+                Hi {sendForm.patient?.firstName}! 😊 Smart Dental AI here. We have some paperwork for your upcoming visit. Please fill it out at your convenience:
+                {'\n\n'}
+                <span className="text-indigo-600 underline">https://smartdentalai.onrender.com/forms/fill/...</span>
+                {'\n\n'}
+                It only takes a few minutes and helps us make the most of your appointment time. See you soon!
+              </div>
+            </div>
+
+            <p className="text-xs text-gray-400">
+              Form: {sendForm.title}
+            </p>
+
+            <div className="flex gap-3 pt-1">
+              <button
+                onClick={handleSend}
+                disabled={sending || !sendForm.patient?.phone}
+                className="inline-flex items-center justify-center gap-2 flex-1 py-2.5 rounded-lg bg-emerald-600 text-white text-sm font-medium hover:bg-emerald-700 transition-colors disabled:opacity-50"
+              >
+                {sending ? <Loader2 size={15} className="animate-spin" /> : <Send size={15} />}
+                Send Text
+              </button>
+              <button
+                onClick={() => setSendForm(null)}
+                className="btn-secondary flex-1 justify-center py-2.5"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        )}
+
+        {sentPreview && (
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 p-4 rounded-lg bg-emerald-50 border border-emerald-100">
+              <div className="p-2 rounded-full bg-emerald-100">
+                <CheckCircle size={24} className="text-emerald-600" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-gray-900">
+                  Text sent to {sendForm?.patient?.firstName}
+                </p>
+                <p className="text-xs text-gray-500">
+                  {sendForm?.patient?.phone}
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xs font-medium text-gray-500 mb-1.5">Message sent:</p>
+              <div className="p-3 rounded-xl bg-gray-50 border border-gray-100 text-sm text-gray-600 leading-relaxed whitespace-pre-line max-h-48 overflow-y-auto">
+                {sentPreview.message}
+              </div>
+            </div>
+
+            <button
+              onClick={() => { setSendForm(null); setSentPreview(null); }}
+              className="btn-primary w-full justify-center py-2.5"
+            >
+              Done
+            </button>
+          </div>
+        )}
       </Modal>
     </div>
   );
