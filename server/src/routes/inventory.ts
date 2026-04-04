@@ -1,8 +1,79 @@
 import { Router, Request, Response } from 'express';
 import { prisma } from '../db/client';
 import { logActivity } from '../lib/activity';
+import { searchPrices } from '../lib/priceSearch';
 
 const router = Router();
+
+// GET /price-search - search for best prices across suppliers
+router.get('/price-search', async (req: Request, res: Response) => {
+  try {
+    const query = req.query.q as string;
+    if (!query) {
+      res.status(400).json({ error: 'Missing search query parameter "q"' });
+      return;
+    }
+
+    const results = await searchPrices(query);
+
+    const cheapest = results.length > 0 ? results[0].price : null;
+    const average =
+      results.length > 0
+        ? Math.round(
+            (results.reduce((s, r) => s + r.price, 0) / results.length) * 100
+          ) / 100
+        : null;
+
+    res.json({
+      query,
+      resultCount: results.length,
+      cheapestPrice: cheapest,
+      averagePrice: average,
+      results,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to search prices' });
+  }
+});
+
+// GET /price-search/:id - search prices for a specific inventory item by ID
+router.get('/price-search/:id', async (req: Request, res: Response) => {
+  try {
+    const item = await prisma.inventoryItem.findUnique({
+      where: { id: req.params.id },
+    });
+
+    if (!item) {
+      res.status(404).json({ error: 'Inventory item not found' });
+      return;
+    }
+
+    const results = await searchPrices(item.name);
+
+    const cheapest = results.length > 0 ? results[0].price : null;
+    const savings =
+      cheapest !== null ? Math.round((item.unitCost - cheapest) * 100) / 100 : 0;
+
+    res.json({
+      item: { id: item.id, name: item.name, currentUnitCost: item.unitCost, supplier: item.supplier },
+      query: item.name,
+      resultCount: results.length,
+      cheapestPrice: cheapest,
+      averagePrice:
+        results.length > 0
+          ? Math.round(
+              (results.reduce((s, r) => s + r.price, 0) / results.length) * 100
+            ) / 100
+          : null,
+      potentialSavings: savings,
+      results,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to search prices for item' });
+  }
+});
 
 // GET /alerts - return items where currentStock <= minStock (defined before /:id to avoid route conflict)
 router.get('/alerts', async (_req: Request, res: Response) => {

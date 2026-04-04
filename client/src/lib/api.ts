@@ -498,6 +498,16 @@ export async function getInventoryAlerts(): Promise<InventoryItem[]> {
   return data;
 }
 
+export async function searchItemPrices(itemId: string): Promise<import('@/types').PriceSearchResponse> {
+  const { data } = await api.get<import('@/types').PriceSearchResponse>(`/inventory/price-search/${itemId}`);
+  return data;
+}
+
+export async function searchPricesByQuery(query: string): Promise<import('@/types').PriceSearchResponse> {
+  const { data } = await api.get<import('@/types').PriceSearchResponse>('/inventory/price-search', { params: { q: query } });
+  return data;
+}
+
 // ─── Perio ───────────────────────────────────────────────────────────────────
 
 export async function getPerioExams(params?: { patientId?: string }): Promise<{ exams: PerioExam[]; total: number }> {

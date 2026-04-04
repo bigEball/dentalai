@@ -8,11 +8,19 @@ import {
   ChevronUp,
   RotateCcw,
   Filter,
+  Search,
+  ExternalLink,
+  Star,
+  TrendingDown,
+  ArrowDown,
+  X,
+  CheckCircle,
+  XCircle,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
-import { getInventory, createInventoryItem, updateInventoryItem, restockItem, getInventoryAlerts } from '@/lib/api';
-import type { InventoryItem } from '@/types';
+import { getInventory, createInventoryItem, updateInventoryItem, restockItem, getInventoryAlerts, searchItemPrices } from '@/lib/api';
+import type { InventoryItem, PriceSearchResponse, PriceResult } from '@/types';
 import { formatCurrency, formatDate, cn } from '@/lib/utils';
 import { FullPageSpinner } from '@/components/ui/LoadingSpinner';
 import EmptyState from '@/components/ui/EmptyState';
@@ -75,6 +83,9 @@ export default function InventoryPage() {
   const [restockQty, setRestockQty] = useState('');
   const [actionId, setActionId] = useState<string | null>(null);
   const [showNewModal, setShowNewModal] = useState(false);
+  const [priceSearchItem, setPriceSearchItem] = useState<InventoryItem | null>(null);
+  const [priceResults, setPriceResults] = useState<PriceSearchResponse | null>(null);
+  const [priceSearching, setPriceSearching] = useState(false);
 
   const loadItems = useCallback(async () => {
     setLoading(true);
@@ -134,6 +145,21 @@ export default function InventoryPage() {
       setActionId(null);
       setRestockTarget(null);
       setRestockQty('');
+    }
+  }
+
+  async function handlePriceSearch(item: InventoryItem) {
+    setPriceSearchItem(item);
+    setPriceResults(null);
+    setPriceSearching(true);
+    try {
+      const results = await searchItemPrices(item.id);
+      setPriceResults(results);
+    } catch {
+      toast.error('Failed to search prices');
+      setPriceSearchItem(null);
+    } finally {
+      setPriceSearching(false);
     }
   }
 
@@ -333,13 +359,22 @@ export default function InventoryPage() {
 
                       {/* Action */}
                       <td className="px-5 py-3.5 text-right">
-                        <button
-                          onClick={() => { setRestockTarget(item); setRestockQty(String(Math.max(1, item.maxStock - item.currentStock))); }}
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 hover:border-indigo-200 transition-all"
-                        >
-                          <RotateCcw size={12} />
-                          Restock
-                        </button>
+                        <div className="flex items-center gap-2 justify-end">
+                          <button
+                            onClick={() => handlePriceSearch(item)}
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-green-200 bg-green-50 text-green-700 hover:bg-green-100 hover:border-green-300 transition-all"
+                          >
+                            <Search size={12} />
+                            Compare Prices
+                          </button>
+                          <button
+                            onClick={() => { setRestockTarget(item); setRestockQty(String(Math.max(1, item.maxStock - item.currentStock))); }}
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 hover:border-indigo-200 transition-all"
+                          >
+                            <RotateCcw size={12} />
+                            Restock
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );
@@ -427,6 +462,184 @@ export default function InventoryPage() {
           </div>
         )}
       </Modal>
+
+      {/* Price Comparison Modal */}
+      {priceSearchItem && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[85vh] flex flex-col">
+            {/* Header */}
+            <div className="px-6 py-4 border-b flex items-center justify-between flex-shrink-0">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                  <Search size={18} className="text-green-600" />
+                  Price Comparison
+                </h3>
+                <p className="text-sm text-gray-500 mt-0.5">
+                  Searching best prices for <span className="font-medium text-gray-700">{priceSearchItem.name}</span>
+                </p>
+              </div>
+              <button
+                onClick={() => { setPriceSearchItem(null); setPriceResults(null); }}
+                className="p-2 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="flex-1 overflow-y-auto px-6 py-4">
+              {priceSearching ? (
+                <div className="flex flex-col items-center justify-center py-16 gap-3">
+                  <Loader2 className="h-10 w-10 animate-spin text-green-500" />
+                  <p className="text-sm text-gray-500">Searching across suppliers...</p>
+                </div>
+              ) : priceResults ? (
+                <div>
+                  {/* Summary cards */}
+                  <div className="grid grid-cols-4 gap-3 mb-6">
+                    <div className="bg-gray-50 rounded-xl p-3 text-center">
+                      <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wider">Your Cost</p>
+                      <p className="text-lg font-bold text-gray-900">
+                        {formatCurrency(priceSearchItem.unitCost)}
+                      </p>
+                      <p className="text-[10px] text-gray-400">per {priceSearchItem.unit}</p>
+                    </div>
+                    <div className="bg-green-50 rounded-xl p-3 text-center border border-green-200">
+                      <p className="text-[10px] font-medium text-green-600 uppercase tracking-wider">Best Price</p>
+                      <p className="text-lg font-bold text-green-700">
+                        {priceResults.cheapestPrice !== null ? formatCurrency(priceResults.cheapestPrice) : '—'}
+                      </p>
+                      <p className="text-[10px] text-green-500">lowest found</p>
+                    </div>
+                    <div className="bg-blue-50 rounded-xl p-3 text-center">
+                      <p className="text-[10px] font-medium text-blue-500 uppercase tracking-wider">Average</p>
+                      <p className="text-lg font-bold text-blue-700">
+                        {priceResults.averagePrice !== null ? formatCurrency(priceResults.averagePrice) : '—'}
+                      </p>
+                      <p className="text-[10px] text-blue-400">market avg</p>
+                    </div>
+                    <div className={`rounded-xl p-3 text-center ${
+                      (priceResults.potentialSavings ?? 0) > 0
+                        ? 'bg-emerald-50 border border-emerald-200'
+                        : 'bg-gray-50'
+                    }`}>
+                      <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wider">Savings</p>
+                      <p className={`text-lg font-bold ${
+                        (priceResults.potentialSavings ?? 0) > 0 ? 'text-emerald-700' : 'text-gray-400'
+                      }`}>
+                        {(priceResults.potentialSavings ?? 0) > 0 ? (
+                          <span className="flex items-center justify-center gap-1">
+                            <TrendingDown size={14} />
+                            {formatCurrency(priceResults.potentialSavings!)}
+                          </span>
+                        ) : '—'}
+                      </p>
+                      <p className="text-[10px] text-gray-400">per unit</p>
+                    </div>
+                  </div>
+
+                  {/* Results list */}
+                  <div className="space-y-2">
+                    {priceResults.results.map((result, idx) => (
+                      <div
+                        key={idx}
+                        className={cn(
+                          'flex items-center gap-4 p-4 rounded-xl border transition-colors',
+                          idx === 0 ? 'border-green-200 bg-green-50/30' : 'border-gray-100 hover:bg-gray-50',
+                          result.inStock === false && 'opacity-60',
+                        )}
+                      >
+                        {/* Rank */}
+                        <div className={cn(
+                          'flex-shrink-0 h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold',
+                          idx === 0 ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-500'
+                        )}>
+                          {idx + 1}
+                        </div>
+
+                        {/* Supplier info */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-semibold text-gray-900">{result.supplier}</span>
+                            {idx === 0 && (
+                              <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-700">
+                                BEST PRICE
+                              </span>
+                            )}
+                            {result.inStock === false && (
+                              <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-red-100 text-red-600 flex items-center gap-0.5">
+                                <XCircle size={10} /> Out of stock
+                              </span>
+                            )}
+                            {result.inStock !== false && (
+                              <span className="text-[10px] text-green-500 flex items-center gap-0.5">
+                                <CheckCircle size={10} /> In stock
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-xs text-gray-500 truncate mt-0.5">{result.title}</p>
+                          <div className="flex items-center gap-3 mt-1">
+                            {result.rating && (
+                              <span className="flex items-center gap-0.5 text-xs text-amber-600">
+                                <Star size={10} fill="currentColor" />
+                                {result.rating.toFixed(1)}
+                                {result.reviews && <span className="text-gray-400">({result.reviews})</span>}
+                              </span>
+                            )}
+                            {result.shipping && (
+                              <span className="text-xs text-gray-400">{result.shipping}</span>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Price */}
+                        <div className="text-right flex-shrink-0">
+                          <p className="text-lg font-bold text-gray-900">{formatCurrency(result.price)}</p>
+                          {result.originalPrice && (
+                            <p className="text-xs text-gray-400 line-through">{formatCurrency(result.originalPrice)}</p>
+                          )}
+                          {result.price < priceSearchItem.unitCost && (
+                            <p className="text-xs text-green-600 font-medium flex items-center justify-end gap-0.5">
+                              <ArrowDown size={10} />
+                              Save {formatCurrency(priceSearchItem.unitCost - result.price)}
+                            </p>
+                          )}
+                        </div>
+
+                        {/* Link */}
+                        <a
+                          href={result.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-shrink-0 p-2 rounded-lg text-indigo-500 hover:bg-indigo-50 hover:text-indigo-700 transition-colors"
+                          title="View on supplier site"
+                        >
+                          <ExternalLink size={16} />
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+
+                  {priceResults.results.length === 0 && (
+                    <div className="text-center py-12 text-gray-400">
+                      No prices found for this item
+                    </div>
+                  )}
+                </div>
+              ) : null}
+            </div>
+
+            {/* Footer */}
+            {priceResults && priceResults.results.length > 0 && (
+              <div className="px-6 py-3 border-t bg-gray-50/50 flex-shrink-0">
+                <p className="text-xs text-gray-400 text-center">
+                  {priceResults.resultCount} results found &middot; Prices may vary &middot; Click supplier link to verify
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Add Item Modal */}
       <Modal

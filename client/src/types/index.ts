@@ -278,6 +278,29 @@ export interface InventoryItem {
   location?: string | null;
 }
 
+export interface PriceResult {
+  supplier: string;
+  title: string;
+  price: number;
+  originalPrice?: number;
+  url: string;
+  imageUrl?: string;
+  shipping?: string;
+  rating?: number;
+  reviews?: number;
+  inStock?: boolean;
+}
+
+export interface PriceSearchResponse {
+  item?: { id: string; name: string; currentUnitCost: number; supplier: string | null };
+  query: string;
+  resultCount: number;
+  cheapestPrice: number | null;
+  averagePrice: number | null;
+  potentialSavings?: number;
+  results: PriceResult[];
+}
+
 export interface Communication {
   id: string;
   patientId: string;

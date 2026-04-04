@@ -28,6 +28,10 @@ export interface AppConfig {
     modelPath: string;
     enabled: boolean;
   };
+  priceSearch: {
+    serpApiKey: string;
+    enabled: boolean;
+  };
   office: {
     name: string;
     locations: string[];
@@ -61,6 +65,10 @@ const DEFAULT_CONFIG: AppConfig = {
   whisper: {
     modelPath: '',
     enabled: false,
+  },
+  priceSearch: {
+    serpApiKey: '',
+    enabled: true,
   },
   office: {
     name: 'Bright Smiles Dental',
