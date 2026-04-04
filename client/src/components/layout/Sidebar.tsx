@@ -21,6 +21,7 @@ import {
   ArrowRightLeft,
   Package,
   Activity,
+  Gauge,
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { getInitials } from '@/lib/utils';
@@ -41,7 +42,6 @@ const AI_NAV = [
   { to: '/billing', label: 'Billing', icon: DollarSign },
   { to: '/payment-plans', label: 'Payment Plans', icon: CreditCard },
   { to: '/recall', label: 'Recall', icon: RefreshCw },
-  { to: '/radiographs', label: 'Radiographs', icon: Scan },
   { to: '/perio', label: 'Perio Chart', icon: Activity },
 ];
 
@@ -52,6 +52,7 @@ const OFFICE_NAV = [
   { to: '/forms', label: 'Patient Forms', icon: FileCheck },
   { to: '/inventory', label: 'Inventory', icon: Package },
   { to: '/reports', label: 'Reports', icon: BarChart3 },
+  { to: '/patient-scores', label: 'Patient Scores', icon: Gauge },
 ];
 
 const SYSTEM_NAV = [

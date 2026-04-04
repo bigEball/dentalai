@@ -397,6 +397,11 @@ export async function reviewForm(id: string, reviewedBy: string): Promise<Patien
   return data;
 }
 
+export async function sendFormToPatient(id: string): Promise<PatientForm & { messagePreview: string; formLink: string }> {
+  const { data } = await api.post<PatientForm & { messagePreview: string; formLink: string }>(`/forms/${id}/send`);
+  return data;
+}
+
 // ─── Follow-Ups ──────────────────────────────────────────────────────────────
 
 export async function getFollowUps(params?: { status?: string }): Promise<{ followUps: FollowUp[]; total: number }> {
@@ -505,6 +510,23 @@ export async function searchItemPrices(itemId: string): Promise<import('@/types'
 
 export async function searchPricesByQuery(query: string): Promise<import('@/types').PriceSearchResponse> {
   const { data } = await api.get<import('@/types').PriceSearchResponse>('/inventory/price-search', { params: { q: query } });
+  return data;
+}
+
+// ─── Patient Scores ──────────────────────────────────────────────────────────
+
+export async function getAllPatientScores(): Promise<import('@/types').PatientScores[]> {
+  const { data } = await api.get<import('@/types').PatientScores[]>('/scores');
+  return data;
+}
+
+export async function getPatientScore(patientId: string): Promise<import('@/types').PatientScores> {
+  const { data } = await api.get<import('@/types').PatientScores>(`/scores/${patientId}`);
+  return data;
+}
+
+export async function getScoreAlerts(): Promise<import('@/types').PatientScores[]> {
+  const { data } = await api.get<import('@/types').PatientScores[]>('/scores/alerts');
   return data;
 }
 

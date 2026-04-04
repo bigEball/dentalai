@@ -272,6 +272,8 @@ model PatientForm {
   reviewedBy  String?
   reviewedAt  String?
   formData    String?  // JSON string of form field values
+  sentAt      String?  // when the form link was texted to the patient
+  formToken   String?  // unique token for the patient-facing form link
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

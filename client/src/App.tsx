@@ -9,7 +9,6 @@ import AINotesPage from '@/pages/AINotesPage';
 import InsurancePage from '@/pages/InsurancePage';
 import BillingPage from '@/pages/BillingPage';
 import RecallPage from '@/pages/RecallPage';
-import RadiographsPage from '@/pages/RadiographsPage';
 import SettingsPage from '@/pages/SettingsPage';
 import CompliancePage from '@/pages/CompliancePage';
 import TreatmentPlansPage from '@/pages/TreatmentPlansPage';
@@ -23,6 +22,7 @@ import FollowUpsPage from '@/pages/FollowUpsPage';
 import ReferralsPage from '@/pages/ReferralsPage';
 import InventoryPage from '@/pages/InventoryPage';
 import PerioChartPage from '@/pages/PerioChartPage';
+import PatientScoresPage from '@/pages/PatientScoresPage';
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth();
@@ -50,7 +50,6 @@ function AppRoutes() {
         <Route path="insurance" element={<InsurancePage />} />
         <Route path="billing" element={<BillingPage />} />
         <Route path="recall" element={<RecallPage />} />
-        <Route path="radiographs" element={<RadiographsPage />} />
         <Route path="treatment-plans" element={<TreatmentPlansPage />} />
         <Route path="calendar" element={<CalendarPage />} />
         <Route path="reports" element={<ReportsPage />} />
@@ -62,6 +61,7 @@ function AppRoutes() {
         <Route path="referrals" element={<ReferralsPage />} />
         <Route path="inventory" element={<InventoryPage />} />
         <Route path="perio" element={<PerioChartPage />} />
+        <Route path="patient-scores" element={<PatientScoresPage />} />
         <Route path="compliance" element={<CompliancePage />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>

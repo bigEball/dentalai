@@ -24,6 +24,7 @@ import followupsRouter from './routes/followups';
 import referralsRouter from './routes/referrals';
 import inventoryRouter from './routes/inventory';
 import perioRouter from './routes/perio';
+import scoresRouter from './routes/scores';
 
 const app = express();
 const PORT = process.env.PORT ?? 3001;
@@ -81,6 +82,7 @@ app.use('/api/v1/followups', followupsRouter);
 app.use('/api/v1/referrals', referralsRouter);
 app.use('/api/v1/inventory', inventoryRouter);
 app.use('/api/v1/perio', perioRouter);
+app.use('/api/v1/scores', scoresRouter);
 
 // SPA fallback — serve index.html for non-API routes in production
 if (process.env.NODE_ENV === 'production') {

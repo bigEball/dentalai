@@ -240,6 +240,8 @@ export interface PatientForm {
   reviewedBy?: string | null;
   reviewedAt?: string | null;
   formData?: string | null;
+  sentAt?: string | null;
+  formToken?: string | null;
   patient?: Patient;
 }
 
@@ -299,6 +301,25 @@ export interface PriceSearchResponse {
   averagePrice: number | null;
   potentialSavings?: number;
   results: PriceResult[];
+}
+
+export interface ScoreAlert {
+  type: 'deposit_required' | 'double_book' | 'priority_outreach' | 'front_desk_warning' | 'high_value';
+  severity: 'info' | 'warning' | 'critical';
+  message: string;
+  score: string;
+}
+
+export interface PatientScores {
+  patientId: string;
+  patientName: string;
+  attendance: number;
+  financial: number;
+  engagement: number;
+  treatmentCommitment: number;
+  composite: number;
+  alerts: ScoreAlert[];
+  calculatedAt: string;
 }
 
 export interface Communication {

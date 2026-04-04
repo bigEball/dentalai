@@ -23,6 +23,7 @@ const PAGE_TITLES: Record<string, string> = {
   '/forms': 'Patient Forms',
   '/inventory': 'Inventory',
   '/reports': 'Reports & Analytics',
+  '/patient-scores': 'Patient Scores',
   '/compliance': 'Compliance',
   '/settings': 'Settings',
 };
