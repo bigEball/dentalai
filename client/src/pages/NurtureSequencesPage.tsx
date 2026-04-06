@@ -116,6 +116,14 @@ const TABS = [
 
 type TabKey = (typeof TABS)[number]['key'];
 
+const OBJECTION_LABELS: Record<string, string> = {
+  cost: 'Concerned about cost',
+  fear: 'Nervous about procedure',
+  time: 'Hard to find time',
+  insurance: 'Insurance questions',
+  indecision: 'Thinking it over',
+};
+
 const OBJECTION_COLORS: Record<string, string> = {
   cost: 'bg-blue-50 text-blue-700',
   fear: 'bg-purple-50 text-purple-700',
@@ -413,9 +421,9 @@ export default function NurtureSequencesPage() {
 
   const funnelChartData = funnel
     ? [
-        { name: 'Plans Proposed', value: funnel.plansProposed, pct: 100 },
+        { name: 'Plans Presented', value: funnel.plansProposed, pct: 100 },
         {
-          name: 'Sequences Started',
+          name: 'Follow-Ups Started',
           value: funnel.sequencesStarted,
           pct:
             funnel.plansProposed > 0
@@ -425,7 +433,7 @@ export default function NurtureSequencesPage() {
               : 0,
         },
         {
-          name: 'Responses',
+          name: 'Patient Replied',
           value: funnel.responsesReceived,
           pct:
             funnel.plansProposed > 0
@@ -435,7 +443,7 @@ export default function NurtureSequencesPage() {
               : 0,
         },
         {
-          name: 'Converted',
+          name: 'Accepted Plan',
           value: funnel.converted,
           pct:
             funnel.plansProposed > 0
@@ -459,10 +467,10 @@ export default function NurtureSequencesPage() {
           </div>
           <div>
             <h1 className="text-lg font-bold text-gray-900">
-              Nurture Sequences
+              Treatment Follow-Up
             </h1>
             <p className="text-sm text-gray-500">
-              Automated follow-ups to convert unaccepted treatment plans
+              Automatically follow up with patients who haven't accepted their treatment plans
             </p>
           </div>
         </div>
@@ -474,27 +482,50 @@ export default function NurtureSequencesPage() {
           className="flex items-center gap-2 px-4 py-2.5 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors"
         >
           <Zap size={16} />
-          Start Sequence
+          Start Follow-Up
         </button>
+      </div>
+
+      {/* How it works */}
+      <div className="bg-indigo-50/50 border border-indigo-100 rounded-xl p-4">
+        <p className="text-xs font-semibold text-indigo-900 mb-2">How it works</p>
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">1</span>
+            <p className="text-xs text-indigo-800">Patient gets a treatment plan but doesn't accept it</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">2</span>
+            <p className="text-xs text-indigo-800">AI detects why they're hesitating (cost, fear, time, etc.)</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">3</span>
+            <p className="text-xs text-indigo-800">Sends 5 personalized texts/emails over 30 days addressing their concern</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">4</span>
+            <p className="text-xs text-indigo-800">Patient accepts the plan — revenue recovered automatically</p>
+          </div>
+        </div>
       </div>
 
       {/* Stat Cards */}
       {dashboard && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <StatCard
-            label="Active Sequences"
+            label="Patients Being Followed Up"
             value={dashboard.activeSequences}
             icon={<Target size={18} className="text-indigo-600" />}
             color="bg-indigo-50"
           />
           <StatCard
-            label="Conversion Rate"
+            label="Acceptance Rate"
             value={`${dashboard.conversionRate}%`}
             icon={<TrendingUp size={18} className="text-green-600" />}
             color="bg-green-50"
           />
           <StatCard
-            label="Avg Touches to Convert"
+            label="Avg Messages to Accept"
             value={dashboard.avgTouchesToConvert}
             icon={<MessageSquare size={18} className="text-purple-600" />}
             color="bg-purple-50"
@@ -511,9 +542,10 @@ export default function NurtureSequencesPage() {
       {/* Conversion Funnel */}
       {funnelChartData.length > 0 && (
         <div className="bg-white rounded-xl border border-gray-200 p-5">
-          <h2 className="text-sm font-semibold text-gray-900 mb-4">
-            Conversion Funnel
+          <h2 className="text-sm font-semibold text-gray-900 mb-1">
+            Patient Journey
           </h2>
+          <p className="text-xs text-gray-400 mb-4">How patients move from proposed plan to accepted treatment</p>
           <div className="h-48">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
@@ -590,8 +622,8 @@ export default function NurtureSequencesPage() {
       {filteredSequences.length === 0 ? (
         <EmptyState
           icon={<HeartHandshake size={28} />}
-          title="No sequences found"
-          subtitle={`No ${activeTab === 'all' ? '' : activeTab} nurture sequences yet. Start one to convert unaccepted treatment plans.`}
+          title="No follow-ups yet"
+          subtitle={`No ${activeTab === 'all' ? '' : activeTab + ' '}follow-up campaigns yet. Click "Start Follow-Up" to begin reaching out to patients with unaccepted treatment plans.`}
         />
       ) : (
         <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
@@ -610,13 +642,13 @@ export default function NurtureSequencesPage() {
                     Plan Value
                   </th>
                   <th className="text-left px-4 py-3 font-medium text-gray-500">
-                    Objection
+                    Why They're Hesitating
                   </th>
                   <th className="text-left px-4 py-3 font-medium text-gray-500 min-w-[140px]">
-                    Progress
+                    Messages Sent
                   </th>
                   <th className="text-left px-4 py-3 font-medium text-gray-500">
-                    Next Touch
+                    Next Message
                   </th>
                   <th className="text-left px-4 py-3 font-medium text-gray-500">
                     Status
@@ -662,8 +694,7 @@ export default function NurtureSequencesPage() {
                           )}
                         >
                           {OBJECTION_ICONS[seq.objectionType]}
-                          {seq.objectionType.charAt(0).toUpperCase() +
-                            seq.objectionType.slice(1)}
+                          {OBJECTION_LABELS[seq.objectionType] ?? seq.objectionType}
                         </span>
                       </td>
                       <td className="px-4 py-3">

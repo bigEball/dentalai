@@ -25,7 +25,7 @@ const PAGE_TITLES: Record<string, string> = {
   '/claim-scrubber': 'Claim Scrubber',
   '/patient-retention': 'Patient Retention',
   '/morning-huddle': 'Morning Huddle',
-  '/nurture-sequences': 'Nurture Sequences',
+  '/nurture-sequences': 'Treatment Follow-Up',
   '/fee-optimizer': 'Fee Optimizer',
   '/smart-scheduling': 'Smart Scheduling',
   '/procurement': 'Procurement Intelligence',

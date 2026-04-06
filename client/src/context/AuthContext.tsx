@@ -1,11 +1,13 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 import * as auth from '@/lib/auth';
 import type { AuthUser } from '@/lib/auth';
+import type { DemoRole } from '@/lib/roles';
 
 interface AuthContextValue {
   user: AuthUser | null;
   login: (email: string, password: string) => { success: boolean; error?: string };
   logout: () => void;
+  switchRole: (role: DemoRole) => void;
   isAuthenticated: boolean;
 }
 
@@ -27,12 +29,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null);
   }, []);
 
+  const switchRole = useCallback((role: DemoRole) => {
+    const newUser = auth.switchDemoRole(role);
+    setUser(newUser);
+  }, []);
+
   return (
     <AuthContext.Provider
       value={{
         user,
         login,
         logout,
+        switchRole,
         isAuthenticated: user !== null,
       }}
     >

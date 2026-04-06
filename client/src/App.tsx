@@ -1,8 +1,10 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from '@/context/AuthContext';
+import { isRouteAllowed, resolveRole } from '@/lib/roles';
 import AppLayout from '@/layouts/AppLayout';
 import LoginPage from '@/pages/LoginPage';
+import AccessDeniedPage from '@/pages/AccessDeniedPage';
 import DashboardPage from '@/pages/DashboardPage';
 import PatientsPage from '@/pages/PatientsPage';
 import AINotesPage from '@/pages/AINotesPage';
@@ -41,6 +43,18 @@ function RequireAuth({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
+function RequireRole({ children }: { children: React.ReactNode }) {
+  const { user } = useAuth();
+  const location = useLocation();
+  const role = resolveRole(user?.role);
+  const path = '/' + location.pathname.split('/')[1];
+
+  if (!isRouteAllowed(role, path)) {
+    return <AccessDeniedPage />;
+  }
+  return <>{children}</>;
+}
+
 function AppRoutes() {
   return (
     <Routes>
@@ -54,34 +68,34 @@ function AppRoutes() {
       >
         <Route index element={<Navigate to="/dashboard" replace />} />
         <Route path="dashboard" element={<DashboardPage />} />
-        <Route path="patients" element={<PatientsPage />} />
-        <Route path="notes" element={<AINotesPage />} />
-        <Route path="insurance" element={<InsurancePage />} />
-        <Route path="billing" element={<BillingPage />} />
-        <Route path="recall" element={<RecallPage />} />
-        <Route path="treatment-plans" element={<TreatmentPlansPage />} />
-        <Route path="reports" element={<ReportsPage />} />
-        <Route path="communications" element={<CommunicationsPage />} />
-        <Route path="preauth" element={<PreauthPage />} />
-        <Route path="payment-plans" element={<PaymentPlansPage />} />
-        <Route path="forms" element={<FormsPage />} />
-        <Route path="follow-ups" element={<FollowUpsPage />} />
-        <Route path="referrals" element={<ReferralsPage />} />
-        <Route path="inventory" element={<InventoryPage />} />
-        <Route path="perio" element={<PerioChartPage />} />
-        <Route path="patient-scores" element={<PatientScoresPage />} />
-        <Route path="claim-scrubber" element={<ClaimScrubberPage />} />
-        <Route path="patient-retention" element={<ChurnPredictionPage />} />
-        <Route path="morning-huddle" element={<MorningHuddlePage />} />
-        <Route path="nurture-sequences" element={<NurtureSequencesPage />} />
-        <Route path="fee-optimizer" element={<FeeSchedulePage />} />
-        <Route path="smart-scheduling" element={<SchedulingPage />} />
-        <Route path="procurement" element={<ProcurementPage />} />
-        <Route path="decision-support" element={<ClinicalDecisionSupportPage />} />
-        <Route path="compliance" element={<ComplianceAutopilotPage />} />
-        <Route path="multi-location" element={<MultiLocationPage />} />
-        <Route path="tools" element={<ToolsPage />} />
-        <Route path="settings" element={<SettingsPage />} />
+        <Route path="patients" element={<RequireRole><PatientsPage /></RequireRole>} />
+        <Route path="notes" element={<RequireRole><AINotesPage /></RequireRole>} />
+        <Route path="insurance" element={<RequireRole><InsurancePage /></RequireRole>} />
+        <Route path="billing" element={<RequireRole><BillingPage /></RequireRole>} />
+        <Route path="recall" element={<RequireRole><RecallPage /></RequireRole>} />
+        <Route path="treatment-plans" element={<RequireRole><TreatmentPlansPage /></RequireRole>} />
+        <Route path="reports" element={<RequireRole><ReportsPage /></RequireRole>} />
+        <Route path="communications" element={<RequireRole><CommunicationsPage /></RequireRole>} />
+        <Route path="preauth" element={<RequireRole><PreauthPage /></RequireRole>} />
+        <Route path="payment-plans" element={<RequireRole><PaymentPlansPage /></RequireRole>} />
+        <Route path="forms" element={<RequireRole><FormsPage /></RequireRole>} />
+        <Route path="follow-ups" element={<RequireRole><FollowUpsPage /></RequireRole>} />
+        <Route path="referrals" element={<RequireRole><ReferralsPage /></RequireRole>} />
+        <Route path="inventory" element={<RequireRole><InventoryPage /></RequireRole>} />
+        <Route path="perio" element={<RequireRole><PerioChartPage /></RequireRole>} />
+        <Route path="patient-scores" element={<RequireRole><PatientScoresPage /></RequireRole>} />
+        <Route path="claim-scrubber" element={<RequireRole><ClaimScrubberPage /></RequireRole>} />
+        <Route path="patient-retention" element={<RequireRole><ChurnPredictionPage /></RequireRole>} />
+        <Route path="morning-huddle" element={<RequireRole><MorningHuddlePage /></RequireRole>} />
+        <Route path="nurture-sequences" element={<RequireRole><NurtureSequencesPage /></RequireRole>} />
+        <Route path="fee-optimizer" element={<RequireRole><FeeSchedulePage /></RequireRole>} />
+        <Route path="smart-scheduling" element={<RequireRole><SchedulingPage /></RequireRole>} />
+        <Route path="procurement" element={<RequireRole><ProcurementPage /></RequireRole>} />
+        <Route path="decision-support" element={<RequireRole><ClinicalDecisionSupportPage /></RequireRole>} />
+        <Route path="compliance" element={<RequireRole><ComplianceAutopilotPage /></RequireRole>} />
+        <Route path="multi-location" element={<RequireRole><MultiLocationPage /></RequireRole>} />
+        <Route path="tools" element={<RequireRole><ToolsPage /></RequireRole>} />
+        <Route path="settings" element={<RequireRole><SettingsPage /></RequireRole>} />
       </Route>
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>

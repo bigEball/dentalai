@@ -33,6 +33,8 @@ import ActivityFeed from '@/components/ui/ActivityFeed';
 import { FullPageSpinner } from '@/components/ui/LoadingSpinner';
 import Badge from '@/components/ui/Badge';
 import OpenDentalLink from '@/components/ui/OpenDentalLink';
+import { useAuth } from '@/context/AuthContext';
+import { ROLES, resolveRole } from '@/lib/roles';
 
 const MOCK_REVENUE = [
   { month: 'Sep', revenue: 38200 },
@@ -186,8 +188,13 @@ function overdueTextColor(daysOverdue: number): string {
 
 export default function DashboardPage() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const currentRole = resolveRole(user?.role);
+  const roleConfig = ROLES[currentRole];
+  const displayName = user?.name?.replace('Dr. ', '') ?? roleConfig.userName;
 
   useEffect(() => {
     getDashboardStats()
@@ -208,119 +215,319 @@ export default function DashboardPage() {
       {/* Greeting */}
       <div>
         <h1 className="text-2xl font-bold text-gray-900">
-          {getGreeting()}, Dr. Mitchell
+          {getGreeting()}, {displayName}
         </h1>
         <p className="mt-1 text-sm text-gray-500">{getTodayFormatted()}</p>
       </div>
 
-      {/* Stat cards */}
+      {/* Stat cards — role-tailored */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
-        {/* Pending Claims */}
-        <button
-          onClick={() => navigate('/insurance')}
-          className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/80 to-transparent pointer-events-none" />
-          <div className="relative">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                Pending Claims
-              </span>
-              <div className="p-2.5 rounded-xl bg-indigo-100 text-indigo-600">
-                <Shield size={20} />
+        {/* ── Doctor stat cards ── */}
+        {currentRole === 'doctor' && (
+          <button
+            onClick={() => navigate('/notes')}
+            className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-50/80 to-transparent pointer-events-none" />
+            <div className="relative">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  Notes to Review
+                </span>
+                <div className="p-2.5 rounded-xl bg-purple-100 text-purple-600">
+                  <FileText size={20} />
+                </div>
               </div>
+              <p className="text-3xl font-bold text-gray-900 tabular-nums">
+                {s.notesAwaitingApproval}
+              </p>
+              <p className="mt-1 text-xs text-gray-400">Pending provider approval</p>
+              <p className="mt-2 flex items-center gap-1 text-xs font-medium text-gray-500">
+                <ClipboardList size={13} />
+                Oldest: 2 days ago
+              </p>
             </div>
-            <p className="text-3xl font-bold text-gray-900 tabular-nums">
-              {s.totalPendingClaims}
-            </p>
-            <p className="mt-1 text-xs text-gray-400">Awaiting submission or approval</p>
-            <p className="mt-2 flex items-center gap-1 text-xs font-medium text-red-500">
-              <TrendingUp size={13} />
-              +2 from last week
-            </p>
-          </div>
-        </button>
+          </button>
+        )}
 
-        {/* Outstanding Balance */}
-        <button
-          onClick={() => navigate('/billing')}
-          className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/80 to-transparent pointer-events-none" />
-          <div className="relative">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                Outstanding Balance
-              </span>
-              <div className="p-2.5 rounded-xl bg-emerald-100 text-emerald-600">
-                <DollarSign size={20} />
+        {currentRole === 'doctor' && (
+          <button
+            onClick={() => navigate('/referrals')}
+            className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/80 to-transparent pointer-events-none" />
+            <div className="relative">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  Open Referrals
+                </span>
+                <div className="p-2.5 rounded-xl bg-indigo-100 text-indigo-600">
+                  <Shield size={20} />
+                </div>
               </div>
+              <p className="text-3xl font-bold text-gray-900 tabular-nums">
+                {s.openReferrals}
+              </p>
+              <p className="mt-1 text-xs text-gray-400">Awaiting specialist reports</p>
             </div>
-            <p className="text-3xl font-bold text-gray-900 tabular-nums">
-              {formatCurrency(s.totalOutstandingBalance)}
-            </p>
-            <p className="mt-1 text-xs text-gray-400">Across all patients</p>
-            <p className="mt-2 flex items-center gap-1 text-xs font-medium text-green-600">
-              <TrendingUp size={13} />
-              {formatCurrency(s.recoveredRevenueThisMonth)} recovered this month
-            </p>
-          </div>
-        </button>
+          </button>
+        )}
 
-        {/* Overdue Recalls */}
-        <button
-          onClick={() => navigate('/recall')}
-          className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-amber-50/80 to-transparent pointer-events-none" />
-          <div className="relative">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                Overdue Recalls
-              </span>
-              <div className="p-2.5 rounded-xl bg-amber-100 text-amber-600">
-                <RefreshCw size={20} />
+        {currentRole === 'doctor' && (
+          <button
+            onClick={() => navigate('/treatment-plans')}
+            className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/80 to-transparent pointer-events-none" />
+            <div className="relative">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  Plans Proposed
+                </span>
+                <div className="p-2.5 rounded-xl bg-emerald-100 text-emerald-600">
+                  <ClipboardList size={20} />
+                </div>
               </div>
+              <p className="text-3xl font-bold text-gray-900 tabular-nums">
+                {s.treatmentPlansProposed}
+              </p>
+              <p className="mt-1 text-xs text-gray-400">Treatment plans awaiting acceptance</p>
             </div>
-            <p className="text-3xl font-bold text-gray-900 tabular-nums">
-              {s.patientsOverdueForHygiene}
-            </p>
-            <p className="mt-1 text-xs text-gray-400">Patients past hygiene due date</p>
-            <p className="mt-2 flex items-center gap-1 text-xs font-medium text-green-600">
-              <CalendarCheck size={13} />
-              5 scheduled this week
-            </p>
-          </div>
-        </button>
+          </button>
+        )}
 
-        {/* Notes to Approve */}
-        <button
-          onClick={() => navigate('/notes')}
-          className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-50/80 to-transparent pointer-events-none" />
-          <div className="relative">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                Notes to Review
-              </span>
-              <div className="p-2.5 rounded-xl bg-purple-100 text-purple-600">
-                <FileText size={20} />
+        {currentRole === 'doctor' && (
+          <button
+            onClick={() => navigate('/decision-support')}
+            className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-50/80 to-transparent pointer-events-none" />
+            <div className="relative">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  Clinical Alerts
+                </span>
+                <div className="p-2.5 rounded-xl bg-amber-100 text-amber-600">
+                  <RefreshCw size={20} />
+                </div>
               </div>
+              <p className="text-3xl font-bold text-gray-900 tabular-nums">
+                5
+              </p>
+              <p className="mt-1 text-xs text-gray-400">AI treatment recommendations</p>
+              <p className="mt-2 flex items-center gap-1 text-xs font-medium text-red-500">
+                <TrendingUp size={13} />
+                2 urgent
+              </p>
             </div>
-            <p className="text-3xl font-bold text-gray-900 tabular-nums">
-              {s.notesAwaitingApproval}
-            </p>
-            <p className="mt-1 text-xs text-gray-400">Pending provider review</p>
-            <p className="mt-2 flex items-center gap-1 text-xs font-medium text-gray-500">
-              <ClipboardList size={13} />
-              Oldest: 2 days ago
-            </p>
-          </div>
-        </button>
+          </button>
+        )}
+
+        {/* ── Office stat cards ── */}
+        {currentRole === 'office' && (
+          <button
+            onClick={() => navigate('/insurance')}
+            className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/80 to-transparent pointer-events-none" />
+            <div className="relative">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  Pending Claims
+                </span>
+                <div className="p-2.5 rounded-xl bg-indigo-100 text-indigo-600">
+                  <Shield size={20} />
+                </div>
+              </div>
+              <p className="text-3xl font-bold text-gray-900 tabular-nums">
+                {s.totalPendingClaims}
+              </p>
+              <p className="mt-1 text-xs text-gray-400">Awaiting submission or approval</p>
+              <p className="mt-2 flex items-center gap-1 text-xs font-medium text-red-500">
+                <TrendingUp size={13} />
+                +2 from last week
+              </p>
+            </div>
+          </button>
+        )}
+
+        {currentRole === 'office' && (
+          <button
+            onClick={() => navigate('/billing')}
+            className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/80 to-transparent pointer-events-none" />
+            <div className="relative">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  Outstanding Balance
+                </span>
+                <div className="p-2.5 rounded-xl bg-emerald-100 text-emerald-600">
+                  <DollarSign size={20} />
+                </div>
+              </div>
+              <p className="text-3xl font-bold text-gray-900 tabular-nums">
+                {formatCurrency(s.totalOutstandingBalance)}
+              </p>
+              <p className="mt-1 text-xs text-gray-400">Across all patients</p>
+              <p className="mt-2 flex items-center gap-1 text-xs font-medium text-green-600">
+                <TrendingUp size={13} />
+                {formatCurrency(s.recoveredRevenueThisMonth)} recovered this month
+              </p>
+            </div>
+          </button>
+        )}
+
+        {currentRole === 'office' && (
+          <button
+            onClick={() => navigate('/recall')}
+            className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-50/80 to-transparent pointer-events-none" />
+            <div className="relative">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  Overdue Recalls
+                </span>
+                <div className="p-2.5 rounded-xl bg-amber-100 text-amber-600">
+                  <RefreshCw size={20} />
+                </div>
+              </div>
+              <p className="text-3xl font-bold text-gray-900 tabular-nums">
+                {s.patientsOverdueForHygiene}
+              </p>
+              <p className="mt-1 text-xs text-gray-400">Patients past hygiene due date</p>
+              <p className="mt-2 flex items-center gap-1 text-xs font-medium text-green-600">
+                <CalendarCheck size={13} />
+                5 scheduled this week
+              </p>
+            </div>
+          </button>
+        )}
+
+        {/* Office: Pending Forms */}
+        {currentRole === 'office' && (
+          <button
+            onClick={() => navigate('/forms')}
+            className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-50/80 to-transparent pointer-events-none" />
+            <div className="relative">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  Pending Forms
+                </span>
+                <div className="p-2.5 rounded-xl bg-purple-100 text-purple-600">
+                  <FileText size={20} />
+                </div>
+              </div>
+              <p className="text-3xl font-bold text-gray-900 tabular-nums">
+                {s.pendingForms}
+              </p>
+              <p className="mt-1 text-xs text-gray-400">Patient forms awaiting review</p>
+            </div>
+          </button>
+        )}
+
+        {/* Assistant: Low Stock Items */}
+        {currentRole === 'assistant' && (
+          <button
+            onClick={() => navigate('/inventory')}
+            className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-red-50/80 to-transparent pointer-events-none" />
+            <div className="relative">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  Low Stock Alerts
+                </span>
+                <div className="p-2.5 rounded-xl bg-red-100 text-red-600">
+                  <Shield size={20} />
+                </div>
+              </div>
+              <p className="text-3xl font-bold text-gray-900 tabular-nums">
+                {s.lowStockItems}
+              </p>
+              <p className="mt-1 text-xs text-gray-400">Items below reorder level</p>
+            </div>
+          </button>
+        )}
+
+        {/* Assistant: Pending Follow-Ups */}
+        {currentRole === 'assistant' && (
+          <button
+            onClick={() => navigate('/follow-ups')}
+            className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-50/80 to-transparent pointer-events-none" />
+            <div className="relative">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  Pending Follow-Ups
+                </span>
+                <div className="p-2.5 rounded-xl bg-amber-100 text-amber-600">
+                  <RefreshCw size={20} />
+                </div>
+              </div>
+              <p className="text-3xl font-bold text-gray-900 tabular-nums">
+                {s.pendingFollowUps}
+              </p>
+              <p className="mt-1 text-xs text-gray-400">Patient follow-ups to complete</p>
+            </div>
+          </button>
+        )}
+
+        {/* Assistant: Pending Forms */}
+        {currentRole === 'assistant' && (
+          <button
+            onClick={() => navigate('/forms')}
+            className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/80 to-transparent pointer-events-none" />
+            <div className="relative">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  Pending Forms
+                </span>
+                <div className="p-2.5 rounded-xl bg-indigo-100 text-indigo-600">
+                  <FileText size={20} />
+                </div>
+              </div>
+              <p className="text-3xl font-bold text-gray-900 tabular-nums">
+                {s.pendingForms}
+              </p>
+              <p className="mt-1 text-xs text-gray-400">Forms awaiting completion</p>
+            </div>
+          </button>
+        )}
+
+        {/* Assistant: Today's Schedule */}
+        {currentRole === 'assistant' && (
+          <button
+            onClick={() => navigate('/smart-scheduling')}
+            className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/80 to-transparent pointer-events-none" />
+            <div className="relative">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  Today's Schedule
+                </span>
+                <div className="p-2.5 rounded-xl bg-emerald-100 text-emerald-600">
+                  <CalendarCheck size={20} />
+                </div>
+              </div>
+              <p className="text-3xl font-bold text-gray-900 tabular-nums">
+                12
+              </p>
+              <p className="mt-1 text-xs text-gray-400">Appointments scheduled today</p>
+            </div>
+          </button>
+        )}
       </div>
 
-      {/* Charts row */}
+      {/* Charts row — doctor & office only */}
+      {(currentRole === 'doctor' || currentRole === 'office') && (
       <div className="grid grid-cols-1 xl:grid-cols-5 gap-5">
         {/* Revenue area chart */}
         <div className="card p-6 xl:col-span-3">
@@ -390,90 +597,248 @@ export default function DashboardPage() {
           </ResponsiveContainer>
         </div>
       </div>
+      )}
 
-      {/* Quick Actions */}
+      {/* Quick Actions — role-tailored */}
       <div>
         <h3 className="text-base font-semibold text-gray-900 mb-4">Quick Actions</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-          <button
-            onClick={() => { navigate('/insurance'); toast.success('Opening insurance verification...'); }}
-            className="card p-5 text-left hover:shadow-md hover:border-indigo-200 transition-all group"
-          >
-            <div className="flex items-start gap-4">
-              <div className="p-3 rounded-xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-100 transition-colors">
-                <Shield size={22} />
+          {/* ── Doctor quick actions ── */}
+          {currentRole === 'doctor' && (
+            <button
+              onClick={() => { navigate('/notes'); toast.success('Opening clinical notes...'); }}
+              className="card p-5 text-left hover:shadow-md hover:border-purple-200 transition-all group"
+            >
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-xl bg-purple-50 text-purple-600 group-hover:bg-purple-100 transition-colors">
+                  <Sparkles size={22} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-gray-900 group-hover:text-purple-700 transition-colors">
+                    Review AI Notes
+                  </p>
+                  <p className="text-xs text-gray-400 mt-0.5">Approve AI-generated clinical notes</p>
+                </div>
               </div>
-              <div className="min-w-0">
-                <p className="text-sm font-semibold text-gray-900 group-hover:text-indigo-700 transition-colors">
-                  Verify Insurance
-                </p>
-                <p className="text-xs text-gray-400 mt-0.5">
-                  Check coverage and eligibility before an appointment
-                </p>
-              </div>
-            </div>
-          </button>
+            </button>
+          )}
 
-          <button
-            onClick={() => { navigate('/insurance'); toast.success('Opening claims...'); }}
-            className="card p-5 text-left hover:shadow-md hover:border-emerald-200 transition-all group"
-          >
-            <div className="flex items-start gap-4">
-              <div className="p-3 rounded-xl bg-emerald-50 text-emerald-600 group-hover:bg-emerald-100 transition-colors">
-                <DollarSign size={22} />
+          {currentRole === 'doctor' && (
+            <button
+              onClick={() => { navigate('/referrals'); toast.success('Opening referrals...'); }}
+              className="card p-5 text-left hover:shadow-md hover:border-indigo-200 transition-all group"
+            >
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-100 transition-colors">
+                  <Shield size={22} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-gray-900 group-hover:text-indigo-700 transition-colors">
+                    Manage Referrals
+                  </p>
+                  <p className="text-xs text-gray-400 mt-0.5">Review specialist reports and referrals</p>
+                </div>
               </div>
-              <div className="min-w-0">
-                <p className="text-sm font-semibold text-gray-900 group-hover:text-emerald-700 transition-colors">
-                  Draft a New Claim
-                </p>
-                <p className="text-xs text-gray-400 mt-0.5">
-                  Start a new insurance claim for a completed visit
-                </p>
-              </div>
-            </div>
-          </button>
+            </button>
+          )}
 
-          <button
-            onClick={() => { navigate('/recall'); toast.success('Opening patient recall...'); }}
-            className="card p-5 text-left hover:shadow-md hover:border-amber-200 transition-all group"
-          >
-            <div className="flex items-start gap-4">
-              <div className="p-3 rounded-xl bg-amber-50 text-amber-600 group-hover:bg-amber-100 transition-colors">
-                <Send size={22} />
+          {currentRole === 'doctor' && (
+            <button
+              onClick={() => { navigate('/treatment-plans'); toast.success('Opening treatment plans...'); }}
+              className="card p-5 text-left hover:shadow-md hover:border-emerald-200 transition-all group"
+            >
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-xl bg-emerald-50 text-emerald-600 group-hover:bg-emerald-100 transition-colors">
+                  <ClipboardList size={22} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-gray-900 group-hover:text-emerald-700 transition-colors">
+                    Treatment Plans
+                  </p>
+                  <p className="text-xs text-gray-400 mt-0.5">Review and create treatment plans</p>
+                </div>
               </div>
-              <div className="min-w-0">
-                <p className="text-sm font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
-                  Send Recall Reminders
-                </p>
-                <p className="text-xs text-gray-400 mt-0.5">
-                  Reach out to patients overdue for hygiene
-                </p>
-              </div>
-            </div>
-          </button>
+            </button>
+          )}
 
-          <button
-            onClick={() => { navigate('/notes'); toast.success('Opening clinical notes...'); }}
-            className="card p-5 text-left hover:shadow-md hover:border-purple-200 transition-all group"
-          >
-            <div className="flex items-start gap-4">
-              <div className="p-3 rounded-xl bg-purple-50 text-purple-600 group-hover:bg-purple-100 transition-colors">
-                <Sparkles size={22} />
+          {currentRole === 'doctor' && (
+            <button
+              onClick={() => { navigate('/perio'); toast.success('Opening perio charting...'); }}
+              className="card p-5 text-left hover:shadow-md hover:border-amber-200 transition-all group"
+            >
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-xl bg-amber-50 text-amber-600 group-hover:bg-amber-100 transition-colors">
+                  <Send size={22} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                    Perio Charting
+                  </p>
+                  <p className="text-xs text-gray-400 mt-0.5">Record and compare periodontal exams</p>
+                </div>
               </div>
-              <div className="min-w-0">
-                <p className="text-sm font-semibold text-gray-900 group-hover:text-purple-700 transition-colors">
-                  Review AI Notes
-                </p>
-                <p className="text-xs text-gray-400 mt-0.5">
-                  Approve or edit AI-generated clinical notes
-                </p>
+            </button>
+          )}
+
+          {/* ── Office quick actions ── */}
+          {currentRole === 'office' && (
+            <button
+              onClick={() => { navigate('/insurance'); toast.success('Opening insurance verification...'); }}
+              className="card p-5 text-left hover:shadow-md hover:border-indigo-200 transition-all group"
+            >
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-100 transition-colors">
+                  <Shield size={22} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-gray-900 group-hover:text-indigo-700 transition-colors">
+                    Verify Insurance
+                  </p>
+                  <p className="text-xs text-gray-400 mt-0.5">Check coverage and eligibility</p>
+                </div>
               </div>
-            </div>
-          </button>
+            </button>
+          )}
+
+          {currentRole === 'office' && (
+            <button
+              onClick={() => { navigate('/recall'); toast.success('Opening patient recall...'); }}
+              className="card p-5 text-left hover:shadow-md hover:border-amber-200 transition-all group"
+            >
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-xl bg-amber-50 text-amber-600 group-hover:bg-amber-100 transition-colors">
+                  <Send size={22} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                    Send Recall Reminders
+                  </p>
+                  <p className="text-xs text-gray-400 mt-0.5">Reach out to overdue patients</p>
+                </div>
+              </div>
+            </button>
+          )}
+
+          {/* Office only */}
+          {currentRole === 'office' && (
+            <button
+              onClick={() => { navigate('/smart-scheduling'); toast.success('Opening scheduling...'); }}
+              className="card p-5 text-left hover:shadow-md hover:border-purple-200 transition-all group"
+            >
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-xl bg-purple-50 text-purple-600 group-hover:bg-purple-100 transition-colors">
+                  <Sparkles size={22} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-gray-900 group-hover:text-purple-700 transition-colors">
+                    Smart Scheduling
+                  </p>
+                  <p className="text-xs text-gray-400 mt-0.5">View today's schedule and predictions</p>
+                </div>
+              </div>
+            </button>
+          )}
+
+          {currentRole === 'office' && (
+            <button
+              onClick={() => { navigate('/communications'); toast.success('Opening messages...'); }}
+              className="card p-5 text-left hover:shadow-md hover:border-emerald-200 transition-all group"
+            >
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-xl bg-emerald-50 text-emerald-600 group-hover:bg-emerald-100 transition-colors">
+                  <DollarSign size={22} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-gray-900 group-hover:text-emerald-700 transition-colors">
+                    Patient Messages
+                  </p>
+                  <p className="text-xs text-gray-400 mt-0.5">View and respond to messages</p>
+                </div>
+              </div>
+            </button>
+          )}
+
+          {/* Assistant */}
+          {currentRole === 'assistant' && (
+            <button
+              onClick={() => { navigate('/inventory'); toast.success('Opening inventory...'); }}
+              className="card p-5 text-left hover:shadow-md hover:border-indigo-200 transition-all group"
+            >
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-100 transition-colors">
+                  <Shield size={22} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-gray-900 group-hover:text-indigo-700 transition-colors">
+                    Check Inventory
+                  </p>
+                  <p className="text-xs text-gray-400 mt-0.5">Review stock levels and reorder</p>
+                </div>
+              </div>
+            </button>
+          )}
+
+          {currentRole === 'assistant' && (
+            <button
+              onClick={() => { navigate('/procurement'); toast.success('Opening procurement...'); }}
+              className="card p-5 text-left hover:shadow-md hover:border-emerald-200 transition-all group"
+            >
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-xl bg-emerald-50 text-emerald-600 group-hover:bg-emerald-100 transition-colors">
+                  <DollarSign size={22} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-gray-900 group-hover:text-emerald-700 transition-colors">
+                    Purchase Orders
+                  </p>
+                  <p className="text-xs text-gray-400 mt-0.5">Review and approve supply orders</p>
+                </div>
+              </div>
+            </button>
+          )}
+
+          {currentRole === 'assistant' && (
+            <button
+              onClick={() => { navigate('/compliance'); toast.success('Opening compliance...'); }}
+              className="card p-5 text-left hover:shadow-md hover:border-amber-200 transition-all group"
+            >
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-xl bg-amber-50 text-amber-600 group-hover:bg-amber-100 transition-colors">
+                  <Send size={22} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                    Compliance Tasks
+                  </p>
+                  <p className="text-xs text-gray-400 mt-0.5">Sterilization logs and OSHA tasks</p>
+                </div>
+              </div>
+            </button>
+          )}
+
+          {currentRole === 'assistant' && (
+            <button
+              onClick={() => { navigate('/smart-scheduling'); toast.success('Opening schedule...'); }}
+              className="card p-5 text-left hover:shadow-md hover:border-purple-200 transition-all group"
+            >
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-xl bg-purple-50 text-purple-600 group-hover:bg-purple-100 transition-colors">
+                  <Sparkles size={22} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-gray-900 group-hover:text-purple-700 transition-colors">
+                    Today's Schedule
+                  </p>
+                  <p className="text-xs text-gray-400 mt-0.5">Room prep and appointment list</p>
+                </div>
+              </div>
+            </button>
+          )}
         </div>
       </div>
 
-      {/* Bottom row */}
+      {/* Bottom row — doctor & office only */}
+      {(currentRole === 'doctor' || currentRole === 'office') && (
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-5">
         {/* Top balances */}
         <div className="card xl:col-span-2">
@@ -537,6 +902,7 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
+      )}
     </div>
   );
 }
