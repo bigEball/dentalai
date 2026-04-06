@@ -40,7 +40,7 @@ export const ROLES: Record<DemoRole, RoleConfig> = {
       '/billing', '/payment-plans', '/recall',
       '/smart-scheduling', '/communications', '/follow-ups', '/referrals',
       '/forms', '/inventory', '/procurement', '/reports', '/patient-scores',
-      '/compliance',
+      '/compliance', '/tools',
     ],
   },
   assistant: {
@@ -51,7 +51,7 @@ export const ROLES: Record<DemoRole, RoleConfig> = {
     allowedRoutes: [
       '/dashboard', '/morning-huddle',
       '/smart-scheduling', '/communications', '/follow-ups',
-      '/forms', '/inventory', '/procurement', '/compliance',
+      '/forms', '/inventory', '/procurement', '/compliance', '/tools',
     ],
   },
 };
