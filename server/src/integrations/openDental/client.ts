@@ -14,11 +14,13 @@ import {
   mapODPatient,
   mapODAppointment,
   mapODProvider,
+  mapODInsurancePlan,
   mapODClaim,
   mapODRecall,
   type MappedPatient,
   type MappedAppointment,
   type MappedProvider,
+  type MappedInsurancePlan,
   type MappedInsuranceClaim,
   type MappedRecallTask,
 } from './mapper';
@@ -168,9 +170,9 @@ export class OpenDentalClient {
   // Insurance Plans
   // ----------------------------------------------------------------
 
-  async getInsurancePlans(params?: ODRequestParams): Promise<Record<string, unknown>[]> {
+  async getInsurancePlans(params?: ODRequestParams): Promise<MappedInsurancePlan[]> {
     const raw = await this.get<Record<string, unknown>[]>('/insplans', params);
-    return Array.isArray(raw) ? raw : [];
+    return Array.isArray(raw) ? raw.map(mapODInsurancePlan) : [];
   }
 
   // ----------------------------------------------------------------

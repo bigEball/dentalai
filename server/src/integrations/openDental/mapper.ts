@@ -162,6 +162,58 @@ export function mapODProvider(od: Record<string, unknown>): MappedProvider {
   };
 }
 
+// ---------- InsurancePlan ----------
+
+export interface MappedInsurancePlan {
+  id: string;
+  patientId: string;
+  provider: string;
+  memberId: string;
+  groupNumber: string;
+  deductible: number;
+  deductibleMet: number;
+  annualMax: number;
+  annualUsed: number;
+  verificationStatus: string;
+  verifiedDate: string | null;
+  coPayPreventive: number;
+  coPayBasic: number;
+  coPayMajor: number;
+}
+
+/**
+ * Maps Open Dental InsPlan data to our internal format.
+ *
+ * OD splits insurance across InsPlan, InsSub, Benefit, and Carrier tables.
+ * We expect the caller to merge relevant fields before passing here.
+ * Financial tracking (deductibleMet, annualUsed) is maintained locally
+ * since OD doesn't expose a convenient summary endpoint for these.
+ */
+export function mapODInsurancePlan(od: Record<string, unknown>): MappedInsurancePlan {
+  // Coverage percentages from OD are "insurance pays X%"
+  // Our UI shows "patient pays X%", so invert: copay = 100 - coverage
+  const percentPreventive = Number(od.PercentPreventive ?? 100);
+  const percentBasic = Number(od.PercentBasic ?? 80);
+  const percentMajor = Number(od.PercentMajor ?? 50);
+
+  return {
+    id: String(od.PlanNum ?? od.InsSubNum ?? ''),
+    patientId: String(od.Subscriber ?? od.PatNum ?? ''),
+    provider: String(od.CarrierName ?? od.GroupName ?? 'Unknown'),
+    memberId: String(od.SubscriberID ?? ''),
+    groupNumber: String(od.GroupNum ?? ''),
+    deductible: Number(od.DedAmt ?? 0),
+    deductibleMet: 0,   // tracked locally
+    annualMax: Number(od.AnnualMax ?? 0),
+    annualUsed: 0,       // tracked locally
+    verificationStatus: od.DateEffective ? 'verified' : 'pending',
+    verifiedDate: od.DateEffective ? normalizeDate(od.DateEffective) : null,
+    coPayPreventive: Math.max(0, 100 - percentPreventive),
+    coPayBasic: Math.max(0, 100 - percentBasic),
+    coPayMajor: Math.max(0, 100 - percentMajor),
+  };
+}
+
 // ---------- InsuranceClaim ----------
 
 export interface MappedInsuranceClaim {
@@ -181,12 +233,13 @@ export interface MappedInsuranceClaim {
 
 function mapClaimStatus(status: unknown): string {
   const statusStr = String(status ?? '').toLowerCase();
+  // OD statuses → our UI statuses
   const statusMap: Record<string, string> = {
-    u: 'unsent',
-    w: 'waiting',
-    r: 'received',
-    s: 'sent',
-    h: 'hold',
+    u: 'draft',       // unsent → draft
+    w: 'pending',     // waiting → pending
+    r: 'approved',    // received → approved
+    s: 'submitted',   // sent → submitted
+    h: 'pending',     // hold → pending
   };
   return statusMap[statusStr] ?? (statusStr || 'draft');
 }

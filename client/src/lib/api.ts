@@ -86,13 +86,28 @@ export async function approveNote(id: string): Promise<ClinicalNote> {
 
 // ─── Insurance Plans ──────────────────────────────────────────────────────────
 
-export async function getInsurancePlans(params?: { status?: string }): Promise<{ plans: InsurancePlan[]; total: number }> {
+export async function getInsurancePlans(params?: { status?: string; patientId?: string }): Promise<InsurancePlan[]> {
   const { data } = await api.get<InsurancePlan[]>('/insurance/plans', { params });
-  return { plans: data, total: data.length };
+  return Array.isArray(data) ? data : [];
 }
 
 export async function getInsurancePlan(id: string): Promise<InsurancePlan> {
   const { data } = await api.get<InsurancePlan>(`/insurance/plans/${id}`);
+  return data;
+}
+
+export async function createInsurancePlan(payload: {
+  patientId: string;
+  provider: string;
+  memberId: string;
+  groupNumber: string;
+  deductible: number;
+  annualMax: number;
+  coPayPreventive?: number;
+  coPayBasic?: number;
+  coPayMajor?: number;
+}): Promise<InsurancePlan> {
+  const { data } = await api.post<InsurancePlan>('/insurance/plans', payload);
   return data;
 }
 
@@ -103,9 +118,9 @@ export async function verifyInsurancePlan(id: string): Promise<InsurancePlan> {
 
 // ─── Insurance Claims ─────────────────────────────────────────────────────────
 
-export async function getInsuranceClaims(params?: { status?: string; patientId?: string }): Promise<{ claims: InsuranceClaim[]; total: number }> {
+export async function getInsuranceClaims(params?: { status?: string; patientId?: string }): Promise<InsuranceClaim[]> {
   const { data } = await api.get<InsuranceClaim[]>('/insurance/claims', { params });
-  return { claims: data, total: data.length };
+  return Array.isArray(data) ? data : [];
 }
 
 export async function getInsuranceClaim(id: string): Promise<InsuranceClaim> {
@@ -113,7 +128,14 @@ export async function getInsuranceClaim(id: string): Promise<InsuranceClaim> {
   return data;
 }
 
-export async function createInsuranceClaim(payload: Partial<InsuranceClaim>): Promise<InsuranceClaim> {
+export async function createInsuranceClaim(payload: {
+  patientId: string;
+  insurancePlanId: string;
+  appointmentId?: string;
+  procedureCodes: string;
+  totalAmount: number;
+  narrative: string;
+}): Promise<InsuranceClaim> {
   const { data } = await api.post<InsuranceClaim>('/insurance/claims', payload);
   return data;
 }
@@ -125,6 +147,11 @@ export async function updateInsuranceClaim(id: string, payload: Partial<Insuranc
 
 export async function submitInsuranceClaim(id: string): Promise<InsuranceClaim> {
   const { data } = await api.patch<InsuranceClaim>(`/insurance/claims/${id}/submit`);
+  return data;
+}
+
+export async function generateClaims(): Promise<{ generated: number; claims: InsuranceClaim[] }> {
+  const { data } = await api.post<{ generated: number; claims: InsuranceClaim[] }>('/insurance/claims/generate');
   return data;
 }
 
