@@ -15,14 +15,12 @@ import {
   ExternalLink,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 
 import { formatCurrency, formatDate, cn } from '@/lib/utils';
 import StatCard from '@/components/ui/StatCard';
 import { FullPageSpinner } from '@/components/ui/LoadingSpinner';
 import EmptyState from '@/components/ui/EmptyState';
-
-const api = axios.create({ baseURL: 'http://localhost:3001/api/v1' });
+import api from '@/lib/api';
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 

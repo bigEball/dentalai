@@ -13,7 +13,7 @@ import {
   Loader2,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
-import axios from 'axios';
+import api from '@/lib/api';
 import {
   LineChart,
   Line,
@@ -28,7 +28,6 @@ import {
 import { formatCurrency, cn } from '@/lib/utils';
 import { FullPageSpinner } from '@/components/ui/LoadingSpinner';
 
-const api = axios.create({ baseURL: 'http://localhost:3001/api/v1' });
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 

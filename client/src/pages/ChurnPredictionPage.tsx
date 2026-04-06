@@ -19,7 +19,7 @@ import {
   Clock,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
-import axios from 'axios';
+import api from '@/lib/api';
 import {
   ScatterChart,
   Scatter,
@@ -33,11 +33,6 @@ import {
   Label,
 } from 'recharts';
 
-const api = axios.create({
-  baseURL: 'http://localhost:3001/api/v1',
-  headers: { 'Content-Type': 'application/json' },
-  timeout: 15000,
-});
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 

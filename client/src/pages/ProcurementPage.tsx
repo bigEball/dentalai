@@ -28,13 +28,12 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import toast from 'react-hot-toast';
-import axios from 'axios';
+import api from '@/lib/api';
 
 import { formatCurrency, formatDate, cn } from '@/lib/utils';
 import { FullPageSpinner } from '@/components/ui/LoadingSpinner';
 import EmptyState from '@/components/ui/EmptyState';
 
-const api = axios.create({ baseURL: 'http://localhost:3001/api/v1' });
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 

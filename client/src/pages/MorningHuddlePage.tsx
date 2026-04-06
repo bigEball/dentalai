@@ -19,14 +19,8 @@ import {
   Stethoscope,
   Send,
 } from 'lucide-react';
-import axios from 'axios';
 import toast from 'react-hot-toast';
-
-const api = axios.create({
-  baseURL: 'http://localhost:3001/api/v1',
-  headers: { 'Content-Type': 'application/json' },
-  timeout: 15000,
-});
+import api from '@/lib/api';
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -194,18 +188,18 @@ export default function MorningHuddlePage() {
   const [generating, setGenerating] = useState(false);
   const [selectedDate, setSelectedDate] = useState(() => new Date().toISOString().split('T')[0]);
 
+  // Try multiple endpoints to load huddle — server auto-generates if none exists
   const fetchHuddle = useCallback(async (date: string) => {
     setLoading(true);
     try {
       const { data } = await api.get<Huddle>(`/morning-huddle/${date}`);
       setHuddle(data);
     } catch {
-      // Try today endpoint as fallback
       try {
         const { data } = await api.get<Huddle>('/morning-huddle/today');
         setHuddle(data);
       } catch {
-        toast.error('Failed to load morning huddle');
+        // Silently fail on initial load — user can click Generate
       }
     } finally {
       setLoading(false);
@@ -219,11 +213,19 @@ export default function MorningHuddlePage() {
   async function handleGenerate() {
     setGenerating(true);
     try {
+      // Try POST /generate first
       const { data } = await api.post<Huddle>('/morning-huddle/generate', { date: selectedDate });
       setHuddle(data);
-      toast.success('Briefing regenerated successfully');
+      toast.success('Briefing generated successfully');
     } catch {
-      toast.error('Failed to generate briefing');
+      // Fall back to GET /:date which also auto-generates
+      try {
+        const { data } = await api.get<Huddle>(`/morning-huddle/${selectedDate}`);
+        setHuddle(data);
+        toast.success('Briefing loaded successfully');
+      } catch {
+        toast.error('Could not reach the server. Make sure the backend is running.');
+      }
     } finally {
       setGenerating(false);
     }
