@@ -250,20 +250,8 @@ export async function declineTreatmentPlan(id: string): Promise<TreatmentPlan> {
   return data;
 }
 
-// ─── Calendar ────────────────────────────────────────────────────────────────
-
-export async function getCalendarAppointments(params?: { start?: string; end?: string; providerId?: string }): Promise<{ appointments: Appointment[]; total: number }> {
-  const { data } = await api.get<Appointment[]>('/calendar', { params });
-  return { appointments: data, total: data.length };
-}
-
-export async function getCalendarProviders(): Promise<Provider[]> {
-  const { data } = await api.get<Provider[]>('/calendar/providers');
-  return data;
-}
-
-export async function getAvailability(params: { providerId: string; date: string }): Promise<{ slots: string[] }> {
-  const { data } = await api.get<{ slots: string[] }>('/calendar/availability', { params });
+export async function sendTreatmentPlanToPatient(id: string): Promise<TreatmentPlan & { messagePreview: string; planLink: string }> {
+  const { data } = await api.post<TreatmentPlan & { messagePreview: string; planLink: string }>(`/treatment-plans/${id}/send`);
   return data;
 }
 
@@ -498,6 +486,11 @@ export async function restockItem(id: string, quantity: number): Promise<Invento
   return data;
 }
 
+export async function adjustStock(id: string, quantity: number, reason?: string): Promise<InventoryItem> {
+  const { data } = await api.patch<InventoryItem>(`/inventory/${id}/adjust`, { quantity, reason });
+  return data;
+}
+
 export async function getInventoryAlerts(): Promise<InventoryItem[]> {
   const { data } = await api.get<InventoryItem[]>('/inventory/alerts');
   return data;
@@ -510,6 +503,21 @@ export async function searchItemPrices(itemId: string): Promise<import('@/types'
 
 export async function searchPricesByQuery(query: string): Promise<import('@/types').PriceSearchResponse> {
   const { data } = await api.get<import('@/types').PriceSearchResponse>('/inventory/price-search', { params: { q: query } });
+  return data;
+}
+
+export async function parseInventoryFile(file: File): Promise<import('@/types').InventoryImportPreview> {
+  const formData = new FormData();
+  formData.append('file', file);
+  const { data } = await api.post<import('@/types').InventoryImportPreview>('/inventory/import/parse', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+    timeout: 60000,
+  });
+  return data;
+}
+
+export async function confirmInventoryImport(items: import('@/types').InventoryImportRow[]): Promise<import('@/types').InventoryImportResult> {
+  const { data } = await api.post<import('@/types').InventoryImportResult>('/inventory/import/confirm', { items });
   return data;
 }
 

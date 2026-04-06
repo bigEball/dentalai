@@ -184,6 +184,8 @@ export interface TreatmentPlan {
   patientEst: number;
   priority: 'urgent' | 'high' | 'standard' | 'elective';
   notes?: string | null;
+  sentAt?: string | null;
+  planToken?: string | null;
   items?: TreatmentPlanItem[];
   patient?: Patient;
   provider?: Provider;
@@ -301,6 +303,33 @@ export interface PriceSearchResponse {
   averagePrice: number | null;
   potentialSavings?: number;
   results: PriceResult[];
+}
+
+export interface InventoryImportRow {
+  name: string;
+  category: string;
+  sku: string | null;
+  currentStock: number;
+  minStock: number;
+  maxStock: number;
+  unit: string;
+  unitCost: number;
+  supplier: string | null;
+  location: string | null;
+}
+
+export interface InventoryImportPreview {
+  fileName: string;
+  fileSize: number;
+  itemCount: number;
+  items: InventoryImportRow[];
+}
+
+export interface InventoryImportResult {
+  created: number;
+  skipped: number;
+  skippedNames: string[];
+  items: Array<{ id: string; name: string }>;
 }
 
 export interface ScoreAlert {

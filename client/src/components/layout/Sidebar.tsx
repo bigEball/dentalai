@@ -11,7 +11,6 @@ import {
   Settings,
   LogOut,
   ClipboardList,
-  Calendar,
   BarChart3,
   MessageSquare,
   ShieldCheck,
@@ -31,7 +30,6 @@ import type { SystemStatus } from '@/lib/api';
 const MAIN_NAV = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/patients', label: 'Patients', icon: Users },
-  { to: '/calendar', label: 'Calendar', icon: Calendar },
 ];
 
 const AI_NAV = [

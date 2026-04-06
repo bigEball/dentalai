@@ -202,4 +202,39 @@ router.patch('/:id/restock', async (req: Request, res: Response) => {
   }
 });
 
+// PATCH /:id/adjust - set stock to an exact value
+router.patch('/:id/adjust', async (req: Request, res: Response) => {
+  try {
+    const { quantity, reason } = req.body;
+    if (quantity === undefined || quantity < 0) {
+      res.status(400).json({ error: 'quantity must be a non-negative number' });
+      return;
+    }
+
+    const prev = await prisma.inventoryItem.findUnique({ where: { id: req.params.id } });
+    if (!prev) {
+      res.status(404).json({ error: 'Inventory item not found' });
+      return;
+    }
+
+    const item = await prisma.inventoryItem.update({
+      where: { id: req.params.id },
+      data: { currentStock: quantity },
+    });
+
+    await logActivity(
+      'adjust_inventory',
+      'InventoryItem',
+      item.id,
+      `Adjusted "${item.name}" stock from ${prev.currentStock} to ${quantity} ${item.unit}${reason ? ` (${reason})` : ''}`,
+      { previousStock: prev.currentStock, newStock: quantity, reason: reason || null }
+    );
+
+    res.json(item);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to adjust inventory' });
+  }
+});
+
 export default router;

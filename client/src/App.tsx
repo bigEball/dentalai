@@ -12,7 +12,6 @@ import RecallPage from '@/pages/RecallPage';
 import SettingsPage from '@/pages/SettingsPage';
 import CompliancePage from '@/pages/CompliancePage';
 import TreatmentPlansPage from '@/pages/TreatmentPlansPage';
-import CalendarPage from '@/pages/CalendarPage';
 import ReportsPage from '@/pages/ReportsPage';
 import CommunicationsPage from '@/pages/CommunicationsPage';
 import PreauthPage from '@/pages/PreauthPage';
@@ -51,7 +50,6 @@ function AppRoutes() {
         <Route path="billing" element={<BillingPage />} />
         <Route path="recall" element={<RecallPage />} />
         <Route path="treatment-plans" element={<TreatmentPlansPage />} />
-        <Route path="calendar" element={<CalendarPage />} />
         <Route path="reports" element={<ReportsPage />} />
         <Route path="communications" element={<CommunicationsPage />} />
         <Route path="preauth" element={<PreauthPage />} />

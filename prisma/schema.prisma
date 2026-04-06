@@ -205,6 +205,8 @@ model TreatmentPlan {
   patientEst      Float    @default(0)
   priority        String   @default("standard") // urgent, high, standard, elective
   notes           String?
+  sentAt          String?
+  planToken       String?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
