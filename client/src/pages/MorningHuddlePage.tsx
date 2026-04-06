@@ -18,6 +18,7 @@ import {
   Loader2,
   Stethoscope,
   Send,
+  Eye,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import api from '@/lib/api';
@@ -187,6 +188,7 @@ export default function MorningHuddlePage() {
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
   const [selectedDate, setSelectedDate] = useState(() => new Date().toISOString().split('T')[0]);
+  const briefingRef = React.useRef<HTMLDivElement>(null);
 
   // Try multiple endpoints to load huddle — server auto-generates if none exists
   const fetchHuddle = useCallback(async (date: string) => {
@@ -213,22 +215,26 @@ export default function MorningHuddlePage() {
   async function handleGenerate() {
     setGenerating(true);
     try {
-      // Try POST /generate first
       const { data } = await api.post<Huddle>('/morning-huddle/generate', { date: selectedDate });
       setHuddle(data);
       toast.success('Briefing generated successfully');
+      setTimeout(() => briefingRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
     } catch {
-      // Fall back to GET /:date which also auto-generates
       try {
         const { data } = await api.get<Huddle>(`/morning-huddle/${selectedDate}`);
         setHuddle(data);
         toast.success('Briefing loaded successfully');
+        setTimeout(() => briefingRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
       } catch {
         toast.error('Could not reach the server. Make sure the backend is running.');
       }
     } finally {
       setGenerating(false);
     }
+  }
+
+  function handleViewBriefing() {
+    briefingRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   async function handleMarkReviewed() {
@@ -293,18 +299,38 @@ export default function MorningHuddlePage() {
             onChange={(e) => setSelectedDate(e.target.value)}
             className="input text-sm py-2 px-3"
           />
-          <button
-            onClick={handleGenerate}
-            disabled={generating}
-            className="btn-primary text-sm py-2.5 px-4"
-          >
-            {generating ? (
-              <Loader2 size={16} className="animate-spin" />
-            ) : (
-              <RefreshCw size={16} />
-            )}
-            Generate Briefing
-          </button>
+          {huddle ? (
+            <>
+              <button
+                onClick={handleViewBriefing}
+                className="btn-primary text-sm py-2.5 px-4"
+              >
+                <Eye size={16} />
+                View Briefing
+              </button>
+              <button
+                onClick={handleGenerate}
+                disabled={generating}
+                className="inline-flex items-center gap-2 text-sm py-2.5 px-4 rounded-lg border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 font-medium transition-colors"
+              >
+                {generating ? <Loader2 size={16} className="animate-spin" /> : <RefreshCw size={16} />}
+                Regenerate
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={handleGenerate}
+              disabled={generating}
+              className="btn-primary text-sm py-2.5 px-4"
+            >
+              {generating ? (
+                <Loader2 size={16} className="animate-spin" />
+              ) : (
+                <RefreshCw size={16} />
+              )}
+              Generate Briefing
+            </button>
+          )}
           {huddle && !huddle.reviewedAt && (
             <button
               onClick={handleMarkReviewed}
@@ -324,6 +350,7 @@ export default function MorningHuddlePage() {
       </div>
 
       {/* ─── Day Summary ─────────────────────────────────────────────────── */}
+      <div ref={briefingRef} />
       {summary && (
         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-8">
           <div className="card p-5 relative overflow-hidden">
