@@ -1091,12 +1091,12 @@ export default function MultiLocationPage() {
     setLoading(true);
     try {
       const [dashRes, locRes, kpiRes, compRes, trendRes, reportRes] = await Promise.allSettled([
-        api.get('/locations/dashboard'),
-        api.get('/locations'),
-        api.get('/locations/kpis'),
-        api.get('/locations/comparison'),
-        api.get('/locations/trends'),
-        api.get('/locations/group-report'),
+        api.get('/multi-location/dashboard'),
+        api.get('/multi-location'),
+        api.get('/multi-location/kpis'),
+        api.get('/multi-location/comparison'),
+        api.get('/multi-location/trends'),
+        api.get('/multi-location/group-report'),
       ]);
 
       if (dashRes.status === 'fulfilled') setDashboard(dashRes.value.data);

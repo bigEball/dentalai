@@ -298,27 +298,27 @@ export async function sendBulkCommunication(payload: { patientIds: string[]; cha
 // ─── Pre-Authorization ──────────────────────────────────────────────────────
 
 export async function getPreAuths(params?: { status?: string }): Promise<{ preAuths: PreAuthorization[]; total: number }> {
-  const { data } = await api.get<PreAuthorization[]>('/pre-authorizations', { params });
+  const { data } = await api.get<PreAuthorization[]>('/preauth', { params });
   return { preAuths: data, total: data.length };
 }
 
 export async function getPreAuth(id: string): Promise<PreAuthorization> {
-  const { data } = await api.get<PreAuthorization>(`/pre-authorizations/${id}`);
+  const { data } = await api.get<PreAuthorization>(`/preauth/${id}`);
   return data;
 }
 
 export async function createPreAuth(payload: Partial<PreAuthorization>): Promise<PreAuthorization> {
-  const { data } = await api.post<PreAuthorization>('/pre-authorizations', payload);
+  const { data } = await api.post<PreAuthorization>('/preauth', payload);
   return data;
 }
 
 export async function updatePreAuth(id: string, payload: Partial<PreAuthorization>): Promise<PreAuthorization> {
-  const { data } = await api.patch<PreAuthorization>(`/pre-authorizations/${id}`, payload);
+  const { data } = await api.patch<PreAuthorization>(`/preauth/${id}`, payload);
   return data;
 }
 
 export async function submitPreAuth(id: string): Promise<PreAuthorization> {
-  const { data } = await api.patch<PreAuthorization>(`/pre-authorizations/${id}/submit`);
+  const { data } = await api.patch<PreAuthorization>(`/preauth/${id}/submit`);
   return data;
 }
 
@@ -384,32 +384,32 @@ export async function sendFormToPatient(id: string): Promise<PatientForm & { mes
 // ─── Follow-Ups ──────────────────────────────────────────────────────────────
 
 export async function getFollowUps(params?: { status?: string }): Promise<{ followUps: FollowUp[]; total: number }> {
-  const { data } = await api.get<FollowUp[]>('/follow-ups', { params });
+  const { data } = await api.get<FollowUp[]>('/followups', { params });
   return { followUps: data, total: data.length };
 }
 
 export async function getFollowUp(id: string): Promise<FollowUp> {
-  const { data } = await api.get<FollowUp>(`/follow-ups/${id}`);
+  const { data } = await api.get<FollowUp>(`/followups/${id}`);
   return data;
 }
 
 export async function createFollowUp(payload: Partial<FollowUp>): Promise<FollowUp> {
-  const { data } = await api.post<FollowUp>('/follow-ups', payload);
+  const { data } = await api.post<FollowUp>('/followups', payload);
   return data;
 }
 
 export async function sendFollowUp(id: string): Promise<FollowUp> {
-  const { data } = await api.patch<FollowUp>(`/follow-ups/${id}/send`);
+  const { data } = await api.patch<FollowUp>(`/followups/${id}/send`);
   return data;
 }
 
 export async function respondFollowUp(id: string, response: string): Promise<FollowUp> {
-  const { data } = await api.patch<FollowUp>(`/follow-ups/${id}/respond`, { response });
+  const { data } = await api.patch<FollowUp>(`/followups/${id}/respond`, { response });
   return data;
 }
 
 export async function completeFollowUp(id: string): Promise<FollowUp> {
-  const { data } = await api.patch<FollowUp>(`/follow-ups/${id}/complete`);
+  const { data } = await api.patch<FollowUp>(`/followups/${id}/complete`);
   return data;
 }
 

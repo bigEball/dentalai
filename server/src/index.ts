@@ -105,7 +105,11 @@ app.use('/api/v1/multi-location', multiLocationRouter);
 // SPA fallback — serve index.html for non-API routes in production
 if (process.env.NODE_ENV === 'production') {
   const clientPath = path.resolve(__dirname, '../../client/dist');
-  app.get('*', (_req: Request, res: Response) => {
+  app.get('*', (req: Request, res: Response, next: NextFunction) => {
+    // Don't intercept API calls — let them fall through to 404
+    if (req.path.startsWith('/api/')) {
+      return next();
+    }
     res.sendFile(path.join(clientPath, 'index.html'));
   });
 }
