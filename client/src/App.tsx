@@ -1,7 +1,46 @@
-import React from 'react';
+import React, { Component, type ErrorInfo, type ReactNode } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from '@/context/AuthContext';
 import { isRouteAllowed, resolveRole } from '@/lib/roles';
+
+class ErrorBoundary extends Component<
+  { children: ReactNode },
+  { hasError: boolean; error: Error | null }
+> {
+  state = { hasError: false, error: null as Error | null };
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    console.error('[ErrorBoundary]', error, info.componentStack);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ padding: 40, fontFamily: 'system-ui', textAlign: 'center' }}>
+          <h1 style={{ fontSize: 24, marginBottom: 8 }}>Something went wrong</h1>
+          <p style={{ color: '#666', marginBottom: 16 }}>{this.state.error?.message}</p>
+          <button
+            onClick={() => {
+              localStorage.clear();
+              window.location.href = '/login';
+            }}
+            style={{
+              padding: '10px 24px', background: '#4f46e5', color: '#fff',
+              border: 'none', borderRadius: 8, cursor: 'pointer', fontSize: 14,
+            }}
+          >
+            Clear session &amp; reload
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 import AppLayout from '@/layouts/AppLayout';
 import LoginPage from '@/pages/LoginPage';
 import AccessDeniedPage from '@/pages/AccessDeniedPage';
@@ -104,8 +143,10 @@ function AppRoutes() {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <AppRoutes />
-    </AuthProvider>
+    <ErrorBoundary>
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }
