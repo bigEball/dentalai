@@ -46,7 +46,7 @@ const MAIN_NAV = [
 const AI_NAV = [
   { to: '/notes', label: 'AI Notes', icon: FileText },
   { to: '/claim-scrubber', label: 'Claim Scrubber', icon: ShieldAlert },
-  { to: '/churn-prediction', label: 'Churn & LTV', icon: TrendingDown },
+  { to: '/patient-retention', label: 'Patient Retention', icon: TrendingDown },
   { to: '/nurture-sequences', label: 'Nurture Sequences', icon: HeartHandshake },
   { to: '/decision-support', label: 'Clinical AI', icon: Stethoscope },
   { to: '/treatment-plans', label: 'Treatment Plans', icon: ClipboardList },

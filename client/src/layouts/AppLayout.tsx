@@ -23,7 +23,7 @@ const PAGE_TITLES: Record<string, string> = {
   '/reports': 'Reports & Analytics',
   '/patient-scores': 'Patient Scores',
   '/claim-scrubber': 'Claim Scrubber',
-  '/churn-prediction': 'Churn & Lifetime Value',
+  '/patient-retention': 'Patient Retention',
   '/morning-huddle': 'Morning Huddle',
   '/nurture-sequences': 'Nurture Sequences',
   '/fee-optimizer': 'Fee Optimizer',

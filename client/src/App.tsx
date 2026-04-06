@@ -71,7 +71,7 @@ function AppRoutes() {
         <Route path="perio" element={<PerioChartPage />} />
         <Route path="patient-scores" element={<PatientScoresPage />} />
         <Route path="claim-scrubber" element={<ClaimScrubberPage />} />
-        <Route path="churn-prediction" element={<ChurnPredictionPage />} />
+        <Route path="patient-retention" element={<ChurnPredictionPage />} />
         <Route path="morning-huddle" element={<MorningHuddlePage />} />
         <Route path="nurture-sequences" element={<NurtureSequencesPage />} />
         <Route path="fee-optimizer" element={<FeeSchedulePage />} />

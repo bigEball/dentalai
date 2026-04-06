@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard,
@@ -20,18 +20,34 @@ import {
   Gauge,
   Settings,
   ArrowRight,
+  Search,
+  Sunrise,
+  ShieldAlert,
+  TrendingDown,
+  HeartHandshake,
+  BadgeDollarSign,
+  CalendarClock,
+  ShoppingCart,
+  Stethoscope,
+  ClipboardCheck,
+  Building2,
+  Sparkles,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+
+type Category = 'all' | 'main' | 'ai' | 'office' | 'system';
 
 interface Tool {
   label: string;
   description: string;
   icon: React.ElementType;
   route: string;
-  category: 'main' | 'ai' | 'office' | 'system';
+  category: Exclude<Category, 'all'>;
+  isNew?: boolean;
 }
 
 const TOOLS: Tool[] = [
+  // ── Main ──
   {
     label: 'Dashboard',
     description: 'Practice overview with daily stats, upcoming appointments, revenue metrics, and recent activity feed.',
@@ -40,18 +56,60 @@ const TOOLS: Tool[] = [
     category: 'main',
   },
   {
+    label: 'Morning Huddle',
+    description: 'AI-generated daily briefing with schedule preview, high-risk patients, open treatment, and revenue targets.',
+    icon: Sunrise,
+    route: '/morning-huddle',
+    category: 'main',
+    isNew: true,
+  },
+  {
     label: 'Patients',
     description: 'Full patient roster with search, demographics, contact info, balance tracking, and Open Dental integration.',
     icon: Users,
     route: '/patients',
     category: 'main',
   },
+
+  // ── AI Modules ──
   {
     label: 'AI Notes',
     description: 'AI-generated clinical notes from voice or text input. Review, edit, and approve SOAP notes per visit.',
     icon: FileText,
     route: '/notes',
     category: 'ai',
+  },
+  {
+    label: 'Claim Scrubber',
+    description: 'Pre-submission claim validation that catches coding errors, missing attachments, and payer-specific rules.',
+    icon: ShieldAlert,
+    route: '/claim-scrubber',
+    category: 'ai',
+    isNew: true,
+  },
+  {
+    label: 'Patient Retention',
+    description: 'Predict patient attrition risk and lifetime value. Surface at-risk patients before they leave.',
+    icon: TrendingDown,
+    route: '/patient-retention',
+    category: 'ai',
+    isNew: true,
+  },
+  {
+    label: 'Nurture Sequences',
+    description: 'Automated multi-step outreach campaigns to re-engage dormant patients and drive case acceptance.',
+    icon: HeartHandshake,
+    route: '/nurture-sequences',
+    category: 'ai',
+    isNew: true,
+  },
+  {
+    label: 'Clinical Decision Support',
+    description: 'Evidence-based treatment suggestions, contraindication alerts, and diagnostic guidance at the chairside.',
+    icon: Stethoscope,
+    route: '/decision-support',
+    category: 'ai',
+    isNew: true,
   },
   {
     label: 'Treatment Plans',
@@ -89,6 +147,14 @@ const TOOLS: Tool[] = [
     category: 'ai',
   },
   {
+    label: 'Fee Optimizer',
+    description: 'Analyze and optimize your fee schedule against market rates, UCR data, and payer reimbursement trends.',
+    icon: BadgeDollarSign,
+    route: '/fee-optimizer',
+    category: 'ai',
+    isNew: true,
+  },
+  {
     label: 'Recall',
     description: 'Overdue hygiene recall tracking with AI-suggested outreach messages via text, email, or phone.',
     icon: RefreshCw,
@@ -101,6 +167,16 @@ const TOOLS: Tool[] = [
     icon: Activity,
     route: '/perio',
     category: 'ai',
+  },
+
+  // ── Office ──
+  {
+    label: 'Smart Scheduling',
+    description: 'AI-optimized appointment scheduling that maximizes chair utilization, minimizes gaps, and reduces no-shows.',
+    icon: CalendarClock,
+    route: '/smart-scheduling',
+    category: 'office',
+    isNew: true,
   },
   {
     label: 'Communications',
@@ -138,6 +214,14 @@ const TOOLS: Tool[] = [
     category: 'office',
   },
   {
+    label: 'Procurement Intelligence',
+    description: 'AI-powered purchasing recommendations, vendor comparison, bulk discount detection, and spend analytics.',
+    icon: ShoppingCart,
+    route: '/procurement',
+    category: 'office',
+    isNew: true,
+  },
+  {
     label: 'Reports',
     description: 'Practice analytics and reporting with production, collections, appointment, and provider metrics.',
     icon: BarChart3,
@@ -151,12 +235,23 @@ const TOOLS: Tool[] = [
     route: '/patient-scores',
     category: 'office',
   },
+
+  // ── System ──
   {
-    label: 'Compliance',
-    description: 'HIPAA, OSHA, state law, and billing compliance checklists with status tracking and guidance.',
-    icon: Shield,
+    label: 'Compliance Autopilot',
+    description: 'Automated HIPAA, OSHA, and state-law compliance monitoring with audit trails and staff training tracking.',
+    icon: ClipboardCheck,
     route: '/compliance',
     category: 'system',
+    isNew: true,
+  },
+  {
+    label: 'Multi-Location',
+    description: 'Cross-location dashboards, benchmarking, resource sharing, and consolidated reporting for multi-site practices.',
+    icon: Building2,
+    route: '/multi-location',
+    category: 'system',
+    isNew: true,
   },
   {
     label: 'Settings',
@@ -167,64 +262,160 @@ const TOOLS: Tool[] = [
   },
 ];
 
-const CATEGORY_META: Record<string, { label: string; color: string }> = {
-  main: { label: 'Main', color: 'bg-slate-100 text-slate-700' },
-  ai: { label: 'AI Modules', color: 'bg-indigo-50 text-indigo-700' },
-  office: { label: 'Office', color: 'bg-emerald-50 text-emerald-700' },
-  system: { label: 'System', color: 'bg-amber-50 text-amber-700' },
+const CATEGORIES: { key: Category; label: string; color: string; activeColor: string }[] = [
+  { key: 'all', label: 'All', color: 'text-gray-600 bg-white border-gray-200 hover:border-gray-300', activeColor: 'text-white bg-gray-900 border-gray-900' },
+  { key: 'main', label: 'Main', color: 'text-slate-600 bg-white border-gray-200 hover:border-slate-400', activeColor: 'text-white bg-slate-700 border-slate-700' },
+  { key: 'ai', label: 'AI Modules', color: 'text-indigo-600 bg-white border-gray-200 hover:border-indigo-400', activeColor: 'text-white bg-indigo-600 border-indigo-600' },
+  { key: 'office', label: 'Office', color: 'text-emerald-600 bg-white border-gray-200 hover:border-emerald-400', activeColor: 'text-white bg-emerald-600 border-emerald-600' },
+  { key: 'system', label: 'System', color: 'text-amber-600 bg-white border-gray-200 hover:border-amber-400', activeColor: 'text-white bg-amber-600 border-amber-600' },
+];
+
+const CATEGORY_ICON_BG: Record<string, string> = {
+  main: 'bg-slate-100 text-slate-600 group-hover:bg-slate-200',
+  ai: 'bg-indigo-50 text-indigo-600 group-hover:bg-indigo-100',
+  office: 'bg-emerald-50 text-emerald-600 group-hover:bg-emerald-100',
+  system: 'bg-amber-50 text-amber-600 group-hover:bg-amber-100',
 };
 
-const CATEGORY_ORDER = ['main', 'ai', 'office', 'system'] as const;
+const CATEGORY_HOVER_BORDER: Record<string, string> = {
+  main: 'hover:border-slate-300',
+  ai: 'hover:border-indigo-300',
+  office: 'hover:border-emerald-300',
+  system: 'hover:border-amber-300',
+};
 
 export default function ToolsPage() {
   const navigate = useNavigate();
+  const [query, setQuery] = useState('');
+  const [activeCategory, setActiveCategory] = useState<Category>('all');
+
+  const filtered = useMemo(() => {
+    let list = TOOLS;
+    if (activeCategory !== 'all') {
+      list = list.filter((t) => t.category === activeCategory);
+    }
+    if (query.trim()) {
+      const q = query.toLowerCase();
+      list = list.filter(
+        (t) => t.label.toLowerCase().includes(q) || t.description.toLowerCase().includes(q),
+      );
+    }
+    return list;
+  }, [query, activeCategory]);
+
+  const newCount = TOOLS.filter((t) => t.isNew).length;
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8">
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">All Tools</h1>
-        <p className="mt-1 text-sm text-gray-500">
-          Every module available in Smart Dental AI at a glance.
-        </p>
+    <div className="max-w-6xl mx-auto space-y-6">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-2.5">
+            <h1 className="text-2xl font-bold text-gray-900">All Tools</h1>
+            <span className="inline-flex items-center gap-1 rounded-full bg-indigo-50 px-2.5 py-0.5 text-xs font-semibold text-indigo-600">
+              {TOOLS.length}
+            </span>
+          </div>
+          <p className="mt-1 text-sm text-gray-500">
+            Everything Smart Dental AI can do — click any card to jump in.
+          </p>
+        </div>
+        {newCount > 0 && (
+          <div className="flex items-center gap-1.5 text-xs text-indigo-600 font-medium">
+            <Sparkles size={14} />
+            {newCount} new tools recently added
+          </div>
+        )}
       </div>
 
-      {CATEGORY_ORDER.map((cat) => {
-        const meta = CATEGORY_META[cat];
-        const items = TOOLS.filter((t) => t.category === cat);
-        return (
-          <section key={cat}>
-            <div className="flex items-center gap-2 mb-3">
-              <span className={cn('text-xs font-semibold px-2 py-0.5 rounded-full', meta.color)}>
-                {meta.label}
-              </span>
-              <span className="text-xs text-gray-400">{items.length} tools</span>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {items.map((tool) => {
-                const Icon = tool.icon;
-                return (
-                  <button
-                    key={tool.route}
-                    onClick={() => navigate(tool.route)}
-                    className="group flex items-start gap-3 rounded-xl border border-gray-200 bg-white p-4 text-left shadow-sm transition hover:border-indigo-300 hover:shadow-md"
-                  >
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 group-hover:bg-indigo-100 transition-colors">
-                      <Icon size={18} />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-1.5">
-                        <span className="text-sm font-semibold text-gray-900">{tool.label}</span>
-                        <ArrowRight size={12} className="text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity" />
-                      </div>
-                      <p className="mt-0.5 text-xs leading-relaxed text-gray-500">{tool.description}</p>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </section>
-        );
-      })}
+      {/* Search + Filters */}
+      <div className="flex flex-col sm:flex-row gap-3">
+        <div className="relative flex-1 max-w-md">
+          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search tools..."
+            className="w-full rounded-lg border border-gray-200 bg-white py-2 pl-9 pr-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-100 transition"
+          />
+        </div>
+        <div className="flex flex-wrap gap-1.5">
+          {CATEGORIES.map((cat) => {
+            const isActive = activeCategory === cat.key;
+            const count = cat.key === 'all' ? TOOLS.length : TOOLS.filter((t) => t.category === cat.key).length;
+            return (
+              <button
+                key={cat.key}
+                onClick={() => setActiveCategory(cat.key)}
+                className={cn(
+                  'inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-all',
+                  isActive ? cat.activeColor : cat.color,
+                )}
+              >
+                {cat.label}
+                <span className={cn(
+                  'rounded-full px-1.5 py-px text-[10px] font-semibold',
+                  isActive ? 'bg-white/20 text-white/90' : 'bg-gray-100 text-gray-500',
+                )}>
+                  {count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Results */}
+      {filtered.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-20 text-center">
+          <Search size={40} className="text-gray-200 mb-3" />
+          <p className="text-sm font-medium text-gray-500">No tools match your search</p>
+          <p className="text-xs text-gray-400 mt-1">Try a different keyword or clear your filters.</p>
+          <button
+            onClick={() => { setQuery(''); setActiveCategory('all'); }}
+            className="mt-3 text-xs font-medium text-indigo-600 hover:text-indigo-700"
+          >
+            Clear all filters
+          </button>
+        </div>
+      ) : (
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {filtered.map((tool) => {
+            const Icon = tool.icon;
+            return (
+              <button
+                key={tool.route}
+                onClick={() => navigate(tool.route)}
+                className={cn(
+                  'group relative flex items-start gap-3.5 rounded-xl border border-gray-200 bg-white p-4 text-left shadow-sm transition-all hover:shadow-md',
+                  CATEGORY_HOVER_BORDER[tool.category],
+                )}
+              >
+                {tool.isNew && (
+                  <span className="absolute top-2.5 right-2.5 inline-flex items-center gap-1 rounded-full bg-indigo-50 px-2 py-0.5 text-[10px] font-semibold text-indigo-600">
+                    <Sparkles size={10} />
+                    New
+                  </span>
+                )}
+                <div className={cn(
+                  'flex h-10 w-10 shrink-0 items-center justify-center rounded-lg transition-colors',
+                  CATEGORY_ICON_BG[tool.category],
+                )}>
+                  <Icon size={20} />
+                </div>
+                <div className="min-w-0 flex-1 pr-6">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-sm font-semibold text-gray-900">{tool.label}</span>
+                    <ArrowRight size={12} className="text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                  <p className="mt-0.5 text-xs leading-relaxed text-gray-500">{tool.description}</p>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
