@@ -12,6 +12,7 @@ import {
   Loader2,
   X,
   ChevronRight,
+  AlertTriangle,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -249,6 +250,8 @@ export default function CommunicationsPage() {
 
   const stats = {
     total: MOCK_COMMUNICATIONS.length,
+    inbound: MOCK_COMMUNICATIONS.filter((m) => m.direction === 'inbound').length,
+    outbound: MOCK_COMMUNICATIONS.filter((m) => m.direction === 'outbound').length,
     unread: MOCK_COMMUNICATIONS.filter((m) => m.direction === 'inbound' && m.status !== 'read').length,
     failed: MOCK_COMMUNICATIONS.filter((m) => m.status === 'failed').length,
   };
@@ -263,9 +266,7 @@ export default function CommunicationsPage() {
             Communications
           </h1>
           <p className="mt-1 text-sm text-gray-500">
-            {stats.total} messages
-            {stats.unread > 0 && <span className="text-indigo-600 font-medium ml-1">({stats.unread} unread)</span>}
-            {stats.failed > 0 && <span className="text-red-500 font-medium ml-1">({stats.failed} failed)</span>}
+            All patient messages across every channel
           </p>
         </div>
         <button
@@ -275,6 +276,81 @@ export default function CommunicationsPage() {
           <Plus size={16} />
           New Message
         </button>
+      </div>
+
+      {/* How it works */}
+      <div className="bg-indigo-50/50 border border-indigo-100 rounded-xl p-4 mb-6">
+        <p className="text-xs font-semibold text-indigo-900 mb-2">How it works</p>
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">1</span>
+            <p className="text-xs text-indigo-800">All patient messages — SMS, email, phone, and portal — in one unified inbox</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">2</span>
+            <p className="text-xs text-indigo-800">Filter by channel to focus on a specific message type</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">3</span>
+            <p className="text-xs text-indigo-800">Click any message to expand and see the full conversation</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">4</span>
+            <p className="text-xs text-indigo-800">Compose new messages or log phone calls from the "New Message" button</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+        <div className="card p-5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/80 to-transparent pointer-events-none" />
+          <div className="relative flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-indigo-100 text-indigo-600">
+              <MessageSquare size={20} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
+              <p className="text-xs text-gray-500">Total Messages</p>
+            </div>
+          </div>
+        </div>
+        <div className="card p-5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 to-transparent pointer-events-none" />
+          <div className="relative flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-blue-100 text-blue-600">
+              <ArrowDownLeft size={20} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-blue-700">{stats.inbound}</p>
+              <p className="text-xs text-gray-500">Inbound</p>
+            </div>
+          </div>
+        </div>
+        <div className="card p-5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-green-50/80 to-transparent pointer-events-none" />
+          <div className="relative flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-green-100 text-green-600">
+              <ArrowUpRight size={20} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-green-700">{stats.outbound}</p>
+              <p className="text-xs text-gray-500">Outbound</p>
+            </div>
+          </div>
+        </div>
+        <div className="card p-5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-red-50/80 to-transparent pointer-events-none" />
+          <div className="relative flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-red-100 text-red-600">
+              <AlertTriangle size={20} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-red-700">{stats.failed}</p>
+              <p className="text-xs text-gray-500">Failed</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Channel filter */}

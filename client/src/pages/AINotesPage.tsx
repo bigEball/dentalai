@@ -1281,11 +1281,21 @@ export default function AINotesPage() {
   /* ─── List view ──────────────────────────────────────────────────────── */
   /* ════════════════════════════════════════════════════════════════════════ */
 
+  const noteStats = {
+    total: MOCK_NOTES.length,
+    draft: MOCK_NOTES.filter((n) => n.status === 'draft').length,
+    pending: MOCK_NOTES.filter((n) => n.status === 'pending_approval').length,
+    approved: MOCK_NOTES.filter((n) => n.status === 'approved').length,
+  };
+
   return (
     <div>
       <div className="flex items-start justify-between mb-6">
         <div>
-          <h1 className="text-xl font-semibold text-gray-900">Clinical Notes</h1>
+          <h1 className="text-xl font-semibold text-gray-900 flex items-center gap-3">
+            <FileText size={24} className="text-indigo-600" />
+            Clinical Notes
+          </h1>
           <p className="mt-1 text-sm text-gray-500">Record appointments and generate AI-powered SOAP notes</p>
         </div>
         <div className="relative" ref={searchDropdownRef}>
@@ -1351,6 +1361,81 @@ export default function AINotesPage() {
               Start New Note
             </button>
           )}
+        </div>
+      </div>
+
+      {/* How it works */}
+      <div className="bg-indigo-50/50 border border-indigo-100 rounded-xl p-4 mb-6">
+        <p className="text-xs font-semibold text-indigo-900 mb-2">How it works</p>
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">1</span>
+            <p className="text-xs text-indigo-800">Click "Start New Note" and select a patient from the search</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">2</span>
+            <p className="text-xs text-indigo-800">Record the visit using voice dictation or type the transcript manually</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">3</span>
+            <p className="text-xs text-indigo-800">AI generates a structured SOAP note — review and edit each section</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">4</span>
+            <p className="text-xs text-indigo-800">Approve the final note to lock it into the patient's record</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+        <div className="card p-5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/80 to-transparent pointer-events-none" />
+          <div className="relative flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-indigo-100 text-indigo-600">
+              <FileText size={20} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-gray-900">{noteStats.total}</p>
+              <p className="text-xs text-gray-500">Total Notes</p>
+            </div>
+          </div>
+        </div>
+        <div className="card p-5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-50/80 to-transparent pointer-events-none" />
+          <div className="relative flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-gray-100 text-gray-500">
+              <Pencil size={20} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-gray-700">{noteStats.draft}</p>
+              <p className="text-xs text-gray-500">Drafts</p>
+            </div>
+          </div>
+        </div>
+        <div className="card p-5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-50/80 to-transparent pointer-events-none" />
+          <div className="relative flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-amber-100 text-amber-600">
+              <Clock size={20} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-amber-700">{noteStats.pending}</p>
+              <p className="text-xs text-gray-500">Pending Approval</p>
+            </div>
+          </div>
+        </div>
+        <div className="card p-5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-green-50/80 to-transparent pointer-events-none" />
+          <div className="relative flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-green-100 text-green-600">
+              <CheckCircle2 size={20} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-green-700">{noteStats.approved}</p>
+              <p className="text-xs text-gray-500">Approved</p>
+            </div>
+          </div>
         </div>
       </div>
 

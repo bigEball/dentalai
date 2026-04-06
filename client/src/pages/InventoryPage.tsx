@@ -348,6 +348,81 @@ export default function InventoryPage() {
         </div>
       </div>
 
+      {/* How it works */}
+      <div className="bg-indigo-50/50 border border-indigo-100 rounded-xl p-4 mb-6">
+        <p className="text-xs font-semibold text-indigo-900 mb-2">How it works</p>
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">1</span>
+            <p className="text-xs text-indigo-800">Add supplies manually or import your inventory from a file</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">2</span>
+            <p className="text-xs text-indigo-800">Set minimum stock levels — alerts fire automatically when items run low</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">3</span>
+            <p className="text-xs text-indigo-800">Search and compare prices across suppliers before reordering</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">4</span>
+            <p className="text-xs text-indigo-800">Restock or adjust quantities — stock levels update in real time</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+        <div className="card p-5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/80 to-transparent pointer-events-none" />
+          <div className="relative flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-indigo-100 text-indigo-600">
+              <Package size={20} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-gray-900">{MOCK_ITEMS.length}</p>
+              <p className="text-xs text-gray-500">Total Items</p>
+            </div>
+          </div>
+        </div>
+        <div className="card p-5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/80 to-transparent pointer-events-none" />
+          <div className="relative flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-emerald-100 text-emerald-600">
+              <Star size={20} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-emerald-700">{formatCurrency(totalValue)}</p>
+              <p className="text-xs text-gray-500">Inventory Value</p>
+            </div>
+          </div>
+        </div>
+        <div className="card p-5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-red-50/80 to-transparent pointer-events-none" />
+          <div className="relative flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-red-100 text-red-600">
+              <AlertTriangle size={20} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-red-700">{lowStockItems.length}</p>
+              <p className="text-xs text-gray-500">Low Stock Alerts</p>
+            </div>
+          </div>
+        </div>
+        <div className="card p-5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-50/80 to-transparent pointer-events-none" />
+          <div className="relative flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-amber-100 text-amber-600">
+              <TrendingDown size={20} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-amber-700">{MOCK_ITEMS.filter((i) => i.expiryDate && new Date(i.expiryDate) < new Date(Date.now() + 90 * 86400000)).length}</p>
+              <p className="text-xs text-gray-500">Expiring Soon</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Product Search Bar */}
       <form onSubmit={handleProductSearch} className="mb-6">
         <div className="card p-4">

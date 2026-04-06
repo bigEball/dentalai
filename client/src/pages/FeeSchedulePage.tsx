@@ -481,6 +481,29 @@ export default function FeeSchedulePage() {
         </div>
       </div>
 
+      {/* How it works */}
+      <div className="bg-indigo-50/50 border border-indigo-100 rounded-xl p-4 mb-6">
+        <p className="text-xs font-semibold text-indigo-900 mb-2">How it works</p>
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">1</span>
+            <p className="text-xs text-indigo-800">View your current fees alongside UCR benchmarks and PPO allowed amounts</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">2</span>
+            <p className="text-xs text-indigo-800">See which procedures are priced below market rates and how much revenue you're leaving behind</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">3</span>
+            <p className="text-xs text-indigo-800">Model fee adjustments and preview the projected impact on annual revenue</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">4</span>
+            <p className="text-xs text-indigo-800">Generate PPO renegotiation briefs backed by data to support higher reimbursement rates</p>
+          </div>
+        </div>
+      </div>
+
       {/* Fee Schedule Selector */}
       <div className="flex items-center gap-3">
         <label className="text-sm font-medium text-gray-700">Fee Schedule:</label>

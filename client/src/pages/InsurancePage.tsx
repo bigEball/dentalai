@@ -363,6 +363,136 @@ export default function InsurancePage() {
         </div>
       </div>
 
+      {/* How it works */}
+      <div className="bg-indigo-50/50 border border-indigo-100 rounded-xl p-4 mb-6">
+        <p className="text-xs font-semibold text-indigo-900 mb-2">How it works</p>
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">1</span>
+            <p className="text-xs text-indigo-800">Add a patient's insurance plan with their carrier, member ID, and coverage details</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">2</span>
+            <p className="text-xs text-indigo-800">Run verification to confirm eligibility and remaining benefits in real time</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">3</span>
+            <p className="text-xs text-indigo-800">Create claims manually or auto-generate them from completed procedures</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">4</span>
+            <p className="text-xs text-indigo-800">Submit claims and track approval status until reimbursement is received</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+        {activeTab === 'verification' ? (
+          <>
+            <div className="card p-5 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/80 to-transparent pointer-events-none" />
+              <div className="relative flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-indigo-100 text-indigo-600">
+                  <Shield size={20} />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-gray-900">{calcVerificationStats(plans).total}</p>
+                  <p className="text-xs text-gray-500">Total Plans</p>
+                </div>
+              </div>
+            </div>
+            <div className="card p-5 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-green-50/80 to-transparent pointer-events-none" />
+              <div className="relative flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-green-100 text-green-600">
+                  <CheckCircle size={20} />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-green-700">{calcVerificationStats(plans).verified}</p>
+                  <p className="text-xs text-gray-500">Verified</p>
+                </div>
+              </div>
+            </div>
+            <div className="card p-5 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-50/80 to-transparent pointer-events-none" />
+              <div className="relative flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-amber-100 text-amber-600">
+                  <AlertTriangle size={20} />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-amber-700">{calcVerificationStats(plans).needsAttention}</p>
+                  <p className="text-xs text-gray-500">Needs Attention</p>
+                </div>
+              </div>
+            </div>
+            <div className="card p-5 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 to-transparent pointer-events-none" />
+              <div className="relative flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-blue-100 text-blue-600">
+                  <RefreshCw size={20} />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-blue-700">{calcVerificationStats(plans).total > 0 ? Math.round((calcVerificationStats(plans).verified / calcVerificationStats(plans).total) * 100) : 0}%</p>
+                  <p className="text-xs text-gray-500">Verification Rate</p>
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="card p-5 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/80 to-transparent pointer-events-none" />
+              <div className="relative flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-indigo-100 text-indigo-600">
+                  <FileText size={20} />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-gray-900">{calcClaimStats(claims).total}</p>
+                  <p className="text-xs text-gray-500">Total Claims</p>
+                </div>
+              </div>
+            </div>
+            <div className="card p-5 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-50/80 to-transparent pointer-events-none" />
+              <div className="relative flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-amber-100 text-amber-600">
+                  <Clock size={20} />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-amber-700">{calcClaimStats(claims).pendingCount}</p>
+                  <p className="text-xs text-gray-500">Pending</p>
+                </div>
+              </div>
+            </div>
+            <div className="card p-5 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-green-50/80 to-transparent pointer-events-none" />
+              <div className="relative flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-green-100 text-green-600">
+                  <DollarSign size={20} />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-green-700">{formatCurrency(calcClaimStats(claims).approvedAmount)}</p>
+                  <p className="text-xs text-gray-500">Approved</p>
+                </div>
+              </div>
+            </div>
+            <div className="card p-5 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-red-50/80 to-transparent pointer-events-none" />
+              <div className="relative flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-red-100 text-red-600">
+                  <XCircle size={20} />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-red-700">{calcClaimStats(claims).deniedCount}</p>
+                  <p className="text-xs text-gray-500">Denied</p>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+
       {/* Patient filter */}
       <div className="mb-4">
         <PatientSearchBar

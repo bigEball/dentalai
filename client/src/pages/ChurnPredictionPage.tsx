@@ -365,10 +365,10 @@ export default function ChurnPredictionPage() {
         <div>
           <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
             <TrendingDown className="h-7 w-7 text-indigo-600" />
-            Churn Prediction & Lifetime Value
+            Patient Retention
           </h1>
           <p className="mt-1 text-sm text-gray-500">
-            Predict patient attrition and optimize retention strategies
+            See which patients are at risk of leaving and take action to keep them
           </p>
         </div>
         <div className="flex gap-3">
@@ -391,6 +391,29 @@ export default function ChurnPredictionPage() {
             )}
             Recalculate All
           </button>
+        </div>
+      </div>
+
+      {/* How it works */}
+      <div className="bg-indigo-50/50 border border-indigo-100 rounded-xl p-4 mb-6">
+        <p className="text-xs font-semibold text-indigo-900 mb-2">How it works</p>
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">1</span>
+            <p className="text-xs text-indigo-800">AI looks at every patient's visit history to spot who might stop coming back</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">2</span>
+            <p className="text-xs text-indigo-800">At-risk patients show up here ranked by how likely they are to leave</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">3</span>
+            <p className="text-xs text-indigo-800">Click a patient to see why — missed visits, old balance, no recall, etc.</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">4</span>
+            <p className="text-xs text-indigo-800">Reach out with a call, text, or email to bring them back before it's too late</p>
+          </div>
         </div>
       </div>
 

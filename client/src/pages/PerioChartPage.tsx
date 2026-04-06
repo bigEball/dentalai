@@ -503,6 +503,12 @@ export default function PerioChartPage() {
   }
 
   // ── Standard View / Comparison Mode ───────────────────────────────────────
+  const perioStats = {
+    patients: MOCK_PATIENTS.length,
+    exams: MOCK_EXAMS.length,
+    withHistory: new Set(MOCK_EXAMS.map((e) => e.patientId)).size,
+  };
+
   return (
     <div>
       {/* Header */}
@@ -514,6 +520,81 @@ export default function PerioChartPage() {
         <p className="mt-1 text-sm text-gray-500">
           View periodontal exam data and track pocket depth changes over time
         </p>
+      </div>
+
+      {/* How it works */}
+      <div className="bg-indigo-50/50 border border-indigo-100 rounded-xl p-4 mb-6">
+        <p className="text-xs font-semibold text-indigo-900 mb-2">How it works</p>
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">1</span>
+            <p className="text-xs text-indigo-800">Select a patient to view their periodontal exam history</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">2</span>
+            <p className="text-xs text-indigo-800">Start a new exam — enter pocket depths using voice or by clicking the chart</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">3</span>
+            <p className="text-xs text-indigo-800">Color-coded depths highlight areas of concern (red = 6mm+)</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">4</span>
+            <p className="text-xs text-indigo-800">Compare current vs. previous exams to track improvement or regression</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+        <div className="card p-5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/80 to-transparent pointer-events-none" />
+          <div className="relative flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-indigo-100 text-indigo-600">
+              <User size={20} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-gray-900">{perioStats.patients}</p>
+              <p className="text-xs text-gray-500">Patients</p>
+            </div>
+          </div>
+        </div>
+        <div className="card p-5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 to-transparent pointer-events-none" />
+          <div className="relative flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-blue-100 text-blue-600">
+              <FileText size={20} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-blue-700">{perioStats.exams}</p>
+              <p className="text-xs text-gray-500">Total Exams</p>
+            </div>
+          </div>
+        </div>
+        <div className="card p-5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-green-50/80 to-transparent pointer-events-none" />
+          <div className="relative flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-green-100 text-green-600">
+              <GitCompare size={20} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-green-700">{perioStats.withHistory}</p>
+              <p className="text-xs text-gray-500">With Exam History</p>
+            </div>
+          </div>
+        </div>
+        <div className="card p-5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-50/80 to-transparent pointer-events-none" />
+          <div className="relative flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-amber-100 text-amber-600">
+              <BarChart3 size={20} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-amber-700">{selectedExam ? exams.length : '—'}</p>
+              <p className="text-xs text-gray-500">{selectedExam ? 'Exams for Patient' : 'Select Patient'}</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Patient selector */}

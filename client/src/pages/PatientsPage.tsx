@@ -14,6 +14,7 @@ import {
   Shield,
   DollarSign,
   RefreshCw,
+  Clock,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
@@ -181,7 +182,10 @@ export default function PatientsPage() {
     return () => clearTimeout(timer);
   }, [load]);
 
-  const totalWithBalance = patients.filter((p) => p.outstandingBalance > 0).length;
+  const totalWithBalance = MOCK_PATIENTS.filter((p) => p.outstandingBalance > 0).length;
+  const totalBalance = MOCK_PATIENTS.reduce((s, p) => s + p.outstandingBalance, 0);
+  const insuredCount = MOCK_PATIENTS.filter((p) => p.insuranceProvider).length;
+  const overdueRecall = MOCK_PATIENTS.filter((p) => p.recallDueDate && daysOverdue(p.recallDueDate) > 0).length;
 
   return (
     <div>
@@ -194,12 +198,82 @@ export default function PatientsPage() {
           </h1>
           <p className="mt-1 text-sm text-gray-500">
             {patients.length} patient{patients.length !== 1 ? 's' : ''} total
-            {totalWithBalance > 0 && (
-              <span className="text-amber-600 ml-2 font-medium">
-                ({totalWithBalance} with open balance)
-              </span>
-            )}
           </p>
+        </div>
+      </div>
+
+      {/* How it works */}
+      <div className="bg-indigo-50/50 border border-indigo-100 rounded-xl p-4 mb-6">
+        <p className="text-xs font-semibold text-indigo-900 mb-2">How it works</p>
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">1</span>
+            <p className="text-xs text-indigo-800">Search for any patient by name, phone, or email</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">2</span>
+            <p className="text-xs text-indigo-800">Click a patient card to view their full profile and contact details</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">3</span>
+            <p className="text-xs text-indigo-800">Check balances, insurance status, and recall dates at a glance</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">4</span>
+            <p className="text-xs text-indigo-800">Use quick links to jump to notes, billing, insurance, or recall for that patient</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+        <div className="card p-5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/80 to-transparent pointer-events-none" />
+          <div className="relative flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-indigo-100 text-indigo-600">
+              <Users size={20} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-gray-900">{MOCK_PATIENTS.length}</p>
+              <p className="text-xs text-gray-500">Total Patients</p>
+            </div>
+          </div>
+        </div>
+        <div className="card p-5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-green-50/80 to-transparent pointer-events-none" />
+          <div className="relative flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-green-100 text-green-600">
+              <Shield size={20} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-green-700">{insuredCount}</p>
+              <p className="text-xs text-gray-500">Insured</p>
+            </div>
+          </div>
+        </div>
+        <div className="card p-5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-50/80 to-transparent pointer-events-none" />
+          <div className="relative flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-amber-100 text-amber-600">
+              <DollarSign size={20} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-amber-700">{totalWithBalance}</p>
+              <p className="text-xs text-gray-500">Open Balances</p>
+            </div>
+          </div>
+        </div>
+        <div className="card p-5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-red-50/80 to-transparent pointer-events-none" />
+          <div className="relative flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-red-100 text-red-600">
+              <Clock size={20} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-red-700">{overdueRecall}</p>
+              <p className="text-xs text-gray-500">Recall Overdue</p>
+            </div>
+          </div>
         </div>
       </div>
 
