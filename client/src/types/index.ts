@@ -120,28 +120,6 @@ export interface RecallTask {
   patient?: Patient;
 }
 
-export interface RadiographFinding {
-  id: string;
-  description: string;
-  tooth?: string;
-  severity: 'low' | 'medium' | 'high';
-  confidence: number;
-  category: 'decay' | 'bone_loss' | 'calculus' | 'watch' | 'normal';
-}
-
-export interface RadiographStudy {
-  id: string;
-  patientId: string;
-  date: string;
-  type: 'bitewing' | 'periapical' | 'panoramic' | 'cephalometric';
-  findings: RadiographFinding[] | string;
-  reviewedBy?: string | null;
-  reviewedDate?: string | null;
-  providerNotes?: string | null;
-  imageUrl: string;
-  patient?: Patient;
-}
-
 export interface ActivityLog {
   id: string;
   action: string;

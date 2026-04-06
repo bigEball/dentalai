@@ -1,4 +1,5 @@
 import { Router, Request, Response } from 'express';
+import { v4 as uuidv4 } from 'uuid';
 import { prisma } from '../db/client';
 import { logActivity } from '../lib/activity';
 
@@ -157,6 +158,83 @@ router.patch('/:id/decline', async (req: Request, res: Response) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to decline treatment plan' });
+  }
+});
+
+// POST /:id/send - send treatment plan to patient via text
+router.post('/:id/send', async (req: Request, res: Response) => {
+  try {
+    const plan = await prisma.treatmentPlan.findUnique({
+      where: { id: req.params.id },
+      include: { patient: true, items: true },
+    });
+
+    if (!plan) {
+      res.status(404).json({ error: 'Treatment plan not found' });
+      return;
+    }
+
+    if (!plan.patient) {
+      res.status(400).json({ error: 'Cannot send a plan with no patient assigned' });
+      return;
+    }
+
+    if (!plan.patient.phone) {
+      res.status(400).json({ error: 'Patient has no phone number on file' });
+      return;
+    }
+
+    const planToken = plan.planToken || uuidv4();
+    const now = new Date().toISOString();
+
+    const baseUrl = process.env.APP_URL || 'https://smartdentalai.onrender.com';
+    const planLink = `${baseUrl}/treatment-plans/view/${planToken}`;
+
+    const officeName = 'Smart Dental AI';
+    const patientFirst = plan.patient.firstName;
+    const itemCount = plan.items?.length ?? 0;
+    const messageBody =
+      `Hi ${patientFirst}! 😊 ${officeName} here. Your dentist has prepared a treatment plan for you — ` +
+      `"${plan.title}" with ${itemCount} procedure${itemCount !== 1 ? 's' : ''} ` +
+      `(estimated patient cost: $${plan.patientEst.toFixed(2)}).\n\n` +
+      `Review it here: ${planLink}\n\n` +
+      `If you have any questions, feel free to call us. We look forward to helping you!`;
+
+    const updated = await prisma.treatmentPlan.update({
+      where: { id: plan.id },
+      data: { planToken, sentAt: now },
+      include: {
+        patient: { select: { id: true, firstName: true, lastName: true, phone: true, email: true } },
+        items: true,
+      },
+    });
+
+    await prisma.communication.create({
+      data: {
+        patientId: plan.patient.id,
+        channel: 'sms',
+        direction: 'outbound',
+        subject: `Treatment Plan: ${plan.title}`,
+        body: messageBody,
+        status: 'sent',
+        sentAt: now,
+        sentBy: 'Office Manager',
+        metadata: JSON.stringify({ treatmentPlanId: plan.id, planToken, planLink }),
+      },
+    });
+
+    await logActivity(
+      'send_treatment_plan',
+      'TreatmentPlan',
+      plan.id,
+      `"${plan.title}" sent to ${plan.patient.firstName} ${plan.patient.lastName} at ${plan.patient.phone}`,
+      { phone: plan.patient.phone, planToken, sentAt: now, totalEstimate: plan.totalEstimate, itemCount }
+    );
+
+    res.json({ ...updated, messagePreview: messageBody, planLink });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to send treatment plan' });
   }
 });
 

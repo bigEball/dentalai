@@ -7,7 +7,6 @@ import {
   Shield,
   DollarSign,
   RefreshCw,
-  Scan,
   Settings,
   LogOut,
   ClipboardList,

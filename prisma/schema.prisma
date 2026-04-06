@@ -31,7 +31,6 @@ model Patient {
   insuranceClaims InsuranceClaim[]
   balances        Balance[]
   recallTasks     RecallTask[]
-  radiographs     RadiographStudy[]
   treatmentPlans  TreatmentPlan[]
   paymentPlans    PaymentPlan[]
   forms           PatientForm[]
@@ -173,21 +172,6 @@ model RecallTask {
   suggestedMessage String
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
-
-  patient Patient @relation(fields: [patientId], references: [id])
-}
-
-model RadiographStudy {
-  id            String   @id @default(cuid())
-  patientId     String
-  date          String
-  type          String
-  findings      String
-  reviewedBy    String?
-  reviewedDate  String?
-  providerNotes String?
-  imageUrl      String
-  createdAt     DateTime @default(now())
 
   patient Patient @relation(fields: [patientId], references: [id])
 }

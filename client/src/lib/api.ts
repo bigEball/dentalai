@@ -8,7 +8,6 @@ import type {
   InsuranceClaim,
   Balance,
   RecallTask,
-  RadiographStudy,
   DashboardStats,
   ActivityLog,
   TreatmentPlan,
@@ -207,41 +206,6 @@ export async function sendRecallText(id: string): Promise<{ success: boolean }> 
 
 export async function sendRecallEmail(id: string): Promise<{ success: boolean }> {
   const { data } = await api.patch<{ success: boolean }>(`/recall/tasks/${id}/send-email`);
-  return data;
-}
-
-// ─── Radiographs ─────────────────────────────────────────────────────────────
-
-export async function getRadiographs(params?: { patientId?: string }): Promise<{ studies: RadiographStudy[]; total: number }> {
-  const { data } = await api.get<RadiographStudy[]>('/radiographs', { params });
-  return { studies: data, total: data.length };
-}
-
-export async function getRadiograph(id: string): Promise<RadiographStudy> {
-  const { data } = await api.get<RadiographStudy>(`/radiographs/${id}`);
-  return data;
-}
-
-export async function updateRadiographNotes(id: string, notes: string): Promise<RadiographStudy> {
-  const { data } = await api.patch<RadiographStudy>(`/radiographs/${id}/notes`, { providerNotes: notes });
-  return data;
-}
-
-// Route uses POST for mark-reviewed
-export async function markRadiographReviewed(id: string): Promise<RadiographStudy> {
-  const { data } = await api.post<RadiographStudy>(`/radiographs/${id}/reviewed`);
-  return data;
-}
-
-export async function uploadRadiograph(file: File, patientId: string, type: string): Promise<RadiographStudy> {
-  const formData = new FormData();
-  formData.append('file', file);
-  formData.append('patientId', patientId);
-  formData.append('type', type);
-  const { data } = await api.post<RadiographStudy>('/radiographs/upload', formData, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-    timeout: 60000,
-  });
   return data;
 }
 
@@ -629,7 +593,6 @@ export interface AppConfig {
     insurance: boolean;
     billing: boolean;
     recall: boolean;
-    radiographs: boolean;
   };
 }
 

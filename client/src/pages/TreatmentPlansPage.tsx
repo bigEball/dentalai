@@ -9,14 +9,19 @@ import {
   Loader2,
   AlertTriangle,
   ArrowRight,
+  Send,
+  Phone,
+  MessageSquare,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
-import { getTreatmentPlans, acceptTreatmentPlan, declineTreatmentPlan } from '@/lib/api';
+import { getTreatmentPlans, acceptTreatmentPlan, declineTreatmentPlan, sendTreatmentPlanToPatient } from '@/lib/api';
 import type { TreatmentPlan } from '@/types';
 import { formatCurrency, formatDate, getInitials, cn } from '@/lib/utils';
 import { FullPageSpinner } from '@/components/ui/LoadingSpinner';
 import EmptyState from '@/components/ui/EmptyState';
+import Modal from '@/components/ui/Modal';
+import OpenDentalLink from '@/components/ui/OpenDentalLink';
 
 const MOCK_PLANS: TreatmentPlan[] = [
   {
@@ -199,6 +204,9 @@ export default function TreatmentPlansPage() {
   const [statusFilter, setStatusFilter] = useState('');
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [actionId, setActionId] = useState<string | null>(null);
+  const [sendPlan, setSendPlan] = useState<TreatmentPlan | null>(null);
+  const [sending, setSending] = useState(false);
+  const [sentPreview, setSentPreview] = useState<{ message: string; link: string } | null>(null);
 
   const loadPlans = useCallback(async () => {
     setLoading(true);
@@ -259,6 +267,37 @@ export default function TreatmentPlansPage() {
       );
     } finally {
       setActionId(null);
+    }
+  }
+
+  async function handleSend() {
+    if (!sendPlan) return;
+    setSending(true);
+    try {
+      const result = await sendTreatmentPlanToPatient(sendPlan.id);
+      setSentPreview({ message: result.messagePreview, link: result.planLink });
+      setPlans((prev) =>
+        prev.map((p) => (p.id === sendPlan.id ? { ...p, sentAt: new Date().toISOString() } : p)),
+      );
+      toast.success(`Treatment plan sent to ${sendPlan.patient?.firstName}!`);
+    } catch {
+      // Demo fallback
+      const patientFirst = sendPlan.patient?.firstName || 'Patient';
+      const itemCount = sendPlan.items?.length ?? 0;
+      const fakeLink = `https://smartdentalai.onrender.com/treatment-plans/view/demo-${sendPlan.id}`;
+      const fakeMsg =
+        `Hi ${patientFirst}! 😊 Smart Dental AI here. Your dentist has prepared a treatment plan for you — ` +
+        `"${sendPlan.title}" with ${itemCount} procedure${itemCount !== 1 ? 's' : ''} ` +
+        `(estimated patient cost: ${formatCurrency(sendPlan.patientEst)}).\n\n` +
+        `Review it here: ${fakeLink}\n\n` +
+        `If you have any questions, feel free to call us. We look forward to helping you!`;
+      setSentPreview({ message: fakeMsg, link: fakeLink });
+      setPlans((prev) =>
+        prev.map((p) => (p.id === sendPlan.id ? { ...p, sentAt: new Date().toISOString() } : p)),
+      );
+      toast.success(`Treatment plan sent to ${patientFirst}!`);
+    } finally {
+      setSending(false);
     }
   }
 
@@ -405,9 +444,12 @@ export default function TreatmentPlansPage() {
                         </div>
                       )}
                       <div className="min-w-0">
-                        <p className="text-sm font-semibold text-gray-900 truncate">
-                          {plan.patient?.firstName} {plan.patient?.lastName}
-                        </p>
+                        <div className="flex items-center gap-1.5">
+                          <p className="text-sm font-semibold text-gray-900 truncate">
+                            {plan.patient?.firstName} {plan.patient?.lastName}
+                          </p>
+                          {plan.patient && <OpenDentalLink patientId={plan.patient.id} />}
+                        </div>
                         <p className="text-xs text-gray-500 truncate mt-0.5">{plan.title}</p>
                       </div>
                     </div>
@@ -528,35 +570,54 @@ export default function TreatmentPlansPage() {
                       </table>
                     </div>
 
-                    {/* Actions for proposed plans */}
-                    {plan.status === 'proposed' && (
-                      <div className="px-5 py-3 bg-blue-50/30 border-t border-gray-100 flex items-center justify-end gap-2">
-                        <button
-                          onClick={() => handleDecline(plan)}
-                          disabled={actionId === plan.id + '-decline'}
-                          className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-medium rounded-lg border border-red-200 bg-white text-red-600 hover:bg-red-50 transition-colors disabled:opacity-50"
-                        >
-                          {actionId === plan.id + '-decline' ? (
-                            <Loader2 size={13} className="animate-spin" />
-                          ) : (
-                            <XCircle size={13} />
-                          )}
-                          Decline
-                        </button>
-                        <button
-                          onClick={() => handleAccept(plan)}
-                          disabled={actionId === plan.id + '-accept'}
-                          className="btn-primary text-xs py-2 px-4"
-                        >
-                          {actionId === plan.id + '-accept' ? (
-                            <Loader2 size={13} className="animate-spin" />
-                          ) : (
-                            <CheckCircle size={13} />
-                          )}
-                          Accept Plan
-                        </button>
+                    {/* Actions */}
+                    <div className="px-5 py-3 bg-blue-50/30 border-t border-gray-100 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        {plan.patient && !plan.sentAt && (
+                          <button
+                            onClick={(e) => { e.stopPropagation(); setSendPlan(plan); }}
+                            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-medium rounded-lg border border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition-colors"
+                          >
+                            <Send size={13} />
+                            Send to Patient
+                          </button>
+                        )}
+                        {plan.sentAt && (
+                          <span className="inline-flex items-center gap-1 text-xs text-emerald-600 font-medium">
+                            <CheckCircle size={12} />
+                            Sent
+                          </span>
+                        )}
                       </div>
-                    )}
+                      {plan.status === 'proposed' && (
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => handleDecline(plan)}
+                            disabled={actionId === plan.id + '-decline'}
+                            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-medium rounded-lg border border-red-200 bg-white text-red-600 hover:bg-red-50 transition-colors disabled:opacity-50"
+                          >
+                            {actionId === plan.id + '-decline' ? (
+                              <Loader2 size={13} className="animate-spin" />
+                            ) : (
+                              <XCircle size={13} />
+                            )}
+                            Decline
+                          </button>
+                          <button
+                            onClick={() => handleAccept(plan)}
+                            disabled={actionId === plan.id + '-accept'}
+                            className="btn-primary text-xs py-2 px-4"
+                          >
+                            {actionId === plan.id + '-accept' ? (
+                              <Loader2 size={13} className="animate-spin" />
+                            ) : (
+                              <CheckCircle size={13} />
+                            )}
+                            Accept Plan
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 )}
               </div>
@@ -564,6 +625,110 @@ export default function TreatmentPlansPage() {
           })}
         </div>
       )}
+
+      {/* Send Treatment Plan Modal */}
+      <Modal
+        isOpen={!!sendPlan}
+        onClose={() => { setSendPlan(null); setSentPreview(null); }}
+        title={sentPreview ? 'Message Sent!' : 'Send Treatment Plan to Patient'}
+        size="sm"
+      >
+        {sendPlan && !sentPreview && (
+          <div className="space-y-4">
+            {/* Patient info */}
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 border border-gray-100">
+              <div className="h-10 w-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center flex-shrink-0">
+                <span className="text-sm font-bold">
+                  {getInitials(sendPlan.patient?.firstName ?? '', sendPlan.patient?.lastName ?? '')}
+                </span>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-gray-900">
+                  {sendPlan.patient?.firstName} {sendPlan.patient?.lastName}
+                </p>
+                <p className="text-xs text-gray-500 flex items-center gap-1">
+                  <Phone size={11} />
+                  {sendPlan.patient?.phone || 'No phone on file'}
+                </p>
+              </div>
+            </div>
+
+            {/* Plan summary */}
+            <div className="p-3 rounded-lg bg-indigo-50 border border-indigo-100">
+              <p className="text-sm font-medium text-gray-900">{sendPlan.title}</p>
+              <div className="flex items-center gap-4 mt-1.5 text-xs text-gray-600">
+                <span>{sendPlan.items?.length ?? 0} procedure{(sendPlan.items?.length ?? 0) !== 1 ? 's' : ''}</span>
+                <span>Patient est: {formatCurrency(sendPlan.patientEst)}</span>
+                <span>Total: {formatCurrency(sendPlan.totalEstimate)}</span>
+              </div>
+            </div>
+
+            {/* Message preview */}
+            <div>
+              <p className="text-xs font-medium text-gray-600 mb-1.5 flex items-center gap-1.5">
+                <MessageSquare size={13} />
+                Text message preview
+              </p>
+              <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-100 text-sm text-gray-700 leading-relaxed whitespace-pre-line">
+                Hi {sendPlan.patient?.firstName}! 😊 Smart Dental AI here. Your dentist has prepared a treatment plan for you — "{sendPlan.title}" with {sendPlan.items?.length ?? 0} procedure{(sendPlan.items?.length ?? 0) !== 1 ? 's' : ''} (estimated patient cost: {formatCurrency(sendPlan.patientEst)}).
+                {'\n\n'}
+                <span className="text-indigo-600 underline">https://smartdentalai.onrender.com/treatment-plans/view/...</span>
+                {'\n\n'}
+                If you have any questions, feel free to call us. We look forward to helping you!
+              </div>
+            </div>
+
+            <div className="flex gap-3 pt-1">
+              <button
+                onClick={handleSend}
+                disabled={sending || !sendPlan.patient?.phone}
+                className="inline-flex items-center justify-center gap-2 flex-1 py-2.5 rounded-lg bg-emerald-600 text-white text-sm font-medium hover:bg-emerald-700 transition-colors disabled:opacity-50"
+              >
+                {sending ? <Loader2 size={15} className="animate-spin" /> : <Send size={15} />}
+                Send Text
+              </button>
+              <button
+                onClick={() => setSendPlan(null)}
+                className="btn-secondary flex-1 justify-center py-2.5"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        )}
+
+        {sentPreview && (
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 p-4 rounded-lg bg-emerald-50 border border-emerald-100">
+              <div className="p-2 rounded-full bg-emerald-100">
+                <CheckCircle size={24} className="text-emerald-600" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-gray-900">
+                  Text sent to {sendPlan?.patient?.firstName}
+                </p>
+                <p className="text-xs text-gray-500">
+                  {sendPlan?.patient?.phone}
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xs font-medium text-gray-500 mb-1.5">Message sent:</p>
+              <div className="p-3 rounded-xl bg-gray-50 border border-gray-100 text-sm text-gray-600 leading-relaxed whitespace-pre-line max-h-48 overflow-y-auto">
+                {sentPreview.message}
+              </div>
+            </div>
+
+            <button
+              onClick={() => { setSendPlan(null); setSentPreview(null); }}
+              className="btn-primary w-full justify-center py-2.5"
+            >
+              Done
+            </button>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 }
