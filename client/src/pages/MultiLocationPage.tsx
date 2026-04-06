@@ -1092,7 +1092,7 @@ export default function MultiLocationPage() {
     try {
       const [dashRes, locRes, kpiRes, compRes, trendRes, reportRes] = await Promise.allSettled([
         api.get('/multi-location/dashboard'),
-        api.get('/multi-location'),
+        api.get('/multi-location/locations'),
         api.get('/multi-location/kpis'),
         api.get('/multi-location/comparison'),
         api.get('/multi-location/trends'),
@@ -1121,7 +1121,7 @@ export default function MultiLocationPage() {
 
   const fetchRootCause = useCallback(async (locationId: string) => {
     try {
-      const { data } = await api.get(`/locations/${locationId}/root-cause`);
+      const { data } = await api.get(`/multi-location/locations/${locationId}/root-cause`);
       setRootCauses((prev) => ({ ...prev, [locationId]: data }));
     } catch {
       // keep mock fallback
