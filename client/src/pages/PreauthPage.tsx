@@ -20,6 +20,7 @@ import { formatCurrency, formatDate, getInitials } from '@/lib/utils';
 import { FullPageSpinner } from '@/components/ui/LoadingSpinner';
 import Modal from '@/components/ui/Modal';
 import EmptyState from '@/components/ui/EmptyState';
+import OpenDentalLink from '@/components/ui/OpenDentalLink';
 
 const MOCK_PREAUTHS: PreAuthorization[] = [
   {
@@ -359,9 +360,12 @@ export default function PreauthPage() {
                             </div>
                           )}
                           <div>
-                            <p className="font-medium text-gray-900">
-                              {pa.patient?.firstName} {pa.patient?.lastName}
-                            </p>
+                            <div className="flex items-center gap-1.5">
+                              <p className="font-medium text-gray-900">
+                                {pa.patient?.firstName} {pa.patient?.lastName}
+                              </p>
+                              {pa.patient && <OpenDentalLink patientId={pa.patient.id} />}
+                            </div>
                             {pa.toothNumbers && (
                               <p className="text-xs text-gray-400">Teeth: {pa.toothNumbers}</p>
                             )}

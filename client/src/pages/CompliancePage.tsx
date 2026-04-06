@@ -334,24 +334,12 @@ export default function CompliancePage() {
             <Requirement met={true} text="Documentation tool, not diagnostic — captures dentist's own clinical observations" />
             <Requirement met={true} text="Dentist must review and approve every note before it enters the chart" />
             <Requirement met={true} text="No autonomous treatment recommendations or diagnostic conclusions" />
-            <Requirement met={true} text="Radiograph analysis clearly labeled as simulated / demo only" />
-          </div>
-
-          <div className="p-4 rounded-lg bg-red-50 border border-red-200 mt-3">
-            <p className="text-xs font-semibold text-red-800 mb-1">Radiograph AI Analysis IS FDA-Regulated</p>
-            <p className="text-xs text-red-700">
-              If you add real AI analysis of dental X-rays (detecting caries, bone loss, pathology), that is
-              definitively a Class II medical device requiring FDA 510(k) clearance. This process takes 6–12 months
-              and costs $100K+. Keep radiograph analysis as a <strong>separate product</strong> if pursued.
-              Current simulated/demo findings with disclaimers are fine.
-            </p>
           </div>
 
           <h4 className="font-semibold text-gray-900 pt-2">Required Disclaimers</h4>
           <div className="space-y-1.5">
             <Requirement met={true} text="'AI-generated notes are drafts requiring clinician review and approval'" />
             <Requirement met={true} text="'Not a medical device — documentation assistance tool only'" />
-            <Requirement met={true} text="Radiograph disclaimer: 'Simulated AI analysis, not for diagnostic use'" />
           </div>
         </Section>
 

@@ -22,7 +22,17 @@ const PAGE_TITLES: Record<string, string> = {
   '/inventory': 'Inventory',
   '/reports': 'Reports & Analytics',
   '/patient-scores': 'Patient Scores',
-  '/compliance': 'Compliance',
+  '/claim-scrubber': 'Claim Scrubber',
+  '/churn-prediction': 'Churn & Lifetime Value',
+  '/morning-huddle': 'Morning Huddle',
+  '/nurture-sequences': 'Nurture Sequences',
+  '/fee-optimizer': 'Fee Optimizer',
+  '/smart-scheduling': 'Smart Scheduling',
+  '/procurement': 'Procurement Intelligence',
+  '/decision-support': 'Clinical Decision Support',
+  '/compliance': 'Compliance Autopilot',
+  '/multi-location': 'Multi-Location Intelligence',
+  '/tools': 'All Tools',
   '/settings': 'Settings',
 };
 

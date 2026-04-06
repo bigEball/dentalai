@@ -28,6 +28,7 @@ import { FullPageSpinner } from '@/components/ui/LoadingSpinner';
 import EmptyState from '@/components/ui/EmptyState';
 import Badge from '@/components/ui/Badge';
 import PatientSearchBar from '@/components/ui/PatientSearchBar';
+import OpenDentalLink from '@/components/ui/OpenDentalLink';
 
 
 /* ─── Mock data (fallback when backend is unavailable) ───────────────────── */
@@ -791,11 +792,14 @@ export default function AINotesPage() {
                 </div>
               )}
               <div>
-                <p className="text-base font-semibold text-gray-900">
-                  {patient
-                    ? `${patient.firstName} ${patient.lastName}`
-                    : 'Unknown Patient'}
-                </p>
+                <div className="flex items-center gap-1.5">
+                  <p className="text-base font-semibold text-gray-900">
+                    {patient
+                      ? `${patient.firstName} ${patient.lastName}`
+                      : 'Unknown Patient'}
+                  </p>
+                  {patient && <OpenDentalLink patientId={patient.id} />}
+                </div>
                 {patient?.dateOfBirth && (
                   <p className="text-xs text-gray-400">
                     DOB: {formatDate(patient.dateOfBirth)}
@@ -1447,11 +1451,14 @@ export default function AINotesPage() {
                   <div className="flex-1 min-w-0">
                     {/* Name + status */}
                     <div className="flex items-center justify-between gap-2 mb-1">
-                      <h3 className="text-sm font-semibold text-gray-900 truncate">
-                        {patient
-                          ? `${patient.firstName} ${patient.lastName}`
-                          : 'Unknown Patient'}
-                      </h3>
+                      <div className="flex items-center gap-1.5">
+                        <h3 className="text-sm font-semibold text-gray-900 truncate">
+                          {patient
+                            ? `${patient.firstName} ${patient.lastName}`
+                            : 'Unknown Patient'}
+                        </h3>
+                        {patient && <OpenDentalLink patientId={patient.id} />}
+                      </div>
                       <Badge status={note.status} variant="note" />
                     </div>
 

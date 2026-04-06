@@ -42,7 +42,6 @@ export interface AppConfig {
     insurance: boolean;
     billing: boolean;
     recall: boolean;
-    radiographs: boolean;
   };
 }
 
@@ -80,7 +79,6 @@ const DEFAULT_CONFIG: AppConfig = {
     insurance: true,
     billing: true,
     recall: true,
-    radiographs: true,
   },
 };
 

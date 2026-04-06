@@ -24,6 +24,7 @@ import toast from 'react-hot-toast';
 import { getAllPatientScores, getScoreAlerts } from '@/lib/api';
 import type { PatientScores, ScoreAlert } from '@/types';
 import { getInitials } from '@/lib/utils';
+import OpenDentalLink from '@/components/ui/OpenDentalLink';
 
 type SortField = 'composite' | 'attendance' | 'financial' | 'engagement' | 'treatmentCommitment';
 
@@ -267,6 +268,7 @@ export default function PatientScoresPage() {
                             </span>
                           </div>
                           <span className="text-sm font-medium text-gray-900">{patient.patientName}</span>
+                          <OpenDentalLink patientId={patient.patientId} />
                         </div>
                       </td>
 

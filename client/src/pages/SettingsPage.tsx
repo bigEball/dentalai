@@ -51,7 +51,6 @@ const DEFAULT_SETTINGS: AppConfig = {
     insurance: true,
     billing: true,
     recall: true,
-    radiographs: true,
   },
   office: {
     name: 'Bright Smiles Dental',
@@ -576,12 +575,6 @@ export default function SettingsPage() {
             onChange={(v) => setSettings((p) => ({ ...p, modules: { ...p.modules, recall: v } }))}
             label="Recall Automation"
             description="AI-suggested hygiene recall messaging"
-          />
-          <ToggleSwitch
-            enabled={settings.modules.radiographs}
-            onChange={(v) => setSettings((p) => ({ ...p, modules: { ...p.modules, radiographs: v } }))}
-            label="Radiograph Review"
-            description="AI-assisted X-ray findings"
           />
         </div>
 

@@ -24,6 +24,16 @@ import inventoryRouter from './routes/inventory';
 import inventoryImportRouter from './routes/inventoryImport';
 import perioRouter from './routes/perio';
 import scoresRouter from './routes/scores';
+import claimScrubberRouter from './routes/claimScrubber';
+import churnRouter from './routes/churn';
+import morningHuddleRouter from './routes/morningHuddle';
+import nurtureRouter from './routes/nurture';
+import feeScheduleRouter from './routes/feeSchedule';
+import schedulingRouter from './routes/scheduling';
+import procurementRouter from './routes/procurement';
+import decisionSupportRouter from './routes/decisionSupport';
+import complianceRouter from './routes/compliance';
+import multiLocationRouter from './routes/multiLocation';
 
 const app = express();
 const PORT = process.env.PORT ?? 3001;
@@ -81,6 +91,16 @@ app.use('/api/v1/inventory', inventoryRouter);
 app.use('/api/v1/inventory/import', inventoryImportRouter);
 app.use('/api/v1/perio', perioRouter);
 app.use('/api/v1/scores', scoresRouter);
+app.use('/api/v1/claim-scrubber', claimScrubberRouter);
+app.use('/api/v1/churn', churnRouter);
+app.use('/api/v1/morning-huddle', morningHuddleRouter);
+app.use('/api/v1/nurture', nurtureRouter);
+app.use('/api/v1/fee-schedules', feeScheduleRouter);
+app.use('/api/v1/scheduling', schedulingRouter);
+app.use('/api/v1/procurement', procurementRouter);
+app.use('/api/v1/decision-support', decisionSupportRouter);
+app.use('/api/v1/compliance', complianceRouter);
+app.use('/api/v1/multi-location', multiLocationRouter);
 
 // SPA fallback — serve index.html for non-API routes in production
 if (process.env.NODE_ENV === 'production') {

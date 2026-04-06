@@ -22,6 +22,7 @@ import { formatDate, getInitials } from '@/lib/utils';
 import { FullPageSpinner } from '@/components/ui/LoadingSpinner';
 import EmptyState from '@/components/ui/EmptyState';
 import PatientSearchBar from '@/components/ui/PatientSearchBar';
+import OpenDentalLink from '@/components/ui/OpenDentalLink';
 
 const MOCK_RECALL: RecallTask[] = [
   { id: 'r1', patientId: 'p3', lastHygieneDate: '2022-09-20', recallDueDate: '2023-03-20', daysOverdue: 318, contactAttempts: 2, lastContactDate: '2024-01-10', status: 'contacted', suggestedMessage: "Hi Maria! This is Bright Smiles Dental. It's been over a year since your last cleaning. Your smile matters to us! Call us at (555) 123-4567 or reply to book your appointment. We have openings this week!", patient: { id: 'p3', firstName: 'Maria', lastName: 'Garcia', dateOfBirth: '1992-11-08', phone: '5551238765', email: 'maria.g@email.com', preferredContactMethod: 'phone', outstandingBalance: 680.50, createdAt: '', updatedAt: '' } },
@@ -376,6 +377,7 @@ export default function RecallPage() {
                           <p className="text-base font-semibold text-gray-900">
                             {task.patient?.firstName} {task.patient?.lastName}
                           </p>
+                          {task.patient && <OpenDentalLink patientId={task.patient.id} />}
                           <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border ${status.className}`}>
                             {statusIcon(task.status)}
                             {status.text}

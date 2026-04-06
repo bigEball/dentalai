@@ -4,7 +4,6 @@ import {
   Shield,
   DollarSign,
   RefreshCw,
-  Scan,
   Users,
   Activity,
 } from 'lucide-react';
@@ -29,8 +28,6 @@ function getActivityIcon(entityType: string) {
       return <DollarSign size={14} />;
     case 'recall':
       return <RefreshCw size={14} />;
-    case 'radiograph':
-      return <Scan size={14} />;
     case 'patient':
       return <Users size={14} />;
     default:

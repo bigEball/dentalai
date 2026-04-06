@@ -57,7 +57,6 @@ router.get('/:id', async (req: Request, res: Response) => {
         },
         balances: true,
         recallTasks: true,
-        radiographs: { orderBy: { date: 'desc' } },
       },
     });
 

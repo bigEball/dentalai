@@ -22,6 +22,7 @@ import { formatCurrency, formatDate, getInitials } from '@/lib/utils';
 import { FullPageSpinner } from '@/components/ui/LoadingSpinner';
 import Modal from '@/components/ui/Modal';
 import EmptyState from '@/components/ui/EmptyState';
+import OpenDentalLink from '@/components/ui/OpenDentalLink';
 
 const MOCK_INSTALLMENTS_1: PaymentPlanInstallment[] = [
   { id: 'inst1-1', paymentPlanId: 'pp1', installmentNo: 1, amount: 200, dueDate: '2024-01-15', paidDate: '2024-01-14', status: 'paid' },
@@ -413,6 +414,7 @@ export default function PaymentPlansPage() {
                           <p className="text-base font-semibold text-gray-900">
                             {plan.patient?.firstName} {plan.patient?.lastName}
                           </p>
+                          {plan.patient && <OpenDentalLink patientId={plan.patient.id} />}
                           <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border ${badge.className}`}>
                             {badge.icon}
                             {badge.text}

@@ -32,6 +32,7 @@ import { formatCurrency, formatDate } from '@/lib/utils';
 import ActivityFeed from '@/components/ui/ActivityFeed';
 import { FullPageSpinner } from '@/components/ui/LoadingSpinner';
 import Badge from '@/components/ui/Badge';
+import OpenDentalLink from '@/components/ui/OpenDentalLink';
 
 const MOCK_REVENUE = [
   { month: 'Sep', revenue: 38200 },
@@ -121,11 +122,11 @@ const MOCK_STATS: DashboardStats = {
 };
 
 const MOCK_TOP_BALANCES = [
-  { id: 'b1', name: 'Michael Torres', amount: 2840.0, status: 'overdue_90', daysOverdue: 94, dueDate: '2024-01-01' },
-  { id: 'b2', name: 'Sarah Kim', amount: 1920.5, status: 'overdue_60', daysOverdue: 67, dueDate: '2024-01-15' },
-  { id: 'b3', name: 'David Park', amount: 1450.0, status: 'overdue_30', daysOverdue: 38, dueDate: '2024-02-01' },
-  { id: 'b4', name: 'Amanda Chen', amount: 980.75, status: 'overdue_30', daysOverdue: 31, dueDate: '2024-02-10' },
-  { id: 'b5', name: 'James Wilson', amount: 750.0, status: 'current', daysOverdue: 0, dueDate: '2024-03-01' },
+  { id: 'b1', patientId: 'p5', name: 'Michael Torres', amount: 2840.0, status: 'overdue_90', daysOverdue: 94, dueDate: '2024-01-01' },
+  { id: 'b2', patientId: 'p7', name: 'Sarah Kim', amount: 1920.5, status: 'overdue_60', daysOverdue: 67, dueDate: '2024-01-15' },
+  { id: 'b3', patientId: 'p8', name: 'David Park', amount: 1450.0, status: 'overdue_30', daysOverdue: 38, dueDate: '2024-02-01' },
+  { id: 'b4', patientId: 'p9', name: 'Amanda Chen', amount: 980.75, status: 'overdue_30', daysOverdue: 31, dueDate: '2024-02-10' },
+  { id: 'b5', patientId: 'p10', name: 'James Wilson', amount: 750.0, status: 'current', daysOverdue: 0, dueDate: '2024-03-01' },
 ];
 
 function claimsChartData(claimsByStatus: Record<string, number>) {
@@ -501,7 +502,10 @@ export default function DashboardPage() {
                     </span>
                   </div>
                   <div className="min-w-0">
-                    <p className="text-sm font-semibold text-gray-900 truncate">{b.name}</p>
+                    <div className="flex items-center gap-1.5">
+                      <p className="text-sm font-semibold text-gray-900 truncate">{b.name}</p>
+                      <OpenDentalLink patientId={b.patientId} />
+                    </div>
                     {b.daysOverdue > 0 ? (
                       <p className={`text-xs ${overdueTextColor(b.daysOverdue)}`}>
                         {b.daysOverdue} days overdue

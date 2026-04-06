@@ -21,6 +21,7 @@ import { formatDate, getInitials } from '@/lib/utils';
 import { FullPageSpinner } from '@/components/ui/LoadingSpinner';
 import Modal from '@/components/ui/Modal';
 import EmptyState from '@/components/ui/EmptyState';
+import OpenDentalLink from '@/components/ui/OpenDentalLink';
 
 const MOCK_FOLLOWUPS: FollowUp[] = [
   {
@@ -440,6 +441,7 @@ export default function FollowUpsPage() {
                           <p className="text-base font-semibold text-gray-900">
                             {fu.patient?.firstName} {fu.patient?.lastName}
                           </p>
+                          {fu.patient && <OpenDentalLink patientId={fu.patient.id} />}
                           <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border ${badge.className}`}>
                             {badge.icon}
                             {badge.text}

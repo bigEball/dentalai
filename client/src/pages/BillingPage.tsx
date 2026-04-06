@@ -22,6 +22,7 @@ import Badge from '@/components/ui/Badge';
 import Modal from '@/components/ui/Modal';
 import EmptyState from '@/components/ui/EmptyState';
 import PatientSearchBar from '@/components/ui/PatientSearchBar';
+import OpenDentalLink from '@/components/ui/OpenDentalLink';
 
 const MOCK_BALANCES: Balance[] = [
   { id: 'b1', patientId: 'p5', amount: 2840.00, dueDate: '2024-01-01', lastPaymentDate: '2023-10-01', lastPaymentAmount: 200, statementSent: true, statementDate: '2024-01-02', collectionStatus: 'overdue_90', patient: { id: 'p5', firstName: 'Michael', lastName: 'Torres', dateOfBirth: '1989-09-12', phone: '5552229988', email: 'mtorres@email.com', preferredContactMethod: 'text', outstandingBalance: 2840, createdAt: '', updatedAt: '' } },
@@ -351,9 +352,12 @@ export default function BillingPage() {
                       </div>
                     )}
                     <div className="min-w-0">
-                      <p className="text-sm font-semibold text-gray-900 truncate">
-                        {b.patient?.firstName} {b.patient?.lastName}
-                      </p>
+                      <div className="flex items-center gap-1.5">
+                        <p className="text-sm font-semibold text-gray-900 truncate">
+                          {b.patient?.firstName} {b.patient?.lastName}
+                        </p>
+                        {b.patient && <OpenDentalLink patientId={b.patient.id} />}
+                      </div>
                       <p className="text-xs text-gray-400 truncate">{b.patient?.email}</p>
                     </div>
                   </div>

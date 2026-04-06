@@ -20,6 +20,17 @@ import {
   Package,
   Activity,
   Gauge,
+  Layers,
+  Sunrise,
+  ShieldAlert,
+  TrendingDown,
+  HeartHandshake,
+  BadgeDollarSign,
+  CalendarClock,
+  ShoppingCart,
+  Stethoscope,
+  ClipboardCheck,
+  Building2,
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { getInitials } from '@/lib/utils';
@@ -28,32 +39,42 @@ import type { SystemStatus } from '@/lib/api';
 
 const MAIN_NAV = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { to: '/morning-huddle', label: 'Morning Huddle', icon: Sunrise },
   { to: '/patients', label: 'Patients', icon: Users },
 ];
 
 const AI_NAV = [
   { to: '/notes', label: 'AI Notes', icon: FileText },
+  { to: '/claim-scrubber', label: 'Claim Scrubber', icon: ShieldAlert },
+  { to: '/churn-prediction', label: 'Churn & LTV', icon: TrendingDown },
+  { to: '/nurture-sequences', label: 'Nurture Sequences', icon: HeartHandshake },
+  { to: '/decision-support', label: 'Clinical AI', icon: Stethoscope },
   { to: '/treatment-plans', label: 'Treatment Plans', icon: ClipboardList },
   { to: '/insurance', label: 'Insurance', icon: Shield },
   { to: '/preauth', label: 'Pre-Auth', icon: ShieldCheck },
   { to: '/billing', label: 'Billing', icon: DollarSign },
   { to: '/payment-plans', label: 'Payment Plans', icon: CreditCard },
+  { to: '/fee-optimizer', label: 'Fee Optimizer', icon: BadgeDollarSign },
   { to: '/recall', label: 'Recall', icon: RefreshCw },
   { to: '/perio', label: 'Perio Chart', icon: Activity },
 ];
 
 const OFFICE_NAV = [
+  { to: '/smart-scheduling', label: 'Smart Scheduling', icon: CalendarClock },
   { to: '/communications', label: 'Communications', icon: MessageSquare },
   { to: '/follow-ups', label: 'Follow-Ups', icon: Bell },
   { to: '/referrals', label: 'Referrals', icon: ArrowRightLeft },
   { to: '/forms', label: 'Patient Forms', icon: FileCheck },
   { to: '/inventory', label: 'Inventory', icon: Package },
+  { to: '/procurement', label: 'Procurement AI', icon: ShoppingCart },
   { to: '/reports', label: 'Reports', icon: BarChart3 },
   { to: '/patient-scores', label: 'Patient Scores', icon: Gauge },
 ];
 
 const SYSTEM_NAV = [
-  { to: '/compliance', label: 'Compliance', icon: Shield },
+  { to: '/compliance', label: 'Compliance', icon: ClipboardCheck },
+  { to: '/multi-location', label: 'Multi-Location', icon: Building2 },
+  { to: '/tools', label: 'All Tools', icon: Layers },
   { to: '/settings', label: 'Settings', icon: Settings },
 ];
 

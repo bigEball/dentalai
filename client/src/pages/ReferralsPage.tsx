@@ -20,6 +20,7 @@ import { formatDate, getInitials, cn } from '@/lib/utils';
 import { FullPageSpinner } from '@/components/ui/LoadingSpinner';
 import EmptyState from '@/components/ui/EmptyState';
 import Modal from '@/components/ui/Modal';
+import OpenDentalLink from '@/components/ui/OpenDentalLink';
 
 const MOCK_REFERRALS: Referral[] = [
   { id: 'ref1', patientId: 'p3', referringProvId: 'prov1', referredToName: 'Dr. Sarah Chen', referredToSpecialty: 'Endodontics', referredToPhone: '5559001122', referredToEmail: 'schen@endo.com', reason: 'Root canal treatment - tooth #14 with irreversible pulpitis', urgency: 'urgent', status: 'sent', sentDate: '2024-03-25', appointmentDate: null, reportReceived: false, patient: { id: 'p3', firstName: 'Maria', lastName: 'Garcia', dateOfBirth: '1992-11-08', phone: '5551238765', email: 'maria.g@email.com', preferredContactMethod: 'phone', outstandingBalance: 680.50, createdAt: '', updatedAt: '' } },
@@ -320,6 +321,7 @@ export default function ReferralsPage() {
                           <p className="text-sm font-semibold text-gray-900">
                             {ref.patient?.firstName} {ref.patient?.lastName}
                           </p>
+                          {ref.patient && <OpenDentalLink patientId={ref.patient.id} />}
                           <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border ${status.className}`}>
                             {status.icon}
                             {status.label}

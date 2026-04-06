@@ -14,7 +14,6 @@ import {
   Shield,
   DollarSign,
   RefreshCw,
-  Scan,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
@@ -24,6 +23,7 @@ import type { Patient } from '@/types';
 import { formatCurrency, formatDate, formatPhone, getInitials, daysOverdue } from '@/lib/utils';
 import { FullPageSpinner } from '@/components/ui/LoadingSpinner';
 import EmptyState from '@/components/ui/EmptyState';
+import OpenDentalLink from '@/components/ui/OpenDentalLink';
 
 const MOCK_PATIENTS: Patient[] = [
   {
@@ -260,6 +260,7 @@ export default function PatientsPage() {
                     <p className="text-base font-semibold text-gray-900 truncate">
                       {patient.firstName} {patient.lastName}
                     </p>
+                    <OpenDentalLink patientId={patient.id} />
                     {patient.provider && (
                       <span className="hidden sm:inline text-xs text-gray-400">
                         Dr. {patient.provider.lastName}
@@ -331,9 +332,12 @@ export default function PatientsPage() {
                       </span>
                     </div>
                     <div>
-                      <h2 className="text-lg font-bold text-gray-900">
-                        {selected.firstName} {selected.lastName}
-                      </h2>
+                      <div className="flex items-center gap-2">
+                        <h2 className="text-lg font-bold text-gray-900">
+                          {selected.firstName} {selected.lastName}
+                        </h2>
+                        <OpenDentalLink patientId={selected.id} />
+                      </div>
                       <p className="text-sm text-gray-500 flex items-center gap-1.5">
                         {selected.insuranceProvider ? (
                           <>
@@ -479,10 +483,6 @@ export default function PatientsPage() {
                   <Link to={`/recall?patient=${selected.id}`} className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:text-indigo-700 transition-colors">
                     <RefreshCw size={14} />
                     Recall
-                  </Link>
-                  <Link to={`/radiographs?patient=${selected.id}`} className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:text-indigo-700 transition-colors">
-                    <Scan size={14} />
-                    Radiographs
                   </Link>
                 </div>
               </div>

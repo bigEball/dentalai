@@ -10,7 +10,6 @@ import InsurancePage from '@/pages/InsurancePage';
 import BillingPage from '@/pages/BillingPage';
 import RecallPage from '@/pages/RecallPage';
 import SettingsPage from '@/pages/SettingsPage';
-import CompliancePage from '@/pages/CompliancePage';
 import TreatmentPlansPage from '@/pages/TreatmentPlansPage';
 import ReportsPage from '@/pages/ReportsPage';
 import CommunicationsPage from '@/pages/CommunicationsPage';
@@ -22,6 +21,17 @@ import ReferralsPage from '@/pages/ReferralsPage';
 import InventoryPage from '@/pages/InventoryPage';
 import PerioChartPage from '@/pages/PerioChartPage';
 import PatientScoresPage from '@/pages/PatientScoresPage';
+import ToolsPage from '@/pages/ToolsPage';
+import ClaimScrubberPage from '@/pages/ClaimScrubberPage';
+import ChurnPredictionPage from '@/pages/ChurnPredictionPage';
+import MorningHuddlePage from '@/pages/MorningHuddlePage';
+import NurtureSequencesPage from '@/pages/NurtureSequencesPage';
+import FeeSchedulePage from '@/pages/FeeSchedulePage';
+import SchedulingPage from '@/pages/SchedulingPage';
+import ProcurementPage from '@/pages/ProcurementPage';
+import ClinicalDecisionSupportPage from '@/pages/ClinicalDecisionSupportPage';
+import ComplianceAutopilotPage from '@/pages/ComplianceAutopilotPage';
+import MultiLocationPage from '@/pages/MultiLocationPage';
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth();
@@ -60,7 +70,17 @@ function AppRoutes() {
         <Route path="inventory" element={<InventoryPage />} />
         <Route path="perio" element={<PerioChartPage />} />
         <Route path="patient-scores" element={<PatientScoresPage />} />
-        <Route path="compliance" element={<CompliancePage />} />
+        <Route path="claim-scrubber" element={<ClaimScrubberPage />} />
+        <Route path="churn-prediction" element={<ChurnPredictionPage />} />
+        <Route path="morning-huddle" element={<MorningHuddlePage />} />
+        <Route path="nurture-sequences" element={<NurtureSequencesPage />} />
+        <Route path="fee-optimizer" element={<FeeSchedulePage />} />
+        <Route path="smart-scheduling" element={<SchedulingPage />} />
+        <Route path="procurement" element={<ProcurementPage />} />
+        <Route path="decision-support" element={<ClinicalDecisionSupportPage />} />
+        <Route path="compliance" element={<ComplianceAutopilotPage />} />
+        <Route path="multi-location" element={<MultiLocationPage />} />
+        <Route path="tools" element={<ToolsPage />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/dashboard" replace />} />

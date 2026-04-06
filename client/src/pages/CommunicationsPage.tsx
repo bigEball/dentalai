@@ -21,6 +21,7 @@ import { formatDate, getInitials, cn } from '@/lib/utils';
 import { FullPageSpinner } from '@/components/ui/LoadingSpinner';
 import EmptyState from '@/components/ui/EmptyState';
 import Modal from '@/components/ui/Modal';
+import OpenDentalLink from '@/components/ui/OpenDentalLink';
 
 const MOCK_COMMUNICATIONS: Communication[] = [
   {
@@ -337,6 +338,7 @@ export default function CommunicationsPage() {
                           <p className="text-sm font-semibold text-gray-900 truncate">
                             {msg.patient?.firstName} {msg.patient?.lastName}
                           </p>
+                          {msg.patient && <OpenDentalLink patientId={msg.patient.id} />}
                           {isInbound ? (
                             <ArrowDownLeft size={13} className="text-indigo-500 flex-shrink-0" />
                           ) : (

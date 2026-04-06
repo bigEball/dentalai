@@ -23,6 +23,7 @@ import { formatDate, getInitials } from '@/lib/utils';
 import { FullPageSpinner } from '@/components/ui/LoadingSpinner';
 import Modal from '@/components/ui/Modal';
 import EmptyState from '@/components/ui/EmptyState';
+import OpenDentalLink from '@/components/ui/OpenDentalLink';
 
 const MOCK_FORMS: PatientForm[] = [
   {
@@ -452,6 +453,7 @@ export default function FormsPage() {
                           <p className="text-sm font-semibold text-gray-900 truncate">
                             {patientName}
                           </p>
+                          {form.patient && <OpenDentalLink patientId={form.patient.id} />}
                           <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium border ${tBadge.className}`}>
                             {tBadge.icon}
                             {tBadge.text}
