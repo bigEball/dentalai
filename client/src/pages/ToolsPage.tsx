@@ -89,15 +89,15 @@ const TOOLS: Tool[] = [
   },
   {
     label: 'Patient Retention',
-    description: 'Predict patient attrition risk and lifetime value. Surface at-risk patients before they leave.',
+    description: 'Identifies which patients are likely to stop coming and calculates their lifetime value. Alerts you before they leave so you can reach out.',
     icon: TrendingDown,
     route: '/patient-retention',
     category: 'ai',
     isNew: true,
   },
   {
-    label: 'Nurture Sequences',
-    description: 'Automated multi-step outreach campaigns to re-engage dormant patients and drive case acceptance.',
+    label: 'Treatment Follow-Up',
+    description: 'Automatically follow up with patients who haven\'t accepted their treatment plans. AI detects why they\'re hesitating and sends personalized messages over 30 days.',
     icon: HeartHandshake,
     route: '/nurture-sequences',
     category: 'ai',
