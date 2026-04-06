@@ -181,12 +181,87 @@ function getActionButtonProps(action: string): { label: string; icon: React.Reac
   return { label: action, icon: <ChevronRight size={13} />, className: 'bg-gray-600 hover:bg-gray-700 text-white' };
 }
 
+// ─── Generate Written Briefing ─────────────────────────────────────────────
+
+function generateBriefingText(h: Huddle): string {
+  const s = h.summary;
+  const lines: string[] = [];
+
+  lines.push(`MORNING HUDDLE — ${formatDateDisplay(h.date)}`);
+  lines.push('');
+
+  // Overview
+  lines.push('OVERVIEW');
+  lines.push(`We have ${s.totalPatients} patients today with an expected production of ${formatCurrency(s.expectedProduction)}.`);
+  if (s.newPatients > 0) lines.push(`${s.newPatients} new patient${s.newPatients > 1 ? 's' : ''} — please make sure we give them the full welcome experience.`);
+  if (s.patientsWithBalances > 0) lines.push(`${s.patientsWithBalances} patient${s.patientsWithBalances > 1 ? 's' : ''} have outstanding balances totaling ${formatCurrency(s.totalCollectible)} — front desk, please collect before seating.`);
+  if (s.highRiskNoShows > 0) lines.push(`${s.highRiskNoShows} patient${s.highRiskNoShows > 1 ? 's are' : ' is'} flagged as high no-show risk — confirm these appointments first thing.`);
+  lines.push('');
+
+  // Critical alerts
+  const criticals = h.alerts.filter(a => a.severity === 'critical');
+  const warnings = h.alerts.filter(a => a.severity === 'warning');
+  if (criticals.length > 0 || warnings.length > 0) {
+    lines.push('HEADS UP');
+    for (const a of criticals) {
+      lines.push(`  ⚠ ${a.patientName}: ${a.message} → ${a.action}`);
+    }
+    for (const a of warnings) {
+      lines.push(`  • ${a.patientName}: ${a.message} → ${a.action}`);
+    }
+    lines.push('');
+  }
+
+  // Patient-by-patient rundown
+  lines.push('PATIENT SCHEDULE');
+  for (const p of h.patients) {
+    const time = formatTime(p.appointmentTime);
+    const newTag = p.isNewPatient ? ' [NEW PATIENT]' : '';
+    lines.push(`  ${time} — ${p.firstName} ${p.lastName}${newTag}`);
+    lines.push(`    Procedure: ${p.appointmentType} (${p.duration} min) with ${p.provider}`);
+    if (p.outstandingBalance > 0) {
+      lines.push(`    💰 Outstanding balance: ${formatCurrency(p.outstandingBalance)} — collect before seating`);
+    }
+    if (p.insuranceStatus && p.insuranceStatus !== 'verified') {
+      lines.push(`    🛡 Insurance: ${p.insuranceStatus} — verify before appointment`);
+    }
+    if (p.noShowRate > 0.3) {
+      lines.push(`    📞 No-show risk: ${Math.round(p.noShowRate * 100)}% — confirm attendance`);
+    }
+    if (p.pendingTreatmentValue > 0) {
+      lines.push(`    📋 Unaccepted treatment: ${formatCurrency(p.pendingTreatmentValue)} — discuss today`);
+    }
+    for (const f of p.flags) {
+      if (f.type !== 'financial' && f.type !== 'insurance' && f.type !== 'attendance') {
+        lines.push(`    → ${f.message}`);
+      }
+    }
+    lines.push('');
+  }
+
+  // Opportunities
+  if (h.opportunities.length > 0) {
+    lines.push('REVENUE OPPORTUNITIES');
+    for (const o of h.opportunities) {
+      lines.push(`  • ${o.patientName}: ${o.title} — ${formatCurrency(o.value)}`);
+      if (o.description) lines.push(`    ${o.description}`);
+    }
+    lines.push('');
+  }
+
+  lines.push('---');
+  lines.push('Let\'s have a great day!');
+
+  return lines.join('\n');
+}
+
 // ─── Component ──────────────────────────────────────────────────────────────
 
 export default function MorningHuddlePage() {
   const [huddle, setHuddle] = useState<Huddle | null>(null);
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
+  const [showBriefing, setShowBriefing] = useState(false);
   const [selectedDate, setSelectedDate] = useState(() => new Date().toISOString().split('T')[0]);
   const briefingRef = React.useRef<HTMLDivElement>(null);
 
@@ -217,24 +292,20 @@ export default function MorningHuddlePage() {
     try {
       const { data } = await api.post<Huddle>('/morning-huddle/generate', { date: selectedDate });
       setHuddle(data);
-      toast.success('Briefing generated successfully');
-      setTimeout(() => briefingRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+      setShowBriefing(true);
+      toast.success('Briefing generated');
     } catch {
       try {
         const { data } = await api.get<Huddle>(`/morning-huddle/${selectedDate}`);
         setHuddle(data);
-        toast.success('Briefing loaded successfully');
-        setTimeout(() => briefingRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+        setShowBriefing(true);
+        toast.success('Briefing loaded');
       } catch {
         toast.error('Could not reach the server. Make sure the backend is running.');
       }
     } finally {
       setGenerating(false);
     }
-  }
-
-  function handleViewBriefing() {
-    briefingRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   async function handleMarkReviewed() {
@@ -302,7 +373,7 @@ export default function MorningHuddlePage() {
           {huddle ? (
             <>
               <button
-                onClick={handleViewBriefing}
+                onClick={() => setShowBriefing(true)}
                 className="btn-primary text-sm py-2.5 px-4"
               >
                 <Eye size={16} />
@@ -742,6 +813,151 @@ export default function MorningHuddlePage() {
           <p className="mt-1 text-sm text-gray-500 max-w-md">
             Click "Generate Briefing" to create your morning huddle for {formatDateDisplay(selectedDate)}.
           </p>
+        </div>
+      )}
+
+      {/* ─── Briefing Modal ─────────────────────────────────────────────── */}
+      {showBriefing && huddle && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={() => setShowBriefing(false)}>
+          <div
+            className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col mx-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-amber-100 text-amber-600">
+                  <Sunrise size={18} />
+                </div>
+                <div>
+                  <h2 className="text-base font-bold text-gray-900">Morning Huddle Briefing</h2>
+                  <p className="text-xs text-gray-500">{formatDateDisplay(huddle.date)}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(generateBriefingText(huddle));
+                    toast.success('Briefing copied to clipboard');
+                  }}
+                  className="text-xs px-3 py-1.5 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 font-medium transition-colors"
+                >
+                  Copy
+                </button>
+                <button
+                  onClick={() => setShowBriefing(false)}
+                  className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+
+            {/* Modal body — the actual briefing */}
+            <div className="flex-1 overflow-y-auto px-6 py-5 space-y-5">
+              {/* Overview */}
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-indigo-600 mb-2">Overview</h3>
+                <div className="bg-indigo-50/50 rounded-lg p-4 text-sm text-gray-800 space-y-1">
+                  <p>We have <strong>{huddle.summary.totalPatients} patients</strong> today with an expected production of <strong>{formatCurrency(huddle.summary.expectedProduction)}</strong>.</p>
+                  {huddle.summary.newPatients > 0 && (
+                    <p><strong>{huddle.summary.newPatients} new patient{huddle.summary.newPatients > 1 ? 's' : ''}</strong> — give them the full welcome experience.</p>
+                  )}
+                  {huddle.summary.patientsWithBalances > 0 && (
+                    <p><strong>{huddle.summary.patientsWithBalances} patient{huddle.summary.patientsWithBalances > 1 ? 's' : ''}</strong> have outstanding balances totaling <strong>{formatCurrency(huddle.summary.totalCollectible)}</strong> — collect before seating.</p>
+                  )}
+                  {huddle.summary.highRiskNoShows > 0 && (
+                    <p className="text-red-700"><strong>{huddle.summary.highRiskNoShows}</strong> flagged as high no-show risk — confirm first thing.</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Heads up / Alerts */}
+              {huddle.alerts.length > 0 && (
+                <div>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-red-600 mb-2">Heads Up</h3>
+                  <div className="space-y-2">
+                    {huddle.alerts.map((a) => (
+                      <div
+                        key={a.id}
+                        className={`rounded-lg p-3 text-sm ${
+                          a.severity === 'critical' ? 'bg-red-50 border border-red-200' : 'bg-amber-50 border border-amber-200'
+                        }`}
+                      >
+                        <p className="font-semibold text-gray-900">{a.patientName}</p>
+                        <p className="text-gray-700">{a.message}</p>
+                        <p className="text-xs mt-1 font-medium text-gray-500">→ {a.action}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Patient schedule */}
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-gray-600 mb-2">Patient Schedule</h3>
+                <div className="space-y-3">
+                  {huddle.patients.map((p) => (
+                    <div key={p.patientId} className="rounded-lg border border-gray-100 p-3">
+                      <div className="flex items-center justify-between mb-1">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-mono font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded">
+                            {formatTime(p.appointmentTime)}
+                          </span>
+                          <span className="text-sm font-semibold text-gray-900">
+                            {p.firstName} {p.lastName}
+                          </span>
+                          {p.isNewPatient && (
+                            <span className="text-[10px] font-bold uppercase bg-green-100 text-green-700 px-1.5 py-0.5 rounded">New</span>
+                          )}
+                        </div>
+                        <span className="text-xs text-gray-400">{p.provider}</span>
+                      </div>
+                      <p className="text-xs text-gray-500 mb-1">{p.appointmentType} · {p.duration} min</p>
+                      {(p.outstandingBalance > 0 || (p.insuranceStatus && p.insuranceStatus !== 'verified') || p.noShowRate > 0.3 || p.pendingTreatmentValue > 0) && (
+                        <div className="mt-2 space-y-1">
+                          {p.outstandingBalance > 0 && (
+                            <p className="text-xs text-red-700 bg-red-50 px-2 py-1 rounded">💰 Collect {formatCurrency(p.outstandingBalance)} before seating</p>
+                          )}
+                          {p.insuranceStatus && p.insuranceStatus !== 'verified' && (
+                            <p className="text-xs text-amber-700 bg-amber-50 px-2 py-1 rounded">🛡 Insurance {p.insuranceStatus} — verify before appointment</p>
+                          )}
+                          {p.noShowRate > 0.3 && (
+                            <p className="text-xs text-orange-700 bg-orange-50 px-2 py-1 rounded">📞 No-show risk {Math.round(p.noShowRate * 100)}% — confirm attendance</p>
+                          )}
+                          {p.pendingTreatmentValue > 0 && (
+                            <p className="text-xs text-blue-700 bg-blue-50 px-2 py-1 rounded">📋 Unaccepted treatment: {formatCurrency(p.pendingTreatmentValue)} — discuss today</p>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Opportunities */}
+              {huddle.opportunities.length > 0 && (
+                <div>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-green-600 mb-2">Revenue Opportunities</h3>
+                  <div className="space-y-2">
+                    {huddle.opportunities.map((o) => (
+                      <div key={o.id} className="bg-green-50 rounded-lg p-3 text-sm">
+                        <div className="flex items-center justify-between">
+                          <span className="font-semibold text-gray-900">{o.patientName}</span>
+                          <span className="font-bold text-green-700">{formatCurrency(o.value)}</span>
+                        </div>
+                        <p className="text-gray-600 text-xs mt-0.5">{o.title}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="text-center pt-2 pb-1">
+                <p className="text-sm font-medium text-gray-400">Let's have a great day! 🦷</p>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>
