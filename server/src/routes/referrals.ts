@@ -52,8 +52,9 @@ router.get('/:id', async (req: Request, res: Response) => {
 // POST / - create referral
 router.post('/', async (req: Request, res: Response) => {
   try {
+    const { patientId, referringProvId, referredToName, referredToSpecialty, referredToPhone, referredToEmail, reason, urgency } = req.body;
     const referral = await prisma.referral.create({
-      data: req.body,
+      data: { patientId, referringProvId, referredToName, referredToSpecialty, referredToPhone, referredToEmail, reason, urgency },
       include: {
         patient: { select: { id: true, firstName: true, lastName: true } },
         referringProvider: { select: { id: true, firstName: true, lastName: true } },
@@ -78,9 +79,10 @@ router.post('/', async (req: Request, res: Response) => {
 // PATCH /:id - update referral
 router.patch('/:id', async (req: Request, res: Response) => {
   try {
+    const { referredToName, referredToSpecialty, referredToPhone, referredToEmail, reason, urgency, status } = req.body;
     const referral = await prisma.referral.update({
       where: { id: req.params.id },
-      data: req.body,
+      data: { referredToName, referredToSpecialty, referredToPhone, referredToEmail, reason, urgency, status },
       include: {
         patient: { select: { id: true, firstName: true, lastName: true } },
         referringProvider: true,
@@ -127,11 +129,16 @@ router.patch('/:id/send', async (req: Request, res: Response) => {
 // PATCH /:id/schedule - mark appointment scheduled
 router.patch('/:id/schedule', async (req: Request, res: Response) => {
   try {
+    const { appointmentDate } = req.body;
+    if (!appointmentDate || isNaN(Date.parse(appointmentDate))) {
+      res.status(400).json({ error: 'A valid appointmentDate is required' });
+      return;
+    }
     const referral = await prisma.referral.update({
       where: { id: req.params.id },
       data: {
         status: 'scheduled',
-        appointmentDate: req.body.appointmentDate,
+        appointmentDate,
       },
       include: {
         patient: { select: { id: true, firstName: true, lastName: true } },

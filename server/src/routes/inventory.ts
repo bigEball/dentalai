@@ -135,8 +135,9 @@ router.get('/:id', async (req: Request, res: Response) => {
 // POST / - create item
 router.post('/', async (req: Request, res: Response) => {
   try {
+    const { name, category, currentStock, minStock, maxStock, unit, unitCost, supplier, lastOrderDate, expiryDate, sku, location } = req.body;
     const item = await prisma.inventoryItem.create({
-      data: req.body,
+      data: { name, category, currentStock, minStock, maxStock, unit, unitCost, supplier, lastOrderDate, expiryDate, sku, location },
     });
 
     await logActivity(
@@ -157,9 +158,10 @@ router.post('/', async (req: Request, res: Response) => {
 // PATCH /:id - update item
 router.patch('/:id', async (req: Request, res: Response) => {
   try {
+    const { name, category, currentStock, minStock, maxStock, unit, unitCost, supplier, lastOrderDate, expiryDate, sku, location } = req.body;
     const item = await prisma.inventoryItem.update({
       where: { id: req.params.id },
-      data: req.body,
+      data: { name, category, currentStock, minStock, maxStock, unit, unitCost, supplier, lastOrderDate, expiryDate, sku, location },
     });
     res.json(item);
   } catch (err) {
@@ -171,10 +173,10 @@ router.patch('/:id', async (req: Request, res: Response) => {
 // PATCH /:id/restock - add quantity
 router.patch('/:id/restock', async (req: Request, res: Response) => {
   try {
-    const { quantity } = req.body;
+    const quantity = Number(req.body.quantity);
     const today = new Date().toISOString().split('T')[0];
 
-    if (!quantity || quantity <= 0) {
+    if (!Number.isFinite(quantity) || quantity <= 0) {
       res.status(400).json({ error: 'quantity must be a positive number' });
       return;
     }
@@ -205,8 +207,9 @@ router.patch('/:id/restock', async (req: Request, res: Response) => {
 // PATCH /:id/adjust - set stock to an exact value
 router.patch('/:id/adjust', async (req: Request, res: Response) => {
   try {
-    const { quantity, reason } = req.body;
-    if (quantity === undefined || quantity < 0) {
+    const quantity = Number(req.body.quantity);
+    const { reason } = req.body;
+    if (!Number.isFinite(quantity) || quantity < 0) {
       res.status(400).json({ error: 'quantity must be a non-negative number' });
       return;
     }

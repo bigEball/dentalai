@@ -17,7 +17,7 @@ const ALL_ROUTES = [
   '/billing', '/payment-plans', '/fee-optimizer', '/recall', '/perio',
   '/smart-scheduling', '/communications', '/follow-ups', '/referrals',
   '/forms', '/inventory', '/procurement', '/reports', '/patient-scores',
-  '/compliance', '/multi-location', '/tools', '/settings',
+  '/compliance', '/tools', '/settings',
 ];
 
 export const ROLES: Record<DemoRole, RoleConfig> = {

@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import { prisma } from '../db/client';
 import { logActivity } from '../lib/activity';
+import { getConfig } from '../config';
 
 const router = Router();
 
@@ -88,9 +89,10 @@ router.post('/', async (req: Request, res: Response) => {
 // PATCH /:id - update plan fields
 router.patch('/:id', async (req: Request, res: Response) => {
   try {
+    const { title, status, totalEstimate, insuranceEst, patientEst, notes } = req.body;
     const plan = await prisma.treatmentPlan.update({
       where: { id: req.params.id },
-      data: req.body,
+      data: { title, status, totalEstimate, insuranceEst, patientEst, notes },
       include: {
         patient: { select: { id: true, firstName: true, lastName: true } },
         provider: true,
@@ -187,10 +189,11 @@ router.post('/:id/send', async (req: Request, res: Response) => {
     const planToken = plan.planToken || uuidv4();
     const now = new Date().toISOString();
 
-    const baseUrl = process.env.APP_URL || 'https://smartdentalai.onrender.com';
+    const baseUrl = process.env.APP_URL || 'http://localhost:5173';
     const planLink = `${baseUrl}/treatment-plans/view/${planToken}`;
 
-    const officeName = 'Smart Dental AI';
+    const config = getConfig();
+    const officeName = config.office.name;
     const patientFirst = plan.patient.firstName;
     const itemCount = plan.items?.length ?? 0;
     const messageBody =
@@ -241,10 +244,11 @@ router.post('/:id/send', async (req: Request, res: Response) => {
 // POST /:id/items - add item to plan
 router.post('/:id/items', async (req: Request, res: Response) => {
   try {
+    const { procedureCode, description, toothNumber, surface, estimatedCost, insuranceCoverage, patientCost, sequence, status } = req.body;
     const item = await prisma.treatmentPlanItem.create({
       data: {
         treatmentPlanId: req.params.id,
-        ...req.body,
+        procedureCode, description, toothNumber, surface, estimatedCost, insuranceCoverage, patientCost, sequence, status,
       },
     });
     res.status(201).json(item);
@@ -257,9 +261,10 @@ router.post('/:id/items', async (req: Request, res: Response) => {
 // PATCH /:id/items/:itemId - update item status
 router.patch('/:id/items/:itemId', async (req: Request, res: Response) => {
   try {
+    const { status, estimatedCost, insuranceCoverage, patientCost } = req.body;
     const item = await prisma.treatmentPlanItem.update({
       where: { id: req.params.itemId },
-      data: req.body,
+      data: { status, estimatedCost, insuranceCoverage, patientCost },
     });
     res.json(item);
   } catch (err) {

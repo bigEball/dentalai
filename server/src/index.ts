@@ -47,6 +47,15 @@ app.use(
 );
 app.use(express.json());
 
+// Security headers
+app.use((_req: Request, res: Response, next: NextFunction) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  next();
+});
+
 // Serve uploaded files statically
 const uploadsPath = path.resolve(__dirname, '../../data/uploads');
 app.use('/uploads', express.static(uploadsPath));
@@ -57,11 +66,13 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(clientPath));
 }
 
-// Request logger
-app.use((req: Request, _res: Response, next: NextFunction) => {
-  console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
-  next();
-});
+// Request logger (development only)
+if (process.env.NODE_ENV !== 'production') {
+  app.use((req: Request, _res: Response, next: NextFunction) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
+    next();
+  });
+}
 
 // Health check
 app.get('/health', (_req: Request, res: Response) => {

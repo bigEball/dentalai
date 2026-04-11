@@ -52,19 +52,21 @@ router.get('/:id', async (req: Request, res: Response) => {
 // POST / - create pre-auth
 router.post('/', async (req: Request, res: Response) => {
   try {
+    const { patientId, insurancePlanId, procedureCodes, estimatedCost, toothNumbers, reason, notes } = req.body;
     const preAuth = await prisma.preAuthorization.create({
-      data: req.body,
+      data: { patientId, insurancePlanId, procedureCodes, estimatedCost: Number(estimatedCost), toothNumbers, reason, notes },
       include: {
         patient: { select: { id: true, firstName: true, lastName: true } },
         insurancePlan: { select: { id: true, provider: true } },
       },
     });
 
+    const pa = preAuth as typeof preAuth & { patient: { firstName: string; lastName: string } };
     await logActivity(
       'create_preauth',
       'PreAuthorization',
       preAuth.id,
-      `Pre-authorization created for ${preAuth.patient.firstName} ${preAuth.patient.lastName} - ${preAuth.procedureCodes}`,
+      `Pre-authorization created for ${pa.patient.firstName} ${pa.patient.lastName} - ${preAuth.procedureCodes}`,
       { estimatedCost: preAuth.estimatedCost }
     );
 
@@ -78,9 +80,10 @@ router.post('/', async (req: Request, res: Response) => {
 // PATCH /:id - update pre-auth
 router.patch('/:id', async (req: Request, res: Response) => {
   try {
+    const { procedureCodes, estimatedCost, toothNumbers, reason, status, notes } = req.body;
     const preAuth = await prisma.preAuthorization.update({
       where: { id: req.params.id },
-      data: req.body,
+      data: { procedureCodes, estimatedCost, toothNumbers, reason, status, notes },
       include: {
         patient: { select: { id: true, firstName: true, lastName: true } },
         insurancePlan: true,

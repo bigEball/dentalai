@@ -199,8 +199,9 @@ router.post('/generate', async (req: Request, res: Response) => {
 // POST /notes - create a new note
 router.post('/', async (req: Request, res: Response) => {
   try {
+    const { patientId, providerId, appointmentId, date, subjective, objective, assessment, plan, procedureCode, status, transcript } = req.body;
     const note = await prisma.clinicalNote.create({
-      data: req.body,
+      data: { patientId, providerId, appointmentId, date, subjective, objective, assessment, plan, procedureCode, status, transcript },
       include: {
         patient: { select: { id: true, firstName: true, lastName: true } },
         provider: { select: { id: true, firstName: true, lastName: true, title: true } },
@@ -224,9 +225,10 @@ router.post('/', async (req: Request, res: Response) => {
 // PATCH /notes/:id - update note fields
 router.patch('/:id', async (req: Request, res: Response) => {
   try {
+    const { subjective, objective, assessment, plan, procedureCode, status, transcript } = req.body;
     const updated = await prisma.clinicalNote.update({
       where: { id: req.params.id },
-      data: req.body,
+      data: { subjective, objective, assessment, plan, procedureCode, status, transcript },
     });
 
     await logActivity(

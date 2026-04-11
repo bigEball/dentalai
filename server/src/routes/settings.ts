@@ -11,10 +11,11 @@ router.get('/', (_req: Request, res: Response) => {
   res.json(config);
 });
 
-// PATCH /settings — deep merge updates into config
+// PATCH /settings — deep merge updates into config (whitelisted keys only)
 router.patch('/', (req: Request, res: Response) => {
   try {
-    const updated = updateConfig(req.body);
+    const { mode, openDental, ollama, whisper, priceSearch, office, modules } = req.body;
+    const updated = updateConfig({ mode, openDental, ollama, whisper, priceSearch, office, modules });
     res.json(updated);
   } catch (err) {
     console.error('[settings] Failed to update config:', err);
@@ -68,8 +69,8 @@ router.post('/sync', async (_req: Request, res: Response) => {
 
   // Placeholder — future implementation will pull patients, appointments, etc.
   res.json({
-    success: true,
-    message: 'Sync initiated. Full data pull from Open Dental will be implemented in a future update.',
+    success: false,
+    message: 'Data sync from Open Dental is not yet implemented. This feature is planned for a future update.',
   });
 });
 

@@ -86,9 +86,10 @@ export default function BillingPage() {
 
   useEffect(() => {
     const patientId = searchParams.get('patient');
-    if (patientId) {
-      getPatient(patientId).then(setFilterPatient).catch(() => {});
-    }
+    if (!patientId) return;
+    let cancelled = false;
+    getPatient(patientId).then(p => { if (!cancelled) setFilterPatient(p); }).catch(() => {});
+    return () => { cancelled = true; };
   }, [searchParams]);
 
   const loadBalances = useCallback(async () => {
@@ -122,12 +123,7 @@ export default function BillingPage() {
         ),
       );
     } catch {
-      toast.success(`Statement sent to ${b.patient?.firstName}. They'll receive it shortly.`);
-      setBalances((prev) =>
-        prev.map((bal) =>
-          bal.id === b.id ? { ...bal, statementSent: true, statementDate: new Date().toISOString() } : bal,
-        ),
-      );
+      toast.error('Failed to send statement. Please try again.');
     } finally {
       setActionId(null);
     }
@@ -139,7 +135,7 @@ export default function BillingPage() {
       await sendReminder(b.id);
       toast.success(`Friendly reminder sent to ${b.patient?.firstName} ${b.patient?.lastName}.`);
     } catch {
-      toast.success(`Friendly reminder sent to ${b.patient?.firstName}.`);
+      toast.error('Failed to send reminder. Please try again.');
     } finally {
       setActionId(null);
     }
@@ -148,7 +144,7 @@ export default function BillingPage() {
   async function handleMarkPaidConfirm() {
     if (!markPaidTarget) return;
     const amt = parseFloat(markPaidAmount);
-    if (isNaN(amt) || amt <= 0) {
+    if (!Number.isFinite(amt) || amt <= 0) {
       toast.error('Please enter a valid payment amount.');
       return;
     }
@@ -171,21 +167,7 @@ export default function BillingPage() {
         ),
       );
     } catch {
-      toast.success(`Payment of ${formatCurrency(amt)} recorded. Thank you!`);
-      const remaining = markPaidTarget.amount - amt;
-      setBalances((prev) =>
-        prev.map((bal) =>
-          bal.id === markPaidTarget.id
-            ? {
-                ...bal,
-                amount: Math.max(0, remaining),
-                lastPaymentDate: new Date().toISOString(),
-                lastPaymentAmount: amt,
-                collectionStatus: (remaining <= 0 ? 'current' : bal.collectionStatus) as Balance['collectionStatus'],
-              }
-            : bal,
-        ),
-      );
+      toast.error('Failed to record payment. Please try again.');
     } finally {
       setActionId(null);
       setMarkPaidTarget(null);
@@ -541,12 +523,12 @@ export default function BillingPage() {
                   autoFocus
                 />
               </div>
-              {parseFloat(markPaidAmount) > 0 && parseFloat(markPaidAmount) < markPaidTarget.amount && (
+              {Number.isFinite(parseFloat(markPaidAmount)) && parseFloat(markPaidAmount) > 0 && parseFloat(markPaidAmount) < markPaidTarget.amount && (
                 <p className="text-xs text-gray-500 mt-2">
                   Remaining balance after payment: {formatCurrency(markPaidTarget.amount - parseFloat(markPaidAmount))}
                 </p>
               )}
-              {parseFloat(markPaidAmount) >= markPaidTarget.amount && (
+              {Number.isFinite(parseFloat(markPaidAmount)) && parseFloat(markPaidAmount) >= markPaidTarget.amount && (
                 <p className="text-xs text-green-600 font-medium mt-2">
                   This will pay off the full balance
                 </p>

@@ -197,12 +197,12 @@ export default function DashboardPage() {
   const displayName = user?.name?.replace('Dr. ', '') ?? roleConfig.userName;
 
   useEffect(() => {
+    let cancelled = false;
     getDashboardStats()
-      .then(setStats)
-      .catch(() => {
-        setStats(MOCK_STATS);
-      })
-      .finally(() => setLoading(false));
+      .then(s => { if (!cancelled) setStats(s); })
+      .catch(() => { if (!cancelled) setStats(MOCK_STATS); })
+      .finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
   }, []);
 
   if (loading) return <FullPageSpinner />;

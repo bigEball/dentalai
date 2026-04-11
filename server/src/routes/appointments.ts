@@ -46,9 +46,10 @@ router.get('/:id', async (req: Request, res: Response) => {
 // PATCH /appointments/:id
 router.patch('/:id', async (req: Request, res: Response) => {
   try {
+    const { date, time, duration, type, status, notes } = req.body;
     const updated = await prisma.appointment.update({
       where: { id: req.params.id },
-      data: req.body,
+      data: { date, time, duration, type, status, notes },
     });
     res.json(updated);
   } catch (err) {

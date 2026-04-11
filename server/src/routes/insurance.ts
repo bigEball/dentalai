@@ -59,11 +59,12 @@ router.post('/plans', async (req: Request, res: Response) => {
       coPayMajor: coPayMajor != null ? Number(coPayMajor) : undefined,
     });
 
+    const planPatient = (plan as { patient?: { firstName?: string; lastName?: string } }).patient;
     await logActivity(
       'create_insurance_plan',
       'InsurancePlan',
       plan.id,
-      `Insurance plan created: ${provider} for patient ${(plan as any).patient?.firstName ?? ''} ${(plan as any).patient?.lastName ?? ''}`,
+      `Insurance plan created: ${provider} for patient ${planPatient?.firstName ?? ''} ${planPatient?.lastName ?? ''}`,
       { provider, memberId }
     );
 

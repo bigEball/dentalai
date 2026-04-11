@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import { prisma } from '../db/client';
 import { logActivity } from '../lib/activity';
+import { getConfig } from '../config';
 
 const router = Router();
 
@@ -50,8 +51,9 @@ router.get('/:id', async (req: Request, res: Response) => {
 // POST / - create form
 router.post('/', async (req: Request, res: Response) => {
   try {
+    const { patientId, formType, title, status } = req.body;
     const form = await prisma.patientForm.create({
-      data: req.body,
+      data: { patientId, formType, title, status },
       include: {
         patient: { select: { id: true, firstName: true, lastName: true } },
       },
@@ -100,11 +102,12 @@ router.post('/:id/send', async (req: Request, res: Response) => {
     const now = new Date().toISOString();
 
     // Build the form link (uses app origin or a placeholder)
-    const baseUrl = process.env.APP_URL || 'https://smartdentalai.onrender.com';
+    const baseUrl = process.env.APP_URL || 'http://localhost:5173';
     const formLink = `${baseUrl}/forms/fill/${formToken}`;
 
     // Friendly text message
-    const officeName = 'Smart Dental AI';
+    const config = getConfig();
+    const officeName = config.office.name;
     const patientFirst = form.patient.firstName;
     const messageBody =
       `Hi ${patientFirst}! 😊 ${officeName} here. We have some paperwork for your upcoming visit. ` +

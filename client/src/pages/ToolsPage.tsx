@@ -30,7 +30,6 @@ import {
   ShoppingCart,
   Stethoscope,
   ClipboardCheck,
-  Building2,
   Sparkles,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -242,14 +241,6 @@ const TOOLS: Tool[] = [
     description: 'Automated HIPAA, OSHA, and state-law compliance monitoring with audit trails and staff training tracking.',
     icon: ClipboardCheck,
     route: '/compliance',
-    category: 'system',
-    isNew: true,
-  },
-  {
-    label: 'Multi-Location',
-    description: 'Cross-location dashboards, benchmarking, resource sharing, and consolidated reporting for multi-site practices.',
-    icon: Building2,
-    route: '/multi-location',
     category: 'system',
     isNew: true,
   },

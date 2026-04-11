@@ -51,8 +51,9 @@ router.get('/:id', async (req: Request, res: Response) => {
 // POST / - create follow-up
 router.post('/', async (req: Request, res: Response) => {
   try {
+    const { patientId, appointmentId, procedureType, procedureDate, followUpDate, channel, message, status } = req.body;
     const followUp = await prisma.followUp.create({
-      data: req.body,
+      data: { patientId, appointmentId, procedureType, procedureDate, followUpDate, channel, message, status },
       include: {
         patient: { select: { id: true, firstName: true, lastName: true } },
       },

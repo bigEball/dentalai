@@ -30,7 +30,7 @@ import {
   ShoppingCart,
   Stethoscope,
   ClipboardCheck,
-  Building2,
+
   ChevronUp,
   UserCog,
   Briefcase,
@@ -79,7 +79,6 @@ const OFFICE_NAV = [
 
 const SYSTEM_NAV = [
   { to: '/compliance', label: 'Compliance', icon: ClipboardCheck },
-  { to: '/multi-location', label: 'Multi-Location', icon: Building2 },
   { to: '/tools', label: 'All Tools', icon: Layers },
   { to: '/settings', label: 'Settings', icon: Settings },
 ];

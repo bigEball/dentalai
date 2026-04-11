@@ -168,9 +168,10 @@ export default function InsurancePage() {
   // Load patient from URL param
   useEffect(() => {
     const patientId = searchParams.get('patient');
-    if (patientId) {
-      getPatient(patientId).then(setFilterPatient).catch(() => {});
-    }
+    if (!patientId) return;
+    let cancelled = false;
+    getPatient(patientId).then(p => { if (!cancelled) setFilterPatient(p); }).catch(() => {});
+    return () => { cancelled = true; };
   }, [searchParams]);
 
   // Load data when tab or filter changes
@@ -200,14 +201,17 @@ export default function InsurancePage() {
 
   // When a claim patient is selected, fetch their plans
   useEffect(() => {
-    if (claimPatient) {
-      getInsurancePlans({ patientId: claimPatient.id }).then(p => {
-        setClaimPatientPlans(p);
-        if (p.length === 1) setClaimForm(f => ({ ...f, planId: p[0].id }));
-      }).catch(() => setClaimPatientPlans([]));
-    } else {
+    if (!claimPatient) {
       setClaimPatientPlans([]);
+      return;
     }
+    let cancelled = false;
+    getInsurancePlans({ patientId: claimPatient.id }).then(p => {
+      if (cancelled) return;
+      setClaimPatientPlans(p);
+      if (p.length === 1) setClaimForm(f => ({ ...f, planId: p[0].id }));
+    }).catch(() => { if (!cancelled) setClaimPatientPlans([]); });
+    return () => { cancelled = true; };
   }, [claimPatient]);
 
   // ─── Handlers ─────────────────────────────────────────────────────────────

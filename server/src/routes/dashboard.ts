@@ -54,14 +54,16 @@ router.get('/stats', async (_req: Request, res: Response) => {
         take: 10,
       }),
 
-      // All claims for groupBy
-      prisma.insuranceClaim.findMany({
-        select: { status: true },
+      // Claims grouped by status
+      prisma.insuranceClaim.groupBy({
+        by: ['status'],
+        _count: { status: true },
       }),
 
-      // All balances for groupBy
-      prisma.balance.findMany({
-        select: { collectionStatus: true, amount: true },
+      // Balances grouped by collection status (summed)
+      prisma.balance.groupBy({
+        by: ['collectionStatus'],
+        _sum: { amount: true },
       }),
 
       // Approved claims this month
@@ -111,15 +113,14 @@ router.get('/stats', async (_req: Request, res: Response) => {
 
     // Claims grouped by status
     const claimsByStatus: Record<string, number> = {};
-    for (const claim of allClaims) {
-      claimsByStatus[claim.status] = (claimsByStatus[claim.status] ?? 0) + 1;
+    for (const group of allClaims) {
+      claimsByStatus[group.status] = group._count.status;
     }
 
     // Balances grouped by collection status (summed)
     const balancesByCollectionStatus: Record<string, number> = {};
-    for (const bal of allBalances) {
-      const key = bal.collectionStatus;
-      balancesByCollectionStatus[key] = (balancesByCollectionStatus[key] ?? 0) + bal.amount;
+    for (const group of allBalances) {
+      balancesByCollectionStatus[group.collectionStatus] = group._sum.amount ?? 0;
     }
 
     // Parse metadata in activity logs

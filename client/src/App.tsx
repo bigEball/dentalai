@@ -72,7 +72,6 @@ import SchedulingPage from '@/pages/SchedulingPage';
 import ProcurementPage from '@/pages/ProcurementPage';
 import ClinicalDecisionSupportPage from '@/pages/ClinicalDecisionSupportPage';
 import ComplianceAutopilotPage from '@/pages/ComplianceAutopilotPage';
-import MultiLocationPage from '@/pages/MultiLocationPage';
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth();
@@ -106,7 +105,7 @@ function AppRoutes() {
         }
       >
         <Route index element={<Navigate to="/dashboard" replace />} />
-        <Route path="dashboard" element={<DashboardPage />} />
+        <Route path="dashboard" element={<RequireRole><DashboardPage /></RequireRole>} />
         <Route path="patients" element={<RequireRole><PatientsPage /></RequireRole>} />
         <Route path="notes" element={<RequireRole><AINotesPage /></RequireRole>} />
         <Route path="insurance" element={<RequireRole><InsurancePage /></RequireRole>} />
@@ -132,7 +131,6 @@ function AppRoutes() {
         <Route path="procurement" element={<RequireRole><ProcurementPage /></RequireRole>} />
         <Route path="decision-support" element={<RequireRole><ClinicalDecisionSupportPage /></RequireRole>} />
         <Route path="compliance" element={<RequireRole><ComplianceAutopilotPage /></RequireRole>} />
-        <Route path="multi-location" element={<RequireRole><MultiLocationPage /></RequireRole>} />
         <Route path="tools" element={<RequireRole><ToolsPage /></RequireRole>} />
         <Route path="settings" element={<RequireRole><SettingsPage /></RequireRole>} />
       </Route>

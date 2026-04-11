@@ -75,9 +75,10 @@ router.get('/:id', async (req: Request, res: Response) => {
 // PATCH /patients/:id - update patient fields
 router.patch('/:id', async (req: Request, res: Response) => {
   try {
+    const { firstName, lastName, dateOfBirth, phone, email, preferredContactMethod, providerId } = req.body;
     const updated = await prisma.patient.update({
       where: { id: req.params.id },
-      data: req.body,
+      data: { firstName, lastName, dateOfBirth, phone, email, preferredContactMethod, providerId },
     });
     res.json(updated);
   } catch (err) {

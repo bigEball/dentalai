@@ -349,9 +349,10 @@ export default function AINotesPage() {
 
   useEffect(() => {
     const patientId = searchParams.get('patient');
-    if (patientId) {
-      getPatient(patientId).then(setFilterPatient).catch(() => {});
-    }
+    if (!patientId) return;
+    let cancelled = false;
+    getPatient(patientId).then(p => { if (!cancelled) setFilterPatient(p); }).catch(() => {});
+    return () => { cancelled = true; };
   }, [searchParams]);
 
   // Recording state

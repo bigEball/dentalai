@@ -31,7 +31,6 @@ const PAGE_TITLES: Record<string, string> = {
   '/procurement': 'Procurement Intelligence',
   '/decision-support': 'Clinical Decision Support',
   '/compliance': 'Compliance Autopilot',
-  '/multi-location': 'Multi-Location Intelligence',
   '/tools': 'All Tools',
   '/settings': 'Settings',
 };
