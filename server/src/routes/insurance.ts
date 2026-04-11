@@ -2,6 +2,9 @@ import { Router, Request, Response } from 'express';
 import { logActivity } from '../lib/activity';
 import * as insuranceService from '../services/insuranceService';
 
+type WithPatient<T> = T & { patient?: { firstName?: string; lastName?: string } };
+type WithPlan<T> = T & { insurancePlan?: { provider?: string } };
+
 const router = Router();
 
 // ----------------------------------------------------------------
@@ -90,13 +93,14 @@ router.patch('/plans/:id', async (req: Request, res: Response) => {
 router.patch('/plans/:id/verify', async (req: Request, res: Response) => {
   try {
     const plan = await insuranceService.verifyPlan(req.params.id);
+    const p = plan as WithPatient<typeof plan>;
 
     await logActivity(
       'verify_insurance',
       'InsurancePlan',
       plan.id,
-      `Insurance verified for ${(plan as any).patient?.firstName ?? ''} ${(plan as any).patient?.lastName ?? ''}`,
-      { verifiedDate: (plan as any).verifiedDate }
+      `Insurance verified for ${p.patient?.firstName ?? ''} ${p.patient?.lastName ?? ''}`,
+      { verifiedDate: plan.verifiedDate }
     );
 
     res.json(plan);
@@ -158,11 +162,12 @@ router.post('/claims', async (req: Request, res: Response) => {
       narrative: narrative || '',
     });
 
+    const c = claim as WithPatient<WithPlan<typeof claim>>;
     await logActivity(
       'create_claim',
       'InsuranceClaim',
       claim.id,
-      `Claim created for ${(claim as any).patient?.firstName ?? ''} ${(claim as any).patient?.lastName ?? ''} — ${(claim as any).insurancePlan?.provider ?? ''}`,
+      `Claim created for ${c.patient?.firstName ?? ''} ${c.patient?.lastName ?? ''} — ${c.insurancePlan?.provider ?? ''}`,
       { totalAmount: claim.totalAmount }
     );
 
@@ -189,13 +194,14 @@ router.patch('/claims/:id', async (req: Request, res: Response) => {
 router.patch('/claims/:id/submit', async (req: Request, res: Response) => {
   try {
     const claim = await insuranceService.submitClaim(req.params.id);
+    const sc = claim as WithPatient<WithPlan<typeof claim>>;
 
     await logActivity(
       'submit_claim',
       'InsuranceClaim',
       claim.id,
-      `Claim submitted for ${(claim as any).patient?.firstName ?? ''} ${(claim as any).patient?.lastName ?? ''} to ${(claim as any).insurancePlan?.provider ?? ''}`,
-      { submittedDate: (claim as any).submittedDate, totalAmount: claim.totalAmount }
+      `Claim submitted for ${sc.patient?.firstName ?? ''} ${sc.patient?.lastName ?? ''} to ${sc.insurancePlan?.provider ?? ''}`,
+      { submittedDate: claim.submittedDate, totalAmount: claim.totalAmount }
     );
 
     res.json(claim);
@@ -211,11 +217,12 @@ router.post('/claims/generate', async (req: Request, res: Response) => {
     const drafts = await insuranceService.generateClaimsFromAppointments();
 
     for (const claim of drafts) {
+      const gc = claim as WithPatient<typeof claim>;
       await logActivity(
         'generate_claim',
         'InsuranceClaim',
         claim.id,
-        `Auto-generated claim for ${(claim as any).patient?.firstName ?? ''} ${(claim as any).patient?.lastName ?? ''}`,
+        `Auto-generated claim for ${gc.patient?.firstName ?? ''} ${gc.patient?.lastName ?? ''}`,
         { totalAmount: claim.totalAmount }
       );
     }
