@@ -121,7 +121,7 @@ const MOCK_COMMUNICATIONS: Communication[] = [
     patientId: 'p4',
     channel: 'email',
     direction: 'outbound',
-    subject: 'Welcome to Smart Dental AI',
+    subject: 'Welcome to Summit AI Services',
     body: 'Dear Mr. & Mrs. Williams, welcome to our practice! We have received your new patient forms. Ethan is scheduled for his first visit on March 28th at 10:00 AM.',
     status: 'read',
     sentAt: new Date(Date.now() - 72 * 3600000).toISOString(),

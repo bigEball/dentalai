@@ -172,11 +172,11 @@ export default function Sidebar() {
         <div className="flex items-center gap-2.5">
           <img
             src="/logo.jpg"
-            alt="Smart Dental AI Services"
+            alt="Summit AI Services"
             className="h-9 w-9 rounded-lg object-cover flex-shrink-0"
           />
           <div>
-            <p className="text-sm font-semibold text-white leading-none">Smart Dental AI</p>
+            <p className="text-sm font-semibold text-white leading-none">Summit AI Services</p>
             <p className="text-[10px] text-gray-500 mt-0.5">AI Operations Layer</p>
           </div>
         </div>
@@ -263,7 +263,7 @@ export default function Sidebar() {
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-xs font-semibold text-white truncate">{user?.name ?? 'Dr. Mitchell'}</p>
-            <p className="text-[11px] text-gray-500 truncate">{user?.office ?? 'Bright Smiles Dental'}</p>
+            <p className="text-[11px] text-gray-500 truncate">{user?.office ?? 'Summit Demo Practice'}</p>
           </div>
           <button
             onClick={handleLogout}

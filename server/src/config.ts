@@ -70,7 +70,7 @@ const DEFAULT_CONFIG: AppConfig = {
     enabled: true,
   },
   office: {
-    name: 'Bright Smiles Dental',
+    name: 'Summit Demo Practice',
     locations: ['Main Street Office', 'Westside Office'],
     timezone: 'America/Chicago',
   },

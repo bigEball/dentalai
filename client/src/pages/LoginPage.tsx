@@ -51,10 +51,10 @@ export default function LoginPage() {
         <div className="flex flex-col items-center mb-8">
           <img
             src="/logo.jpg"
-            alt="Smart Dental AI Services"
+            alt="Summit AI Services"
             className="h-20 w-20 rounded-2xl object-cover mb-4 shadow-lg shadow-indigo-500/30"
           />
-          <h1 className="text-2xl font-bold text-white tracking-tight">Smart Dental AI</h1>
+          <h1 className="text-2xl font-bold text-white tracking-tight">Summit AI Services</h1>
           <p className="mt-1.5 text-sm text-gray-400 text-center">
             AI-powered operations for modern dental practices
           </p>
@@ -139,12 +139,12 @@ export default function LoginPage() {
             style={{ backgroundColor: 'rgba(99,102,241,0.08)', borderColor: 'rgba(99,102,241,0.2)' }}
           >
             <p className="text-xs text-indigo-400 font-medium mb-0.5">Demo credentials</p>
-            <p className="text-xs text-gray-500 font-mono">demo@smartdentalai.com / demo</p>
+            <p className="text-xs text-gray-500 font-mono">demo@summitai.com / demo</p>
           </div>
         </div>
 
         <p className="mt-6 text-center text-xs text-gray-600">
-          &copy; {new Date().getFullYear()} Smart Dental AI Services. For demonstration purposes only.
+          &copy; {new Date().getFullYear()} Summit AI Services. For demonstration purposes only.
         </p>
       </div>
     </div>

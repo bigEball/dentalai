@@ -63,7 +63,7 @@ export default function TopBar({ title }: TopBarProps) {
             onClick={() => setOfficeOpen((v) => !v)}
             className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-700 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors"
           >
-            <span className="hidden sm:block">{user?.office ?? 'Bright Smiles Dental'}</span>
+            <span className="hidden sm:block">{user?.office ?? 'Summit Demo Practice'}</span>
             <ChevronDown size={13} className="text-gray-400" />
           </button>
           {officeOpen && (
@@ -72,7 +72,7 @@ export default function TopBar({ title }: TopBarProps) {
                 className="w-full text-left px-4 py-2 text-sm text-gray-700 bg-indigo-50 text-indigo-600 font-medium"
                 onClick={() => setOfficeOpen(false)}
               >
-                {user?.office ?? 'Bright Smiles Dental'}
+                {user?.office ?? 'Summit Demo Practice'}
               </button>
             </div>
           )}

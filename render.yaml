@@ -1,11 +1,11 @@
 services:
   - type: web
-    name: smart-dental-ai
+    name: summit-ai-services
     runtime: node
     buildCommand: npm run build
     startCommand: npm start
     disk:
-      name: smart-dental-ai-data
+      name: summit-ai-services-data
       mountPath: /opt/render/project/src/data
       sizeGB: 1
     envVars:

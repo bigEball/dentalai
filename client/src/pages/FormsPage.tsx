@@ -283,9 +283,9 @@ export default function FormsPage() {
     } catch {
       // Demo fallback
       const patientFirst = sendForm.patient?.firstName || 'Patient';
-      const fakeLink = `https://smartdentalai.onrender.com/forms/fill/demo-${sendForm.id}`;
+      const fakeLink = `https://summitai.com/forms/fill/demo-${sendForm.id}`;
       const fakeMsg =
-        `Hi ${patientFirst}! 😊 Smart Dental AI here. We have some paperwork for your upcoming visit. ` +
+        `Hi ${patientFirst}! 😊 Summit AI Services here. We have some paperwork for your upcoming visit. ` +
         `Please fill it out at your convenience:\n\n${fakeLink}\n\n` +
         `It only takes a few minutes and helps us make the most of your appointment time. See you soon!`;
       setSentPreview({ message: fakeMsg, link: fakeLink });
@@ -660,9 +660,9 @@ export default function FormsPage() {
                 Text message preview
               </p>
               <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-100 text-sm text-gray-700 leading-relaxed whitespace-pre-line">
-                Hi {sendForm.patient?.firstName}! 😊 Smart Dental AI here. We have some paperwork for your upcoming visit. Please fill it out at your convenience:
+                Hi {sendForm.patient?.firstName}! 😊 Summit AI Services here. We have some paperwork for your upcoming visit. Please fill it out at your convenience:
                 {'\n\n'}
-                <span className="text-indigo-600 underline">https://smartdentalai.onrender.com/forms/fill/...</span>
+                <span className="text-indigo-600 underline">https://summitai.com/forms/fill/...</span>
                 {'\n\n'}
                 It only takes a few minutes and helps us make the most of your appointment time. See you soon!
               </div>

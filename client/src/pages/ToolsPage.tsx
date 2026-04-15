@@ -308,7 +308,7 @@ export default function ToolsPage() {
             </span>
           </div>
           <p className="mt-1 text-sm text-gray-500">
-            Everything Smart Dental AI can do — click any card to jump in.
+            Everything Summit AI Services can do — click any card to jump in.
           </p>
         </div>
         {newCount > 0 && (

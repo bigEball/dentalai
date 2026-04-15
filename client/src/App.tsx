@@ -42,6 +42,7 @@ class ErrorBoundary extends Component<
   }
 }
 import AppLayout from '@/layouts/AppLayout';
+import LandingPage from '@/pages/LandingPage';
 import LoginPage from '@/pages/LoginPage';
 import AccessDeniedPage from '@/pages/AccessDeniedPage';
 import DashboardPage from '@/pages/DashboardPage';
@@ -81,6 +82,14 @@ function RequireAuth({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
+function HomeRoute() {
+  const { isAuthenticated } = useAuth();
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" replace />;
+  }
+  return <LandingPage />;
+}
+
 function RequireRole({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
   const location = useLocation();
@@ -96,6 +105,7 @@ function RequireRole({ children }: { children: React.ReactNode }) {
 function AppRoutes() {
   return (
     <Routes>
+      <Route path="/" element={<HomeRoute />} />
       <Route path="/login" element={<LoginPage />} />
       <Route
         element={
@@ -104,7 +114,6 @@ function AppRoutes() {
           </RequireAuth>
         }
       >
-        <Route index element={<Navigate to="/dashboard" replace />} />
         <Route path="dashboard" element={<RequireRole><DashboardPage /></RequireRole>} />
         <Route path="patients" element={<RequireRole><PatientsPage /></RequireRole>} />
         <Route path="notes" element={<RequireRole><AINotesPage /></RequireRole>} />
@@ -134,7 +143,7 @@ function AppRoutes() {
         <Route path="tools" element={<RequireRole><ToolsPage /></RequireRole>} />
         <Route path="settings" element={<RequireRole><SettingsPage /></RequireRole>} />
       </Route>
-      <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }

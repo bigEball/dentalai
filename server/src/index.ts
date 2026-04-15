@@ -34,6 +34,7 @@ import procurementRouter from './routes/procurement';
 import decisionSupportRouter from './routes/decisionSupport';
 import complianceRouter from './routes/compliance';
 import multiLocationRouter from './routes/multiLocation';
+import demoRequestsRouter from './routes/demoRequests';
 
 const app = express();
 const PORT = process.env.PORT ?? 3001;
@@ -112,6 +113,7 @@ app.use('/api/v1/procurement', procurementRouter);
 app.use('/api/v1/decision-support', decisionSupportRouter);
 app.use('/api/v1/compliance', complianceRouter);
 app.use('/api/v1/multi-location', multiLocationRouter);
+app.use('/api/v1/demo-requests', demoRequestsRouter);
 
 // SPA fallback — serve index.html for non-API routes in production
 if (process.env.NODE_ENV === 'production') {
@@ -137,7 +139,7 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Smart Dental AI server running on http://localhost:${PORT}`);
+  console.log(`Summit AI Services server running on http://localhost:${PORT}`);
 });
 
 export default app;

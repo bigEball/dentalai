@@ -632,7 +632,7 @@ export default function FollowUpsPage() {
               value={newFu.message}
               onChange={(e) => setNewFu({ ...newFu, message: e.target.value })}
               className="input min-h-[80px]"
-              placeholder="Hi [name], this is Bright Smiles Dental checking in after your procedure..."
+              placeholder="Hi [name], this is Summit Demo Practice checking in after your procedure..."
             />
           </div>
           <div className="flex gap-3 pt-2">

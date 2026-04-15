@@ -15,13 +15,13 @@ export interface AuthUser {
 const DEMO_USER: AuthUser = {
   id: 'demo-user',
   name: 'Dr. Sarah Mitchell',
-  email: 'demo@smartdentalai.com',
+  email: 'demo@summitai.com',
   role: 'doctor',
-  office: 'Bright Smiles Dental',
+  office: 'Summit Demo Practice',
 };
 
 const DEMO_CREDENTIALS = {
-  email: 'demo@smartdentalai.com',
+  email: 'demo@summitai.com',
   password: 'demo',
 };
 
@@ -76,9 +76,9 @@ export function switchDemoRole(role: DemoRole): AuthUser {
   const user: AuthUser = {
     id: `demo-${role}`,
     name: config.userName,
-    email: 'demo@smartdentalai.com',
+    email: 'demo@summitai.com',
     role,
-    office: 'Bright Smiles Dental',
+    office: 'Summit Demo Practice',
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
   localStorage.setItem(ROLE_KEY, role);
