@@ -83,10 +83,6 @@ function RequireAuth({ children }: { children: React.ReactNode }) {
 }
 
 function HomeRoute() {
-  const { isAuthenticated } = useAuth();
-  if (isAuthenticated) {
-    return <Navigate to="/dashboard" replace />;
-  }
   return <LandingPage />;
 }
 

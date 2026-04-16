@@ -50,7 +50,7 @@ export default function LoginPage() {
         {/* Logo */}
         <div className="flex flex-col items-center mb-8">
           <img
-            src="/logo.jpg"
+            src="/logo.png"
             alt="Summit AI Services"
             className="h-20 w-20 rounded-2xl object-cover mb-4 shadow-lg shadow-indigo-500/30"
           />
