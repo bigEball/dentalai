@@ -450,7 +450,7 @@ export default function LandingPage() {
                 Helping dental offices run more efficiently — without disrupting the way they already work.
               </p>
               <p className="text-sm text-gray-500 mt-3">
-                contact@summitai.com
+                contact@summitaisoftware.com
               </p>
             </div>
 

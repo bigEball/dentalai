@@ -15,13 +15,13 @@ export interface AuthUser {
 const DEMO_USER: AuthUser = {
   id: 'demo-user',
   name: 'Dr. Sarah Mitchell',
-  email: 'demo@summitai.com',
+  email: 'demo@summitaisoftware.com',
   role: 'doctor',
   office: 'Summit Demo Practice',
 };
 
 const DEMO_CREDENTIALS = {
-  email: 'demo@summitai.com',
+  email: 'demo@summitaisoftware.com',
   password: 'demo',
 };
 
@@ -76,7 +76,7 @@ export function switchDemoRole(role: DemoRole): AuthUser {
   const user: AuthUser = {
     id: `demo-${role}`,
     name: config.userName,
-    email: 'demo@summitai.com',
+    email: 'demo@summitaisoftware.com',
     role,
     office: 'Summit Demo Practice',
   };
