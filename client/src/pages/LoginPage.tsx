@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Eye, EyeOff, Loader2 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
@@ -48,13 +48,13 @@ export default function LoginPage() {
 
       <div className="relative w-full max-w-md">
         {/* Back to landing */}
-        <Link
-          to="/"
+        <a
+          href="/"
           className="absolute -top-10 left-0 flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-300 transition-colors"
         >
           <ArrowLeft size={13} />
           Back to main site
-        </Link>
+        </a>
 
         {/* Logo */}
         <div className="flex flex-col items-center mb-8">
@@ -150,6 +150,14 @@ export default function LoginPage() {
             <p className="text-xs text-indigo-400 font-medium mb-0.5">Demo credentials</p>
             <p className="text-xs text-gray-500 font-mono">demo@summitaisoftware.com / demo</p>
           </div>
+
+          <a
+            href="/"
+            className="mt-4 w-full py-2.5 border border-white/10 hover:border-white/20 text-gray-300 hover:text-white text-sm font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
+          >
+            <ArrowLeft size={15} />
+            Back to main site
+          </a>
         </div>
 
         <p className="mt-6 text-center text-xs text-gray-600">

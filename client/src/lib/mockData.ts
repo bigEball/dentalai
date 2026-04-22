@@ -34,19 +34,43 @@ const pt = (i: number) => ({ id: PATIENTS[i]!.id, firstName: PATIENTS[i]!.firstN
 
 // ─── Dashboard ────────────────────────────────────────────────────────────────
 
+const DASHBOARD_ACTIVITY = [
+  { id: 'act-001', action: 'approve_note', entityType: 'ClinicalNote', entityId: 'note-001', description: 'Clinical note approved for Margaret Harrington', userId: 'demo-user', timestamp: '2026-04-20T14:05:00Z' },
+  { id: 'act-002', action: 'submit_claim', entityType: 'InsuranceClaim', entityId: 'claim-004', description: 'Claim submitted for Patricia Monroe to Cigna Dental', userId: 'demo-user', timestamp: '2026-04-20T13:42:00Z' },
+  { id: 'act-003', action: 'send_statement', entityType: 'Balance', entityId: 'bal-002', description: 'Statement sent to Thomas Brennan', userId: 'demo-user', timestamp: '2026-04-20T11:20:00Z' },
+  { id: 'act-004', action: 'create_treatment_plan', entityType: 'TreatmentPlan', entityId: 'tp-004', description: 'Treatment plan created for Robert Kessler - Implant #19', userId: 'demo-user', timestamp: '2026-04-20T09:15:00Z' },
+  { id: 'act-005', action: 'verify_insurance', entityType: 'InsurancePlan', entityId: 'plan-006', description: 'Insurance verified for David Nguyen - Delta Dental', userId: 'demo-user', timestamp: '2026-04-19T16:50:00Z' },
+];
+
 const DASHBOARD_STATS = {
-  todayAppointments: 24,
-  pendingNotes: 7,
-  pendingClaims: 5,
-  outstandingBalances: 18420,
-  recallsDue: 23,
-  newPatientsThisMonth: 14,
-  productionThisMonth: 142350,
-  collectionsThisMonth: 128420,
-  collectionRate: 90.2,
-  caseAcceptanceRate: 72,
-  hygieneUtilization: 88,
-  recentPatients: PATIENTS.slice(0, 5),
+  totalPendingClaims: 12,
+  totalOutstandingBalance: 24850,
+  patientsOverdueForHygiene: 47,
+  notesAwaitingApproval: 8,
+  recentActivity: DASHBOARD_ACTIVITY,
+  claimsByStatus: {
+    draft: 4,
+    pending: 3,
+    submitted: 5,
+    approved: 18,
+    denied: 2,
+    resubmit: 1,
+  },
+  balancesByCollectionStatus: {
+    current: 8,
+    overdue_30: 5,
+    overdue_60: 3,
+    overdue_90: 2,
+    collections: 1,
+  },
+  recoveredRevenueThisMonth: 51300,
+  treatmentPlansProposed: 6,
+  pendingPreAuths: 3,
+  lowStockItems: 2,
+  pendingFollowUps: 4,
+  pendingForms: 1,
+  activePaymentPlans: 5,
+  openReferrals: 2,
 };
 
 // ─── Insurance ────────────────────────────────────────────────────────────────
