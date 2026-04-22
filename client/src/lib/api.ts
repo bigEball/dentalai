@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getMockForPath } from './mockData';
 import type {
   Patient,
   Provider,
@@ -27,6 +28,38 @@ const api = axios.create({
   headers: { 'Content-Type': 'application/json' },
   timeout: 15000,
 });
+
+// If the backend is unreachable (static-only deploy), serve mock data
+// from the seed so every page renders a realistic demo state.
+api.interceptors.response.use(
+  response => response,
+  error => {
+    const url: string = error?.config?.url ?? '';
+    const method: string = (error?.config?.method ?? 'get').toLowerCase();
+    const mock = getMockForPath(url);
+
+    if (mock !== undefined) {
+      // For mutations, echo the request body (or the mock) so pages that
+      // read the result keep working in demo mode.
+      if (method !== 'get') {
+        let payload: unknown = mock;
+        try {
+          const body = error.config?.data;
+          if (typeof body === 'string' && body.length > 0) {
+            payload = { ...(mock as object), ...JSON.parse(body), id: `mock-${Date.now()}` };
+          }
+        } catch {
+          /* fall through to mock */
+        }
+        return Promise.resolve({ data: payload, status: 200, statusText: 'OK', headers: {}, config: error.config });
+      }
+      return Promise.resolve({ data: mock, status: 200, statusText: 'OK', headers: {}, config: error.config });
+    }
+
+    // No mock — let the caller see the original error.
+    return Promise.reject(error);
+  }
+);
 
 // ─── Patients ────────────────────────────────────────────────────────────────
 

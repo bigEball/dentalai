@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Eye, EyeOff, Loader2 } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ArrowLeft, Eye, EyeOff, Loader2 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
 export default function LoginPage() {
@@ -47,6 +47,15 @@ export default function LoginPage() {
       />
 
       <div className="relative w-full max-w-md">
+        {/* Back to landing */}
+        <Link
+          to="/"
+          className="absolute -top-10 left-0 flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-300 transition-colors"
+        >
+          <ArrowLeft size={13} />
+          Back to main site
+        </Link>
+
         {/* Logo */}
         <div className="flex flex-col items-center mb-8">
           <img
@@ -139,7 +148,7 @@ export default function LoginPage() {
             style={{ backgroundColor: 'rgba(99,102,241,0.08)', borderColor: 'rgba(99,102,241,0.2)' }}
           >
             <p className="text-xs text-indigo-400 font-medium mb-0.5">Demo credentials</p>
-            <p className="text-xs text-gray-500 font-mono">demo@summitai.com / demo</p>
+            <p className="text-xs text-gray-500 font-mono">demo@summitaisoftware.com / demo</p>
           </div>
         </div>
 
