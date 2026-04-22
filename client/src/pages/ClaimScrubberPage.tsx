@@ -351,10 +351,10 @@ export default function ClaimScrubberPage() {
         <div>
           <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
             <ShieldAlert className="text-indigo-600" size={28} />
-            AI Claim Scrubber
+            Claim Review
           </h1>
           <p className="text-sm text-gray-500 mt-1">
-            Pre-submission denial prevention powered by payer intelligence
+            Pre-submission denial prevention using payer patterns and coding rules
           </p>
         </div>
         <button

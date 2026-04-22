@@ -79,7 +79,7 @@ const TOOLS: Tool[] = [
     category: 'ai',
   },
   {
-    label: 'Claim Scrubber',
+    label: 'Claim Review',
     description: 'Pre-submission claim validation that catches coding errors, missing attachments, and payer-specific rules.',
     icon: ShieldAlert,
     route: '/claim-scrubber',
@@ -178,7 +178,7 @@ const TOOLS: Tool[] = [
     isNew: true,
   },
   {
-    label: 'Communications',
+    label: 'Patient Interaction',
     description: 'Unified inbox for patient communications across SMS, email, phone, and portal messages.',
     icon: MessageSquare,
     route: '/communications',
@@ -213,8 +213,8 @@ const TOOLS: Tool[] = [
     category: 'office',
   },
   {
-    label: 'Procurement Intelligence',
-    description: 'AI-powered purchasing recommendations, vendor comparison, bulk discount detection, and spend analytics.',
+    label: 'Purchasing',
+    description: 'Supply forecasting, vendor comparison, bulk discount detection, and spend analytics.',
     icon: ShoppingCart,
     route: '/procurement',
     category: 'office',

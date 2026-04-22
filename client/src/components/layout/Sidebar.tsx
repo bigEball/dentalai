@@ -51,7 +51,7 @@ const MAIN_NAV = [
 
 const AI_NAV = [
   { to: '/notes', label: 'AI Notes', icon: FileText },
-  { to: '/claim-scrubber', label: 'Claim Scrubber', icon: ShieldAlert },
+  { to: '/claim-scrubber', label: 'Claim Review', icon: ShieldAlert },
   { to: '/patient-retention', label: 'Patient Retention', icon: TrendingDown },
   { to: '/nurture-sequences', label: 'Treatment Follow-Up', icon: HeartHandshake },
   { to: '/decision-support', label: 'Clinical AI', icon: Stethoscope },
@@ -67,12 +67,12 @@ const AI_NAV = [
 
 const OFFICE_NAV = [
   { to: '/smart-scheduling', label: 'Smart Scheduling', icon: CalendarClock },
-  { to: '/communications', label: 'Communications', icon: MessageSquare },
+  { to: '/communications', label: 'Patient Interaction', icon: MessageSquare },
   { to: '/follow-ups', label: 'Follow-Ups', icon: Bell },
   { to: '/referrals', label: 'Referrals', icon: ArrowRightLeft },
   { to: '/forms', label: 'Patient Forms', icon: FileCheck },
   { to: '/inventory', label: 'Inventory', icon: Package },
-  { to: '/procurement', label: 'Procurement AI', icon: ShoppingCart },
+  { to: '/procurement', label: 'Purchasing', icon: ShoppingCart },
   { to: '/reports', label: 'Reports', icon: BarChart3 },
   { to: '/patient-scores', label: 'Patient Scores', icon: Gauge },
 ];

@@ -263,7 +263,7 @@ export default function CommunicationsPage() {
         <div>
           <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
             <MessageSquare size={24} className="text-indigo-600" />
-            Communications
+            Patient Interaction
           </h1>
           <p className="mt-1 text-sm text-gray-500">
             All patient messages across every channel

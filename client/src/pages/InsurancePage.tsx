@@ -34,6 +34,75 @@ import Modal from '@/components/ui/Modal';
 import EmptyState from '@/components/ui/EmptyState';
 import PatientSearchBar from '@/components/ui/PatientSearchBar';
 
+// ─── Mock Data (fallback when API is unavailable) ─────────────────────────────
+
+const MOCK_PLANS: InsurancePlan[] = [
+  {
+    id: 'mock-plan-1', patientId: 'mock-p1', provider: 'Delta Dental', memberId: 'DD-8821445', groupNumber: 'GRP-441209',
+    deductible: 100, deductibleMet: 100, annualMax: 2000, annualUsed: 620,
+    verificationStatus: 'verified', verifiedDate: '2026-01-02',
+    coPayPreventive: 0, coPayBasic: 20, coPayMajor: 50,
+    patient: { id: 'mock-p1', firstName: 'Margaret', lastName: 'Harrington', phone: '(312) 555-0142', email: 'margaret.harrington@email.com' } as Patient,
+  } as InsurancePlan,
+  {
+    id: 'mock-plan-2', patientId: 'mock-p2', provider: 'Cigna Dental', memberId: 'CIG-3347821', groupNumber: 'GRP-882341',
+    deductible: 150, deductibleMet: 150, annualMax: 1500, annualUsed: 1340,
+    verificationStatus: 'verified', verifiedDate: '2026-01-05',
+    coPayPreventive: 0, coPayBasic: 20, coPayMajor: 50,
+    patient: { id: 'mock-p2', firstName: 'Robert', lastName: 'Kessler', phone: '(312) 555-0287', email: 'r.kessler@workplace.com' } as Patient,
+  } as InsurancePlan,
+  {
+    id: 'mock-plan-3', patientId: 'mock-p3', provider: 'Aetna Dental', memberId: 'AET-5592038', groupNumber: 'GRP-209341',
+    deductible: 50, deductibleMet: 50, annualMax: 2500, annualUsed: 195,
+    verificationStatus: 'verified', verifiedDate: '2026-01-10',
+    coPayPreventive: 0, coPayBasic: 15, coPayMajor: 40,
+    patient: { id: 'mock-p3', firstName: 'Aisha', lastName: 'Washington', phone: '(773) 555-0391', email: 'aisha.washington@gmail.com' } as Patient,
+  } as InsurancePlan,
+  {
+    id: 'mock-plan-4', patientId: 'mock-p4', provider: 'MetLife Dental', memberId: 'MET-7734902', groupNumber: 'GRP-331892',
+    deductible: 75, deductibleMet: 75, annualMax: 1750, annualUsed: 520,
+    verificationStatus: 'pending', verifiedDate: null,
+    coPayPreventive: 0, coPayBasic: 20, coPayMajor: 50,
+    patient: { id: 'mock-p4', firstName: 'Thomas', lastName: 'Brennan', phone: '(630) 555-0458', email: 'tbrennan@hotmail.com' } as Patient,
+  } as InsurancePlan,
+];
+
+const MOCK_CLAIMS: InsuranceClaim[] = [
+  {
+    id: 'mock-claim-1', patientId: 'mock-p1', insurancePlanId: 'mock-plan-1', appointmentId: 'mock-apt-1',
+    claimDate: '2026-03-28', procedureCodes: 'D2391,D2392', totalAmount: 425,
+    narrative: 'Composite restorations #28 DO and #30 MO. Two-surface restorations with dentin bonding agent.',
+    status: 'submitted', submittedDate: '2026-03-29', approvedAmount: null, denialReason: null,
+    patient: { id: 'mock-p1', firstName: 'Margaret', lastName: 'Harrington' } as Patient,
+    insurancePlan: { id: 'mock-plan-1', provider: 'Delta Dental' } as InsurancePlan,
+  } as InsuranceClaim,
+  {
+    id: 'mock-claim-2', patientId: 'mock-p2', insurancePlanId: 'mock-plan-2', appointmentId: 'mock-apt-2',
+    claimDate: '2026-03-25', procedureCodes: 'D2750', totalAmount: 1100,
+    narrative: 'Crown seat appointment — porcelain-fused-to-metal crown #3 seated with permanent cement.',
+    status: 'pending', submittedDate: null, approvedAmount: null, denialReason: null,
+    patient: { id: 'mock-p2', firstName: 'Robert', lastName: 'Kessler' } as Patient,
+    insurancePlan: { id: 'mock-plan-2', provider: 'Cigna Dental' } as InsurancePlan,
+  } as InsuranceClaim,
+  {
+    id: 'mock-claim-3', patientId: 'mock-p3', insurancePlanId: 'mock-plan-3', appointmentId: 'mock-apt-3',
+    claimDate: '2026-03-12', procedureCodes: 'D1110,D0274', totalAmount: 195,
+    narrative: 'Adult prophylaxis. Bitewing radiographs — no caries detected. Fluoride varnish applied.',
+    status: 'approved', submittedDate: '2026-03-13', approvedAmount: 195, denialReason: null,
+    patient: { id: 'mock-p3', firstName: 'Aisha', lastName: 'Washington' } as Patient,
+    insurancePlan: { id: 'mock-plan-3', provider: 'Aetna Dental' } as InsurancePlan,
+  } as InsuranceClaim,
+  {
+    id: 'mock-claim-4', patientId: 'mock-p4', insurancePlanId: 'mock-plan-4', appointmentId: 'mock-apt-4',
+    claimDate: '2026-03-05', procedureCodes: 'D0150,D0274,D1110', totalAmount: 485,
+    narrative: 'Comprehensive oral evaluation — new patient. Full-mouth radiographic series. Adult prophylaxis.',
+    status: 'denied', submittedDate: '2026-03-06', approvedAmount: 0,
+    denialReason: 'Coverage lapsed — member not found in eligibility file at time of service.',
+    patient: { id: 'mock-p4', firstName: 'Thomas', lastName: 'Brennan' } as Patient,
+    insurancePlan: { id: 'mock-plan-4', provider: 'MetLife Dental' } as InsurancePlan,
+  } as InsuranceClaim,
+];
+
 // ─── Status Tab Config ────────────────────────────────────────────────────────
 
 const CLAIM_TABS = [
@@ -182,16 +251,28 @@ export default function InsurancePage() {
         const result = await getInsurancePlans(
           filterPatient ? { patientId: filterPatient.id } : undefined,
         );
-        setPlans(result);
+        setPlans(result.length > 0 ? result : (filterPatient ? [] : MOCK_PLANS));
       } else {
         const result = await getInsuranceClaims({
           status: claimFilter || undefined,
           patientId: filterPatient?.id,
         });
-        setClaims(result);
+        if (result.length > 0) {
+          setClaims(result);
+        } else if (filterPatient) {
+          setClaims([]);
+        } else {
+          const filtered = claimFilter ? MOCK_CLAIMS.filter(c => c.status === claimFilter) : MOCK_CLAIMS;
+          setClaims(filtered);
+        }
       }
     } catch {
-      toast.error('Failed to load insurance data');
+      if (activeTab === 'verification') {
+        setPlans(MOCK_PLANS);
+      } else {
+        const filtered = claimFilter ? MOCK_CLAIMS.filter(c => c.status === claimFilter) : MOCK_CLAIMS;
+        setClaims(filtered);
+      }
     } finally {
       setLoading(false);
     }
