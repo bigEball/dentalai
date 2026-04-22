@@ -31,31 +31,55 @@ const api = axios.create({
 
 // If the backend is unreachable (static-only deploy), serve mock data
 // from the seed so every page renders a realistic demo state.
+function resolveMock(url: string, method: string, requestBody?: unknown): { data: unknown } | undefined {
+  const mock = getMockForPath(url);
+  if (mock === undefined) return undefined;
+
+  if (method !== 'get') {
+    let payload: unknown = mock;
+    try {
+      if (typeof requestBody === 'string' && requestBody.length > 0) {
+        payload = { ...(mock as object), ...JSON.parse(requestBody), id: `mock-${Date.now()}` };
+      } else if (requestBody && typeof requestBody === 'object') {
+        payload = { ...(mock as object), ...(requestBody as object), id: `mock-${Date.now()}` };
+      }
+    } catch {
+      /* use mock as-is */
+    }
+    return { data: payload };
+  }
+
+  return { data: mock };
+}
+
 api.interceptors.response.use(
-  response => response,
+  response => {
+    // Netlify's SPA fallback could return index.html (HTML, 200) for an
+    // unknown /api/v1/* path. If the response looks like HTML when we
+    // expected JSON, treat it as a miss and fall back to mock data.
+    const contentType = String(response.headers?.['content-type'] ?? '');
+    const looksLikeHtml =
+      contentType.includes('text/html') ||
+      (typeof response.data === 'string' && response.data.trim().startsWith('<'));
+
+    if (looksLikeHtml) {
+      const url: string = response.config?.url ?? '';
+      const method: string = (response.config?.method ?? 'get').toLowerCase();
+      const mock = resolveMock(url, method, response.config?.data);
+      if (mock !== undefined) {
+        return { ...response, ...mock, status: 200, statusText: 'OK' };
+      }
+    }
+    return response;
+  },
   error => {
     const url: string = error?.config?.url ?? '';
     const method: string = (error?.config?.method ?? 'get').toLowerCase();
-    const mock = getMockForPath(url);
+    const mock = resolveMock(url, method, error?.config?.data);
 
     if (mock !== undefined) {
-      // For mutations, echo the request body (or the mock) so pages that
-      // read the result keep working in demo mode.
-      if (method !== 'get') {
-        let payload: unknown = mock;
-        try {
-          const body = error.config?.data;
-          if (typeof body === 'string' && body.length > 0) {
-            payload = { ...(mock as object), ...JSON.parse(body), id: `mock-${Date.now()}` };
-          }
-        } catch {
-          /* fall through to mock */
-        }
-        return Promise.resolve({ data: payload, status: 200, statusText: 'OK', headers: {}, config: error.config });
-      }
-      return Promise.resolve({ data: mock, status: 200, statusText: 'OK', headers: {}, config: error.config });
+      return Promise.resolve({ ...mock, status: 200, statusText: 'OK', headers: {}, config: error.config });
     }
-
     // No mock — let the caller see the original error.
     return Promise.reject(error);
   }

@@ -1,11 +1,23 @@
 [build]
   base    = "client"
   command = "npm install && npm run build"
-  publish = "client/dist"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
 
 # No backend proxy — the client's axios interceptor falls back to
 # bundled mock data when /api/v1/* requests fail, so the app runs as a
 # pure static demo on Netlify with no Node server required.
+
+# Stop the SPA fallback from swallowing API requests and returning
+# index.html with HTTP 200 (which breaks the mock-fallback detection in
+# the client). /api/* must 404 so axios throws and the interceptor
+# serves the mock.
+[[redirects]]
+  from   = "/api/*"
+  to     = "/_api_not_found"
+  status = 404
 
 [[redirects]]
   from   = "/*"
