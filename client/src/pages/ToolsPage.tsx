@@ -213,7 +213,7 @@ const TOOLS: Tool[] = [
     category: 'office',
   },
   {
-    label: 'Purchasing',
+    label: 'Inventory Management',
     description: 'Supply forecasting, vendor comparison, bulk discount detection, and spend analytics.',
     icon: ShoppingCart,
     route: '/procurement',

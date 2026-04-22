@@ -72,7 +72,7 @@ const OFFICE_NAV = [
   { to: '/referrals', label: 'Referrals', icon: ArrowRightLeft },
   { to: '/forms', label: 'Patient Forms', icon: FileCheck },
   { to: '/inventory', label: 'Inventory', icon: Package },
-  { to: '/procurement', label: 'Purchasing', icon: ShoppingCart },
+  { to: '/procurement', label: 'Inventory Management', icon: ShoppingCart },
   { to: '/reports', label: 'Reports', icon: BarChart3 },
   { to: '/patient-scores', label: 'Patient Scores', icon: Gauge },
 ];
