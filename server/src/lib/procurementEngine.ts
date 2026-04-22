@@ -657,7 +657,7 @@ export async function getExpiryAlerts(): Promise<{
 }
 
 /**
- * Procurement dashboard stats.
+ * Inventory management dashboard stats.
  */
 export async function getProcurementDashboard(): Promise<{
   itemsBelowReorder: number;

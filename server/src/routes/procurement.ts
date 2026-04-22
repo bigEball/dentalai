@@ -126,7 +126,7 @@ router.get('/dashboard', async (_req: Request, res: Response) => {
     res.json(result);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Failed to fetch procurement dashboard' });
+    res.status(500).json({ error: 'Failed to fetch inventory management dashboard' });
   }
 });
 

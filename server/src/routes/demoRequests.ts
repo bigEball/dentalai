@@ -12,6 +12,7 @@ interface DemoRequest {
   email: string;
   practice: string;
   phone: string;
+  locations: string;
   providers: string;
   source: string;
   message: string;
@@ -35,7 +36,7 @@ function saveRequests(requests: DemoRequest[]): void {
 
 // POST /api/v1/demo-requests — submit a demo booking request
 router.post('/', (req: Request, res: Response) => {
-  const { name, email, practice, phone, providers, source, message } = req.body as Partial<DemoRequest>;
+  const { name, email, practice, phone, locations, providers, source, message } = req.body as Partial<DemoRequest>;
 
   if (!name || !email || !practice) {
     res.status(400).json({ error: 'name, email, and practice are required' });
@@ -48,6 +49,7 @@ router.post('/', (req: Request, res: Response) => {
     email: String(email).trim().toLowerCase(),
     practice: String(practice).trim(),
     phone: phone ? String(phone).trim() : '',
+    locations: locations ? String(locations) : '',
     providers: providers ? String(providers) : '',
     source: source ? String(source) : '',
     message: message ? String(message).trim() : '',
@@ -66,6 +68,20 @@ router.post('/', (req: Request, res: Response) => {
 // GET /api/v1/demo-requests — list all requests (admin use)
 router.get('/', (_req: Request, res: Response) => {
   res.json(loadRequests());
+});
+
+// DELETE /api/v1/demo-requests/:id — remove a request from the admin list
+router.delete('/:id', (req: Request, res: Response) => {
+  const all = loadRequests();
+  const next = all.filter((entry) => entry.id !== req.params.id);
+
+  if (next.length === all.length) {
+    res.status(404).json({ error: 'Demo request not found' });
+    return;
+  }
+
+  saveRequests(next);
+  res.json({ success: true });
 });
 
 export default router;

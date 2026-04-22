@@ -220,33 +220,34 @@ export default function DashboardPage() {
         <p className="mt-1 text-sm text-gray-500">{getTodayFormatted()}</p>
       </div>
 
-      {/* How it works */}
+      {/* Tier overview */}
       <div className="bg-indigo-50/50 border border-indigo-100 rounded-xl p-4 mb-6">
-        <p className="text-xs font-semibold text-indigo-900 mb-2">How it works</p>
+        <p className="text-xs font-semibold text-indigo-900 mb-1">{roleConfig.label}</p>
+        <p className="mb-3 text-xs text-indigo-800">{roleConfig.summary}</p>
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
           <div className="flex items-start gap-2">
             <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">1</span>
-            <p className="text-xs text-indigo-800">Open your dashboard each morning to see today's key metrics at a glance</p>
+            <p className="text-xs text-indigo-800">Open your dashboard each morning to see the metrics included in this tier</p>
           </div>
           <div className="flex items-start gap-2">
             <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">2</span>
-            <p className="text-xs text-indigo-800">Review pending items — notes to approve, open referrals, and pre-auths</p>
+            <p className="text-xs text-indigo-800">Review the highest-priority tasks for this package</p>
           </div>
           <div className="flex items-start gap-2">
             <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">3</span>
-            <p className="text-xs text-indigo-800">Click any stat card to jump directly to that module and take action</p>
+            <p className="text-xs text-indigo-800">Click any stat card to jump directly to the included module</p>
           </div>
           <div className="flex items-start gap-2">
             <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">4</span>
-            <p className="text-xs text-indigo-800">Track production and activity trends throughout the day</p>
+            <p className="text-xs text-indigo-800">Use All Tools to see exactly what the tier unlocks</p>
           </div>
         </div>
       </div>
 
-      {/* Stat cards — role-tailored */}
+      {/* Stat cards — tier-tailored */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
-        {/* ── Doctor stat cards ── */}
-        {currentRole === 'doctor' && (
+        {/* ── Gold stat cards ── */}
+        {currentRole === 'gold' && (
           <button
             onClick={() => navigate('/notes')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -273,7 +274,7 @@ export default function DashboardPage() {
           </button>
         )}
 
-        {currentRole === 'doctor' && (
+        {currentRole === 'gold' && (
           <button
             onClick={() => navigate('/referrals')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -296,7 +297,7 @@ export default function DashboardPage() {
           </button>
         )}
 
-        {currentRole === 'doctor' && (
+        {currentRole === 'gold' && (
           <button
             onClick={() => navigate('/treatment-plans')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -319,7 +320,7 @@ export default function DashboardPage() {
           </button>
         )}
 
-        {currentRole === 'doctor' && (
+        {currentRole === 'gold' && (
           <button
             onClick={() => navigate('/decision-support')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -346,35 +347,35 @@ export default function DashboardPage() {
           </button>
         )}
 
-        {/* ── Office stat cards ── */}
-        {currentRole === 'office' && (
+        {/* ── Silver stat cards ── */}
+        {currentRole === 'silver' && (
           <button
-            onClick={() => navigate('/insurance')}
+            onClick={() => navigate('/nurture-sequences')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/80 to-transparent pointer-events-none" />
             <div className="relative">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                  Pending Claims
+                  Treatment Follow-Up
                 </span>
                 <div className="p-2.5 rounded-xl bg-indigo-100 text-indigo-600">
                   <Shield size={20} />
                 </div>
               </div>
               <p className="text-3xl font-bold text-gray-900 tabular-nums">
-                {s.totalPendingClaims}
+                {s.treatmentPlansProposed}
               </p>
-              <p className="mt-1 text-xs text-gray-400">Awaiting submission or approval</p>
+              <p className="mt-1 text-xs text-gray-400">Unaccepted treatment plans in outreach</p>
               <p className="mt-2 flex items-center gap-1 text-xs font-medium text-red-500">
                 <TrendingUp size={13} />
-                +2 from last week
+                3 need attention
               </p>
             </div>
           </button>
         )}
 
-        {currentRole === 'office' && (
+        {currentRole === 'silver' && (
           <button
             onClick={() => navigate('/billing')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -401,7 +402,7 @@ export default function DashboardPage() {
           </button>
         )}
 
-        {currentRole === 'office' && (
+        {currentRole === 'silver' && (
           <button
             onClick={() => navigate('/recall')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -428,8 +429,8 @@ export default function DashboardPage() {
           </button>
         )}
 
-        {/* Office: Pending Forms */}
-        {currentRole === 'office' && (
+        {/* Silver: Pending Forms */}
+        {currentRole === 'silver' && (
           <button
             onClick={() => navigate('/forms')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -452,8 +453,8 @@ export default function DashboardPage() {
           </button>
         )}
 
-        {/* Assistant: Low Stock Items */}
-        {currentRole === 'assistant' && (
+        {/* Bronze: Low Stock Items */}
+        {currentRole === 'bronze' && (
           <button
             onClick={() => navigate('/inventory')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -476,8 +477,8 @@ export default function DashboardPage() {
           </button>
         )}
 
-        {/* Assistant: Pending Follow-Ups */}
-        {currentRole === 'assistant' && (
+        {/* Bronze: Pending Follow-Ups */}
+        {currentRole === 'bronze' && (
           <button
             onClick={() => navigate('/follow-ups')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -500,8 +501,8 @@ export default function DashboardPage() {
           </button>
         )}
 
-        {/* Assistant: Pending Forms */}
-        {currentRole === 'assistant' && (
+        {/* Bronze: Pending Forms */}
+        {currentRole === 'bronze' && (
           <button
             onClick={() => navigate('/forms')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -524,8 +525,8 @@ export default function DashboardPage() {
           </button>
         )}
 
-        {/* Assistant: Today's Schedule */}
-        {currentRole === 'assistant' && (
+        {/* Bronze: Today's Schedule */}
+        {currentRole === 'bronze' && (
           <button
             onClick={() => navigate('/smart-scheduling')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -549,8 +550,8 @@ export default function DashboardPage() {
         )}
       </div>
 
-      {/* Charts row — doctor & office only */}
-      {(currentRole === 'doctor' || currentRole === 'office') && (
+      {/* Charts row — Gold only */}
+      {currentRole === 'gold' && (
       <div className="grid grid-cols-1 xl:grid-cols-5 gap-5">
         {/* Revenue area chart */}
         <div className="card p-6 xl:col-span-3">
@@ -626,8 +627,8 @@ export default function DashboardPage() {
       <div>
         <h3 className="text-base font-semibold text-gray-900 mb-4">Quick Actions</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-          {/* ── Doctor quick actions ── */}
-          {currentRole === 'doctor' && (
+          {/* ── Gold quick actions ── */}
+          {currentRole === 'gold' && (
             <button
               onClick={() => { navigate('/notes'); toast.success('Opening clinical notes...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-purple-200 transition-all group"
@@ -646,7 +647,7 @@ export default function DashboardPage() {
             </button>
           )}
 
-          {currentRole === 'doctor' && (
+          {currentRole === 'gold' && (
             <button
               onClick={() => { navigate('/referrals'); toast.success('Opening referrals...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-indigo-200 transition-all group"
@@ -665,7 +666,7 @@ export default function DashboardPage() {
             </button>
           )}
 
-          {currentRole === 'doctor' && (
+          {currentRole === 'gold' && (
             <button
               onClick={() => { navigate('/treatment-plans'); toast.success('Opening treatment plans...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-emerald-200 transition-all group"
@@ -684,7 +685,7 @@ export default function DashboardPage() {
             </button>
           )}
 
-          {currentRole === 'doctor' && (
+          {currentRole === 'gold' && (
             <button
               onClick={() => { navigate('/perio'); toast.success('Opening perio charting...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-amber-200 transition-all group"
@@ -703,10 +704,10 @@ export default function DashboardPage() {
             </button>
           )}
 
-          {/* ── Office quick actions ── */}
-          {currentRole === 'office' && (
+          {/* ── Silver quick actions ── */}
+          {currentRole === 'silver' && (
             <button
-              onClick={() => { navigate('/insurance'); toast.success('Opening insurance verification...'); }}
+              onClick={() => { navigate('/billing'); toast.success('Opening billing...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-indigo-200 transition-all group"
             >
               <div className="flex items-start gap-4">
@@ -715,15 +716,15 @@ export default function DashboardPage() {
                 </div>
                 <div className="min-w-0">
                   <p className="text-sm font-semibold text-gray-900 group-hover:text-indigo-700 transition-colors">
-                    Verify Insurance
+                    Billing Workflows
                   </p>
-                  <p className="text-xs text-gray-400 mt-0.5">Check coverage and eligibility</p>
+                  <p className="text-xs text-gray-400 mt-0.5">Review balances and collections</p>
                 </div>
               </div>
             </button>
           )}
 
-          {currentRole === 'office' && (
+          {currentRole === 'silver' && (
             <button
               onClick={() => { navigate('/recall'); toast.success('Opening patient recall...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-amber-200 transition-all group"
@@ -742,8 +743,8 @@ export default function DashboardPage() {
             </button>
           )}
 
-          {/* Office only */}
-          {currentRole === 'office' && (
+          {/* Silver only */}
+          {currentRole === 'silver' && (
             <button
               onClick={() => { navigate('/smart-scheduling'); toast.success('Opening scheduling...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-purple-200 transition-all group"
@@ -762,7 +763,7 @@ export default function DashboardPage() {
             </button>
           )}
 
-          {currentRole === 'office' && (
+          {currentRole === 'silver' && (
             <button
               onClick={() => { navigate('/communications'); toast.success('Opening messages...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-emerald-200 transition-all group"
@@ -781,8 +782,8 @@ export default function DashboardPage() {
             </button>
           )}
 
-          {/* Assistant */}
-          {currentRole === 'assistant' && (
+          {/* Bronze */}
+          {currentRole === 'bronze' && (
             <button
               onClick={() => { navigate('/inventory'); toast.success('Opening inventory...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-indigo-200 transition-all group"
@@ -801,9 +802,9 @@ export default function DashboardPage() {
             </button>
           )}
 
-          {currentRole === 'assistant' && (
+          {currentRole === 'bronze' && (
             <button
-              onClick={() => { navigate('/procurement'); toast.success('Opening procurement...'); }}
+              onClick={() => { navigate('/follow-ups'); toast.success('Opening follow-ups...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-emerald-200 transition-all group"
             >
               <div className="flex items-start gap-4">
@@ -812,15 +813,15 @@ export default function DashboardPage() {
                 </div>
                 <div className="min-w-0">
                   <p className="text-sm font-semibold text-gray-900 group-hover:text-emerald-700 transition-colors">
-                    Purchase Orders
+                    Patient Follow-Ups
                   </p>
-                  <p className="text-xs text-gray-400 mt-0.5">Review and approve supply orders</p>
+                  <p className="text-xs text-gray-400 mt-0.5">Complete post-visit outreach tasks</p>
                 </div>
               </div>
             </button>
           )}
 
-          {currentRole === 'assistant' && (
+          {currentRole === 'bronze' && (
             <button
               onClick={() => { navigate('/compliance'); toast.success('Opening compliance...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-amber-200 transition-all group"
@@ -839,7 +840,7 @@ export default function DashboardPage() {
             </button>
           )}
 
-          {currentRole === 'assistant' && (
+          {currentRole === 'bronze' && (
             <button
               onClick={() => { navigate('/smart-scheduling'); toast.success('Opening schedule...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-purple-200 transition-all group"
@@ -860,8 +861,8 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Bottom row — doctor & office only */}
-      {(currentRole === 'doctor' || currentRole === 'office') && (
+      {/* Bottom row — Silver and Gold only */}
+      {(currentRole === 'gold' || currentRole === 'silver') && (
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-5">
         {/* Top balances */}
         <div className="card xl:col-span-2">

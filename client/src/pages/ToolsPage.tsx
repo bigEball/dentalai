@@ -31,8 +31,11 @@ import {
   Stethoscope,
   ClipboardCheck,
   Sparkles,
+  Bot,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/context/AuthContext';
+import { isRouteAllowed, ROLES, resolveRole } from '@/lib/roles';
 
 type Category = 'all' | 'main' | 'ai' | 'office' | 'system';
 
@@ -168,7 +171,7 @@ const TOOLS: Tool[] = [
     category: 'ai',
   },
 
-  // ── Office ──
+  // ── Operations ──
   {
     label: 'Smart Scheduling',
     description: 'AI-optimized appointment scheduling that maximizes chair utilization, minimizes gaps, and reduces no-shows.',
@@ -253,11 +256,22 @@ const TOOLS: Tool[] = [
   },
 ];
 
+const ADD_ON_TOOLS: Tool[] = [
+  {
+    label: 'AI Assistant',
+    description: 'Beta employee chatbot preview for Open Dental guidance and Summit AI Services workflow support. Paid add-on, not included in any tier.',
+    icon: Bot,
+    route: '/ai-assistant',
+    category: 'ai',
+    isNew: true,
+  },
+];
+
 const CATEGORIES: { key: Category; label: string; color: string; activeColor: string }[] = [
   { key: 'all', label: 'All', color: 'text-gray-600 bg-white border-gray-200 hover:border-gray-300', activeColor: 'text-white bg-gray-900 border-gray-900' },
   { key: 'main', label: 'Main', color: 'text-slate-600 bg-white border-gray-200 hover:border-slate-400', activeColor: 'text-white bg-slate-700 border-slate-700' },
   { key: 'ai', label: 'AI Modules', color: 'text-indigo-600 bg-white border-gray-200 hover:border-indigo-400', activeColor: 'text-white bg-indigo-600 border-indigo-600' },
-  { key: 'office', label: 'Office', color: 'text-emerald-600 bg-white border-gray-200 hover:border-emerald-400', activeColor: 'text-white bg-emerald-600 border-emerald-600' },
+  { key: 'office', label: 'Operations', color: 'text-emerald-600 bg-white border-gray-200 hover:border-emerald-400', activeColor: 'text-white bg-emerald-600 border-emerald-600' },
   { key: 'system', label: 'System', color: 'text-amber-600 bg-white border-gray-200 hover:border-amber-400', activeColor: 'text-white bg-amber-600 border-amber-600' },
 ];
 
@@ -277,11 +291,17 @@ const CATEGORY_HOVER_BORDER: Record<string, string> = {
 
 export default function ToolsPage() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [query, setQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState<Category>('all');
+  const currentRole = resolveRole(user?.role);
+  const tierTools = useMemo(
+    () => TOOLS.filter((tool) => isRouteAllowed(currentRole, tool.route)),
+    [currentRole],
+  );
 
   const filtered = useMemo(() => {
-    let list = TOOLS;
+    let list = tierTools;
     if (activeCategory !== 'all') {
       list = list.filter((t) => t.category === activeCategory);
     }
@@ -292,9 +312,18 @@ export default function ToolsPage() {
       );
     }
     return list;
-  }, [query, activeCategory]);
+  }, [query, activeCategory, tierTools]);
 
-  const newCount = TOOLS.filter((t) => t.isNew).length;
+  const filteredAddOns = useMemo(() => {
+    if (activeCategory !== 'all' && activeCategory !== 'ai') return [];
+    if (!query.trim()) return ADD_ON_TOOLS;
+    const q = query.toLowerCase();
+    return ADD_ON_TOOLS.filter(
+      (t) => t.label.toLowerCase().includes(q) || t.description.toLowerCase().includes(q),
+    );
+  }, [activeCategory, query]);
+
+  const newCount = tierTools.filter((t) => t.isNew).length;
 
   return (
     <div className="max-w-6xl mx-auto space-y-6">
@@ -304,11 +333,11 @@ export default function ToolsPage() {
           <div className="flex items-center gap-2.5">
             <h1 className="text-2xl font-bold text-gray-900">All Tools</h1>
             <span className="inline-flex items-center gap-1 rounded-full bg-indigo-50 px-2.5 py-0.5 text-xs font-semibold text-indigo-600">
-              {TOOLS.length}
+              {tierTools.length}
             </span>
           </div>
           <p className="mt-1 text-sm text-gray-500">
-            Everything Summit AI Services can do — click any card to jump in.
+            Included in {ROLES[currentRole].label}: {ROLES[currentRole].summary}
           </p>
         </div>
         {newCount > 0 && (
@@ -334,7 +363,7 @@ export default function ToolsPage() {
         <div className="flex flex-wrap gap-1.5">
           {CATEGORIES.map((cat) => {
             const isActive = activeCategory === cat.key;
-            const count = cat.key === 'all' ? TOOLS.length : TOOLS.filter((t) => t.category === cat.key).length;
+            const count = cat.key === 'all' ? tierTools.length : tierTools.filter((t) => t.category === cat.key).length;
             return (
               <button
                 key={cat.key}
@@ -358,7 +387,7 @@ export default function ToolsPage() {
       </div>
 
       {/* Results */}
-      {filtered.length === 0 ? (
+      {filtered.length === 0 && filteredAddOns.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-center">
           <Search size={40} className="text-gray-200 mb-3" />
           <p className="text-sm font-medium text-gray-500">No tools match your search</p>
@@ -405,6 +434,46 @@ export default function ToolsPage() {
               </button>
             );
           })}
+        </div>
+      )}
+
+      {filteredAddOns.length > 0 && (
+        <div className="space-y-3">
+          <div>
+            <h2 className="text-sm font-semibold text-gray-900">Paid add-ons</h2>
+            <p className="mt-0.5 text-xs text-gray-500">
+              Optional tools that are separate from Bronze, Silver, and Gold.
+            </p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredAddOns.map((tool) => {
+              const Icon = tool.icon;
+              return (
+                <button
+                  key={tool.route}
+                  onClick={() => navigate(tool.route)}
+                  className="group relative flex items-start gap-3.5 rounded-xl border border-amber-200 bg-white p-4 text-left shadow-sm transition-all hover:border-amber-300 hover:shadow-md"
+                >
+                  <span className="absolute top-2.5 right-2.5 inline-flex items-center gap-1 rounded-full bg-amber-50 px-2 py-0.5 text-[10px] font-semibold text-amber-700">
+                    Add-on
+                  </span>
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 transition-colors group-hover:bg-indigo-100">
+                    <Icon size={20} />
+                  </div>
+                  <div className="min-w-0 flex-1 pr-6">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-sm font-semibold text-gray-900">{tool.label}</span>
+                      <span className="rounded-full bg-indigo-50 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-600">
+                        Beta
+                      </span>
+                      <ArrowRight size={12} className="text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                    <p className="mt-0.5 text-xs leading-relaxed text-gray-500">{tool.description}</p>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>

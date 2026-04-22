@@ -28,9 +28,10 @@ const PAGE_TITLES: Record<string, string> = {
   '/nurture-sequences': 'Treatment Follow-Up',
   '/fee-optimizer': 'Fee Optimizer',
   '/smart-scheduling': 'Smart Scheduling',
-  '/procurement': 'Procurement Intelligence',
+  '/procurement': 'Inventory Management',
   '/decision-support': 'Clinical Decision Support',
   '/compliance': 'Compliance Autopilot',
+  '/ai-assistant': 'AI Assistant',
   '/tools': 'All Tools',
   '/settings': 'Settings',
 };

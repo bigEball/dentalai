@@ -55,6 +55,79 @@ const BUILT_FOR = [
   { label: 'Multi-Location Offices', desc: 'DSOs and group practices managing workflows across multiple sites.' },
 ];
 
+const PRICING_TIERS = [
+  {
+    name: 'Bronze',
+    includes: [
+      'Dashboard',
+      'Morning Huddle',
+      'Patients',
+      'Smart Scheduling',
+      'Patient Interaction',
+      'Follow-Ups',
+      'Patient Forms',
+      'Inventory',
+      'Compliance Autopilot',
+    ],
+  },
+  {
+    name: 'Silver',
+    includes: [
+      'Dashboard',
+      'Morning Huddle',
+      'Patients',
+      'Smart Scheduling',
+      'Patient Interaction',
+      'Follow-Ups',
+      'Patient Forms',
+      'Inventory',
+      'Compliance Autopilot',
+      'Patient Retention',
+      'Treatment Follow-Up',
+      'Treatment Plans',
+      'Billing',
+      'Payment Plans',
+      'Recall',
+      'Referrals',
+      'Inventory Management',
+      'Reports',
+      'Patient Scores',
+    ],
+  },
+  {
+    name: 'Gold',
+    includes: [
+      'Dashboard',
+      'Morning Huddle',
+      'Patients',
+      'Smart Scheduling',
+      'Patient Interaction',
+      'Follow-Ups',
+      'Patient Forms',
+      'Inventory',
+      'Compliance Autopilot',
+      'Patient Retention',
+      'Treatment Follow-Up',
+      'Treatment Plans',
+      'Billing',
+      'Payment Plans',
+      'Recall',
+      'Referrals',
+      'Inventory Management',
+      'Reports',
+      'Patient Scores',
+      'AI Notes',
+      'Claim Review',
+      'Insurance',
+      'Pre-Auth',
+      'Clinical Decision Support',
+      'Fee Optimizer',
+      'Perio Chart',
+      'Settings',
+    ],
+  },
+];
+
 /* ── Form types ── */
 
 interface FormData {
@@ -139,10 +212,23 @@ export default function LandingPage() {
             <a href="#values" className="text-sm text-gray-300 hover:text-white transition-colors cursor-pointer">What We Do</a>
             <a href="#how-it-works" className="text-sm text-gray-300 hover:text-white transition-colors cursor-pointer">How It Works</a>
             <a href="#use-cases" className="text-sm text-gray-300 hover:text-white transition-colors cursor-pointer">Use Cases</a>
+            <a href="#pricing" className="text-sm text-gray-300 hover:text-white transition-colors cursor-pointer">Pricing</a>
             <a href="#why" className="text-sm text-gray-300 hover:text-white transition-colors cursor-pointer">Why Summit</a>
           </div>
 
           <div className="hidden md:flex items-center gap-4">
+            <Link
+              to="/ai-assistant-preview"
+              className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10"
+            >
+              AI Assistant
+              <span className="rounded-full border border-blue-300/30 bg-blue-400/10 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-blue-200">
+                Beta
+              </span>
+              <span className="rounded-full border border-amber-300/30 bg-amber-400/10 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-200">
+                Add-on
+              </span>
+            </Link>
             <a
               href="#demo"
               className="text-sm font-medium text-white px-5 py-2.5 rounded-lg transition-colors cursor-pointer"
@@ -167,10 +253,17 @@ export default function LandingPage() {
 
         {mobileNav && (
           <div className="md:hidden px-5 pb-5 space-y-2" style={{ backgroundColor: BRAND.bg }}>
-            {['What We Do|#values', 'How It Works|#how-it-works', 'Use Cases|#use-cases', 'Why Summit|#why'].map(item => {
+            {['What We Do|#values', 'How It Works|#how-it-works', 'Use Cases|#use-cases', 'Pricing|#pricing', 'Why Summit|#why'].map(item => {
               const [label, href] = item.split('|');
               return <a key={href} href={href} onClick={() => setMobileNav(false)} className="block text-sm text-gray-300 py-2 cursor-pointer">{label}</a>;
             })}
+            <Link to="/ai-assistant-preview" onClick={() => setMobileNav(false)} className="flex items-center justify-between gap-3 rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white cursor-pointer">
+              <span>AI Assistant</span>
+              <span className="flex items-center gap-1.5">
+                <span className="rounded-full border border-blue-300/30 bg-blue-400/10 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-blue-200">Beta</span>
+                <span className="rounded-full border border-amber-300/30 bg-amber-400/10 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-200">Add-on</span>
+              </span>
+            </Link>
             <a href="#demo" onClick={() => setMobileNav(false)} className="block text-sm font-medium text-white py-2.5 px-4 rounded-lg text-center cursor-pointer mt-2" style={{ backgroundColor: BRAND.accent }}>Book a Demo</a>
           </div>
         )}
@@ -344,6 +437,84 @@ export default function LandingPage() {
                 <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════ PRICING TIERS ═══════════ */}
+      <section id="pricing" className="py-20 sm:py-28 px-5 sm:px-8" style={{ backgroundColor: '#f8fafc' }}>
+        <div className="max-w-6xl mx-auto">
+          <div className="max-w-2xl mb-14">
+            <SectionLabel>Pricing packages</SectionLabel>
+            <h2 className="text-3xl sm:text-4xl font-bold leading-tight mb-4">
+              Bronze, Silver, and Gold tiers that are easy to sell.
+            </h2>
+            <p className="text-gray-500 text-base leading-relaxed">
+              Bronze covers the operational basics. Silver adds growth and revenue tools.
+              Gold includes insurance, clinical AI, and complete system access.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-6">
+            {PRICING_TIERS.map(tier => (
+              <div
+                key={tier.name}
+                className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm"
+              >
+                <div className="flex items-end justify-between gap-4 border-b border-gray-100 pb-4 mb-4">
+                  <h3 className="text-2xl font-bold text-gray-900">{tier.name}</h3>
+                  <span className="text-xs font-semibold text-gray-500">{tier.includes.length} tools</span>
+                </div>
+                <ul className="grid gap-2">
+                  {tier.includes.map(item => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="mt-1 h-4 w-4 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                          <path d="M2.5 6l2.5 2.5L9.5 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </span>
+                      <span className="text-sm text-gray-700 leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <div id="assistant" className="mt-6 rounded-xl border border-blue-200 bg-white p-6 shadow-sm">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <div className="flex flex-wrap items-center gap-2 mb-2">
+                  <h3 className="text-xl font-bold text-gray-900">AI Assistant</h3>
+                  <span className="rounded-full border border-blue-200 bg-blue-50 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-blue-700">
+                    Beta
+                  </span>
+                  <span className="rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-amber-700">
+                    Paid add-on
+                  </span>
+                </div>
+                <p className="max-w-2xl text-sm text-gray-600 leading-relaxed">
+                  A future employee support chatbot designed to help staff with Open Dental and Summit AI Services workflows. It is not included in Bronze, Silver, or Gold.
+                </p>
+              </div>
+              <div className="flex shrink-0 flex-col gap-2 sm:items-end">
+                <Link
+                  to="/ai-assistant-preview"
+                  className="inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-semibold text-white transition-colors cursor-pointer"
+                  style={{ backgroundColor: BRAND.accent }}
+                  onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#2563eb')}
+                  onMouseLeave={e => (e.currentTarget.style.backgroundColor = BRAND.accent)}
+                >
+                  Preview AI Assistant
+                </Link>
+                <a
+                  href="#demo"
+                  className="inline-flex items-center justify-center rounded-lg border border-gray-200 px-5 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50 cursor-pointer"
+                >
+                  Ask About Add-on
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>

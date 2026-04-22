@@ -659,6 +659,19 @@ export interface SystemStatus {
   ollamaAvailable: boolean;
 }
 
+export interface DemoRequest {
+  id: string;
+  name: string;
+  email: string;
+  practice: string;
+  phone: string;
+  locations?: string;
+  providers?: string;
+  source?: string;
+  message: string;
+  submittedAt: string;
+}
+
 export async function getSettings(): Promise<AppConfig> {
   const { data } = await api.get<AppConfig>('/settings');
   return data;
@@ -687,6 +700,15 @@ export async function switchMode(mode: 'demo' | 'live'): Promise<AppConfig> {
 export async function getSystemStatus(): Promise<SystemStatus> {
   const { data } = await api.get<SystemStatus>('/settings/status');
   return data;
+}
+
+export async function getDemoRequests(): Promise<DemoRequest[]> {
+  const { data } = await api.get<DemoRequest[]>('/demo-requests');
+  return Array.isArray(data) ? data : [];
+}
+
+export async function deleteDemoRequest(id: string): Promise<void> {
+  await api.delete(`/demo-requests/${id}`);
 }
 
 export default api;

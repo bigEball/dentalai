@@ -17,6 +17,11 @@ import {
   Cpu,
   Mic,
   Building2,
+  ClipboardList,
+  Mail,
+  Phone,
+  MapPin,
+  Trash2,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -27,8 +32,10 @@ import {
   triggerSync,
   switchMode,
   getSystemStatus,
+  getDemoRequests,
+  deleteDemoRequest,
 } from '@/lib/api';
-import type { AppConfig, SystemStatus } from '@/lib/api';
+import type { AppConfig, DemoRequest, SystemStatus } from '@/lib/api';
 
 const DEFAULT_SETTINGS: AppConfig = {
   mode: 'demo',
@@ -149,6 +156,10 @@ export default function SettingsPage() {
   const [switchingMode, setSwitchingMode] = useState(false);
   const [testResult, setTestResult] = useState<{ connected: boolean; message: string } | null>(null);
   const [syncLog, setSyncLog] = useState(SYNC_LOG_DEFAULT);
+  const [demoRequests, setDemoRequests] = useState<DemoRequest[]>([]);
+  const [demoRequestsLoading, setDemoRequestsLoading] = useState(true);
+  const [demoRequestsError, setDemoRequestsError] = useState('');
+  const [deletingDemoRequestId, setDeletingDemoRequestId] = useState<string | null>(null);
 
   useEffect(() => {
     Promise.all([
@@ -161,6 +172,46 @@ export default function SettingsPage() {
       })
       .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    loadDemoRequests();
+  }, []);
+
+  async function loadDemoRequests() {
+    setDemoRequestsLoading(true);
+    setDemoRequestsError('');
+    try {
+      const requests = await getDemoRequests();
+      setDemoRequests(
+        [...requests].sort(
+          (a, b) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime(),
+        ),
+      );
+    } catch {
+      setDemoRequestsError('Demo requests could not be loaded.');
+    } finally {
+      setDemoRequestsLoading(false);
+    }
+  }
+
+  async function handleDeleteDemoRequest(request: DemoRequest) {
+    const confirmed = window.confirm(`Delete the demo request from ${request.name} at ${request.practice}?`);
+    if (!confirmed) return;
+
+    const previousRequests = demoRequests;
+    setDeletingDemoRequestId(request.id);
+    setDemoRequests((current) => current.filter((entry) => entry.id !== request.id));
+
+    try {
+      await deleteDemoRequest(request.id);
+      toast.success('Demo request deleted');
+    } catch {
+      setDemoRequests(previousRequests);
+      toast.error('Could not delete demo request');
+    } finally {
+      setDeletingDemoRequestId(null);
+    }
+  }
 
   async function handleSwitchMode(mode: 'demo' | 'live') {
     if (mode === settings.mode) return;
@@ -695,6 +746,98 @@ export default function SettingsPage() {
               Connect Open Dental to enable real-time patient, appointment, and billing data sync.
             </p>
           </div>
+        </div>
+
+        {/* ── Section 7: Demo Requests ── */}
+        <div className="card p-6">
+          <div className="flex items-start justify-between gap-4 mb-4">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-xl bg-sky-50 flex items-center justify-center">
+                <ClipboardList size={20} className="text-sky-600" />
+              </div>
+              <div>
+                <h2 className="text-sm font-semibold text-gray-900">Requested Demos</h2>
+                <p className="text-xs text-gray-500 mt-0.5">Submissions from the landing page demo form</p>
+              </div>
+            </div>
+            <button onClick={loadDemoRequests} disabled={demoRequestsLoading} className="btn-secondary text-sm">
+              {demoRequestsLoading ? <Loader2 size={14} className="animate-spin" /> : <RefreshCw size={14} />}
+              Refresh
+            </button>
+          </div>
+
+          {demoRequestsError && (
+            <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-100 flex items-center gap-2">
+              <AlertCircle size={14} className="text-red-500 flex-shrink-0" />
+              <p className="text-xs text-red-700">{demoRequestsError}</p>
+            </div>
+          )}
+
+          {demoRequestsLoading ? (
+            <div className="flex items-center justify-center py-10">
+              <Loader2 size={22} className="animate-spin text-indigo-600" />
+            </div>
+          ) : demoRequests.length === 0 ? (
+            <div className="rounded-xl border border-dashed border-gray-200 bg-gray-50 py-10 px-4 text-center">
+              <p className="text-sm font-medium text-gray-900">No demo requests yet</p>
+              <p className="text-xs text-gray-500 mt-1">New landing page submissions will appear here.</p>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {demoRequests.map((request) => {
+                const locationCount = request.locations || request.providers || 'Not specified';
+                return (
+                  <div key={request.id} className="rounded-xl border border-gray-200 bg-white p-4">
+                    <div className="flex items-start justify-between gap-4 mb-3">
+                      <div>
+                        <p className="text-sm font-semibold text-gray-900">{request.name}</p>
+                        <p className="text-xs text-gray-500 mt-0.5">{request.practice}</p>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="text-[11px] text-gray-400 whitespace-nowrap">
+                          {new Date(request.submittedAt).toLocaleString()}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => handleDeleteDemoRequest(request)}
+                          disabled={deletingDemoRequestId === request.id}
+                          className="p-1.5 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors disabled:opacity-50"
+                          title="Delete demo request"
+                        >
+                          {deletingDemoRequestId === request.id ? (
+                            <Loader2 size={14} className="animate-spin" />
+                          ) : (
+                            <Trash2 size={14} />
+                          )}
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="grid sm:grid-cols-3 gap-2 text-xs">
+                      <a href={`mailto:${request.email}`} className="flex items-center gap-2 text-gray-600 hover:text-indigo-600">
+                        <Mail size={13} className="text-gray-400" />
+                        <span className="truncate">{request.email}</span>
+                      </a>
+                      <div className="flex items-center gap-2 text-gray-600">
+                        <Phone size={13} className="text-gray-400" />
+                        <span>{request.phone || 'No phone'}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-gray-600">
+                        <MapPin size={13} className="text-gray-400" />
+                        <span>{locationCount}</span>
+                      </div>
+                    </div>
+
+                    {request.message && (
+                      <p className="mt-3 text-xs leading-relaxed text-gray-600 bg-gray-50 rounded-lg p-3">
+                        {request.message}
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         {/* ── Save Button ── */}

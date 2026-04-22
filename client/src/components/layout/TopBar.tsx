@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Bell, ChevronDown } from 'lucide-react';
+import { Bell, Bot, ChevronDown } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { getInitials } from '@/lib/utils';
 import { getSystemStatus, getSettings } from '@/lib/api';
@@ -11,6 +12,7 @@ interface TopBarProps {
 
 export default function TopBar({ title }: TopBarProps) {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [officeOpen, setOfficeOpen] = useState(false);
   const [status, setStatus] = useState<SystemStatus | null>(null);
   const [officeName, setOfficeName] = useState<string>('');
@@ -35,6 +37,22 @@ export default function TopBar({ title }: TopBarProps) {
       <div className="flex-1" />
 
       <div className="flex items-center gap-2 ml-auto">
+        <button
+          type="button"
+          onClick={() => navigate('/ai-assistant')}
+          title="AI Assistant is a beta add-on for Open Dental and Summit AI Services workflow support."
+          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-indigo-100 bg-indigo-50 text-sm font-medium text-indigo-700 transition-colors hover:bg-indigo-100"
+        >
+          <Bot size={15} />
+          <span className="hidden sm:inline">AI Assistant</span>
+          <span className="rounded-full border border-indigo-200 bg-white px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-600">
+            Beta
+          </span>
+          <span className="hidden md:inline rounded-full border border-amber-200 bg-amber-50 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-700">
+            Add-on
+          </span>
+        </button>
+
         {status && (
           <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gray-50 border border-gray-200 mr-1">
             {status.mode === 'demo' ? (

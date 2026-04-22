@@ -14,9 +14,9 @@ export interface AuthUser {
 
 const DEMO_USER: AuthUser = {
   id: 'demo-user',
-  name: 'Dr. Sarah Mitchell',
+  name: 'Gold Tier Demo',
   email: 'demo@summitaisoftware.com',
-  role: 'doctor',
+  role: 'gold',
   office: 'Summit Demo Practice',
 };
 
@@ -45,9 +45,18 @@ export function getUser(): AuthUser | null {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw) as AuthUser;
-    // Migrate stale sessions missing the role field
-    if (!parsed.role) {
-      parsed.role = 'doctor';
+    // Migrate stale sessions missing the role field or using the old persona views.
+    if (!parsed.role || parsed.role === 'doctor') {
+      parsed.role = 'gold';
+      parsed.name = ROLES.gold.userName;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+    } else if (parsed.role === 'office') {
+      parsed.role = 'silver';
+      parsed.name = ROLES.silver.userName;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+    } else if (parsed.role === 'assistant') {
+      parsed.role = 'bronze';
+      parsed.name = ROLES.bronze.userName;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
     }
     return parsed;
@@ -64,11 +73,14 @@ export function isAuthenticated(): boolean {
 export function getDemoRole(): DemoRole {
   try {
     const raw = localStorage.getItem(ROLE_KEY);
-    if (raw && (raw === 'doctor' || raw === 'office' || raw === 'assistant')) {
+    if (raw === 'doctor') return 'gold';
+    if (raw === 'office') return 'silver';
+    if (raw === 'assistant') return 'bronze';
+    if (raw && (raw === 'gold' || raw === 'silver' || raw === 'bronze')) {
       return raw;
     }
   } catch { /* ignore */ }
-  return 'doctor';
+  return 'gold';
 }
 
 export function switchDemoRole(role: DemoRole): AuthUser {

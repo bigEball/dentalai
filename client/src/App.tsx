@@ -73,6 +73,7 @@ import SchedulingPage from '@/pages/SchedulingPage';
 import ProcurementPage from '@/pages/ProcurementPage';
 import ClinicalDecisionSupportPage from '@/pages/ClinicalDecisionSupportPage';
 import ComplianceAutopilotPage from '@/pages/ComplianceAutopilotPage';
+import AIAssistantPage from '@/pages/AIAssistantPage';
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth();
@@ -103,6 +104,14 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={<HomeRoute />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route
+        path="/ai-assistant-preview"
+        element={
+          <div className="min-h-screen bg-gray-50 px-5 py-8 sm:px-8">
+            <AIAssistantPage />
+          </div>
+        }
+      />
       <Route
         element={
           <RequireAuth>
@@ -136,6 +145,7 @@ function AppRoutes() {
         <Route path="procurement" element={<RequireRole><ProcurementPage /></RequireRole>} />
         <Route path="decision-support" element={<RequireRole><ClinicalDecisionSupportPage /></RequireRole>} />
         <Route path="compliance" element={<RequireRole><ComplianceAutopilotPage /></RequireRole>} />
+        <Route path="ai-assistant" element={<RequireRole><AIAssistantPage /></RequireRole>} />
         <Route path="tools" element={<RequireRole><ToolsPage /></RequireRole>} />
         <Route path="settings" element={<RequireRole><SettingsPage /></RequireRole>} />
       </Route>

@@ -32,9 +32,9 @@ import {
   ClipboardCheck,
 
   ChevronUp,
-  UserCog,
-  Briefcase,
-  Wrench,
+  Award,
+  Medal,
+  Gem,
   Check,
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
@@ -108,15 +108,15 @@ function NavSection({ label, items }: { label: string; items: typeof MAIN_NAV })
 }
 
 const ROLE_ICONS: Record<DemoRole, React.ElementType> = {
-  doctor: UserCog,
-  office: Briefcase,
-  assistant: Wrench,
+  bronze: Award,
+  silver: Medal,
+  gold: Gem,
 };
 
 const ROLE_COLORS: Record<DemoRole, string> = {
-  doctor: 'text-indigo-400',
-  office: 'text-emerald-400',
-  assistant: 'text-amber-400',
+  bronze: 'text-amber-500',
+  silver: 'text-slate-300',
+  gold: 'text-yellow-300',
 };
 
 export default function Sidebar() {
@@ -186,7 +186,7 @@ export default function Sidebar() {
       <div className="flex-1 overflow-y-auto px-3 py-4">
         {mainNav.length > 0 && <NavSection label="Main" items={mainNav} />}
         {aiNav.length > 0 && <NavSection label="AI Modules" items={aiNav} />}
-        {officeNav.length > 0 && <NavSection label="Office" items={officeNav} />}
+        {officeNav.length > 0 && <NavSection label="Operations" items={officeNav} />}
         {systemNav.length > 0 && <NavSection label="System" items={systemNav} />}
       </div>
 
@@ -199,7 +199,7 @@ export default function Sidebar() {
               style={{ backgroundColor: '#1a1b23' }}
             >
               <p className="px-3 py-2 text-[10px] font-semibold uppercase tracking-wider text-gray-500 border-b border-white/5">
-                Switch Demo View
+                Switch Demo Tier
               </p>
               {(Object.keys(ROLES) as DemoRole[]).map((role) => {
                 const config = ROLES[role];
@@ -234,7 +234,7 @@ export default function Sidebar() {
           >
             <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
             <span className="text-[10px] font-semibold uppercase tracking-wider text-amber-400">
-              Demo — {ROLES[currentRole].label}
+              Demo - {ROLES[currentRole].label}
             </span>
             <ChevronUp size={10} className={`text-amber-400 transition-transform ${roleDropdownOpen ? '' : 'rotate-180'}`} />
           </button>

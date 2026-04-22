@@ -8,7 +8,7 @@
  *
  * If the real backend is reachable, responses take precedence — mocks
  * only kick in on failure. Pages that already ship their own internal
- * mock fallbacks (Procurement, Claim Review, Churn, Scheduling, etc.)
+ * mock fallbacks (Inventory Management, Claim Review, Churn, Scheduling, etc.)
  * aren't repeated here; the interceptor resolves those with `[]` or
  * `{}` so the page's own fallback takes over.
  */
