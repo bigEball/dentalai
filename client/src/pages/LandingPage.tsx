@@ -623,6 +623,12 @@ export default function LandingPage() {
               <p className="text-sm text-gray-500 mt-3">
                 contact@summitaisoftware.com
               </p>
+              <a
+                href="tel:4256154567"
+                className="block text-sm text-gray-500 mt-2 hover:text-gray-300 transition-colors cursor-pointer"
+              >
+                425-615-4567
+              </a>
             </div>
 
             <div className="flex gap-16">
