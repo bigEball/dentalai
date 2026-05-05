@@ -8,10 +8,12 @@ import {
   ChevronRight,
   ClipboardCheck,
   FileText,
+  Layers,
   Headphones,
   Menu,
   MessageSquare,
   PhoneCall,
+  ReceiptText,
   ShieldCheck,
   Sparkles,
   TrendingUp,
@@ -22,7 +24,6 @@ const NAV_ITEMS = [
   { label: 'Values', href: '#values' },
   { label: 'Packages', href: '#packages' },
   { label: 'Use Cases', href: '#use-cases' },
-  { label: 'Pricing', href: '#pricing' },
   { label: 'AI Assistant', href: '#assistant' },
 ];
 
@@ -30,7 +31,7 @@ const CORE_VALUES = [
   {
     icon: ShieldCheck,
     title: 'Clarity first',
-    desc: 'Straightforward packages, plain language, and tools your team can understand without a long sales process.',
+    desc: 'Straightforward packages, plain language, and tools your team can understand before a sales conversation.',
   },
   {
     icon: PhoneCall,
@@ -68,30 +69,30 @@ const OUTCOMES = [
   {
     icon: ShieldCheck,
     title: 'Clear package structure',
-    desc: 'Choose Bronze, Silver, or Gold and know exactly which capabilities your office receives.',
+    desc: 'Choose the workflow package that matches the work your team most needs to improve.',
   },
 ];
 
 const PACKAGE_STEPS = [
   {
-    label: 'Choose',
-    title: 'Pick the right tier',
-    desc: 'Start with Bronze, Silver, or Gold based on the operational areas your office wants covered.',
+    label: 'Map',
+    title: 'Identify the bottleneck',
+    desc: 'Start with the workflow that is costing the most time: clinical notes, front desk work, billing, or all three.',
   },
   {
-    label: 'Enable',
-    title: 'Turn on included tools',
-    desc: 'Your package gives your team access to a defined set of modules with a predictable onboarding path.',
+    label: 'Package',
+    title: 'Pick a clear starting point',
+    desc: 'Each package is named around the job it performs so offices can evaluate fit without decoding feature bundles.',
   },
   {
-    label: 'Use',
-    title: 'Run daily operations',
-    desc: 'Use the included tools for scheduling, follow-up, forms, reporting, billing, and clinical support.',
+    label: 'Demo',
+    title: 'Review pricing in context',
+    desc: 'Commercial terms are handled during the demo after practice size, provider count, and workflow scope are clear.',
   },
   {
-    label: 'Upgrade',
-    title: 'Move up when ready',
-    desc: 'Add more capabilities by moving from Bronze to Silver or Gold as your office needs more coverage.',
+    label: 'Expand',
+    title: 'Add coverage as needed',
+    desc: 'Start narrow, then add adjacent packages when the team is ready for broader automation.',
   },
 ];
 
@@ -133,55 +134,65 @@ const FIT_ITEMS = [
   },
 ];
 
-const PRICING_TIERS = [
+const PRODUCT_PACKAGES = [
   {
-    name: 'Bronze',
-    note: 'Operational foundation',
+    name: 'Notes Package',
+    note: 'Clinical documentation',
+    icon: FileText,
     highlight: false,
+    bestFor: 'Providers who need notes finished faster without removing clinical review.',
+    outcome: 'Shorter charting backlog and cleaner provider sign-off.',
     includes: [
-      'Dashboard',
-      'Morning Huddle',
-      'Patients',
-      'Smart Scheduling',
-      'Patient Interaction',
-      'Follow-Ups',
-      'Patient Forms',
-      'Inventory',
-      'Compliance Autopilot',
+      'AI-drafted clinical notes',
+      'SOAP-style templates',
+      'Procedure and perio summaries',
+      'Provider review before chart write-back',
+      'Open Dental workflow support',
     ],
   },
   {
-    name: 'Silver',
-    note: 'Growth and revenue tools',
+    name: 'Front Desk Package',
+    note: 'Patient operations',
+    icon: Headphones,
     highlight: true,
+    bestFor: 'Teams losing time to calls, forms, reminders, scheduling gaps, and follow-up lists.',
+    outcome: 'Fewer interruptions and more consistent patient follow-through.',
     includes: [
-      'Everything in Bronze',
-      'Patient Retention',
-      'Treatment Follow-Up',
-      'Treatment Plans',
-      'Billing',
-      'Payment Plans',
-      'Recall',
-      'Referrals',
-      'Inventory Management',
-      'Reports',
-      'Patient Scores',
+      'AI assistant for staff questions',
+      'Smart scheduling support',
+      'Recall and follow-up workflows',
+      'Patient forms and communications',
+      'Morning huddle and task visibility',
     ],
   },
   {
-    name: 'Gold',
-    note: 'Complete package access',
+    name: 'Billing Package',
+    note: 'Revenue cycle support',
+    icon: ReceiptText,
     highlight: false,
+    bestFor: 'Offices that need cleaner claim prep, better pre-auth tracking, and fewer aging surprises.',
+    outcome: 'More billing work visible before it becomes a collections problem.',
     includes: [
-      'Everything in Silver',
-      'AI Notes',
-      'Claim Review',
-      'Insurance',
-      'Pre-Auth',
-      'Clinical Decision Support',
-      'Fee Optimizer',
-      'Perio Chart',
-      'Settings',
+      'Claim review and narrative support',
+      'Pre-auth workflow tracking',
+      'Eligibility and insurance task support',
+      'Billing queue and payment plan visibility',
+      'Reports for follow-up and aging work',
+    ],
+  },
+  {
+    name: 'Complete Package',
+    note: 'Full practice operating layer',
+    icon: Layers,
+    highlight: false,
+    bestFor: 'Growing practices that want notes, front desk, and billing workflows in one rollout.',
+    outcome: 'One connected system for the daily work that slows the office down.',
+    includes: [
+      'Everything in Notes',
+      'Everything in Front Desk',
+      'Everything in Billing',
+      'Clinical decision support workflows',
+      'Priority onboarding path',
     ],
   },
 ];
@@ -192,6 +203,7 @@ interface FormData {
   email: string;
   phone: string;
   locations: string;
+  packageInterest: string;
   message: string;
 }
 
@@ -201,6 +213,7 @@ const EMPTY: FormData = {
   email: '',
   phone: '',
   locations: '',
+  packageInterest: '',
   message: '',
 };
 
@@ -432,13 +445,13 @@ export default function LandingPage() {
             <div className="max-w-3xl pb-20 pt-8 sm:pb-24 lg:pb-28">
               <div className="mb-6 inline-flex max-w-full items-center gap-2 rounded-lg border border-cyan-300/25 bg-cyan-300/10 px-3 py-2 text-sm font-medium text-cyan-100">
                 <Sparkles className="h-4 w-4 shrink-0" />
-                Practical software for smoother dental operations
+                Dental AI packages for the work that slows the office down
               </div>
               <h1 className="max-w-3xl break-words text-[2.35rem] font-semibold leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
-                Less busywork. Better follow-through. A smoother dental office.
+                Package AI around real dental workflows.
               </h1>
               <p className="mt-6 max-w-2xl break-words text-lg leading-8 text-slate-300 sm:text-xl">
-                Summit helps dental teams stay ahead of scheduling, follow-up, forms, billing, reporting, insurance support, and clinical workflows with packages that are clear from the start.
+                Summit gives dental teams focused packages for clinical notes, front desk support, billing workflows, and complete practice operations. Pricing is reviewed during the demo so it matches the office size and rollout scope.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <a
@@ -460,9 +473,9 @@ export default function LandingPage() {
 
             <div className="grid gap-3 border-t border-white/10 pt-5 sm:grid-cols-3">
               {[
-                ['Clear tools', 'easy to understand and adopt'],
-                ['Daily focus', 'built for recurring office work'],
-                ['3 tiers', 'Bronze, Silver, and Gold'],
+                ['Notes', 'documentation and review'],
+                ['Front Desk', 'calls, follow-up, and tasks'],
+                ['Billing', 'claims and revenue workflow'],
               ].map(([value, label]) => (
                 <div key={label} className="flex items-baseline gap-3">
                   <span className="text-2xl font-semibold text-white">{value}</span>
@@ -503,13 +516,13 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section id="packages" className="bg-white px-5 py-20 sm:px-8 sm:py-28">
+        <section id="packaging-approach" className="bg-white px-5 py-20 sm:px-8 sm:py-28">
           <div className="mx-auto max-w-7xl">
             <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
               <SectionIntro
                 eyebrow="Packages"
-                title="A simple package ladder with clear included tools."
-                desc="Bronze starts with the operational essentials. Silver adds growth and revenue tools. Gold gives the office the broadest set of administrative, insurance, and clinical capabilities."
+                title="Sell the job to be done, not a confusing feature list."
+                desc="Each package maps to a budget owner and a painful workflow: providers want better notes, the front desk wants fewer interruptions, and office managers want billing work under control."
               />
 
               <div className="grid gap-4 sm:grid-cols-2">
@@ -585,51 +598,81 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section id="pricing" className="bg-white px-5 py-20 sm:px-8 sm:py-28">
+        <section id="packages" className="bg-white px-5 py-20 sm:px-8 sm:py-28">
           <div className="mx-auto max-w-7xl">
             <div className="mb-12 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
               <SectionIntro
-                eyebrow="Pricing packages"
-                title="Simple tiers for the level of support your office needs."
-                desc="Bronze covers the operational foundation. Silver adds growth and revenue tools. Gold includes full package access."
+                eyebrow="Package lineup"
+                title="Four packages built for how dental offices actually buy."
+                desc="Packages are public so teams can understand fit before booking. Pricing is handled in the demo after provider count, locations, integrations, and rollout scope are understood."
               />
               <p className="max-w-sm text-sm leading-6 text-slate-500">
-                Review the included tools, choose the right starting point, and upgrade when your office needs more coverage.
+                The goal is to anchor value to labor saved and revenue work recovered, not publish a one-size-fits-all number that may not match the practice.
               </p>
             </div>
 
-            <div className="grid gap-5 lg:grid-cols-3">
-              {PRICING_TIERS.map(tier => (
-                <div
-                  key={tier.name}
-                  className={`rounded-lg border p-6 shadow-sm ${
-                    tier.highlight
-                      ? 'border-cyan-300 bg-cyan-50/60 ring-1 ring-cyan-200'
-                      : 'border-slate-200 bg-white'
-                  }`}
-                >
-                  <div className="mb-6 flex items-start justify-between gap-4">
-                    <div>
-                      <h3 className="text-2xl font-semibold text-slate-950">{tier.name}</h3>
-                      <p className="mt-1 text-sm text-slate-600">{tier.note}</p>
+            <div className="grid gap-5 lg:grid-cols-4">
+              {PRODUCT_PACKAGES.map(tier => {
+                const Icon = tier.icon;
+                return (
+                  <div
+                    key={tier.name}
+                    className={`flex h-full flex-col rounded-lg border p-6 shadow-sm ${
+                      tier.highlight
+                        ? 'border-cyan-300 bg-cyan-50/60 ring-1 ring-cyan-200'
+                        : 'border-slate-200 bg-white'
+                    }`}
+                  >
+                    <div className="mb-6 flex items-start justify-between gap-4">
+                      <div>
+                        <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-cyan-50 text-cyan-700">
+                          <Icon className="h-5 w-5" />
+                        </div>
+                        <h3 className="text-2xl font-semibold text-slate-950">{tier.name}</h3>
+                        <p className="mt-1 text-sm text-slate-600">{tier.note}</p>
+                      </div>
+                      {tier.highlight && (
+                        <span className="rounded-lg bg-cyan-700 px-2.5 py-1 text-xs font-semibold text-white">
+                          Common start
+                        </span>
+                      )}
                     </div>
-                    {tier.highlight && (
-                      <span className="rounded-lg bg-cyan-700 px-2.5 py-1 text-xs font-semibold text-white">
-                        Popular
-                      </span>
-                    )}
-                  </div>
 
-                  <ul className="space-y-3">
-                    {tier.includes.map(item => (
-                      <li key={item} className="flex gap-3 text-sm leading-6 text-slate-700">
-                        <Check className="mt-1 h-4 w-4 shrink-0 text-cyan-700" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+                    <div className="mb-6 space-y-4 border-y border-slate-200 py-5">
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Best for</p>
+                        <p className="mt-2 text-sm leading-6 text-slate-700">{tier.bestFor}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Outcome</p>
+                        <p className="mt-2 text-sm leading-6 text-slate-700">{tier.outcome}</p>
+                      </div>
+                    </div>
+
+                    <ul className="mt-auto space-y-3">
+                      {tier.includes.map(item => (
+                        <li key={item} className="flex gap-3 text-sm leading-6 text-slate-700">
+                          <Check className="mt-1 h-4 w-4 shrink-0 text-cyan-700" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="mt-8 rounded-lg border border-slate-200 bg-[#f6f3ed] p-5 sm:flex sm:items-center sm:justify-between sm:gap-6">
+              <p className="text-sm leading-6 text-slate-700">
+                Pricing is not published because package fit depends on providers, locations, integrations, AI usage, and how much workflow support the office wants in the first rollout.
+              </p>
+              <a
+                href="#demo"
+                className="mt-4 inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-slate-800 sm:mt-0"
+              >
+                Discuss pricing in a demo
+                <ArrowRight className="h-4 w-4" />
+              </a>
             </div>
           </div>
         </section>
@@ -639,8 +682,8 @@ export default function LandingPage() {
             <div>
               <SectionIntro
                 eyebrow="AI Assistant"
-                title="A staff chatbot for everyday workflow questions."
-                desc="The AI Assistant is a beta paid add-on designed to help employees find answers faster. It can guide staff through Open Dental tasks, Summit tools, and common office workflows without interrupting a manager."
+                title="A staff assistant that belongs inside the Front Desk package."
+                desc="The AI Assistant helps employees find answers faster. It can guide staff through Open Dental tasks, Summit tools, and common office workflows without interrupting a manager."
                 light
               />
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -655,11 +698,11 @@ export default function LandingPage() {
                   href="#demo"
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/15 px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-white/35 hover:bg-white/5"
                 >
-                  Ask about the add-on
+                  Ask about package fit
                 </a>
               </div>
               <p className="mt-5 text-sm leading-6 text-slate-400">
-                The Assistant is separate from Bronze, Silver, and Gold. It is available as an add-on for offices that want more staff support.
+                The Assistant is included in the Front Desk and Complete packages, with deeper workflow coverage available during rollout.
               </p>
             </div>
 
@@ -675,7 +718,7 @@ export default function LandingPage() {
                   </div>
                 </div>
                 <span className="rounded-lg border border-amber-300/25 bg-amber-300/10 px-2.5 py-1 text-xs font-semibold text-amber-100">
-                  Paid add-on
+                  Package feature
                 </span>
               </div>
 
@@ -749,14 +792,14 @@ export default function LandingPage() {
               <SectionIntro
                 eyebrow="Book a demo"
                 title="Choose the right Summit package for your office."
-                desc="Tell us a little about your office. We will walk through Bronze, Silver, and Gold so you can see which package covers the tools you need."
+                desc="Tell us a little about your office. We will walk through the package options, then price the rollout around your providers, locations, integrations, and workflow priorities."
               />
               <div className="mt-8 rounded-lg border border-slate-200 bg-[#f6f3ed] p-5">
                 <p className="text-sm font-semibold text-slate-950">What to expect</p>
                 <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-600">
                   <li className="flex gap-3"><Check className="mt-1 h-4 w-4 shrink-0 text-cyan-700" /> A 30-minute walkthrough.</li>
-                  <li className="flex gap-3"><Check className="mt-1 h-4 w-4 shrink-0 text-cyan-700" /> A clear comparison of Bronze, Silver, and Gold.</li>
-                  <li className="flex gap-3"><Check className="mt-1 h-4 w-4 shrink-0 text-cyan-700" /> A recommendation for the package that matches your needs.</li>
+                  <li className="flex gap-3"><Check className="mt-1 h-4 w-4 shrink-0 text-cyan-700" /> A clear comparison of Notes, Front Desk, Billing, and Complete.</li>
+                  <li className="flex gap-3"><Check className="mt-1 h-4 w-4 shrink-0 text-cyan-700" /> A package recommendation and demo-only pricing discussion.</li>
                 </ul>
               </div>
             </div>
@@ -806,8 +849,27 @@ export default function LandingPage() {
                   </select>
                 </div>
                 <div className="mt-4">
+                  <label htmlFor="packageInterest" className="mb-1.5 block text-sm font-medium text-slate-700">
+                    Package interest
+                  </label>
+                  <select
+                    id="packageInterest"
+                    name="packageInterest"
+                    value={form.packageInterest}
+                    onChange={set}
+                    className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-950 outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20"
+                  >
+                    <option value="">Select</option>
+                    <option value="notes">Notes Package</option>
+                    <option value="front-desk">Front Desk Package</option>
+                    <option value="billing">Billing Package</option>
+                    <option value="complete">Complete Package</option>
+                    <option value="not-sure">Not sure yet</option>
+                  </select>
+                </div>
+                <div className="mt-4">
                   <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-slate-700">
-                    Which package are you interested in?
+                    What should we focus on in the demo?
                   </label>
                   <textarea
                     id="message"
@@ -815,7 +877,7 @@ export default function LandingPage() {
                     rows={4}
                     value={form.message}
                     onChange={set}
-                    placeholder="For example: Bronze, Silver, Gold, or the tools you care about most."
+                    placeholder="For example: notes after hygiene visits, missed calls, pre-auth tracking, claims, or front desk workload."
                     className="w-full resize-none rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20"
                   />
                 </div>
