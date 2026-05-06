@@ -40,12 +40,12 @@ import type { AppConfig, DemoRequest, SystemStatus } from '@/lib/api';
 const DEFAULT_SETTINGS: AppConfig = {
   mode: 'demo',
   openDental: {
-    serverUrl: 'http://localhost:30222',
+    serverUrl: '',
     developerKey: '',
     customerKey: '',
   },
   ollama: {
-    url: 'http://localhost:11434',
+    url: '',
     model: 'qwen2.5:14b',
     enabled: false,
   },
@@ -413,7 +413,7 @@ export default function SettingsPage() {
                   }))
                 }
                 className={`input ${!isLive ? 'bg-gray-50 text-gray-400' : ''}`}
-                placeholder="http://localhost:30222"
+                placeholder="Open Dental API URL"
                 disabled={!isLive}
               />
             </div>
@@ -555,7 +555,7 @@ export default function SettingsPage() {
                     }))
                   }
                   className="input"
-                  placeholder="http://localhost:11434"
+                  placeholder="Ollama API URL"
                 />
               </div>
               <div>

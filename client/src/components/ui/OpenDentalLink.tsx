@@ -2,18 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { getSettings } from '@/lib/api';
 
-const DEFAULT_SERVER_URL = 'http://localhost:30222';
-
 let cachedServerUrl: string | null = null;
 
 function useOpenDentalUrl() {
-  const [serverUrl, setServerUrl] = useState(cachedServerUrl ?? DEFAULT_SERVER_URL);
+  const [serverUrl, setServerUrl] = useState(cachedServerUrl ?? '');
 
   useEffect(() => {
     if (cachedServerUrl) return;
     getSettings()
       .then((cfg) => {
-        const url = cfg.openDental.serverUrl || DEFAULT_SERVER_URL;
+        const url = cfg.openDental.serverUrl || '';
         cachedServerUrl = url;
         setServerUrl(url);
       })
@@ -30,6 +28,8 @@ interface OpenDentalLinkProps {
 
 export default function OpenDentalLink({ patientId, className = '' }: OpenDentalLinkProps) {
   const serverUrl = useOpenDentalUrl();
+  if (!serverUrl) return null;
+
   const base = serverUrl.replace(/\/+$/, '');
   const href = `${base}/api/v1/patients/${patientId}`;
 
