@@ -195,6 +195,10 @@ export default function DashboardPage() {
   const currentRole = resolveRole(user?.role);
   const roleConfig = ROLES[currentRole];
   const displayName = user?.name?.replace('Dr. ', '') ?? roleConfig.userName;
+  const isNotes = currentRole === 'notes';
+  const isFrontDesk = currentRole === 'frontDesk';
+  const isBilling = currentRole === 'billing';
+  const isComplete = currentRole === 'complete';
 
   useEffect(() => {
     let cancelled = false;
@@ -220,14 +224,14 @@ export default function DashboardPage() {
         <p className="mt-1 text-sm text-gray-500">{getTodayFormatted()}</p>
       </div>
 
-      {/* Tier overview */}
+      {/* Package overview */}
       <div className="bg-indigo-50/50 border border-indigo-100 rounded-xl p-4 mb-6">
         <p className="text-xs font-semibold text-indigo-900 mb-1">{roleConfig.label}</p>
         <p className="mb-3 text-xs text-indigo-800">{roleConfig.summary}</p>
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
           <div className="flex items-start gap-2">
             <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">1</span>
-            <p className="text-xs text-indigo-800">Open your dashboard each morning to see the metrics included in this tier</p>
+            <p className="text-xs text-indigo-800">Open your dashboard each morning to see the metrics included in this package</p>
           </div>
           <div className="flex items-start gap-2">
             <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">2</span>
@@ -239,15 +243,14 @@ export default function DashboardPage() {
           </div>
           <div className="flex items-start gap-2">
             <span className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center mt-0.5">4</span>
-            <p className="text-xs text-indigo-800">Use All Tools to see exactly what the tier unlocks</p>
+            <p className="text-xs text-indigo-800">Use All Tools to see exactly what the package unlocks</p>
           </div>
         </div>
       </div>
 
-      {/* Stat cards — tier-tailored */}
+      {/* Stat cards — package-tailored */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
-        {/* ── Gold stat cards ── */}
-        {currentRole === 'gold' && (
+        { (isNotes || isComplete) && (
           <button
             onClick={() => navigate('/notes')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -274,7 +277,7 @@ export default function DashboardPage() {
           </button>
         )}
 
-        {currentRole === 'gold' && (
+        {isComplete && (
           <button
             onClick={() => navigate('/referrals')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -297,7 +300,7 @@ export default function DashboardPage() {
           </button>
         )}
 
-        {currentRole === 'gold' && (
+        {(isNotes || isComplete) && (
           <button
             onClick={() => navigate('/treatment-plans')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -320,7 +323,7 @@ export default function DashboardPage() {
           </button>
         )}
 
-        {currentRole === 'gold' && (
+        {isComplete && (
           <button
             onClick={() => navigate('/decision-support')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -347,8 +350,7 @@ export default function DashboardPage() {
           </button>
         )}
 
-        {/* ── Silver stat cards ── */}
-        {currentRole === 'silver' && (
+        {(isFrontDesk || isComplete) && (
           <button
             onClick={() => navigate('/nurture-sequences')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -375,7 +377,7 @@ export default function DashboardPage() {
           </button>
         )}
 
-        {currentRole === 'silver' && (
+        {(isBilling || isComplete) && (
           <button
             onClick={() => navigate('/billing')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -402,7 +404,7 @@ export default function DashboardPage() {
           </button>
         )}
 
-        {currentRole === 'silver' && (
+        {(isFrontDesk || isComplete) && (
           <button
             onClick={() => navigate('/recall')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -429,8 +431,7 @@ export default function DashboardPage() {
           </button>
         )}
 
-        {/* Silver: Pending Forms */}
-        {currentRole === 'silver' && (
+        {(isFrontDesk || isComplete) && (
           <button
             onClick={() => navigate('/forms')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -453,8 +454,7 @@ export default function DashboardPage() {
           </button>
         )}
 
-        {/* Bronze: Low Stock Items */}
-        {currentRole === 'bronze' && (
+        {isComplete && (
           <button
             onClick={() => navigate('/inventory')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -477,8 +477,7 @@ export default function DashboardPage() {
           </button>
         )}
 
-        {/* Bronze: Pending Follow-Ups */}
-        {currentRole === 'bronze' && (
+        {(isFrontDesk || isComplete) && (
           <button
             onClick={() => navigate('/follow-ups')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -501,8 +500,7 @@ export default function DashboardPage() {
           </button>
         )}
 
-        {/* Bronze: Pending Forms */}
-        {currentRole === 'bronze' && (
+        {(isFrontDesk || isComplete) && (
           <button
             onClick={() => navigate('/forms')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -525,8 +523,7 @@ export default function DashboardPage() {
           </button>
         )}
 
-        {/* Bronze: Today's Schedule */}
-        {currentRole === 'bronze' && (
+        {(isFrontDesk || isComplete) && (
           <button
             onClick={() => navigate('/smart-scheduling')}
             className="card p-6 text-left hover:shadow-md transition-shadow group relative overflow-hidden"
@@ -550,8 +547,8 @@ export default function DashboardPage() {
         )}
       </div>
 
-      {/* Charts row — Gold only */}
-      {currentRole === 'gold' && (
+      {/* Charts row */}
+      {(isBilling || isComplete) && (
       <div className="grid grid-cols-1 xl:grid-cols-5 gap-5">
         {/* Revenue area chart */}
         <div className="card p-6 xl:col-span-3">
@@ -623,12 +620,11 @@ export default function DashboardPage() {
       </div>
       )}
 
-      {/* Quick Actions — role-tailored */}
+      {/* Quick Actions — package-tailored */}
       <div>
         <h3 className="text-base font-semibold text-gray-900 mb-4">Quick Actions</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-          {/* ── Gold quick actions ── */}
-          {currentRole === 'gold' && (
+          {(isNotes || isComplete) && (
             <button
               onClick={() => { navigate('/notes'); toast.success('Opening clinical notes...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-purple-200 transition-all group"
@@ -647,7 +643,7 @@ export default function DashboardPage() {
             </button>
           )}
 
-          {currentRole === 'gold' && (
+          {isComplete && (
             <button
               onClick={() => { navigate('/referrals'); toast.success('Opening referrals...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-indigo-200 transition-all group"
@@ -666,7 +662,7 @@ export default function DashboardPage() {
             </button>
           )}
 
-          {currentRole === 'gold' && (
+          {(isNotes || isComplete) && (
             <button
               onClick={() => { navigate('/treatment-plans'); toast.success('Opening treatment plans...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-emerald-200 transition-all group"
@@ -685,7 +681,7 @@ export default function DashboardPage() {
             </button>
           )}
 
-          {currentRole === 'gold' && (
+          {(isNotes || isComplete) && (
             <button
               onClick={() => { navigate('/perio'); toast.success('Opening perio charting...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-amber-200 transition-all group"
@@ -704,8 +700,7 @@ export default function DashboardPage() {
             </button>
           )}
 
-          {/* ── Silver quick actions ── */}
-          {currentRole === 'silver' && (
+          {(isBilling || isComplete) && (
             <button
               onClick={() => { navigate('/billing'); toast.success('Opening billing...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-indigo-200 transition-all group"
@@ -724,7 +719,7 @@ export default function DashboardPage() {
             </button>
           )}
 
-          {currentRole === 'silver' && (
+          {(isFrontDesk || isComplete) && (
             <button
               onClick={() => { navigate('/recall'); toast.success('Opening patient recall...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-amber-200 transition-all group"
@@ -743,8 +738,7 @@ export default function DashboardPage() {
             </button>
           )}
 
-          {/* Silver only */}
-          {currentRole === 'silver' && (
+          {(isFrontDesk || isComplete) && (
             <button
               onClick={() => { navigate('/smart-scheduling'); toast.success('Opening scheduling...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-purple-200 transition-all group"
@@ -763,7 +757,7 @@ export default function DashboardPage() {
             </button>
           )}
 
-          {currentRole === 'silver' && (
+          {(isFrontDesk || isComplete) && (
             <button
               onClick={() => { navigate('/communications'); toast.success('Opening messages...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-emerald-200 transition-all group"
@@ -782,8 +776,7 @@ export default function DashboardPage() {
             </button>
           )}
 
-          {/* Bronze */}
-          {currentRole === 'bronze' && (
+          {isComplete && (
             <button
               onClick={() => { navigate('/inventory'); toast.success('Opening inventory...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-indigo-200 transition-all group"
@@ -802,7 +795,7 @@ export default function DashboardPage() {
             </button>
           )}
 
-          {currentRole === 'bronze' && (
+          {(isFrontDesk || isComplete) && (
             <button
               onClick={() => { navigate('/follow-ups'); toast.success('Opening follow-ups...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-emerald-200 transition-all group"
@@ -821,7 +814,7 @@ export default function DashboardPage() {
             </button>
           )}
 
-          {currentRole === 'bronze' && (
+          {isComplete && (
             <button
               onClick={() => { navigate('/compliance'); toast.success('Opening compliance...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-amber-200 transition-all group"
@@ -840,7 +833,7 @@ export default function DashboardPage() {
             </button>
           )}
 
-          {currentRole === 'bronze' && (
+          {(isFrontDesk || isComplete) && (
             <button
               onClick={() => { navigate('/smart-scheduling'); toast.success('Opening schedule...'); }}
               className="card p-5 text-left hover:shadow-md hover:border-purple-200 transition-all group"
@@ -861,8 +854,8 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Bottom row — Silver and Gold only */}
-      {(currentRole === 'gold' || currentRole === 'silver') && (
+      {/* Bottom row — billing and complete */}
+      {(isBilling || isComplete) && (
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-5">
         {/* Top balances */}
         <div className="card xl:col-span-2">

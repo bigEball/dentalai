@@ -39,7 +39,7 @@ export default function TopBar({ title }: TopBarProps) {
       <div className="flex items-center gap-2 ml-auto">
         <button
           type="button"
-          onClick={() => navigate('/ai-assistant')}
+          onClick={() => navigate('/ai-assistant-preview')}
           title="AI Assistant is a beta add-on for Open Dental and Summit AI Services workflow support."
           className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-indigo-100 bg-indigo-50 text-sm font-medium text-indigo-700 transition-colors hover:bg-indigo-100"
         >

@@ -112,6 +112,7 @@ function AppRoutes() {
           </div>
         }
       />
+      <Route path="/ai-assistant" element={<Navigate to="/ai-assistant-preview" replace />} />
       <Route
         element={
           <RequireAuth>
@@ -145,7 +146,6 @@ function AppRoutes() {
         <Route path="procurement" element={<RequireRole><ProcurementPage /></RequireRole>} />
         <Route path="decision-support" element={<RequireRole><ClinicalDecisionSupportPage /></RequireRole>} />
         <Route path="compliance" element={<RequireRole><ComplianceAutopilotPage /></RequireRole>} />
-        <Route path="ai-assistant" element={<RequireRole><AIAssistantPage /></RequireRole>} />
         <Route path="tools" element={<RequireRole><ToolsPage /></RequireRole>} />
         <Route path="settings" element={<RequireRole><SettingsPage /></RequireRole>} />
       </Route>

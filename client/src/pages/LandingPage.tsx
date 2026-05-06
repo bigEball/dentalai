@@ -158,11 +158,11 @@ const PRODUCT_PACKAGES = [
     bestFor: 'Teams losing time to calls, forms, reminders, scheduling gaps, and follow-up lists.',
     outcome: 'Fewer interruptions and more consistent patient follow-through.',
     includes: [
-      'AI assistant for staff questions',
       'Smart scheduling support',
       'Recall and follow-up workflows',
       'Patient forms and communications',
       'Morning huddle and task visibility',
+      'Schedule gap and waitlist workflows',
     ],
   },
   {
@@ -682,7 +682,7 @@ export default function LandingPage() {
             <div>
               <SectionIntro
                 eyebrow="AI Assistant"
-                title="A staff assistant that belongs inside the Front Desk package."
+                title="A staff assistant available as a separate add-on."
                 desc="The AI Assistant helps employees find answers faster. It can guide staff through Open Dental tasks, Summit tools, and common office workflows without interrupting a manager."
                 light
               />
@@ -698,11 +698,11 @@ export default function LandingPage() {
                   href="#demo"
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/15 px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-white/35 hover:bg-white/5"
                 >
-                  Ask about package fit
+                  Ask about add-on fit
                 </a>
               </div>
               <p className="mt-5 text-sm leading-6 text-slate-400">
-                The Assistant is included in the Front Desk and Complete packages, with deeper workflow coverage available during rollout.
+                The Assistant is not included in Notes, Front Desk, Billing, or Complete. It is quoted separately for teams that want staff workflow support.
               </p>
             </div>
 
@@ -718,7 +718,7 @@ export default function LandingPage() {
                   </div>
                 </div>
                 <span className="rounded-lg border border-amber-300/25 bg-amber-300/10 px-2.5 py-1 text-xs font-semibold text-amber-100">
-                  Package feature
+                  Paid add-on
                 </span>
               </div>
 

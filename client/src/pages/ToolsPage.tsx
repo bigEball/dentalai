@@ -259,9 +259,9 @@ const TOOLS: Tool[] = [
 const ADD_ON_TOOLS: Tool[] = [
   {
     label: 'AI Assistant',
-    description: 'Beta employee chatbot preview for Open Dental guidance and Summit AI Services workflow support. Paid add-on, not included in any tier.',
+    description: 'Beta employee chatbot preview for Open Dental guidance and Summit AI Services workflow support. Paid add-on, not included in any package.',
     icon: Bot,
-    route: '/ai-assistant',
+    route: '/ai-assistant-preview',
     category: 'ai',
     isNew: true,
   },
@@ -295,13 +295,13 @@ export default function ToolsPage() {
   const [query, setQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState<Category>('all');
   const currentRole = resolveRole(user?.role);
-  const tierTools = useMemo(
+  const packageTools = useMemo(
     () => TOOLS.filter((tool) => isRouteAllowed(currentRole, tool.route)),
     [currentRole],
   );
 
   const filtered = useMemo(() => {
-    let list = tierTools;
+    let list = packageTools;
     if (activeCategory !== 'all') {
       list = list.filter((t) => t.category === activeCategory);
     }
@@ -312,7 +312,7 @@ export default function ToolsPage() {
       );
     }
     return list;
-  }, [query, activeCategory, tierTools]);
+  }, [query, activeCategory, packageTools]);
 
   const filteredAddOns = useMemo(() => {
     if (activeCategory !== 'all' && activeCategory !== 'ai') return [];
@@ -323,7 +323,7 @@ export default function ToolsPage() {
     );
   }, [activeCategory, query]);
 
-  const newCount = tierTools.filter((t) => t.isNew).length;
+  const newCount = packageTools.filter((t) => t.isNew).length;
 
   return (
     <div className="max-w-6xl mx-auto space-y-6">
@@ -333,7 +333,7 @@ export default function ToolsPage() {
           <div className="flex items-center gap-2.5">
             <h1 className="text-2xl font-bold text-gray-900">All Tools</h1>
             <span className="inline-flex items-center gap-1 rounded-full bg-indigo-50 px-2.5 py-0.5 text-xs font-semibold text-indigo-600">
-              {tierTools.length}
+              {packageTools.length}
             </span>
           </div>
           <p className="mt-1 text-sm text-gray-500">
@@ -363,7 +363,7 @@ export default function ToolsPage() {
         <div className="flex flex-wrap gap-1.5">
           {CATEGORIES.map((cat) => {
             const isActive = activeCategory === cat.key;
-            const count = cat.key === 'all' ? tierTools.length : tierTools.filter((t) => t.category === cat.key).length;
+            const count = cat.key === 'all' ? packageTools.length : packageTools.filter((t) => t.category === cat.key).length;
             return (
               <button
                 key={cat.key}
@@ -442,7 +442,7 @@ export default function ToolsPage() {
           <div>
             <h2 className="text-sm font-semibold text-gray-900">Paid add-ons</h2>
             <p className="mt-0.5 text-xs text-gray-500">
-              Optional tools that are separate from Bronze, Silver, and Gold.
+              Optional tools that are separate from Notes, Front Desk, Billing, and Complete.
             </p>
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

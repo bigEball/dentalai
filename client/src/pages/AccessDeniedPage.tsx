@@ -20,7 +20,7 @@ export default function AccessDeniedPage() {
           You don't have access to this page.
         </p>
         <p className="text-xs text-gray-400 mb-6">
-          Current role: <span className="font-medium text-gray-600">{roleLabel}</span>
+          Current package: <span className="font-medium text-gray-600">{roleLabel}</span>
         </p>
         <button
           onClick={() => navigate('/dashboard')}

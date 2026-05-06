@@ -31,7 +31,6 @@ const PAGE_TITLES: Record<string, string> = {
   '/procurement': 'Inventory Management',
   '/decision-support': 'Clinical Decision Support',
   '/compliance': 'Compliance Autopilot',
-  '/ai-assistant': 'AI Assistant',
   '/tools': 'All Tools',
   '/settings': 'Settings',
 };

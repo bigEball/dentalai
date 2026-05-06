@@ -129,10 +129,10 @@ const ANSWERS: Array<{ keywords: string[]; answer: AssistantAnswer }> = [
     },
   },
   {
-    keywords: ['bronze', 'silver', 'gold', 'package', 'pricing', 'tier'],
+    keywords: ['notes', 'front desk', 'billing', 'complete', 'package', 'pricing', 'tier'],
     answer: {
-      text: 'Bronze covers the operational foundation. Silver adds growth and revenue tools. Gold includes full package access, including insurance, clinical support, fee optimization, and advanced settings.',
-      steps: ['Choose Bronze for core operations', 'Choose Silver for growth and revenue workflows', 'Choose Gold for the broadest toolset', 'Ask for a demo to match the package to your office'],
+      text: 'Notes covers clinical documentation. Front Desk covers patient operations. Billing covers revenue cycle support. Complete combines the package workflows into the broadest demo view. The AI Assistant is quoted separately as a paid add-on.',
+      steps: ['Choose Notes for provider documentation', 'Choose Front Desk for scheduling, recall, forms, and communication', 'Choose Billing for claims, insurance, balances, and reports', 'Ask separately about the AI Assistant add-on'],
     },
   },
 ];
@@ -310,7 +310,7 @@ export default function AIAssistantPage() {
               <h3 className="text-sm font-semibold text-amber-900">Separate add-on</h3>
             </div>
             <p className="text-xs leading-relaxed text-amber-800">
-              This preview is not included in Bronze, Silver, or Gold. It is a separate paid add-on.
+              This preview is not included in Notes, Front Desk, Billing, or Complete. It is a separate paid add-on.
             </p>
           </div>
 

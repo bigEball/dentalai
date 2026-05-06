@@ -14,9 +14,9 @@ export interface AuthUser {
 
 const DEMO_USER: AuthUser = {
   id: 'demo-user',
-  name: 'Gold Tier Demo',
+  name: 'Complete Package Demo',
   email: 'demo@summitaisoftware.com',
-  role: 'gold',
+  role: 'complete',
   office: 'Summit Demo Practice',
 };
 
@@ -46,17 +46,17 @@ export function getUser(): AuthUser | null {
     if (!raw) return null;
     const parsed = JSON.parse(raw) as AuthUser;
     // Migrate stale sessions missing the role field or using the old persona views.
-    if (!parsed.role || parsed.role === 'doctor') {
-      parsed.role = 'gold';
-      parsed.name = ROLES.gold.userName;
+    if (!parsed.role || parsed.role === 'doctor' || parsed.role === 'gold') {
+      parsed.role = 'complete';
+      parsed.name = ROLES.complete.userName;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
-    } else if (parsed.role === 'office') {
-      parsed.role = 'silver';
-      parsed.name = ROLES.silver.userName;
+    } else if (parsed.role === 'office' || parsed.role === 'bronze') {
+      parsed.role = 'frontDesk';
+      parsed.name = ROLES.frontDesk.userName;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
-    } else if (parsed.role === 'assistant') {
-      parsed.role = 'bronze';
-      parsed.name = ROLES.bronze.userName;
+    } else if (parsed.role === 'assistant' || parsed.role === 'silver') {
+      parsed.role = 'billing';
+      parsed.name = ROLES.billing.userName;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
     }
     return parsed;
@@ -73,14 +73,12 @@ export function isAuthenticated(): boolean {
 export function getDemoRole(): DemoRole {
   try {
     const raw = localStorage.getItem(ROLE_KEY);
-    if (raw === 'doctor') return 'gold';
-    if (raw === 'office') return 'silver';
-    if (raw === 'assistant') return 'bronze';
-    if (raw && (raw === 'gold' || raw === 'silver' || raw === 'bronze')) {
-      return raw;
-    }
+    if (raw === 'doctor' || raw === 'gold') return 'complete';
+    if (raw === 'office' || raw === 'bronze') return 'frontDesk';
+    if (raw === 'assistant' || raw === 'silver') return 'billing';
+    if (raw && raw in ROLES) return raw as DemoRole;
   } catch { /* ignore */ }
-  return 'gold';
+  return 'complete';
 }
 
 export function switchDemoRole(role: DemoRole): AuthUser {

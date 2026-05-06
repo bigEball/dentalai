@@ -1,6 +1,6 @@
 // ─── Role Definitions & Access Control ──────────────────────────────────────
 
-export type DemoRole = 'bronze' | 'silver' | 'gold';
+export type DemoRole = 'notes' | 'frontDesk' | 'billing' | 'complete';
 
 export interface RoleConfig {
   id: DemoRole;
@@ -11,63 +11,66 @@ export interface RoleConfig {
   summary: string;
 }
 
-const ALL_ROUTES = [
+const COMPLETE_ROUTES = [
   '/dashboard', '/morning-huddle', '/patients',
   '/notes', '/claim-scrubber', '/patient-retention', '/nurture-sequences',
   '/decision-support', '/treatment-plans', '/insurance', '/preauth',
   '/billing', '/payment-plans', '/fee-optimizer', '/recall', '/perio',
   '/smart-scheduling', '/communications', '/follow-ups', '/referrals',
   '/forms', '/inventory', '/procurement', '/reports', '/patient-scores',
-  '/compliance', '/ai-assistant', '/tools', '/settings',
+  '/compliance', '/tools', '/settings',
 ];
 
 export const ROLES: Record<DemoRole, RoleConfig> = {
-  bronze: {
-    id: 'bronze',
-    label: 'Bronze Tier',
-    userName: 'Bronze Tier Demo',
-    userTitle: 'Core Operations',
-    summary: 'Front desk automation, scheduling, patient communication, forms, inventory, and compliance.',
+  notes: {
+    id: 'notes',
+    label: 'Notes Package',
+    userName: 'Notes Package Demo',
+    userTitle: 'Clinical Documentation',
+    summary: 'Clinical note drafting, SOAP-style review, treatment documentation, perio context, and provider approval workflows.',
     allowedRoutes: [
-      '/dashboard', '/morning-huddle', '/patients',
-      '/smart-scheduling', '/communications', '/follow-ups',
-      '/forms', '/inventory', '/compliance', '/tools',
-      '/ai-assistant',
+      '/dashboard', '/patients', '/notes', '/treatment-plans', '/perio', '/tools',
     ],
   },
-  silver: {
-    id: 'silver',
-    label: 'Silver Tier',
-    userName: 'Silver Tier Demo',
-    userTitle: 'Revenue Operations',
-    summary: 'Everything in Bronze, plus billing, recall, treatment follow-up, reports, referrals, inventory management, patient retention, and patient scoring.',
+  frontDesk: {
+    id: 'frontDesk',
+    label: 'Front Desk Package',
+    userName: 'Front Desk Package Demo',
+    userTitle: 'Patient Operations',
+    summary: 'Scheduling, patient communication, recall, follow-ups, forms, morning huddle, and daily task visibility.',
     allowedRoutes: [
       '/dashboard', '/morning-huddle', '/patients',
-      '/patient-retention', '/nurture-sequences',
-      '/treatment-plans',
-      '/billing', '/payment-plans', '/recall',
-      '/smart-scheduling', '/communications', '/follow-ups', '/referrals',
-      '/forms', '/inventory', '/procurement', '/reports', '/patient-scores',
-      '/compliance', '/tools',
-      '/ai-assistant',
+      '/smart-scheduling', '/communications', '/follow-ups', '/recall', '/nurture-sequences',
+      '/forms', '/patient-scores', '/tools',
     ],
   },
-  gold: {
-    id: 'gold',
-    label: 'Gold Tier',
-    userName: 'Gold Tier Demo',
-    userTitle: 'Complete AI Platform',
-    summary: 'Everything in Silver, plus insurance tools, clinical AI notes, decision support, perio charting, fee optimization, and full system configuration.',
-    allowedRoutes: ALL_ROUTES,
+  billing: {
+    id: 'billing',
+    label: 'Billing Package',
+    userName: 'Billing Package Demo',
+    userTitle: 'Revenue Cycle Support',
+    summary: 'Claim review, insurance eligibility, pre-auth tracking, billing queues, payment plans, and revenue reports.',
+    allowedRoutes: [
+      '/dashboard', '/patients', '/claim-scrubber', '/insurance', '/preauth',
+      '/billing', '/payment-plans', '/fee-optimizer', '/reports', '/tools',
+    ],
+  },
+  complete: {
+    id: 'complete',
+    label: 'Complete Package',
+    userName: 'Complete Package Demo',
+    userTitle: 'Full Practice Operating Layer',
+    summary: 'Notes, front desk, billing, reporting, recall, clinical support, operations, and complete practice visibility.',
+    allowedRoutes: COMPLETE_ROUTES,
   },
 };
 
 export function resolveRole(role: string | undefined | null): DemoRole {
-  if (role === 'assistant') return 'bronze';
-  if (role === 'office') return 'silver';
-  if (role === 'doctor') return 'gold';
+  if (role === 'assistant' || role === 'office' || role === 'bronze') return 'frontDesk';
+  if (role === 'silver') return 'billing';
+  if (role === 'doctor' || role === 'gold') return 'complete';
   if (role && role in ROLES) return role as DemoRole;
-  return 'gold';
+  return 'complete';
 }
 
 export function isRouteAllowed(role: DemoRole, route: string): boolean {

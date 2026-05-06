@@ -32,9 +32,6 @@ import {
   ClipboardCheck,
 
   ChevronUp,
-  Award,
-  Medal,
-  Gem,
   Check,
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
@@ -108,15 +105,17 @@ function NavSection({ label, items }: { label: string; items: typeof MAIN_NAV })
 }
 
 const ROLE_ICONS: Record<DemoRole, React.ElementType> = {
-  bronze: Award,
-  silver: Medal,
-  gold: Gem,
+  notes: FileText,
+  frontDesk: MessageSquare,
+  billing: DollarSign,
+  complete: Layers,
 };
 
 const ROLE_COLORS: Record<DemoRole, string> = {
-  bronze: 'text-amber-500',
-  silver: 'text-slate-300',
-  gold: 'text-yellow-300',
+  notes: 'text-purple-300',
+  frontDesk: 'text-cyan-300',
+  billing: 'text-emerald-300',
+  complete: 'text-yellow-300',
 };
 
 export default function Sidebar() {
@@ -199,7 +198,7 @@ export default function Sidebar() {
               style={{ backgroundColor: '#1a1b23' }}
             >
               <p className="px-3 py-2 text-[10px] font-semibold uppercase tracking-wider text-gray-500 border-b border-white/5">
-                Switch Demo Tier
+                Switch Demo Package
               </p>
               {(Object.keys(ROLES) as DemoRole[]).map((role) => {
                 const config = ROLES[role];
