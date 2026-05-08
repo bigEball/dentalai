@@ -52,6 +52,48 @@ function resolveMock(url: string, method: string, requestBody?: unknown): { data
   return { data: mock };
 }
 
+function normalizeTreatmentPlan(plan: TreatmentPlan | Record<string, unknown>): TreatmentPlan {
+  const raw = plan as Record<string, unknown>;
+  const totalEstimate = Number(raw.totalEstimate ?? raw.totalCost ?? 0);
+  const insuranceEst = Number(raw.insuranceEst ?? raw.estimatedInsurance ?? 0);
+  const patientEst = Number(raw.patientEst ?? raw.patientPortion ?? Math.max(0, totalEstimate - insuranceEst));
+  const status = raw.status === 'presented' ? 'proposed' : String(raw.status ?? 'proposed');
+  const items = Array.isArray(raw.items)
+    ? raw.items.map((item, index) => {
+        const rawItem = item as Record<string, unknown>;
+        const estimatedCost = Number(rawItem.estimatedCost ?? rawItem.cost ?? 0);
+        const insuranceCoverage = Number(rawItem.insuranceCoverage ?? 0);
+        return {
+          ...rawItem,
+          id: String(rawItem.id ?? `${raw.id ?? 'tp'}-${index + 1}`),
+          treatmentPlanId: String(rawItem.treatmentPlanId ?? raw.id ?? ''),
+          procedureCode: String(rawItem.procedureCode ?? ''),
+          description: String(rawItem.description ?? 'Treatment item'),
+          estimatedCost,
+          insuranceCoverage,
+          patientCost: Number(rawItem.patientCost ?? Math.max(0, estimatedCost - insuranceCoverage)),
+          status: String(rawItem.status ?? 'pending'),
+          sequence: Number(rawItem.sequence ?? index + 1),
+        } as TreatmentPlanItem;
+      })
+    : [];
+
+  return {
+    ...(raw as unknown as TreatmentPlan),
+    id: String(raw.id ?? ''),
+    patientId: String(raw.patientId ?? ''),
+    providerId: String(raw.providerId ?? ''),
+    title: String(raw.title ?? 'Treatment Plan'),
+    status: status as TreatmentPlan['status'],
+    presentedDate: String(raw.presentedDate ?? raw.createdDate ?? ''),
+    totalEstimate: Number.isFinite(totalEstimate) ? totalEstimate : 0,
+    insuranceEst: Number.isFinite(insuranceEst) ? insuranceEst : 0,
+    patientEst: Number.isFinite(patientEst) ? patientEst : 0,
+    priority: (raw.priority ?? 'standard') as TreatmentPlan['priority'],
+    items,
+  };
+}
+
 api.interceptors.response.use(
   response => {
     // Netlify's SPA fallback could return index.html (HTML, 200) for an
@@ -270,12 +312,13 @@ export async function sendRecallEmail(id: string): Promise<{ success: boolean }>
 
 export async function getTreatmentPlans(params?: { status?: string; patientId?: string }): Promise<{ plans: TreatmentPlan[]; total: number }> {
   const { data } = await api.get<TreatmentPlan[]>('/treatment-plans', { params });
-  return { plans: data, total: data.length };
+  const plans = Array.isArray(data) ? data.map(normalizeTreatmentPlan) : [];
+  return { plans, total: plans.length };
 }
 
 export async function getTreatmentPlan(id: string): Promise<TreatmentPlan> {
   const { data } = await api.get<TreatmentPlan>(`/treatment-plans/${id}`);
-  return data;
+  return normalizeTreatmentPlan(data);
 }
 
 export async function createTreatmentPlan(payload: Partial<TreatmentPlan> & { items?: Partial<TreatmentPlanItem>[] }): Promise<TreatmentPlan> {

@@ -237,12 +237,156 @@ const ACTIVITY = [
 
 const PATIENT_SCORES = PATIENTS.map((p, i) => ({
   patientId: p.id,
-  riskScore: [72, 15, 28, 84, 42, 35, 91, 18, 55, 22, 88, 20][i] || 30,
-  churnRisk: [0.42, 0.08, 0.12, 0.68, 0.25, 0.18, 0.79, 0.10, 0.38, 0.14, 0.72, 0.11][i] || 0.15,
-  lifetimeValue: [8200, 12500, 4800, 5200, 18400, 15200, 3100, 9800, 6200, 7500, 4900, 8900][i] || 5000,
-  lastUpdate: '2026-04-20',
+  patientName: `${p.firstName} ${p.lastName}`,
+  attendance: [86, 58, 77, 42, 91, 74, 35, 88, 69, 83, 46, 79][i] || 72,
+  financial: [78, 92, 68, 51, 84, 88, 39, 80, 73, 77, 44, 86][i] || 75,
+  engagement: [70, 84, 62, 45, 89, 71, 32, 85, 64, 81, 41, 76][i] || 70,
+  treatmentCommitment: [82, 76, 64, 40, 93, 79, 36, 91, 67, 74, 43, 82][i] || 70,
+  composite: [79, 78, 68, 45, 89, 78, 36, 86, 68, 79, 44, 81][i] || 72,
+  alerts: ([45, 36, 44].includes([79, 78, 68, 45, 89, 78, 36, 86, 68, 79, 44, 81][i] || 72))
+    ? [
+        { type: 'front_desk_warning', severity: 'warning', message: 'Confirm appointment and review balance before seating.', score: 'Low reliability' },
+      ]
+    : [],
+  calculatedAt: '2026-04-20T12:00:00Z',
   patient: pt(i),
 }));
+
+const MORNING_HUDDLE = {
+  id: 'mh-demo',
+  date: new Date().toISOString().split('T')[0],
+  generatedAt: new Date().toISOString(),
+  reviewedAt: null,
+  reviewedBy: null,
+  summary: {
+    totalPatients: 6,
+    expectedProduction: 8450,
+    newPatients: 1,
+    patientsWithBalances: 2,
+    totalCollectible: 2325,
+    highRiskNoShows: 1,
+  },
+  patients: [
+    {
+      patientId: 'pat-001', firstName: 'Margaret', lastName: 'Harrington',
+      appointmentTime: '08:30', appointmentType: 'Crown seat', provider: 'Dr. Mitchell',
+      duration: 60, isNewPatient: false, flags: [], outstandingBalance: 420,
+      insuranceStatus: 'verified', noShowRate: 0.08, pendingTreatmentValue: 0,
+    },
+    {
+      patientId: 'pat-002', firstName: 'Robert', lastName: 'Kessler',
+      appointmentTime: '10:00', appointmentType: 'Implant consult', provider: 'Dr. Patel',
+      duration: 90, isNewPatient: false,
+      flags: [{ type: 'treatment', severity: 'warning', message: 'Discuss pending implant plan', action: 'Review plan' }],
+      outstandingBalance: 0, insuranceStatus: 'near max', noShowRate: 0.18, pendingTreatmentValue: 4200,
+    },
+    {
+      patientId: 'pat-010', firstName: 'Carlos', lastName: 'Ramirez',
+      appointmentTime: '14:30', appointmentType: 'New patient exam', provider: 'Dr. Mitchell',
+      duration: 60, isNewPatient: true,
+      flags: [{ type: 'clinical', severity: 'info', message: 'New patient intake forms complete' }],
+      outstandingBalance: 0, insuranceStatus: 'verified', noShowRate: 0.12, pendingTreatmentValue: 0,
+    },
+  ],
+  alerts: [
+    {
+      id: 'mha-1', type: 'financial', severity: 'warning', patientName: 'Margaret Harrington',
+      patientId: 'pat-001', message: 'Outstanding balance due before seating.', action: 'Collect balance',
+    },
+  ],
+  opportunities: [
+    {
+      id: 'mho-1', type: 'treatment', patientName: 'Robert Kessler', patientId: 'pat-002',
+      title: 'Implant plan follow-up', value: 4200, description: 'Review financing and answer remaining questions.',
+    },
+  ],
+};
+
+const FEE_SCHEDULES = [
+  { id: 'fs-standard', name: 'Standard UCR', type: 'standard', payerName: null, effectiveDate: '2026-01-01', entryCount: 4 },
+];
+
+const FEE_SCHEDULE_DETAIL = {
+  id: 'fs-standard',
+  name: 'Standard UCR',
+  type: 'standard',
+  payerName: null,
+  entries: [
+    { id: 'fee-1', scheduleId: 'fs-standard', code: 'D1110', description: 'Adult prophylaxis', category: 'Preventive', feeAmount: 145, ppoAllowedFee: 105, annualVolume: 420, ucrPercentile: 55, writeOff: 40, annualRevenue: 44100, annualWriteOff: 16800 },
+    { id: 'fee-2', scheduleId: 'fs-standard', code: 'D2740', description: 'Porcelain crown', category: 'Restorative', feeAmount: 1425, ppoAllowedFee: 980, annualVolume: 96, ucrPercentile: 48, writeOff: 445, annualRevenue: 94080, annualWriteOff: 42720 },
+    { id: 'fee-3', scheduleId: 'fs-standard', code: 'D4341', description: 'SRP per quadrant', category: 'Perio', feeAmount: 430, ppoAllowedFee: 330, annualVolume: 130, ucrPercentile: 62, writeOff: 100, annualRevenue: 42900, annualWriteOff: 13000 },
+    { id: 'fee-4', scheduleId: 'fs-standard', code: 'D2392', description: 'Two-surface composite', category: 'Restorative', feeAmount: 285, ppoAllowedFee: 210, annualVolume: 260, ucrPercentile: 51, writeOff: 75, annualRevenue: 54600, annualWriteOff: 19500 },
+  ],
+};
+
+const WRITE_OFF_ANALYSIS = {
+  byPayer: [{ payerName: 'Demo PPO', totalWriteOff: 92020, procedureCount: 4 }],
+  details: FEE_SCHEDULE_DETAIL.entries.map((entry) => ({
+    code: entry.code,
+    description: entry.description,
+    category: entry.category,
+    standardFee: entry.feeAmount,
+    ppoAllowedFee: entry.ppoAllowedFee ?? entry.feeAmount,
+    writeOffPerUnit: entry.writeOff ?? 0,
+    annualVolume: entry.annualVolume,
+    annualWriteOff: entry.annualWriteOff ?? 0,
+    payerName: 'Demo PPO',
+  })),
+};
+
+const COMPLIANCE_TASKS = [
+  { id: 'ct-1', title: 'HIPAA risk assessment', category: 'hipaa', description: 'Annual privacy and security review.', frequency: 'Annual', lastCompleted: '2025-06-15', nextDue: '2026-06-15', status: 'due_soon', assignee: 'Office Manager', notes: 'Review access logs and vendor list.', evidence: 'Prior assessment PDF', priority: 'high' },
+  { id: 'ct-2', title: 'OSHA bloodborne pathogen training', category: 'osha', description: 'Staff training renewal.', frequency: 'Annual', lastCompleted: '2025-04-10', nextDue: '2026-04-10', status: 'overdue', assignee: 'Clinical Lead', notes: 'Schedule makeup session.', evidence: 'Training roster', priority: 'critical' },
+  { id: 'ct-3', title: 'Sterilizer spore test logs', category: 'infection_control', description: 'Verify weekly biological monitoring.', frequency: 'Weekly', lastCompleted: '2026-04-20', nextDue: '2026-04-27', status: 'compliant', assignee: 'Back Office', notes: '', evidence: 'Logbook', priority: 'medium' },
+  { id: 'ct-4', title: 'State license renewal checklist', category: 'state_regulatory', description: 'Prepare provider renewal documents.', frequency: 'Biennial', lastCompleted: null, nextDue: '2026-08-01', status: 'not_started', assignee: 'Admin', notes: '', evidence: '', priority: 'medium' },
+];
+
+const COMPLIANCE_TRAINING = [
+  { id: 'tr-1', staffName: 'Sarah Mitchell', staffRole: 'DDS', trainingType: 'HIPAA Privacy', completedDate: '2026-01-08', expiryDate: '2027-01-08', certificateRef: 'HIPAA-2026-01', status: 'current' },
+  { id: 'tr-2', staffName: 'Jamie Foster', staffRole: 'Assistant', trainingType: 'OSHA BBP', completedDate: '2025-04-10', expiryDate: '2026-04-10', certificateRef: 'OSHA-2025-04', status: 'expired' },
+];
+
+const COMPLIANCE_ALERTS = [
+  { id: 'ca-1', type: 'task', title: 'OSHA bloodborne pathogen training', category: 'osha', dueDate: '2026-04-10', daysUntilDue: -28, urgency: '30_days', assignee: 'Clinical Lead' },
+  { id: 'ca-2', type: 'training', title: 'Jamie Foster - OSHA BBP', category: 'training', dueDate: '2026-04-10', daysUntilDue: -28, urgency: '30_days', assignee: 'Jamie Foster' },
+];
+
+const COMPLIANCE_DASHBOARD = {
+  overallScore: 78,
+  categoryScores: { hipaa: 86, osha: 62, infection_control: 94, state_regulatory: 70 },
+  totalTasks: COMPLIANCE_TASKS.length,
+  compliantCount: 1,
+  dueSoonCount: 1,
+  overdueCount: 1,
+  notStartedCount: 1,
+  expiringTrainingCount: 0,
+  expiredTrainingCount: 1,
+  recentAudits: [],
+};
+
+const COMPLIANCE_AUDITS = [
+  {
+    id: 'audit-1',
+    type: 'readiness',
+    generatedAt: '2026-04-20T12:00:00Z',
+    overallScore: 78,
+    categoryScores: COMPLIANCE_DASHBOARD.categoryScores,
+    sections: [
+      {
+        category: 'OSHA',
+        tasks: COMPLIANCE_TASKS.filter((task) => task.category === 'osha').map((task) => ({
+          title: task.title,
+          status: task.status,
+          lastCompleted: task.lastCompleted,
+          nextDue: task.nextDue,
+          evidence: task.evidence,
+          priority: task.priority,
+        })),
+        score: 62,
+      },
+    ],
+  },
+];
 
 // ─── Settings / Status ────────────────────────────────────────────────────────
 
@@ -276,11 +420,23 @@ const EXACT: Record<string, Mock> = {
   '/followups': FOLLOWUPS,
   '/referrals': REFERRALS,
   '/inventory': INVENTORY,
+  '/inventory/alerts': INVENTORY.filter((item) => item.currentStock <= item.reorderPoint),
   '/notes': NOTES,
   '/perio/exams': PERIO_EXAMS,
   '/perio': PERIO_EXAMS,
   '/scores/patients': PATIENT_SCORES,
   '/scores': PATIENT_SCORES,
+  '/scores/alerts': PATIENT_SCORES.filter((score) => score.alerts.length > 0),
+  '/morning-huddle/today': MORNING_HUDDLE,
+  [`/morning-huddle/${MORNING_HUDDLE.date}`]: MORNING_HUDDLE,
+  '/fee-schedules': FEE_SCHEDULES,
+  '/fee-schedules/fs-standard': FEE_SCHEDULE_DETAIL,
+  '/fee-schedules/write-off-analysis': WRITE_OFF_ANALYSIS,
+  '/compliance/dashboard': COMPLIANCE_DASHBOARD,
+  '/compliance/tasks': COMPLIANCE_TASKS,
+  '/compliance/training': COMPLIANCE_TRAINING,
+  '/compliance/expiry-alerts': COMPLIANCE_ALERTS,
+  '/compliance/audits': COMPLIANCE_AUDITS,
   '/activity': ACTIVITY,
   '/settings': SETTINGS,
   '/settings/status': SYSTEM_STATUS,
@@ -288,14 +444,13 @@ const EXACT: Record<string, Mock> = {
 
 // Pages that ship their own richer internal mocks — just unblock with []
 const EMPTY_ARRAY_PATHS = [
-  '/procurement', '/claim-scrubber', '/churn', '/nurture', '/scheduling',
-  '/compliance', '/decision-support', '/fee-schedules', '/morning-huddle',
+  '/procurement', '/claim-scrubber', '/churn', '/nurture',
+  '/decision-support',
   '/reports', '/appointments',
 ];
 
 const EMPTY_OBJECT_PATHS = [
   '/procurement/dashboard', '/claim-scrubber/stats', '/churn/dashboard',
-  '/scheduling/dashboard', '/scheduling/utilization', '/morning-huddle/today',
   '/reports/production', '/reports/collections', '/reports/case-acceptance',
   '/reports/hygiene', '/reports/aging-ar',
 ];
@@ -317,7 +472,7 @@ export function getMockForPath(path: string): Mock | undefined {
   if (segments.length >= 2) {
     const collectionKey = '/' + segments.slice(0, -1).join('/');
     const last = segments[segments.length - 1]!;
-    if (collectionKey in EXACT && !/^(stats|status|generate|recent|today|overview)$/.test(last)) {
+    if (collectionKey in EXACT && !/^(stats|status|generate|recent|today|overview|alerts|bulk|parse|confirm|send|submit|sync|switch-mode|test-connection)$/.test(last)) {
       const collection = EXACT[collectionKey];
       if (Array.isArray(collection)) {
         const match = collection.find((item: Record<string, unknown>) => item.id === last);
