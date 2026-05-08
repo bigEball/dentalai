@@ -111,6 +111,7 @@ api.interceptors.response.use(
       if (mock !== undefined) {
         return { ...response, ...mock, status: 200, statusText: 'OK' };
       }
+      return Promise.reject(new Error(`Expected JSON from ${url}, received HTML`));
     }
     return response;
   },

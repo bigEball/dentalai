@@ -33,6 +33,20 @@ The app will be available at:
 
 ---
 
+## Documentation
+
+Project Markdown is organized under [docs](docs/README.md):
+
+| Area | Start here |
+| --- | --- |
+| Legal and compliance | [docs/legal/README.md](docs/legal/README.md) |
+| Sales enablement | [docs/sales/README.md](docs/sales/README.md) |
+| Service agreement packet | [docs/legal/templates/service-agreements/README.md](docs/legal/templates/service-agreements/README.md) |
+
+Generated PDFs and compiled contract packets live in the nearest `dist/` folder.
+
+---
+
 ## Project Structure
 
 ```
@@ -43,35 +57,33 @@ dentalai/
 │       │   ├── layout/      # Sidebar, TopBar
 │       │   └── ui/          # StatCard, Badge, Modal, ActivityFeed, etc.
 │       ├── context/         # AuthContext (fake local auth)
+│       ├── features/        # One folder per routed product area
 │       ├── layouts/         # AppLayout (sidebar + main area wrapper)
 │       ├── lib/
 │       │   ├── api.ts       # Typed axios API client for all endpoints
 │       │   ├── auth.ts      # LocalStorage-based demo auth
 │       │   └── utils.ts     # formatCurrency, formatDate, color helpers
-│       ├── pages/           # One file per route/module
 │       └── types/           # Shared TypeScript interfaces
 │
 ├── server/                  # Node.js + Express + TypeScript backend
+│   ├── prisma/
+│   │   ├── schema.prisma    # SQLite schema
+│   │   └── seed.ts          # Realistic demo dental office data
 │   └── src/
+│       ├── api/routes/      # Express route handlers
+│       ├── core/            # Config and shared filesystem paths
 │       ├── db/client.ts     # Prisma singleton
-│       ├── lib/activity.ts  # logActivity() helper
-│       └── routes/          # One file per resource
-│           ├── patients.ts
-│           ├── notes.ts      # + mock AI SOAP generator
-│           ├── insurance.ts  # plans + claims
-│           ├── billing.ts
-│           ├── recall.ts
-│           ├── radiographs.ts
-│           ├── dashboard.ts  # aggregated stats
-│           ├── activity.ts
-│           └── settings.ts   # in-memory mock settings
+│       ├── domain/          # Business logic engines
+│       ├── integrations/    # Open Dental, Ollama, and external clients
+│       └── services/        # Application services
 │
-├── prisma/
-│   ├── schema.prisma        # SQLite schema (9 models)
-│   └── seed.ts              # Realistic demo dental office data
+├── docs/                    # Legal, sales, and generated documentation
+├── scripts/docs/            # Documentation render/build scripts
 │
 └── data/
-    └── dentalai.db          # SQLite database (auto-created by seed)
+    ├── dentalai.db          # SQLite database (auto-created by seed)
+    ├── demo-requests.json   # Local demo request inbox
+    └── uploads/             # Imported files and uploaded assets
 ```
 
 ---
@@ -203,4 +215,4 @@ The following areas are **clearly marked as future work** and require API keys o
 | Insurance eligibility | Availity API credentials |
 | Production auth | JWT secret + user database |
 
-All integration points are isolated in their respective service files (`server/src/routes/` and future `server/src/integrations/`) for easy drop-in replacement.
+Integration points live under `server/src/integrations/`, route handlers live under `server/src/api/routes/`, and business logic lives under `server/src/domain/`.

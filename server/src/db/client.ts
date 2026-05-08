@@ -1,8 +1,8 @@
-import path from 'path';
 import type { PrismaClient as PrismaClientType } from '../../node_modules/.prisma/client';
+import { dataFilePath } from '../core/paths';
 
 if (!process.env.DATABASE_URL) {
-  process.env.DATABASE_URL = `file:${path.resolve(__dirname, '../../../data/dentalai.db')}`;
+  process.env.DATABASE_URL = `file:${dataFilePath('dentalai.db')}`;
 }
 
 // Load Prisma after DATABASE_URL has been initialized.

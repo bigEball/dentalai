@@ -1,8 +1,14 @@
 node_modules/
 dist/
+!docs/**/dist/
+!docs/**/dist/*.html
+!docs/**/dist/*.md
+!docs/**/dist/*.pdf
+docs/**/dist/.swift-cache/
 .env
 *.db
 *.db-journal
+data/*.json
 tmp/
 .DS_Store
 

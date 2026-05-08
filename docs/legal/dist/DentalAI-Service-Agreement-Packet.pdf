@@ -1,0 +1,3708 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+4 0 obj
+<< /Length 1930 >>
+stream
+1.000 1.000 1.000 rg
+0.00 0.00 612.00 792.00 re f
+0.122 0.165 0.267 RG
+1.2 w 48.00 48.00 m 564.00 48.00 l S
+0.122 0.165 0.267 RG
+1.2 w 48.00 744.00 m 564.00 744.00 l S
+0.122 0.165 0.267 RG
+1.2 w 48.00 48.00 m 48.00 744.00 l S
+0.122 0.165 0.267 RG
+1.2 w 564.00 48.00 m 564.00 744.00 l S
+0.208 0.420 0.361 rg
+BT /F2 9 Tf 72.00 690.00 Td (DENTALAI DEPLOYMENT PACKET) Tj ET
+0.067 0.094 0.153 rg
+BT /F2 30 Tf 72.00 622.00 Td (Office Service Agreements) Tj ET
+0.067 0.094 0.153 rg
+BT /F2 30 Tf 72.00 584.00 Td (and Compliance Templates) Tj ET
+0.216 0.255 0.318 rg
+BT /F1 13 Tf 72.00 536.00 Td (A consolidated contract packet for deploying an AI-enabled dental) Tj ET
+0.216 0.255 0.318 rg
+BT /F1 13 Tf 72.00 518.06 Td (operations platform in a dental office using Open Dental and related) Tj ET
+0.216 0.255 0.318 rg
+BT /F1 13 Tf 72.00 500.12 Td (service providers.) Tj ET
+0.961 0.969 0.980 rg
+72.00 405.00 410.00 72.00 re f
+0.208 0.420 0.361 rg
+72.00 405.00 5.00 72.00 re f
+0.216 0.255 0.318 rg
+BT /F1 10.5 Tf 92.00 452.00 Td (Draft for counsel review. This packet is a practical starting point, not) Tj ET
+0.216 0.255 0.318 rg
+BT /F1 10.5 Tf 92.00 437.51 Td (legal advice. It should be reviewed and adapted by qualified healthcare,) Tj ET
+0.216 0.255 0.318 rg
+BT /F1 10.5 Tf 92.00 423.02 Td (privacy, and commercial counsel before use.) Tj ET
+0.400 0.439 0.522 rg
+BT /F2 8 Tf 72.00 204.00 Td (Prepared For) Tj ET
+0.067 0.094 0.153 rg
+BT /F2 11 Tf 72.00 186.00 Td ([Dental Practice Legal Name]) Tj ET
+0.400 0.439 0.522 rg
+BT /F2 8 Tf 330.00 204.00 Td (Prepared By) Tj ET
+0.067 0.094 0.153 rg
+BT /F2 11 Tf 330.00 186.00 Td ([Vendor Legal Name]) Tj ET
+0.400 0.439 0.522 rg
+BT /F2 8 Tf 72.00 142.00 Td (Generated) Tj ET
+0.067 0.094 0.153 rg
+BT /F2 11 Tf 72.00 124.00 Td (2026-05-08) Tj ET
+0.400 0.439 0.522 rg
+BT /F2 8 Tf 330.00 142.00 Td (Version) Tj ET
+0.067 0.094 0.153 rg
+BT /F2 11 Tf 330.00 124.00 Td (Attorney Review Draft v0.1) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Length 3002 >>
+stream
+0.067 0.094 0.153 rg
+BT /F2 23 Tf 54.00 734.00 Td (Table of Contents) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 10.5 Tf 54.00 692.00 Td (1. Master Services Agreement) Tj ET
+0.796 0.835 0.882 RG
+0.45 w 270.00 690.50 m 500.00 690.50 l S
+0.400 0.439 0.522 rg
+BT /F1 9.5 Tf 508.00 692.00 Td (Page ____) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 10.5 Tf 54.00 672.00 Td (2. Business Associate Agreement) Tj ET
+0.796 0.835 0.882 RG
+0.45 w 270.00 670.50 m 500.00 670.50 l S
+0.400 0.439 0.522 rg
+BT /F1 9.5 Tf 508.00 672.00 Td (Page ____) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 10.5 Tf 54.00 652.00 Td (3. Implementation Statement of Work) Tj ET
+0.796 0.835 0.882 RG
+0.45 w 270.00 650.50 m 500.00 650.50 l S
+0.400 0.439 0.522 rg
+BT /F1 9.5 Tf 508.00 652.00 Td (Page ____) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 10.5 Tf 54.00 632.00 Td (4. Security and Data Protection Addendum) Tj ET
+0.796 0.835 0.882 RG
+0.45 w 270.00 630.50 m 500.00 630.50 l S
+0.400 0.439 0.522 rg
+BT /F1 9.5 Tf 508.00 632.00 Td (Page ____) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 10.5 Tf 54.00 612.00 Td (5. Open Dental Integration Authorization) Tj ET
+0.796 0.835 0.882 RG
+0.45 w 270.00 610.50 m 500.00 610.50 l S
+0.400 0.439 0.522 rg
+BT /F1 9.5 Tf 508.00 612.00 Td (Page ____) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 10.5 Tf 54.00 592.00 Td (6. AI Clinical Use Addendum) Tj ET
+0.796 0.835 0.882 RG
+0.45 w 270.00 590.50 m 500.00 590.50 l S
+0.400 0.439 0.522 rg
+BT /F1 9.5 Tf 508.00 592.00 Td (Page ____) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 10.5 Tf 54.00 572.00 Td (7. Patient Recording and AI Documentation Consent) Tj ET
+0.796 0.835 0.882 RG
+0.45 w 270.00 570.50 m 500.00 570.50 l S
+0.400 0.439 0.522 rg
+BT /F1 9.5 Tf 508.00 572.00 Td (Page ____) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 10.5 Tf 54.00 552.00 Td (8. Staff Recording and AI Documentation Policy) Tj ET
+0.796 0.835 0.882 RG
+0.45 w 270.00 550.50 m 500.00 550.50 l S
+0.400 0.439 0.522 rg
+BT /F1 9.5 Tf 508.00 552.00 Td (Page ____) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 10.5 Tf 54.00 532.00 Td (9. Patient Communications Addendum) Tj ET
+0.796 0.835 0.882 RG
+0.45 w 270.00 530.50 m 500.00 530.50 l S
+0.400 0.439 0.522 rg
+BT /F1 9.5 Tf 508.00 532.00 Td (Page ____) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 10.5 Tf 54.00 512.00 Td (10. Billing and Insurance Addendum) Tj ET
+0.796 0.835 0.882 RG
+0.45 w 270.00 510.50 m 500.00 510.50 l S
+0.400 0.439 0.522 rg
+BT /F1 9.5 Tf 508.00 512.00 Td (Page ____) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 10.5 Tf 54.00 492.00 Td (11. Subprocessor and Vendor Checklist) Tj ET
+0.796 0.835 0.882 RG
+0.45 w 270.00 490.50 m 500.00 490.50 l S
+0.400 0.439 0.522 rg
+BT /F1 9.5 Tf 508.00 492.00 Td (Page ____) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 8.8 Tf 54.00 446.00 Td (Page numbers are intentionally left blank in the editable draft. Regenerate or finalize after counsel completes revisions.) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (2) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Length 6275 >>
+stream
+0.067 0.094 0.153 rg
+BT /F2 20 Tf 54.00 734.00 Td (Master Services Agreement) Tj ET
+0.122 0.165 0.267 RG
+1.1 w 54.00 720.00 m 558.00 720.00 l S
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 697.00 Td (This Master Services Agreement \(the Agreement\) is entered into as of [Effective Date] by and between) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 683.77 Td ([Vendor Legal Name], a [State] [entity type] with offices at [Vendor Address] \(Vendor\), and [Dental Practice) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 670.54 Td (Legal Name], a [State] [entity type] with offices at [Customer Address] \(Customer\).) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 650.31 Td (Vendor and Customer may be referred to individually as a Party and together as the Parties.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 622.08 Td (1. Services) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 601.08 Td (Vendor will provide the DentalAI software, implementation, support, and related services described in one or) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 587.85 Td (more order forms, statements of work, or addenda signed or accepted by the Parties \(collectively, the) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 574.62 Td (Services\).) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 554.39 Td (The Services may include modules for dental practice operations, Open Dental integration, AI-assisted) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 541.16 Td (documentation, recall, billing workflows, insurance workflows, patient communications, compliance tracking,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 527.93 Td (analytics, and related administrative tools. Specific enabled modules will be listed in the applicable order form) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 514.70 Td (or statement of work.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 486.47 Td (2. Relationship to Addenda) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 465.47 Td (The following documents are incorporated into this Agreement when signed, attached, referenced in an order) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 452.24 Td (form, or otherwise accepted by the Parties:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 432.01 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 432.01 Td (Business Associate Agreement.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 417.05 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 417.05 Td (Security and Data Protection Addendum.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 402.09 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 402.09 Td (Implementation Statement of Work.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 387.13 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 387.13 Td (Open Dental Integration Authorization.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 372.17 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 372.17 Td (AI Clinical Use Addendum.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 357.21 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 357.21 Td (Patient Communications Addendum.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 342.25 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 342.25 Td (Billing and Insurance Addendum.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 327.29 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 327.29 Td (Any other written addendum or order form.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 309.33 Td (If there is a conflict, the following order of precedence applies: Business Associate Agreement, applicable) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 296.10 Td (regulatory addendum, order form or statement of work, this Agreement, then other incorporated documents.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 267.87 Td (3. Customer Responsibilities) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 246.87 Td (Customer is responsible for:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 226.64 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 226.64 Td (Maintaining accurate patient, provider, appointment, billing, insurance, and clinical data in its systems.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 211.68 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 211.68 Td (Obtaining all patient, staff, and provider consents required for the Services, including recording and) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 198.72 Td (communications consents where applicable.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 183.76 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 183.76 Td (Reviewing, editing, approving, and retaining all clinical records according to professional standards and law.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 168.80 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 168.80 Td (Ensuring licensed dental professionals make all clinical decisions.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 153.84 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 153.84 Td (Maintaining a secure local environment, including workstations, network, firewalls, operating system) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 140.88 Td (updates, backups, endpoint protection, physical safeguards, and user access controls.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 125.92 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 125.92 Td (Maintaining an active Open Dental subscription and eConnector/API configuration if Open Dental integration is) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 112.96 Td (enabled.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 98.00 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 98.00 Td (Providing accurate configuration information and minimum necessary system permissions.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 83.04 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 83.04 Td (Ensuring its personnel use the Services according to training, documentation, this Agreement, and applicable) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 70.08 Td (law.) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (3) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Length 5757 >>
+stream
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 726.00 Td (4. Vendor Responsibilities) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 705.00 Td (Vendor will:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 684.77 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 684.77 Td (Provide the Services in a professional manner.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 669.81 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 669.81 Td (Use commercially reasonable efforts to maintain the availability and functionality of the Services.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 654.85 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 654.85 Td (Provide support according to the applicable order form or support policy.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 639.89 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 639.89 Td (Maintain administrative, technical, and physical safeguards described in the Security and Data Protection) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 626.93 Td (Addendum.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 611.97 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 611.97 Td (Process protected health information only as permitted by the Business Associate Agreement.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 597.01 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 597.01 Td (Use reasonable efforts to correct reproducible material defects reported by Customer.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 571.05 Td (5. Fees and Payment) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 550.05 Td (Customer will pay the fees described in the applicable order form. Unless otherwise stated:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 529.82 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 529.82 Td (Fees are due within [15/30] days of invoice.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 514.86 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 514.86 Td (Fees are non-refundable except as expressly stated.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 499.90 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 499.90 Td (Late amounts may accrue interest at [1.5% per month or maximum allowed by law].) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 484.94 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 484.94 Td (Customer is responsible for taxes other than taxes based on Vendor's net income.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 469.98 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 469.98 Td (Vendor may suspend Services for overdue amounts after [10] days' written notice if Customer does not) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 457.02 Td (cure the nonpayment.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 431.06 Td (6. Term and Termination) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 410.06 Td (This Agreement begins on the Effective Date and continues until terminated.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 389.83 Td (Either Party may terminate this Agreement or an order form:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 369.60 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 369.60 Td (For material breach if the breach is not cured within [30] days after written notice.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 354.64 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 354.64 Td (Immediately if the other Party becomes insolvent, ceases business, or makes an assignment for the benefit) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 341.68 Td (of creditors.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 326.72 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 326.72 Td (As otherwise provided in an applicable order form or addendum.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 308.76 Td (Customer may terminate an order form for convenience only if the order form expressly allows convenience) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 295.53 Td (termination.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 275.30 Td (Upon termination, Customer must stop using the Services and pay all unpaid fees. Vendor will return or) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 262.07 Td (destroy Customer Data as required by the Business Associate Agreement and applicable law.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 233.84 Td (7. Customer Data) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 212.84 Td (Customer Data means data, files, records, images, audio, transcripts, messages, insurance information, billing) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 199.61 Td (information, and other content submitted to, processed by, or generated through the Services for Customer.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 179.38 Td (As between the Parties, Customer owns Customer Data. Vendor receives only the rights necessary to provide,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 166.15 Td (secure, support, improve, and comply with legal obligations related to the Services, subject to the Business) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 152.92 Td (Associate Agreement.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 132.69 Td (Vendor will not sell Customer Data or use identifiable Customer Data to train general-purpose AI models) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 119.46 Td (unless Customer gives express written authorization and the use is permitted by applicable law and the) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 106.23 Td (Business Associate Agreement.) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (4) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Length 5330 >>
+stream
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 726.00 Td (8. De-Identified and Aggregated Data) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 705.00 Td (Vendor may use de-identified or aggregated information to operate, secure, analyze, and improve the Services) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 691.77 Td (only if the information is de-identified according to applicable law and the Business Associate Agreement.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 678.54 Td (De-identified or aggregated data must not identify Customer, Customer's patients, or Customer's personnel.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 650.31 Td (9. AI Features) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 629.31 Td (AI-generated outputs may be incomplete, inaccurate, biased, or inappropriate for a particular patient. AI) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 616.08 Td (outputs are provided for workflow assistance and drafting support. Customer and its licensed personnel are) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 602.85 Td (solely responsible for clinical judgment, diagnosis, treatment, coding, billing, communications, and final record) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 589.62 Td (approval.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 569.39 Td (Additional AI terms are set forth in the AI Clinical Use Addendum.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 541.16 Td (10. Open Dental and Third-Party Services) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 520.16 Td (Customer may choose to connect the Services to third-party systems such as Open Dental, communications) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 506.93 Td (providers, insurance/clearinghouse vendors, payment processors, or AI providers. Customer is responsible for) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 493.70 Td (maintaining its own third-party accounts, subscriptions, credentials, and permissions unless otherwise) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 480.47 Td (stated.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 460.24 Td (Vendor is not responsible for third-party service outages, data errors, API changes, permission limitations, or) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 447.01 Td (terms imposed by third parties. Vendor may disable or modify an integration if reasonably necessary for) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 433.78 Td (security, legal compliance, or platform stability.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 405.55 Td (11. Confidentiality) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 384.55 Td (Each Party may receive non-public business, technical, financial, security, product, customer, or operational) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 371.32 Td (information from the other Party \(Confidential Information\). The receiving Party will use the disclosing) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 358.09 Td (Party's Confidential Information only to perform under this Agreement and will protect it using reasonable) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 344.86 Td (safeguards.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 324.63 Td (Confidential Information does not include information that is publicly available without breach, already known) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 311.40 Td (without restriction, independently developed, or rightfully obtained from a third party.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 291.17 Td (Confidentiality obligations for protected health information are governed by the Business Associate) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 277.94 Td (Agreement.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 249.71 Td (12. Intellectual Property) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 228.71 Td (Vendor owns the Services, software, documentation, workflows, templates, designs, models, algorithms,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 215.48 Td (code, know-how, and related intellectual property, excluding Customer Data and Customer's pre-existing) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 202.25 Td (materials.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 182.02 Td (Customer receives a limited, non-exclusive, non-transferable right to use the Services during the applicable) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 168.79 Td (term for Customer's internal dental practice operations.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 148.56 Td (Customer may not copy, modify, reverse engineer, resell, sublicense, or attempt to extract source code from) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 135.33 Td (the Services except to the extent such restriction is prohibited by law.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 107.10 Td (13. Feedback) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 86.10 Td (Customer may provide feedback or suggestions. Vendor may use feedback without restriction or) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 72.87 Td (compensation, provided Vendor does not disclose Customer's Confidential Information or PHI.) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (5) Tj ET
+endstream
+endobj
+9 0 obj
+<< /Length 5525 >>
+stream
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 726.00 Td (14. Support and Maintenance) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 705.00 Td (Vendor will provide support according to the applicable order form or support policy. Support does not include:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 684.77 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 684.77 Td (General IT administration unless expressly included.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 669.81 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 669.81 Td (Repairing Customer hardware, networks, firewalls, operating systems, Open Dental installation, or) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 656.85 Td (third-party systems.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 641.89 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 641.89 Td (Correcting issues caused by unsupported configurations, unauthorized changes, misuse, or third-party) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 628.93 Td (outages.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 602.97 Td (15. Compliance) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 581.97 Td (Each Party will comply with laws applicable to its own activities. Customer is responsible for laws and) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 568.74 Td (professional obligations applicable to dental practices, providers, patient care, patient communications,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 555.51 Td (billing, claims, recordkeeping, and office operations. Vendor is responsible for laws applicable to Vendor as a) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 542.28 Td (software and services provider and, where applicable, a HIPAA business associate.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 514.05 Td (16. Warranties) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 493.05 Td (Vendor warrants that it will provide the Services in a professional and workmanlike manner.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 472.82 Td (Except for the express warranty above, the Services are provided as is and as available to the maximum) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 459.59 Td (extent allowed by law. Vendor disclaims all implied warranties, including warranties of merchantability,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 446.36 Td (fitness for a particular purpose, title, and non-infringement.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 426.13 Td (Vendor does not warrant that the Services will be error-free, uninterrupted, immune from security) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 412.90 Td (incidents, or that AI outputs, billing outputs, insurance outputs, treatment plan outputs, or communications) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 399.67 Td (will be accurate or complete.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 371.44 Td (17. Limitation of Liability) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 350.44 Td (To the maximum extent allowed by law, neither Party will be liable for indirect, incidental, consequential,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 337.21 Td (special, exemplary, punitive, or lost-profit damages.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 316.98 Td (Except for excluded claims, each Party's total liability arising out of this Agreement will not exceed the fees) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 303.75 Td (paid or payable by Customer to Vendor under the applicable order form during the [6/12] months before the) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 290.52 Td (event giving rise to liability.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 270.29 Td (Excluded claims are: payment obligations, confidentiality breaches, misuse of intellectual property,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 257.06 Td (indemnification obligations, and liabilities that cannot be limited by law. Counsel should review whether HIPAA,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 243.83 Td (privacy, data security, gross negligence, willful misconduct, and regulatory fines should be excluded from or) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 230.60 Td (subject to a separate cap.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 202.37 Td (18. Indemnification) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 181.37 Td (Vendor will defend Customer against third-party claims alleging that the Services, as provided by Vendor and) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 168.14 Td (used according to this Agreement, infringe a U.S. patent, copyright, trademark, or trade secret, and will pay) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 154.91 Td (final damages or approved settlements.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 134.68 Td (Customer will defend Vendor against third-party claims arising from Customer's use of the Services in) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 121.45 Td (violation of this Agreement, Customer Data, Customer's clinical decisions, patient care, coding, billing, claims,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 108.22 Td (patient communications, failure to obtain consent, or Customer's violation of law, and will pay final damages) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 94.99 Td (or approved settlements.) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (6) Tj ET
+endstream
+endobj
+10 0 obj
+<< /Length 4880 >>
+stream
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 734.00 Td (The indemnified Party must promptly notify the indemnifying Party, reasonably cooperate, and allow the) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 720.77 Td (indemnifying Party to control the defense and settlement, provided no settlement may impose non-monetary) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 707.54 Td (obligations or admissions on the indemnified Party without consent.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 679.31 Td (19. Insurance) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 658.31 Td (During the term, each Party will maintain commercially reasonable insurance for its operations. Vendor should) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 645.08 Td (maintain, at minimum:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 624.85 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 624.85 Td (Commercial general liability.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 609.89 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 609.89 Td (Technology errors and omissions.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 594.93 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 594.93 Td (Cyber liability/privacy breach coverage.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 579.97 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 579.97 Td (Workers' compensation as required by law.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 562.01 Td (Specific limits should be set in the order form after insurance broker and counsel review.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 533.78 Td (20. Publicity) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 512.78 Td (Vendor may not use Customer's name, logo, or patient information in marketing without Customer's prior) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 499.55 Td (written consent. Customer may not issue public statements implying Vendor provides clinical care or) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 486.32 Td (guarantees clinical, billing, or financial outcomes.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 458.09 Td (21. Notices) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 437.09 Td (Legal notices must be sent to the addresses below by personal delivery, certified mail, nationally recognized) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 423.86 Td (courier, or email with confirmation of receipt.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 403.63 Td (Vendor notice address: [Vendor Legal Notice Address and Email]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 386.40 Td (Customer notice address: [Customer Legal Notice Address and Email]) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 358.17 Td (22. Governing Law and Disputes) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 337.17 Td (This Agreement is governed by the laws of [State], excluding conflict-of-law rules. The Parties consent to) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 323.94 Td (exclusive jurisdiction and venue in the state and federal courts located in [County, State].) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 303.71 Td (Optional arbitration clause: [Insert only after counsel review.]) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 275.48 Td (23. Assignment) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 254.48 Td (Neither Party may assign this Agreement without the other Party's prior written consent, except to an) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 241.25 Td (affiliate or successor in connection with a merger, acquisition, corporate reorganization, or sale of) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 228.02 Td (substantially all assets, provided the assignee assumes all obligations.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 199.79 Td (24. Miscellaneous) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 178.79 Td (This Agreement is the entire agreement between the Parties regarding its subject matter and supersedes) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 165.56 Td (prior agreements. Amendments must be in writing and signed by both Parties. If any provision is) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 152.33 Td (unenforceable, the remaining provisions remain effective. No waiver is effective unless in writing. Neither) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 139.10 Td (Party is liable for delay caused by events beyond reasonable control.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 110.87 Td (25. Signatures) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 89.87 Td (Vendor: [Vendor Legal Name]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 72.64 Td (By: ___________________________) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (7) Tj ET
+endstream
+endobj
+11 0 obj
+<< /Length 955 >>
+stream
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 734.00 Td (Name: _________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 716.77 Td (Title: ________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 699.54 Td (Date: _________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 679.31 Td (Customer: [Dental Practice Legal Name]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 662.08 Td (By: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 644.85 Td (Name: _________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 627.62 Td (Title: ________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 610.39 Td (Date: _________________________) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (8) Tj ET
+endstream
+endobj
+12 0 obj
+<< /Length 5519 >>
+stream
+0.067 0.094 0.153 rg
+BT /F2 20 Tf 54.00 731.00 Td (Business Associate Agreement) Tj ET
+0.122 0.165 0.267 RG
+1.1 w 54.00 717.00 m 558.00 717.00 l S
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 694.00 Td (This Business Associate Agreement \(BAA\) is entered into as of [Effective Date] by and between [Dental) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 680.77 Td (Practice Legal Name] \(Covered Entity\) and [Vendor Legal Name] \(Business Associate\).) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 660.54 Td (This BAA supplements the Master Services Agreement or other services agreement between the Parties) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 647.31 Td (\(Services Agreement\). Capitalized terms not defined here have the meaning given to them in HIPAA.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 619.08 Td (1. Purpose) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 598.08 Td (Covered Entity is a dental practice that may disclose Protected Health Information \(PHI\) to Business) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 584.85 Td (Associate, or allow Business Associate to create, receive, maintain, or transmit PHI, so Business Associate can) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 571.62 Td (provide software, integration, support, AI documentation, administrative, billing, insurance, communications,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 558.39 Td (analytics, and related services.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 538.16 Td (The Parties intend this BAA to satisfy the requirements of the HIPAA Privacy, Security, Breach Notification,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 524.93 Td (and Enforcement Rules at 45 C.F.R. Parts 160 and 164.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 496.70 Td (2. Definitions) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 475.70 Td (Breach, Data Aggregation, Designated Record Set, Disclosure, Electronic Protected Health Information, Health) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 462.47 Td (Care Operations, Individual, Minimum Necessary, Protected Health Information, Required by Law, Secretary,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 449.24 Td (Security Incident, Subcontractor, Unsecured Protected Health Information, and Use have the meanings set) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 436.01 Td (forth in HIPAA.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 415.78 Td (HIPAA means the Health Insurance Portability and Accountability Act of 1996, HITECH Act amendments, and) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 402.55 Td (implementing regulations, as amended.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 374.32 Td (3. Permitted Uses and Disclosures) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 353.32 Td (Business Associate may Use and Disclose PHI only:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 333.09 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 333.09 Td (To perform the Services described in the Services Agreement.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 318.13 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 318.13 Td (As permitted by this BAA.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 303.17 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 303.17 Td (As Required by Law.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 288.21 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 288.21 Td (For Business Associate's proper management and administration or legal responsibilities, if permitted by) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 275.25 Td (HIPAA and this BAA.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 260.29 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 260.29 Td (To provide Data Aggregation services relating to Covered Entity's Health Care Operations, if expressly enabled) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 247.33 Td (in the Services Agreement.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 232.37 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 232.37 Td (To de-identify PHI according to 45 C.F.R. 164.514\(a\)-\(c\), if expressly permitted by Covered Entity in writing.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 214.41 Td (Business Associate will make Uses, Disclosures, and requests for PHI consistent with the Minimum Necessary) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 201.18 Td (standard.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 180.95 Td (Business Associate will not sell PHI, use PHI for marketing, or use PHI to train general-purpose AI models) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 167.72 Td (unless expressly authorized in writing by Covered Entity and permitted by HIPAA.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 139.49 Td (4. Business Associate Obligations) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 118.49 Td (Business Associate will:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 98.26 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 98.26 Td (Not Use or Disclose PHI other than as permitted or required by this BAA or Required by Law.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 83.30 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 83.30 Td (Use appropriate safeguards to prevent Use or Disclosure of PHI other than as permitted by this BAA.) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (9) Tj ET
+endstream
+endobj
+13 0 obj
+<< /Length 6521 >>
+stream
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 734.00 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 734.00 Td (Comply with the HIPAA Security Rule with respect to Electronic PHI.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 719.04 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 719.04 Td (Report to Covered Entity any Use or Disclosure of PHI not permitted by this BAA of which Business Associate) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 706.08 Td (becomes aware.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 691.12 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 691.12 Td (Report Breaches of Unsecured PHI as required by Section 6.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 676.16 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 676.16 Td (Report Security Incidents as required by Section 7.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 661.20 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 661.20 Td (Ensure Subcontractors that create, receive, maintain, or transmit PHI on Business Associate's behalf agree) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 648.24 Td (in writing to substantially the same restrictions and conditions that apply to Business Associate.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 633.28 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 633.28 Td (Make PHI in a Designated Record Set available to Covered Entity as necessary to satisfy Covered Entity's) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 620.32 Td (obligations under 45 C.F.R. 164.524.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 605.36 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 605.36 Td (Make PHI available for amendment and incorporate amendments as necessary to satisfy 45 C.F.R. 164.526.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 590.40 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 590.40 Td (Maintain and make available information required to provide an accounting of disclosures under 45 C.F.R.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 577.44 Td (164.528.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 562.48 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 562.48 Td (Make internal practices, books, and records relating to Use and Disclosure of PHI available to the Secretary) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 549.52 Td (for purposes of determining HIPAA compliance.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 534.56 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 534.56 Td (Return or destroy PHI upon termination as described in Section 12.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 508.60 Td (5. Covered Entity Obligations) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 487.60 Td (Covered Entity will:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 467.37 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 467.37 Td (Notify Business Associate of limitations in Covered Entity's Notice of Privacy Practices that may affect) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 454.41 Td (Business Associate's Use or Disclosure of PHI.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 439.45 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 439.45 Td (Notify Business Associate of changes in, or revocation of, Individual permissions that may affect Business) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 426.49 Td (Associate's Use or Disclosure of PHI.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 411.53 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 411.53 Td (Notify Business Associate of restrictions on Use or Disclosure of PHI agreed to by Covered Entity that may) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 398.57 Td (affect Business Associate.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 383.61 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 383.61 Td (Not request Business Associate to Use or Disclose PHI in a manner that would violate HIPAA if done by Covered) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 370.65 Td (Entity.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 355.69 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 355.69 Td (Obtain all consents, authorizations, and notices required for the Services, including recording and) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 342.73 Td (communication consents where applicable.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 316.77 Td (6. Breach Notification) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 295.77 Td (Business Associate will notify Covered Entity without unreasonable delay, and in no event later than [5) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 282.54 Td (business days / 10 calendar days] after discovery of a Breach of Unsecured PHI.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 262.31 Td (The notice will include, to the extent known:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 242.08 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 242.08 Td (A description of the Breach.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 227.12 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 227.12 Td (The date of the Breach and date of discovery.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 212.16 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 212.16 Td (The types of PHI involved.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 197.20 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 197.20 Td (The Individuals affected or reasonably believed to be affected.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 182.24 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 182.24 Td (Steps taken to investigate, mitigate harm, and prevent recurrence.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 167.28 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 167.28 Td (Information reasonably needed by Covered Entity to provide legally required notifications.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 149.32 Td (Unless otherwise agreed, Covered Entity is responsible for notifying Individuals, HHS, media, regulators, and) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 136.09 Td (other parties. Business Associate will reasonably cooperate with Covered Entity's notification obligations.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 107.86 Td (7. Security Incident Reporting) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (10) Tj ET
+endstream
+endobj
+14 0 obj
+<< /Length 5332 >>
+stream
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 734.00 Td (Business Associate will report successful Security Incidents involving Electronic PHI without unreasonable) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 720.77 Td (delay. The Parties acknowledge that unsuccessful security events, such as pings, port scans, blocked firewall) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 707.54 Td (attempts, or unsuccessful login attempts, occur frequently and are deemed reported on a periodic basis) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 694.31 Td (unless they indicate a material threat to PHI.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 666.08 Td (8. Subcontractors) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 645.08 Td (Business Associate may use Subcontractors to provide the Services, provided each Subcontractor that) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 631.85 Td (creates, receives, maintains, or transmits PHI agrees in writing to restrictions and safeguards substantially) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 618.62 Td (similar to this BAA.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 598.39 Td (Business Associate will maintain a list of material Subcontractors that may handle PHI and provide it to) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 585.16 Td (Covered Entity upon request, subject to reasonable confidentiality and security limitations.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 556.93 Td (9. Safeguards) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 535.93 Td (Business Associate will maintain administrative, technical, and physical safeguards designed to protect the) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 522.70 Td (confidentiality, integrity, and availability of Electronic PHI. Safeguards are further described in the Security) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 509.47 Td (and Data Protection Addendum.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 489.24 Td (Covered Entity is responsible for safeguards within its own office, devices, network, Open Dental) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 476.01 Td (environment, user accounts, and physical premises.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 447.78 Td (10. Access, Amendment, and Accounting) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 426.78 Td (If Business Associate maintains PHI in a Designated Record Set, Business Associate will make PHI available to) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 413.55 Td (Covered Entity within [10] business days after request, or sooner if required by law.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 393.32 Td (Business Associate will reasonably assist Covered Entity with amendments and accounting of disclosures) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 380.09 Td (where required by HIPAA.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 351.86 Td (11. De-Identification) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 330.86 Td (Business Associate may de-identify PHI only if authorized by Covered Entity in the Services Agreement, an) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 317.63 Td (order form, or written instruction. De-identification must comply with HIPAA. De-identified data must not be) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 304.40 Td (re-identified except as permitted by HIPAA and this BAA.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 276.17 Td (12. Term and Termination) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 255.17 Td (This BAA begins on the Effective Date and continues until all PHI provided by Covered Entity to Business) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 241.94 Td (Associate, or created or received by Business Associate on Covered Entity's behalf, is returned or destroyed,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 228.71 Td (unless retention is required by law or infeasible.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 208.48 Td (Covered Entity may terminate the Services Agreement if Business Associate materially breaches this BAA and) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 195.25 Td (fails to cure within [30] days after written notice, or sooner if cure is not possible.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 175.02 Td (Upon termination, Business Associate will return or destroy PHI if feasible. If return or destruction is) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 161.79 Td (infeasible or retention is required by law, Business Associate will extend the protections of this BAA to) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 148.56 Td (retained PHI and limit further Uses and Disclosures to those purposes that make return or destruction) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 135.33 Td (infeasible or legally required.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 107.10 Td (13. No Third-Party Beneficiaries) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 86.10 Td (Nothing in this BAA creates rights for any person other than the Parties and their permitted successors and) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 72.87 Td (assigns.) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (11) Tj ET
+endstream
+endobj
+15 0 obj
+<< /Length 1568 >>
+stream
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 726.00 Td (14. Interpretation) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 705.00 Td (Any ambiguity in this BAA will be interpreted to permit compliance with HIPAA. References to HIPAA provisions) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 691.77 Td (mean those provisions as amended.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 663.54 Td (15. Signatures) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 642.54 Td (Covered Entity: [Dental Practice Legal Name]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 625.31 Td (By: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 608.08 Td (Name: _________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 590.85 Td (Title: ________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 573.62 Td (Date: _________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 553.39 Td (Business Associate: [Vendor Legal Name]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 536.16 Td (By: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 518.93 Td (Name: _________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 501.70 Td (Title: ________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 484.47 Td (Date: _________________________) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (12) Tj ET
+endstream
+endobj
+16 0 obj
+<< /Length 5703 >>
+stream
+0.067 0.094 0.153 rg
+BT /F2 20 Tf 54.00 731.00 Td (Implementation Statement of Work) Tj ET
+0.122 0.165 0.267 RG
+1.1 w 54.00 717.00 m 558.00 717.00 l S
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 694.00 Td (This Implementation Statement of Work \(SOW\) is entered into under the Master Services Agreement between) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 680.77 Td ([Vendor Legal Name] \(Vendor\) and [Dental Practice Legal Name] \(Customer\).) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 652.54 Td (1. Project Overview) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 631.54 Td (Vendor will configure and deploy DentalAI for Customer's dental office located at [Office Address].) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 611.31 Td (Deployment type:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 591.08 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 591.08 Td ([ ] Local/offline installation.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 576.12 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 576.12 Td ([ ] Local installation with Open Dental API access.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 561.16 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 561.16 Td ([ ] Hosted/cloud installation.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 546.20 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 546.20 Td ([ ] Hybrid installation.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 528.24 Td (Enabled modules:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 508.01 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 508.01 Td ([ ] Dashboard and reporting.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 493.05 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 493.05 Td ([ ] Open Dental patient/appointment sync.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 478.09 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 478.09 Td ([ ] AI notes.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 463.13 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 463.13 Td ([ ] Audio recording/transcription.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 448.17 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 448.17 Td ([ ] Radiograph review support.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 433.21 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 433.21 Td ([ ] Recall workflows.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 418.25 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 418.25 Td ([ ] Patient communications.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 403.29 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 403.29 Td ([ ] Billing workflows.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 388.33 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 388.33 Td ([ ] Insurance workflows.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 373.37 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 373.37 Td ([ ] Treatment plan workflows.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 358.41 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 358.41 Td ([ ] Compliance tracking.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 343.45 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 343.45 Td ([ ] Other: [Describe].) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 317.49 Td (2. Scope of Work) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 296.49 Td (Vendor will perform the following implementation services:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 276.26 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 276.26 Td (Initial discovery call and implementation checklist.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 261.30 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 261.30 Td (Review of Customer's technical environment.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 246.34 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 246.34 Td (Installation or provisioning of DentalAI.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 231.38 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 231.38 Td (Configuration of office settings and enabled modules.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 216.42 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 216.42 Td (Open Dental API setup support if enabled.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 201.46 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 201.46 Td (User account setup for up to [number] users.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 186.50 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 186.50 Td (Role/permission configuration.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 171.54 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 171.54 Td (Initial sync or import of permitted data if enabled.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 156.58 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 156.58 Td (Training session for administrative users.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 141.62 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 141.62 Td (Training session for clinical users if AI notes or clinical modules are enabled.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 126.66 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 126.66 Td (Go-live support for [number] business days.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 100.70 Td (3. Out of Scope) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 79.70 Td (Unless expressly included in this SOW, Vendor is not responsible for:) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (13) Tj ET
+endstream
+endobj
+17 0 obj
+<< /Length 6791 >>
+stream
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 734.00 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 734.00 Td (Purchasing, repairing, or maintaining hardware.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 719.04 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 719.04 Td (General network administration.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 704.08 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 704.08 Td (Firewall, router, VPN, Wi-Fi, or endpoint security configuration.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 689.12 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 689.12 Td (Open Dental licensing, subscription, updates, support, or database repair.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 674.16 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 674.16 Td (Data cleanup in Open Dental or other practice systems.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 659.20 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 659.20 Td (Patient consent collection.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 644.24 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 644.24 Td (Staff HR policy implementation.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 629.28 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 629.28 Td (Legal, billing, coding, clinical, regulatory, accounting, or tax advice.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 614.32 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 614.32 Td (Clearinghouse enrollment.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 599.36 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 599.36 Td (Payment processor enrollment.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 584.40 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 584.40 Td (Custom software development.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 558.44 Td (4. Customer Prerequisites) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 537.44 Td (Before installation, Customer will provide:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 517.21 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 517.21 Td (Signed Master Services Agreement.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 502.25 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 502.25 Td (Signed Business Associate Agreement.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 487.29 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 487.29 Td (Signed Security and Data Protection Addendum.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 472.33 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 472.33 Td (Signed Open Dental Integration Authorization if Open Dental integration is enabled.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 457.37 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 457.37 Td (Patient recording consent workflow if recording/transcription is enabled.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 442.41 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 442.41 Td (Staff recording/AI policy if staff may be recorded.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 427.45 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 427.45 Td (Administrative contact and technical contact.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 412.49 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 412.49 Td (Open Dental administrator access or authorized staff availability.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 397.53 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 397.53 Td (Open Dental eConnector/API readiness if remote API is used.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 382.57 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 382.57 Td (Workstations or server meeting Vendor's minimum specifications.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 367.61 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 367.61 Td (Internet access if any cloud, API, remote support, email, SMS, AI, or clearinghouse service is enabled.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 352.65 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 352.65 Td (Current backups for Open Dental and relevant systems before go-live.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 326.69 Td (5. Minimum Technical Requirements) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 305.69 Td (Customer environment must meet or exceed:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 285.46 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 285.46 Td (Supported operating system: [Windows/macOS/Linux versions].) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 270.50 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 270.50 Td (CPU/RAM/storage: [spec].) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 255.54 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 255.54 Td (Browser: [supported browsers].) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 240.58 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 240.58 Td (Network: secure LAN and internet connection where required.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 225.62 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 225.62 Td (Endpoint protection: enabled and current.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 210.66 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 210.66 Td (Disk encryption: enabled where PHI may reside.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 195.70 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 195.70 Td (User accounts: unique named accounts for each user.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 180.74 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 180.74 Td (Screen lock/session lock: enabled.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 165.78 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 165.78 Td (Backups: active and tested backup process for Customer-controlled systems.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 139.82 Td (6. Open Dental Integration) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 118.82 Td (If Open Dental integration is enabled, Customer authorizes Vendor to assist with API configuration as) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 105.59 Td (described in the Open Dental Integration Authorization.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 85.36 Td (The Parties will configure the minimum permissions necessary for enabled modules. Customer remains) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 72.13 Td (responsible for approving API permissions, safeguarding API keys, and disabling access when no longer needed.) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (14) Tj ET
+endstream
+endobj
+18 0 obj
+<< /Length 5630 >>
+stream
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 726.00 Td (7. Data Migration and Sync) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 705.00 Td (Data migration or initial sync will be limited to the data types selected below:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 684.77 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 684.77 Td ([ ] Patients.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 669.81 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 669.81 Td ([ ] Providers.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 654.85 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 654.85 Td ([ ] Appointments.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 639.89 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 639.89 Td ([ ] Procedures.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 624.93 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 624.93 Td ([ ] Treatment plans.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 609.97 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 609.97 Td ([ ] Clinical notes.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 595.01 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 595.01 Td ([ ] Recall data.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 580.05 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 580.05 Td ([ ] Insurance plans.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 565.09 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 565.09 Td ([ ] Claims.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 550.13 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 550.13 Td ([ ] Balances.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 535.17 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 535.17 Td ([ ] Communications metadata.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 520.21 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 520.21 Td ([ ] Other: [Describe].) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 502.25 Td (Vendor does not guarantee that source data is complete, accurate, or formatted correctly. Customer is) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 489.02 Td (responsible for validating migrated or synced data.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 460.79 Td (8. Training) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 439.79 Td (Vendor will provide:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 419.56 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 419.56 Td ([Number] remote or onsite training sessions.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 404.60 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 404.60 Td (Training materials for enabled modules.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 389.64 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 389.64 Td (Administrative training covering users, permissions, and configuration.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 374.68 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 374.68 Td (Clinical workflow training if AI notes or clinical modules are enabled.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 356.72 Td (Customer is responsible for ensuring all users complete training before using production PHI or patient-facing) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 343.49 Td (workflows.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 315.26 Td (9. Go-Live Criteria) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 294.26 Td (The implementation will be considered ready for go-live when:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 274.03 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 274.03 Td (Required agreements are signed.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 259.07 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 259.07 Td (Enabled modules are configured.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 244.11 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 244.11 Td (User accounts are created.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 229.15 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 229.15 Td (Required consents/policies are operational.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 214.19 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 214.19 Td (Customer has completed training.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 199.23 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 199.23 Td (Customer has confirmed backups are current.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 184.27 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 184.27 Td (Open Dental connection, if enabled, has been tested.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 169.31 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 169.31 Td (Customer has approved go-live in writing or by using the Services in production.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 143.35 Td (10. Acceptance) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 122.35 Td (Implementation services are accepted when the go-live criteria are met or Customer uses the Services in) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 109.12 Td (production, whichever occurs first.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 88.89 Td (Customer must report implementation defects within [5] business days after go-live. Vendor will use) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 75.66 Td (commercially reasonable efforts to correct reproducible implementation defects within scope.) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (15) Tj ET
+endstream
+endobj
+19 0 obj
+<< /Length 2344 >>
+stream
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 726.00 Td (11. Timeline) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 705.00 Td (Target dates:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 684.77 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 684.77 Td (Kickoff: [Date].) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 669.81 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 669.81 Td (Technical readiness review: [Date].) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 654.85 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 654.85 Td (Installation/configuration: [Date].) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 639.89 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 639.89 Td (Training: [Date].) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 624.93 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 624.93 Td (Go-live: [Date].) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 606.97 Td (Dates are estimates and depend on Customer readiness, third-party availability, and timely access to required) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 593.74 Td (systems.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 565.51 Td (12. Fees) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 544.51 Td (Implementation fee: [$ amount].) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 527.28 Td (Travel expenses, if any: [Included / billed at cost / not applicable].) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 510.05 Td (Additional services rate: [$ amount/hour].) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 481.82 Td (13. Signatures) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 460.82 Td (Vendor: [Vendor Legal Name]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 443.59 Td (By: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 426.36 Td (Date: _________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 406.13 Td (Customer: [Dental Practice Legal Name]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 388.90 Td (By: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 371.67 Td (Date: _________________________) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (16) Tj ET
+endstream
+endobj
+20 0 obj
+<< /Length 6100 >>
+stream
+0.067 0.094 0.153 rg
+BT /F2 20 Tf 54.00 731.00 Td (Security and Data Protection Addendum) Tj ET
+0.122 0.165 0.267 RG
+1.1 w 54.00 717.00 m 558.00 717.00 l S
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 694.00 Td (This Security and Data Protection Addendum \(Addendum\) supplements the Master Services Agreement and) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 680.77 Td (Business Associate Agreement between [Vendor Legal Name] \(Vendor\) and [Dental Practice Legal Name]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 667.54 Td (\(Customer\).) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 639.31 Td (1. Shared Security Model) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 618.31 Td (Security is a shared responsibility.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 598.08 Td (Vendor is responsible for safeguards within the Services and Vendor-controlled systems. Customer is) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 584.85 Td (responsible for safeguards within Customer-controlled workstations, servers, Open Dental environment, user) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 571.62 Td (accounts, network, backups, physical office, and staff workflows.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 543.39 Td (2. Vendor Safeguards) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 522.39 Td (Vendor will maintain a written information security program appropriate to the nature of the Services and) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 509.16 Td (the sensitivity of Customer Data, including PHI.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 488.93 Td (Vendor safeguards will include:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 468.70 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 468.70 Td (Access controls for Vendor systems.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 453.74 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 453.74 Td (Unique accounts for Vendor personnel with access to production systems.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 438.78 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 438.78 Td (Least-privilege access.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 423.82 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 423.82 Td (Authentication controls, including MFA where reasonably available for administrative access.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 408.86 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 408.86 Td (Encryption in transit for internet-accessible services.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 393.90 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 393.90 Td (Encryption at rest for Vendor-controlled systems storing PHI, where technically feasible.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 378.94 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 378.94 Td (Audit logging for material PHI access and administrative activity where supported.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 363.98 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 363.98 Td (Secure development practices.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 349.02 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 349.02 Td (Vulnerability management for Vendor-controlled software and infrastructure.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 334.06 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 334.06 Td (Incident response procedures.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 319.10 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 319.10 Td (Workforce confidentiality obligations.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 304.14 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 304.14 Td (Workforce security training.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 289.18 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 289.18 Td (Subcontractor review for vendors that may handle PHI.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 263.22 Td (3. Customer Safeguards) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 242.22 Td (Customer will maintain safeguards for its office environment, including:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 221.99 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 221.99 Td (Unique user accounts for each workforce member.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 207.03 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 207.03 Td (Role-based access according to job duties.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 192.07 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 192.07 Td (Prompt user deactivation after termination or role change.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 177.11 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 177.11 Td (Strong passwords and MFA where available.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 162.15 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 162.15 Td (Screen lock and session timeout.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 147.19 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 147.19 Td (Disk encryption for devices storing PHI.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 132.23 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 132.23 Td (Current operating system and browser updates.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 117.27 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 117.27 Td (Endpoint protection.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 102.31 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 102.31 Td (Firewall and network protections.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 87.35 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 87.35 Td (Secure Wi-Fi configuration.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 72.39 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 72.39 Td (Physical access controls for servers and workstations.) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (17) Tj ET
+endstream
+endobj
+21 0 obj
+<< /Length 5660 >>
+stream
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 734.00 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 734.00 Td (Secure disposal of media containing PHI.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 719.04 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 719.04 Td (Current, tested backups for Customer-controlled systems.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 704.08 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 704.08 Td (HIPAA security risk analysis and risk management process.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 678.12 Td (4. Local Installation Requirements) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 657.12 Td (If the Services are installed locally, Customer is responsible for:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 636.89 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 636.89 Td (Providing a secure workstation or server.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 621.93 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 621.93 Td (Restricting local administrator access.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 606.97 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 606.97 Td (Preventing shared accounts.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 592.01 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 592.01 Td (Protecting local databases, logs, exports, audio, transcripts, and attachments.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 577.05 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 577.05 Td (Maintaining backups for data stored locally.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 562.09 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 562.09 Td (Not exposing local services to the public internet unless approved in writing by Vendor and secured) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 549.13 Td (appropriately.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 523.17 Td (5. Remote Support) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 502.17 Td (Vendor may provide remote support only through approved support channels. Customer must avoid sending PHI) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 488.94 Td (through ordinary email, unsecured chat, or unapproved file transfer tools.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 468.71 Td (If screen sharing is used, Customer should minimize PHI visible on screen unless PHI access is necessary for) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 455.48 Td (support and covered by the Business Associate Agreement.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 435.25 Td (Vendor support personnel will access Customer systems only as reasonably necessary to provide support,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 422.02 Td (troubleshoot, implement, or secure the Services.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 393.79 Td (6. Credentials and API Keys) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 372.79 Td (Customer and Vendor will protect credentials, tokens, and API keys.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 352.56 Td (Customer will:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 332.33 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 332.33 Td (Use unique credentials where possible.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 317.37 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 317.37 Td (Avoid sharing credentials between users.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 302.41 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 302.41 Td (Store API keys securely.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 287.45 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 287.45 Td (Promptly rotate or disable credentials suspected of compromise.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 272.49 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 272.49 Td (Disable Open Dental or third-party access when no longer needed.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 254.53 Td (Vendor will not ask Customer to send passwords, API keys, or secrets through unsecured channels.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 226.30 Td (7. Audit Logs) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 205.30 Td (Where supported by the Services and enabled modules, Vendor will maintain logs of material system activity,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 192.07 Td (which may include:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 171.84 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 171.84 Td (User login/logout.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 156.88 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 156.88 Td (PHI access.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 141.92 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 141.92 Td (Record creation, update, approval, deletion, or export.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 126.96 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 126.96 Td (AI note generation and approval.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 112.00 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 112.00 Td (Open Dental sync events.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 97.04 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 97.04 Td (Administrative setting changes.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 82.08 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 82.08 Td (Patient communication events.) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (18) Tj ET
+endstream
+endobj
+22 0 obj
+<< /Length 5070 >>
+stream
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 734.00 Td (Log retention period: [Insert period] unless a different period is required by law, the Business Associate) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 720.77 Td (Agreement, or technical constraints.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 692.54 Td (8. Backups and Disaster Recovery) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 671.54 Td (Vendor will maintain backup and recovery procedures for Vendor-controlled systems.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 651.31 Td (Customer is responsible for backup and recovery of Customer-controlled systems, including Open Dental) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 638.08 Td (databases, local DentalAI installations, local exports, local audio/transcript storage, and office workstations) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 624.85 Td (unless Vendor expressly agrees otherwise in a statement of work.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 604.62 Td (Customer should test backups regularly.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 576.39 Td (9. Data Retention and Deletion) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 555.39 Td (Default retention settings:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 535.16 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 535.16 Td (Audio recordings: [Delete after transcription verification / retain for X days / not enabled].) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 520.20 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 520.20 Td (Transcripts: [Retain as part of clinical documentation workflow / delete after note approval / X days].) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 505.24 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 505.24 Td (AI draft notes: [Retain until approved/deleted / X days].) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 490.28 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 490.28 Td (Approved notes: retained according to Customer's record retention policy and applicable law.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 475.32 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 475.32 Td (Audit logs: [X years/months].) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 460.36 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 460.36 Td (Support files containing PHI: [X days] unless needed for legal or security purposes.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 442.40 Td (Customer is responsible for configuring retention settings consistent with its legal and professional) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 429.17 Td (obligations.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 400.94 Td (10. Incident Response) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 379.94 Td (Each Party will promptly notify the other of suspected security incidents affecting the Services or Customer) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 366.71 Td (Data.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 346.48 Td (Business Associate breach notification obligations are governed by the Business Associate Agreement.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 326.25 Td (The Parties will reasonably cooperate to investigate, contain, mitigate, and remediate security incidents.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 298.02 Td (11. Vulnerability Reporting) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 277.02 Td (Customer may report suspected vulnerabilities to [security email]. Vendor will review reports in good faith) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 263.79 Td (and prioritize remediation based on risk.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 243.56 Td (Customer will not perform penetration testing, vulnerability scanning, load testing, reverse engineering, or) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 230.33 Td (security testing of Vendor systems without prior written authorization.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 202.10 Td (12. Subprocessors) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 181.10 Td (Vendor will maintain a list of material subprocessors that may process Customer Data or PHI. Vendor will) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 167.87 Td (ensure subprocessors that handle PHI are bound by written obligations consistent with HIPAA where required.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 139.64 Td (13. No Absolute Security) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 118.64 Td (No system can be guaranteed completely secure. Vendor does not warrant that the Services or Customer) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 105.41 Td (environment will be immune from unauthorized access, malware, ransomware, third-party attacks, user) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 92.18 Td (error, or configuration mistakes.) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (19) Tj ET
+endstream
+endobj
+23 0 obj
+<< /Length 845 >>
+stream
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 726.00 Td (14. Signatures) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 705.00 Td (Vendor: [Vendor Legal Name]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 687.77 Td (By: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 670.54 Td (Date: _________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 650.31 Td (Customer: [Dental Practice Legal Name]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 633.08 Td (By: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 615.85 Td (Date: _________________________) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (20) Tj ET
+endstream
+endobj
+24 0 obj
+<< /Length 4901 >>
+stream
+0.067 0.094 0.153 rg
+BT /F2 20 Tf 54.00 731.00 Td (Open Dental Integration Authorization) Tj ET
+0.122 0.165 0.267 RG
+1.1 w 54.00 717.00 m 558.00 717.00 l S
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 694.00 Td (This Open Dental Integration Authorization \(Authorization\) is entered into by [Dental Practice Legal Name]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 680.77 Td (\(Customer\) and [Vendor Legal Name] \(Vendor\) under the Master Services Agreement.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 652.54 Td (1. Purpose) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 631.54 Td (Customer authorizes Vendor to assist with configuration and use of Open Dental API access for the purpose of) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 618.31 Td (providing DentalAI services selected by Customer.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 590.08 Td (2. Authorized Integration Method) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 569.08 Td (The Parties will use the official Open Dental API or another Open Dental-supported integration method unless) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 555.85 Td (otherwise approved in writing by Customer after disclosure of risks.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 535.62 Td (Vendor will not write directly to Open Dental database tables except through an authorized method approved) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 522.39 Td (by Open Dental and Customer.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 494.16 Td (3. Customer Authorization) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 473.16 Td (Customer authorizes Vendor to:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 452.93 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 452.93 Td (Help Customer enable Open Dental API access.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 437.97 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 437.97 Td (Generate, receive, configure, or use API credentials as necessary for the Services.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 423.01 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 423.01 Td (Read Open Dental data for enabled modules.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 408.05 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 408.05 Td (Create or update Open Dental records only if the applicable module and permission are expressly enabled.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 393.09 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 393.09 Td (Troubleshoot API connectivity and sync issues.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 375.13 Td (Customer remains responsible for approving API permissions and deciding whether to enable, disable, or) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 361.90 Td (revoke Vendor access.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 333.67 Td (4. Minimum Necessary Permissions) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 312.67 Td (API permissions must be limited to the minimum resources and actions necessary for enabled modules.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 292.44 Td (Approved permissions:) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 271.21 Td (Resource | Read | Create | Update | Delete | Purpose) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 258.14 Td (Patients | [ ] | [ ] | [ ] | [ ] | [Describe]) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 245.07 Td (Appointments | [ ] | [ ] | [ ] | [ ] | [Describe]) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 232.00 Td (Providers | [ ] | [ ] | [ ] | [ ] | [Describe]) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 218.93 Td (Procedures | [ ] | [ ] | [ ] | [ ] | [Describe]) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 205.86 Td (Procedure codes | [ ] | [ ] | [ ] | [ ] | [Describe]) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 192.79 Td (Claims | [ ] | [ ] | [ ] | [ ] | [Describe]) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 179.72 Td (Insurance plans | [ ] | [ ] | [ ] | [ ] | [Describe]) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 166.65 Td (Recall | [ ] | [ ] | [ ] | [ ] | [Describe]) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 153.58 Td (Payments | [ ] | [ ] | [ ] | [ ] | [Describe]) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 140.51 Td (Documents/images | [ ] | [ ] | [ ] | [ ] | [Describe]) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 127.44 Td (Other | [ ] | [ ] | [ ] | [ ] | [Describe]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 112.37 Td (Delete permissions should remain disabled unless specifically required, documented, and approved by Customer.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 84.14 Td (5. API Keys and Credentials) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (21) Tj ET
+endstream
+endobj
+25 0 obj
+<< /Length 5321 >>
+stream
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 734.00 Td (Customer will not share credentials through unsecured channels. Vendor will store API keys and credentials) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 720.77 Td (using reasonable safeguards.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 700.54 Td (Customer should disable or rotate API keys:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 680.31 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 680.31 Td (When Vendor access is no longer needed.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 665.35 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 665.35 Td (Upon suspected compromise.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 650.39 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 650.39 Td (Upon termination of the Services.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 635.43 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 635.43 Td (Upon material personnel or configuration changes.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 609.47 Td (6. Data Accuracy) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 588.47 Td (Open Dental remains the system of record unless otherwise agreed. Customer is responsible for validating) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 575.24 Td (data displayed, imported, synced, generated, or written by the Services.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 555.01 Td (Vendor is not responsible for errors caused by inaccurate source data, Open Dental configuration, permission) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 541.78 Td (limitations, API changes, third-party outages, or Customer/user actions.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 513.55 Td (7. Write-Back Controls) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 492.55 Td (If write-back to Open Dental is enabled:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 472.32 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 472.32 Td (Customer must identify which users may approve write-back actions.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 457.36 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 457.36 Td (Clinical notes must be reviewed and approved by licensed dental professionals before finalization.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 442.40 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 442.40 Td (Billing, claims, payments, and insurance updates must be reviewed by authorized Customer personnel.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 427.44 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 427.44 Td (Vendor may implement logs, confirmations, or approval gates for write-back actions.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 409.48 Td (Approved write-back actions:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 389.25 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 389.25 Td ([ ] Create draft clinical note.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 374.29 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 374.29 Td ([ ] Update approved clinical note.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 359.33 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 359.33 Td ([ ] Create appointment.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 344.37 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 344.37 Td ([ ] Update appointment.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 329.41 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 329.41 Td ([ ] Create task/recall item.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 314.45 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 314.45 Td ([ ] Update claim status.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 299.49 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 299.49 Td ([ ] Create payment.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 284.53 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 284.53 Td ([ ] Other: [Describe].) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 258.57 Td (8. Support Access) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 237.57 Td (Customer authorizes Vendor to access integration logs, sync status, and configuration information as needed) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 224.34 Td (to support the Open Dental integration. PHI access during support is governed by the Business Associate) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 211.11 Td (Agreement.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 182.88 Td (9. Termination of Access) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 161.88 Td (Upon termination or Customer request, Vendor will stop using Customer's Open Dental API credentials.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 148.65 Td (Customer is responsible for disabling or revoking credentials in Open Dental and related portals unless Vendor) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 135.42 Td (controls the credential and has agreed to revoke it.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 107.19 Td (10. Signatures) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 86.19 Td (Vendor: [Vendor Legal Name]) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (22) Tj ET
+endstream
+endobj
+26 0 obj
+<< /Length 683 >>
+stream
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 734.00 Td (By: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 716.77 Td (Date: _________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 696.54 Td (Customer: [Dental Practice Legal Name]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 679.31 Td (By: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 662.08 Td (Date: _________________________) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (23) Tj ET
+endstream
+endobj
+27 0 obj
+<< /Length 5502 >>
+stream
+0.067 0.094 0.153 rg
+BT /F2 20 Tf 54.00 731.00 Td (AI Clinical Use Addendum) Tj ET
+0.122 0.165 0.267 RG
+1.1 w 54.00 717.00 m 558.00 717.00 l S
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 694.00 Td (This AI Clinical Use Addendum \(Addendum\) supplements the Master Services Agreement between [Vendor Legal) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 680.77 Td (Name] \(Vendor\) and [Dental Practice Legal Name] \(Customer\).) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 652.54 Td (1. Purpose) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 631.54 Td (This Addendum governs Customer's use of AI-enabled features, including AI-assisted clinical notes,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 618.31 Td (summaries, treatment plan support, patient risk scores, radiograph review support, insurance/billing) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 605.08 Td (suggestions, patient communications drafting, and other AI outputs.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 576.85 Td (2. AI Outputs Are Drafts and Workflow Support) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 555.85 Td (AI outputs are generated for drafting, administrative support, triage support, or workflow assistance. AI) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 542.62 Td (outputs are not final clinical records, diagnoses, treatment decisions, legal advice, billing advice, coding advice,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 529.39 Td (or payer determinations.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 509.16 Td (Customer and its licensed professionals are solely responsible for:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 488.93 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 488.93 Td (Reviewing all AI outputs before use.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 473.97 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 473.97 Td (Editing inaccurate, incomplete, or inappropriate outputs.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 459.01 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 459.01 Td (Approving final clinical notes and records.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 444.05 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 444.05 Td (Making diagnoses and treatment decisions.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 429.09 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 429.09 Td (Obtaining informed consent for treatment.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 414.13 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 414.13 Td (Selecting procedure codes.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 399.17 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 399.17 Td (Submitting claims.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 384.21 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 384.21 Td (Communicating with patients.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 369.25 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 369.25 Td (Complying with professional standards and law.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 343.29 Td (3. Required Human Review) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 322.29 Td (Customer must ensure that a licensed dentist or other appropriately licensed professional reviews and) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 309.06 Td (approves AI-generated clinical content before it is entered into the final patient record or relied upon for) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 295.83 Td (patient care.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 275.60 Td (Customer must not use AI outputs as the sole basis for diagnosis, treatment, prescription, referral,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 262.37 Td (radiographic interpretation, emergency care, or billing/coding decisions.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 234.14 Td (4. Accuracy Limitations) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 213.14 Td (Customer acknowledges that AI outputs may:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 192.91 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 192.91 Td (Contain factual errors.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 177.95 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 177.95 Td (Omit relevant information.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 162.99 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 162.99 Td (Misinterpret audio, transcripts, images, codes, abbreviations, or clinical context.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 148.03 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 148.03 Td (Produce unsupported recommendations.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 133.07 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 133.07 Td (Reflect bias or inconsistent phrasing.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 118.11 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 118.11 Td (Fail to identify urgent issues.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 103.15 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 103.15 Td (Generate language that is not clinically, legally, or professionally appropriate.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 85.19 Td (Customer must independently verify all material information.) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (24) Tj ET
+endstream
+endobj
+28 0 obj
+<< /Length 5713 >>
+stream
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 726.00 Td (5. Recording and Transcription) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 705.00 Td (If audio recording or transcription is enabled, Customer is responsible for:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 684.77 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 684.77 Td (Obtaining patient consent before recording.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 669.81 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 669.81 Td (Obtaining staff/provider consent where required.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 654.85 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 654.85 Td (Stopping recording if consent is withdrawn.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 639.89 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 639.89 Td (Maintaining notices and consent records.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 624.93 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 624.93 Td (Reviewing transcripts for accuracy before relying on them.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 609.97 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 609.97 Td (Configuring retention and deletion settings consistent with law and office policy.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 584.01 Td (6. Radiograph and Image Features) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 563.01 Td (If radiograph or image review support is enabled, AI image outputs are not a substitute for dentist,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 549.78 Td (radiologist, or other licensed professional review.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 529.55 Td (Customer must not represent that the AI has independently diagnosed disease or cleared a patient unless the) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 516.32 Td (feature has been reviewed by counsel and, where applicable, regulatory specialists for FDA and state-law) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 503.09 Td (requirements.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 474.86 Td (7. Patient Communications) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 453.86 Td (AI-drafted patient messages must be reviewed by Customer before sending unless Customer expressly) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 440.63 Td (enables automated sending. Customer remains responsible for message content, consent, opt-outs, frequency,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 427.40 Td (and compliance with communications laws.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 399.17 Td (8. Billing and Insurance Outputs) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 378.17 Td (AI or automated outputs related to billing, claims, eligibility, coverage, coding, payment estimates, and) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 364.94 Td (patient responsibility are workflow aids only. Customer remains responsible for coding accuracy,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 351.71 Td (medical/dental necessity documentation, claim submission, payer rules, and compliance.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 323.48 Td (9. Prohibited Uses) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 302.48 Td (Customer will not use AI features:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 282.25 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 282.25 Td (As a replacement for licensed professional judgment.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 267.29 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 267.29 Td (For emergency diagnosis or time-critical clinical decisions.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 252.33 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 252.33 Td (To generate fraudulent, misleading, or unsupported documentation.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 237.37 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 237.37 Td (To upcode, miscode, or manipulate claims.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 222.41 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 222.41 Td (To send patient communications without required consent.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 207.45 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 207.45 Td (To process data for patients or practices not authorized under the Agreement.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 192.49 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 192.49 Td (In violation of applicable law or professional standards.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 166.53 Td (10. Model and Vendor Changes) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 145.53 Td (Vendor may update models, prompts, vendors, workflows, or AI configurations to improve performance,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 132.30 Td (security, availability, or compliance. Vendor will not intentionally reduce material protections for PHI without) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 119.07 Td (appropriate notice or contractual safeguards.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 98.84 Td (If a third-party AI vendor handles PHI, Vendor will ensure an appropriate Business Associate Agreement or) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 85.61 Td (equivalent required agreement is in place before PHI is transmitted, unless Customer expressly instructs) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 72.38 Td (otherwise in a legally permissible configuration.) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (25) Tj ET
+endstream
+endobj
+29 0 obj
+<< /Length 2945 >>
+stream
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 726.00 Td (11. No Medical Device Representation) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 705.00 Td (Unless expressly stated in a signed addendum, the Services are not marketed, sold, or intended as FDA-cleared) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 691.77 Td (or FDA-approved medical devices. Customer must not use or describe the Services in a manner inconsistent) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 678.54 Td (with the applicable documentation and intended use.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 650.31 Td (12. Customer Configuration Choices) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 629.31 Td (Customer has selected the following AI settings:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 609.08 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 609.08 Td (Cloud AI processing: [ ] Enabled [ ] Disabled.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 594.12 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 594.12 Td (Local AI processing: [ ] Enabled [ ] Disabled.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 579.16 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 579.16 Td (Audio recording: [ ] Enabled [ ] Disabled.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 564.20 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 564.20 Td (Raw audio retention: [Setting].) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 549.24 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 549.24 Td (Transcript retention: [Setting].) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 534.28 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 534.28 Td (Automated patient message sending: [ ] Enabled [ ] Disabled.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 519.32 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 519.32 Td (Radiograph/image review support: [ ] Enabled [ ] Disabled.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 504.36 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 504.36 Td (Open Dental write-back of AI-generated content: [ ] Enabled [ ] Disabled.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 478.40 Td (13. Signatures) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 457.40 Td (Vendor: [Vendor Legal Name]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 440.17 Td (By: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 422.94 Td (Date: _________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 402.71 Td (Customer: [Dental Practice Legal Name]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 385.48 Td (By: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 368.25 Td (Date: _________________________) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (26) Tj ET
+endstream
+endobj
+30 0 obj
+<< /Length 4563 >>
+stream
+0.067 0.094 0.153 rg
+BT /F2 20 Tf 54.00 731.00 Td (Patient Recording and AI Documentation Consent) Tj ET
+0.122 0.165 0.267 RG
+1.1 w 54.00 717.00 m 558.00 717.00 l S
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 694.00 Td (Practice: [Dental Practice Legal Name]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 676.77 Td (Patient Name: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 659.54 Td (Date of Birth: __________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 642.31 Td (Date: _________________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 622.08 Td (This form explains how our office may use audio recording, transcription, and AI-assisted documentation) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 608.85 Td (tools during your dental visit.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 580.62 Td (1. What We May Record) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 559.62 Td (With your permission, we may record audio of conversations during your dental appointment. The recording) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 546.39 Td (may include your voice, the dentist's voice, and staff voices. The recording may include information about) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 533.16 Td (your health, dental treatment, symptoms, medications, insurance, and care plan.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 512.93 Td (We will not record if you do not consent.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 484.70 Td (2. Why We Use Recording and AI Tools) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 463.70 Td (We use recording, transcription, and AI-assisted documentation to help prepare clinical notes, summaries,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 450.47 Td (treatment plan documentation, and related office records. These tools help our team document your visit, but) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 437.24 Td (they do not replace your dentist's professional judgment.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 409.01 Td (3. Human Review) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 388.01 Td (AI-generated notes or summaries are drafts. A licensed dental professional or authorized member of our) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 374.78 Td (team must review, edit, and approve information before it becomes part of your final dental record or is used) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 361.55 Td (for your care.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 333.32 Td (4. How Recordings and Transcripts Are Protected) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 312.32 Td (Recordings, transcripts, and AI-generated drafts may contain protected health information. We protect this) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 299.09 Td (information according to our privacy and security policies and applicable health privacy laws.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 278.86 Td (Access is limited to authorized personnel and service providers who support our practice and are required to) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 265.63 Td (protect the information.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 237.40 Td (5. Retention and Deletion) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 216.40 Td (Our current policy is:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 196.17 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 196.17 Td (Audio recordings are retained for: [Insert period or "until transcription and quality review are complete"].) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 181.21 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 181.21 Td (Transcripts are retained for: [Insert period].) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 166.25 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 166.25 Td (Approved clinical notes are retained as part of your dental record according to legal and professional) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 153.29 Td (requirements.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 135.33 Td (We may keep or delete recordings and transcripts according to our record retention policies and applicable) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 122.10 Td (law.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 93.87 Td (6. Your Choice) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (27) Tj ET
+endstream
+endobj
+31 0 obj
+<< /Length 2354 >>
+stream
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 734.00 Td (You may refuse recording or AI-assisted documentation. Refusing will not affect your ability to receive) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 720.77 Td (dental care from our office.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 700.54 Td (If you agree now and later change your mind, tell a team member. We will stop recording after you withdraw) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 687.31 Td (consent. Information already recorded or documented before withdrawal may remain part of our records if) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 674.08 Td (permitted or required by law.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 645.85 Td (7. Questions) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 624.85 Td (You may ask questions before signing this form. You may also request a copy of this consent.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 596.62 Td (8. Consent) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 575.62 Td (By signing below, I consent to audio recording, transcription, and AI-assisted documentation for the purposes) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 562.39 Td (described above.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 542.16 Td (Patient or legal representative signature: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 521.93 Td (Printed name: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 501.70 Td (Relationship to patient, if representative: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 481.47 Td (Date: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 461.24 Td (Staff witness: ___________________________) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 433.01 Td (Optional State-Specific Language) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 412.01 Td (Counsel should add state-specific language for all-party consent, minors, guardians, revocation, retention, and) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 398.78 Td (special privacy categories where required.) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (28) Tj ET
+endstream
+endobj
+32 0 obj
+<< /Length 5074 >>
+stream
+0.067 0.094 0.153 rg
+BT /F2 20 Tf 54.00 731.00 Td (Staff Recording and AI Documentation Policy) Tj ET
+0.122 0.165 0.267 RG
+1.1 w 54.00 717.00 m 558.00 717.00 l S
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 694.00 Td (Practice: [Dental Practice Legal Name]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 676.77 Td (Effective Date: [Date]) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 648.54 Td (1. Purpose) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 627.54 Td (Our practice may use audio recording, transcription, AI-assisted documentation, and workflow automation) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 614.31 Td (tools to support dental care, charting, administrative work, billing, insurance, recall, patient communications,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 601.08 Td (and quality improvement.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 580.85 Td (This policy explains staff responsibilities when these tools are used.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 552.62 Td (2. Applicability) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 531.62 Td (This policy applies to all dentists, hygienists, assistants, front desk staff, office managers, contractors, and) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 518.39 Td (other personnel who work in areas where recording, transcription, AI documentation, or AI workflow tools) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 505.16 Td (may be used.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 476.93 Td (3. Recording Consent and Notice) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 455.93 Td (Staff acknowledge that their voices may be recorded during patient encounters or office workflows when) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 442.70 Td (recording features are enabled.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 422.47 Td (Recording may occur only for approved practice purposes. Recording must not begin unless patient consent has) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 409.24 Td (been obtained where required by practice policy and applicable law.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 389.01 Td (If a patient refuses or withdraws consent, staff must stop or avoid recording for that patient encounter.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 360.78 Td (4. Approved Uses) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 339.78 Td (Approved uses include:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 319.55 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 319.55 Td (Preparing draft clinical notes.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 304.59 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 304.59 Td (Creating visit summaries.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 289.63 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 289.63 Td (Supporting treatment plan documentation.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 274.67 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 274.67 Td (Improving documentation workflows.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 259.71 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 259.71 Td (Supporting administrative workflows.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 244.75 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 244.75 Td (Quality review and troubleshooting authorized by the practice.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 218.79 Td (5. Prohibited Uses) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 197.79 Td (Staff may not:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 177.56 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 177.56 Td (Secretly record patients or coworkers outside approved workflows.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 162.60 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 162.60 Td (Use personal phones or personal recording apps for patient encounters unless expressly authorized.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 147.64 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 147.64 Td (Send recordings, transcripts, screenshots, or PHI through unsecured channels.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 132.68 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 132.68 Td (Copy AI outputs into the chart without appropriate review.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 117.72 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 117.72 Td (Use AI outputs as a replacement for licensed clinical judgment.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 102.76 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 102.76 Td (Use the tools to generate false, misleading, or unsupported documentation.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 87.80 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 87.80 Td (Bypass access controls or use another person's account.) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (29) Tj ET
+endstream
+endobj
+33 0 obj
+<< /Length 3785 >>
+stream
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 726.00 Td (6. Human Review) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 705.00 Td (AI-generated clinical content is a draft. Licensed providers remain responsible for clinical judgment and final) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 691.77 Td (approval of clinical documentation. Administrative staff must follow office procedures for review and) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 678.54 Td (escalation.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 650.31 Td (7. Privacy and Security) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 629.31 Td (Staff must protect recordings, transcripts, AI drafts, patient messages, billing information, insurance) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 616.08 Td (information, and other PHI according to the practice's HIPAA policies.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 595.85 Td (Staff must:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 575.62 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 575.62 Td (Use only assigned accounts.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 560.66 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 560.66 Td (Lock screens when unattended.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 545.70 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 545.70 Td (Report suspected privacy or security incidents immediately.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 530.74 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 530.74 Td (Follow role-based access rules.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 515.78 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 515.78 Td (Avoid viewing PHI not needed for their duties.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 500.82 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 500.82 Td (Follow retention and deletion procedures.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 474.86 Td (8. Patient Questions) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 453.86 Td (If a patient asks about recording or AI documentation, staff should use the practice-approved explanation) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 440.63 Td (and offer the patient the consent form or privacy contact. Staff should not make promises about legal) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 427.40 Td (rights, deletion, or technology capabilities beyond approved practice materials.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 399.17 Td (9. Violations) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 378.17 Td (Violation of this policy may result in corrective action, loss of system access, discipline, termination, and) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 364.94 Td (reporting where required by law.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 336.71 Td (10. Acknowledgment) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 315.71 Td (I acknowledge that I have received, read, and understand this Staff Recording and AI Documentation Policy. I) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 302.48 Td (agree to follow this policy and applicable privacy, security, and patient care requirements.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 282.25 Td (Staff signature: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 262.02 Td (Printed name: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 241.79 Td (Role/title: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 221.56 Td (Date: ___________________________) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (30) Tj ET
+endstream
+endobj
+34 0 obj
+<< /Length 5054 >>
+stream
+0.067 0.094 0.153 rg
+BT /F2 20 Tf 54.00 731.00 Td (Patient Communications Addendum) Tj ET
+0.122 0.165 0.267 RG
+1.1 w 54.00 717.00 m 558.00 717.00 l S
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 694.00 Td (This Patient Communications Addendum \(Addendum\) supplements the Master Services Agreement between) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 680.77 Td ([Vendor Legal Name] \(Vendor\) and [Dental Practice Legal Name] \(Customer\).) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 652.54 Td (1. Purpose) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 631.54 Td (This Addendum governs use of features that send, draft, automate, schedule, track, or manage patient) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 618.31 Td (communications, including SMS, MMS, email, phone call reminders, portal messages, recall messages,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 605.08 Td (treatment plan follow-ups, billing reminders, insurance reminders, and nurture sequences.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 576.85 Td (2. Customer Responsibility for Consent) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 555.85 Td (Customer is solely responsible for obtaining and maintaining all patient consents, authorizations, notices, and) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 542.62 Td (opt-in records required for communications.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 522.39 Td (Customer must not use the communications features unless it has a legally sufficient basis to contact the) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 509.16 Td (patient through the selected channel.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 480.93 Td (3. Opt-Outs) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 459.93 Td (Customer must honor opt-outs, revocations, do-not-contact requests, STOP replies, unsubscribe requests,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 446.70 Td (and communication preferences promptly.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 426.47 Td (Vendor may provide tools to help manage opt-outs, but Customer remains responsible for ensuring opt-outs) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 413.24 Td (are honored across all systems and workflows.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 385.01 Td (4. Message Content) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 364.01 Td (Customer is responsible for message content, including AI-drafted content. Customer must review and) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 350.78 Td (approve message templates and automated campaigns before use.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 330.55 Td (Messages must not:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 310.32 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 310.32 Td (Include unnecessary PHI.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 295.36 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 295.36 Td (Be misleading, coercive, or deceptive.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 280.40 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 280.40 Td (Promise insurance coverage or clinical results.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 265.44 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 265.44 Td (Pressure patients inappropriately.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 250.48 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 250.48 Td (Violate professional standards.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 235.52 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 235.52 Td (Violate TCPA, CAN-SPAM, state communications laws, privacy laws, or payer rules.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 209.56 Td (5. Automated Sending) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 188.56 Td (If Customer enables automated sending, Customer authorizes Vendor to send messages according to) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 175.33 Td (Customer-approved settings, templates, schedules, and recipient lists.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 155.10 Td (Customer remains responsible for:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 134.87 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 134.87 Td (Recipient eligibility.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 119.91 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 119.91 Td (Timing and frequency.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 104.95 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 104.95 Td (Consent and opt-out status.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 89.99 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 89.99 Td (Template approval.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 75.03 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 75.03 Td (Reviewing campaign performance and complaints.) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (31) Tj ET
+endstream
+endobj
+35 0 obj
+<< /Length 4038 >>
+stream
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 726.00 Td (6. SMS and Email Risks) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 705.00 Td (Customer acknowledges that ordinary SMS and email may not be fully secure and may be viewed by others) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 691.77 Td (with access to the patient's device, phone number, email account, carrier account, or household.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 671.54 Td (Customer should limit PHI in messages and use neutral wording unless the patient has expressly agreed to) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 658.31 Td (receive more detailed communications.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 630.08 Td (7. Sample Patient Consent Language) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 609.08 Td (Counsel should review before use.) Tj ET
+0.588 0.706 0.667 rg
+54.00 570.85 3.00 22.00 re f
+0.204 0.251 0.329 rg
+BT /F1 9.2 Tf 66.00 588.85 Td (I authorize [Practice Name] to contact me by phone, text message, email, voicemail, or other electronic) Tj ET
+0.204 0.251 0.329 rg
+BT /F1 9.2 Tf 66.00 576.43 Td (communication for appointment reminders, recall reminders, treatment follow-up, billing, insurance, and practice) Tj ET
+0.204 0.251 0.329 rg
+BT /F1 9.2 Tf 66.00 564.01 Td (communications. I understand that messages may be sent using automated technology. Message and data rates) Tj ET
+0.204 0.251 0.329 rg
+BT /F1 9.2 Tf 66.00 551.59 Td (may apply. I can opt out of text messages by replying STOP or by contacting the practice. I understand that) Tj ET
+0.204 0.251 0.329 rg
+BT /F1 9.2 Tf 66.00 539.17 Td (ordinary text and email may not be fully secure.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 511.75 Td (8. Third-Party Communication Vendors) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 490.75 Td (If Vendor uses SMS, email, phone, or messaging providers that may process PHI, Vendor will ensure) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 477.52 Td (appropriate contractual safeguards are in place where required. Customer may need separate accounts,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 464.29 Td (terms, or registrations with certain providers.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 436.06 Td (9. No Emergency Communications) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 415.06 Td (Customer must not use the communications features for emergency or urgent clinical communications unless) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 401.83 Td (specifically designed and contracted for that purpose. Patients should be instructed to call emergency) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 388.60 Td (services or the practice directly for urgent matters.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 360.37 Td (10. Records) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 339.37 Td (The Services may log communication metadata and message content. Customer is responsible for determining) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 326.14 Td (whether communications should be retained in the dental record and for complying with recordkeeping) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 312.91 Td (requirements.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 284.68 Td (11. Signatures) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 263.68 Td (Vendor: [Vendor Legal Name]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 246.45 Td (By: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 229.22 Td (Date: _________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 208.99 Td (Customer: [Dental Practice Legal Name]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 191.76 Td (By: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 174.53 Td (Date: _________________________) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (32) Tj ET
+endstream
+endobj
+36 0 obj
+<< /Length 5320 >>
+stream
+0.067 0.094 0.153 rg
+BT /F2 20 Tf 54.00 731.00 Td (Billing and Insurance Addendum) Tj ET
+0.122 0.165 0.267 RG
+1.1 w 54.00 717.00 m 558.00 717.00 l S
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 694.00 Td (This Billing and Insurance Addendum \(Addendum\) supplements the Master Services Agreement between) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 680.77 Td ([Vendor Legal Name] \(Vendor\) and [Dental Practice Legal Name] \(Customer\).) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 652.54 Td (1. Purpose) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 631.54 Td (This Addendum governs features related to billing, patient balances, payment plans, insurance eligibility,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 618.31 Td (benefit verification, preauthorization, claims, claim scrubbing, denial management, ERA/EOB parsing, coding) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 605.08 Td (suggestions, and patient responsibility estimates.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 576.85 Td (2. Workflow Aid Only) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 555.85 Td (Billing and insurance outputs are administrative workflow aids. They are not legal, accounting, coding, payer,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 542.62 Td (reimbursement, or compliance advice.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 522.39 Td (Customer is solely responsible for:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 502.16 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 502.16 Td (Selecting procedure codes.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 487.20 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 487.20 Td (Confirming dental necessity and documentation.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 472.24 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 472.24 Td (Verifying eligibility and benefits.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 457.28 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 457.28 Td (Reviewing claims before submission.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 442.32 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 442.32 Td (Submitting accurate claims.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 427.36 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 427.36 Td (Managing payer communications.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 412.40 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 412.40 Td (Posting payments and adjustments.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 397.44 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 397.44 Td (Handling refunds and patient balances.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 382.48 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 382.48 Td (Complying with payer contracts and law.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 356.52 Td (3. No Coverage or Payment Guarantee) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 335.52 Td (Vendor does not guarantee:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 315.29 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 315.29 Td (Eligibility results.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 300.33 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 300.33 Td (Benefit information.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 285.37 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 285.37 Td (Preauthorization approval.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 270.41 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 270.41 Td (Claim acceptance.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 255.45 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 255.45 Td (Claim payment.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 240.49 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 240.49 Td (Patient responsibility estimates.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 225.53 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 225.53 Td (Payer timelines.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 210.57 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 210.57 Td (Coding accuracy.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 195.61 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 195.61 Td (Appeal outcomes.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 177.65 Td (Payer responses may be incomplete, delayed, outdated, or inconsistent with final adjudication.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 149.42 Td (4. Claim Scrubbing and Coding Suggestions) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 128.42 Td (Any claim scrubbing, coding suggestion, missing-documentation alert, or denial-risk score is a suggestion only.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 115.19 Td (Customer must review and approve all claims and supporting documentation before submission.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 94.96 Td (Customer must not use the Services to upcode, unbundle, misrepresent services, fabricate documentation, or) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 81.73 Td (submit claims not supported by the patient record.) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (33) Tj ET
+endstream
+endobj
+37 0 obj
+<< /Length 4708 >>
+stream
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 726.00 Td (5. Insurance Eligibility and Verification) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 705.00 Td (Eligibility and verification information may come from payer portals, clearinghouses, Open Dental,) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 691.77 Td (Customer-entered data, or other sources. Customer is responsible for validating material information before) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 678.54 Td (quoting patient responsibility or making financial decisions.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 658.31 Td (Customer should communicate estimates as estimates, not guarantees.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 630.08 Td (6. Payment Plans and Patient Balances) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 609.08 Td (If payment plan or billing reminder features are enabled, Customer is responsible for:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 588.85 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 588.85 Td (Truthful and accurate patient balance information.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 573.89 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 573.89 Td (Compliance with credit, lending, collections, and consumer protection laws.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 558.93 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 558.93 Td (Required disclosures.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 543.97 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 543.97 Td (Payment processor terms.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 529.01 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 529.01 Td (Refunds and disputes.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 514.05 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 514.05 Td (Avoiding unauthorized or harassing communications.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 488.09 Td (7. Clearinghouses and Payer Connections) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 467.09 Td (If the Services connect to clearinghouses, payer APIs, or claims networks, Customer may need separate) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 453.86 Td (enrollment, credentials, terms, fees, and authorizations.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 433.63 Td (Vendor is not responsible for clearinghouse or payer outages, rejections, rule changes, enrollment delays, or) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 420.40 Td (credential problems.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 392.17 Td (8. Fraud, Waste, and Abuse) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 371.17 Td (Customer must maintain policies and controls to prevent fraud, waste, abuse, false claims, and improper) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 357.94 Td (billing. Customer must promptly investigate and correct suspected billing errors.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 337.71 Td (Customer will not use the Services to create false documentation, conceal overpayments, misstate dates of) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 324.48 Td (service, misrepresent providers, or submit claims for services not performed or not documented.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 296.25 Td (9. Audit Support) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 275.25 Td (The Services may maintain logs or reports that support billing review. Vendor does not guarantee that logs or) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 262.02 Td (reports satisfy payer, audit, litigation, or regulatory requirements.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 241.79 Td (Customer is responsible for retaining claim, payment, dental record, and supporting documentation according) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 228.56 Td (to applicable law and payer contracts.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 200.33 Td (10. Signatures) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 179.33 Td (Vendor: [Vendor Legal Name]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 162.10 Td (By: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 144.87 Td (Date: _________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 124.64 Td (Customer: [Dental Practice Legal Name]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 107.41 Td (By: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 90.18 Td (Date: _________________________) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (34) Tj ET
+endstream
+endobj
+38 0 obj
+<< /Length 5827 >>
+stream
+0.067 0.094 0.153 rg
+BT /F2 20 Tf 54.00 731.00 Td (Subprocessor and Vendor Checklist) Tj ET
+0.122 0.165 0.267 RG
+1.1 w 54.00 717.00 m 558.00 717.00 l S
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 694.00 Td (Use this checklist before enabling any production office deployment or module that may process PHI, patient) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 680.77 Td (contact information, payment data, insurance data, clinical data, audio, transcripts, images, or support files.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 652.54 Td (1. Customer-Specific Vendor Inventory) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 631.54 Td (Customer: [Dental Practice Legal Name]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 614.31 Td (Office: [Office Address]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 597.08 Td (Deployment date: [Date]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 579.85 Td (Prepared by: [Name]) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 558.62 Td (Vendor/System | Purpose | Data Types | PHI? | BAA Required? | BAA Signed? | Notes) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 545.55 Td (DentalAI / [Vendor] | Software/services | Patient, clinical, billing, insurance | Yes | Yes | [ ] |) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 532.48 Td (Open Dental | Practice management | Dental record, billing, claims | Yes | Customer/Open Dental | [ ] |) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 519.41 Td (OpenAI / Anthropic / other AI provider | AI processing | Transcripts, notes, prompts | [ ] | [ ] | [ ] | Disable PHI unless BAA in place) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 506.34 Td (Ollama/local model | Local AI | Transcripts, notes | Yes/local | N/A vendor if fully local | [ ] | Verify no telemetry) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 493.27 Td (Twilio / SMS provider | Text messaging | Contact info, message content | [ ] | [ ] | [ ] |) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 480.20 Td (SendGrid / email provider | Email | Contact info, message content | [ ] | [ ] | [ ] |) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 467.13 Td (Clearinghouse | Claims/eligibility | Insurance, claims | Yes | [ ] | [ ] |) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 454.06 Td (Payment processor | Payments | Payment data, balances | [ ] | [ ] | [ ] | Check PCI and HIPAA posture) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 440.99 Td (Cloud hosting | Hosting/storage | Application data | [ ] | [ ] | [ ] |) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 427.92 Td (Error logging/monitoring | Logs | Possible PHI | [ ] | [ ] | [ ] | Scrub PHI or disable) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 414.85 Td (Analytics | Usage analytics | Possible identifiers | [ ] | [ ] | [ ] | Avoid PHI) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 401.78 Td (Remote support tool | Support access | Screen/PHI possible | [ ] | [ ] | [ ] |) Tj ET
+0.204 0.251 0.329 rg
+BT /F3 8.2 Tf 54.00 388.71 Td (Backup provider | Backup | Database/files | [ ] | [ ] | [ ] |) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 365.64 Td (2. Module Readiness) Tj ET
+0.149 0.196 0.282 rg
+BT /F2 11 Tf 54.00 339.64 Td (Core App) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 320.64 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 320.64 Td ([ ] MSA signed.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 305.68 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 305.68 Td ([ ] BAA signed.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 290.72 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 290.72 Td ([ ] Security Addendum signed.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 275.76 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 275.76 Td ([ ] Implementation SOW signed.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 260.80 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 260.80 Td ([ ] Customer technical contact identified.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 245.84 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 245.84 Td ([ ] Customer privacy/security contact identified.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 230.88 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 230.88 Td ([ ] Minimum technical requirements confirmed.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 215.92 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 215.92 Td ([ ] Customer backup confirmed.) Tj ET
+0.149 0.196 0.282 rg
+BT /F2 11 Tf 54.00 192.96 Td (Open Dental) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 173.96 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 173.96 Td ([ ] Open Dental Integration Authorization signed.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 159.00 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 159.00 Td ([ ] API access approved by Customer.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 144.04 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 144.04 Td ([ ] API permissions documented.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 129.08 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 129.08 Td ([ ] Delete permissions disabled unless expressly approved.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 114.12 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 114.12 Td ([ ] Write-back actions documented.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 99.16 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 99.16 Td ([ ] API keys stored securely.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 84.20 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 84.20 Td ([ ] Credential rotation/disable process documented.) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (35) Tj ET
+endstream
+endobj
+39 0 obj
+<< /Length 6005 >>
+stream
+0.149 0.196 0.282 rg
+BT /F2 11 Tf 54.00 729.00 Td (AI Notes / Audio) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 710.00 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 710.00 Td ([ ] AI Clinical Use Addendum signed.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 695.04 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 695.04 Td ([ ] Patient Recording and AI Consent approved by counsel/practice.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 680.08 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 680.08 Td ([ ] Staff Recording and AI Policy adopted.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 665.12 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 665.12 Td ([ ] Audio retention configured.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 650.16 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 650.16 Td ([ ] Transcript retention configured.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 635.20 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 635.20 Td ([ ] Human review workflow enabled.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 620.24 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 620.24 Td ([ ] Cloud AI disabled unless BAA/vendor approval complete.) Tj ET
+0.149 0.196 0.282 rg
+BT /F2 11 Tf 54.00 597.28 Td (Patient Communications) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 578.28 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 578.28 Td ([ ] Patient Communications Addendum signed.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 563.32 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 563.32 Td ([ ] SMS/email vendor reviewed.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 548.36 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 548.36 Td ([ ] BAA signed if required.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 533.40 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 533.40 Td ([ ] Patient communication consent language approved.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 518.44 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 518.44 Td ([ ] Opt-out workflow tested.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 503.48 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 503.48 Td ([ ] Templates approved by Customer.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 488.52 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 488.52 Td ([ ] Automated sending disabled until approved.) Tj ET
+0.149 0.196 0.282 rg
+BT /F2 11 Tf 54.00 465.56 Td (Billing and Insurance) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 446.56 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 446.56 Td ([ ] Billing and Insurance Addendum signed.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 431.60 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 431.60 Td ([ ] Clearinghouse/payer terms reviewed.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 416.64 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 416.64 Td ([ ] BAA signed if required.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 401.68 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 401.68 Td ([ ] Claim review workflow enabled.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 386.72 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 386.72 Td ([ ] Estimates labeled as estimates.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 371.76 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 371.76 Td ([ ] User permissions limited to authorized billing staff.) Tj ET
+0.149 0.196 0.282 rg
+BT /F2 11 Tf 54.00 348.80 Td (Payments) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 329.80 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 329.80 Td ([ ] Payment processor reviewed.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 314.84 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 314.84 Td ([ ] PCI responsibilities reviewed.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 299.88 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 299.88 Td ([ ] Refund/dispute process documented.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 284.92 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 284.92 Td ([ ] Payment communications reviewed.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 269.96 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 269.96 Td ([ ] Stored payment data minimized.) Tj ET
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 244.00 Td (3. Data Flow Review) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 223.00 Td (For each enabled module, document:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 202.77 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 202.77 Td (Data source.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 187.81 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 187.81 Td (Data destination.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 172.85 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 172.85 Td (Whether PHI is included.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 157.89 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 157.89 Td (Whether data leaves Customer's local network.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 142.93 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 142.93 Td (Whether data is encrypted in transit.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 127.97 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 127.97 Td (Whether data is encrypted at rest.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 113.01 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 113.01 Td (Retention period.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 98.05 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 98.05 Td (Deletion process.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 83.09 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 83.09 Td (Support access process.) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (36) Tj ET
+endstream
+endobj
+40 0 obj
+<< /Length 1321 >>
+stream
+0.122 0.165 0.267 rg
+BT /F2 13.2 Tf 54.00 726.00 Td (4. Go/No-Go Decision) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 705.00 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 705.00 Td ([ ] Approved for production.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 690.04 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 690.04 Td ([ ] Approved for pilot only.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 54.00 675.08 Td (-) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.6 Tf 68.00 675.08 Td ([ ] Not approved.) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 657.12 Td (Conditions or open items:) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 636.89 Td (1. [Item]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 619.66 Td (2. [Item]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 602.43 Td (3. [Item]) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 582.20 Td (Approver: ___________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 564.97 Td (Title: ______________________________) Tj ET
+0.090 0.125 0.200 rg
+BT /F1 9.8 Tf 54.00 547.74 Td (Date: _______________________________) Tj ET
+0.894 0.906 0.925 RG
+0.7 w 54.00 38.00 m 558.00 38.00 l S
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 54.00 25.00 Td (DentalAI Office Deployment Agreement Packet) Tj ET
+0.400 0.439 0.522 rg
+BT /F1 7.8 Tf 546.00 25.00 Td (37) Tj ET
+endstream
+endobj
+41 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 4 0 R >>
+endobj
+42 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 5 0 R >>
+endobj
+43 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 6 0 R >>
+endobj
+44 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 7 0 R >>
+endobj
+45 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 8 0 R >>
+endobj
+46 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 9 0 R >>
+endobj
+47 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 10 0 R >>
+endobj
+48 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 11 0 R >>
+endobj
+49 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 12 0 R >>
+endobj
+50 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 13 0 R >>
+endobj
+51 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 14 0 R >>
+endobj
+52 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 15 0 R >>
+endobj
+53 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 16 0 R >>
+endobj
+54 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 17 0 R >>
+endobj
+55 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 18 0 R >>
+endobj
+56 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 19 0 R >>
+endobj
+57 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 20 0 R >>
+endobj
+58 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 21 0 R >>
+endobj
+59 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 22 0 R >>
+endobj
+60 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 23 0 R >>
+endobj
+61 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 24 0 R >>
+endobj
+62 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 25 0 R >>
+endobj
+63 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 26 0 R >>
+endobj
+64 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 27 0 R >>
+endobj
+65 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 28 0 R >>
+endobj
+66 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 29 0 R >>
+endobj
+67 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 30 0 R >>
+endobj
+68 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 31 0 R >>
+endobj
+69 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 32 0 R >>
+endobj
+70 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 33 0 R >>
+endobj
+71 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 34 0 R >>
+endobj
+72 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 35 0 R >>
+endobj
+73 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 36 0 R >>
+endobj
+74 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 37 0 R >>
+endobj
+75 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 38 0 R >>
+endobj
+76 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 39 0 R >>
+endobj
+77 0 obj
+<< /Type /Page /Parent 78 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 40 0 R >>
+endobj
+78 0 obj
+<< /Type /Pages /Count 37 /Kids [41 0 R 42 0 R 43 0 R 44 0 R 45 0 R 46 0 R 47 0 R 48 0 R 49 0 R 50 0 R 51 0 R 52 0 R 53 0 R 54 0 R 55 0 R 56 0 R 57 0 R 58 0 R 59 0 R 60 0 R 61 0 R 62 0 R 63 0 R 64 0 R 65 0 R 66 0 R 67 0 R 68 0 R 69 0 R 70 0 R 71 0 R 72 0 R 73 0 R 74 0 R 75 0 R 76 0 R 77 0 R] >>
+endobj
+79 0 obj
+<< /Type /Catalog /Pages 78 0 R >>
+endobj
+xref
+0 80
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000000160 00000 n 
+0000000228 00000 n 
+0000002210 00000 n 
+0000005264 00000 n 
+0000011591 00000 n 
+0000017400 00000 n 
+0000022782 00000 n 
+0000028359 00000 n 
+0000033292 00000 n 
+0000034299 00000 n 
+0000039871 00000 n 
+0000046445 00000 n 
+0000051830 00000 n 
+0000053451 00000 n 
+0000059207 00000 n 
+0000066051 00000 n 
+0000071734 00000 n 
+0000074131 00000 n 
+0000080284 00000 n 
+0000085997 00000 n 
+0000091120 00000 n 
+0000092017 00000 n 
+0000096971 00000 n 
+0000102345 00000 n 
+0000103080 00000 n 
+0000108635 00000 n 
+0000114401 00000 n 
+0000117399 00000 n 
+0000122015 00000 n 
+0000124422 00000 n 
+0000129549 00000 n 
+0000133387 00000 n 
+0000138494 00000 n 
+0000142585 00000 n 
+0000147958 00000 n 
+0000152719 00000 n 
+0000158599 00000 n 
+0000164657 00000 n 
+0000166031 00000 n 
+0000166179 00000 n 
+0000166327 00000 n 
+0000166475 00000 n 
+0000166623 00000 n 
+0000166771 00000 n 
+0000166919 00000 n 
+0000167068 00000 n 
+0000167217 00000 n 
+0000167366 00000 n 
+0000167515 00000 n 
+0000167664 00000 n 
+0000167813 00000 n 
+0000167962 00000 n 
+0000168111 00000 n 
+0000168260 00000 n 
+0000168409 00000 n 
+0000168558 00000 n 
+0000168707 00000 n 
+0000168856 00000 n 
+0000169005 00000 n 
+0000169154 00000 n 
+0000169303 00000 n 
+0000169452 00000 n 
+0000169601 00000 n 
+0000169750 00000 n 
+0000169899 00000 n 
+0000170048 00000 n 
+0000170197 00000 n 
+0000170346 00000 n 
+0000170495 00000 n 
+0000170644 00000 n 
+0000170793 00000 n 
+0000170942 00000 n 
+0000171091 00000 n 
+0000171240 00000 n 
+0000171389 00000 n 
+0000171538 00000 n 
+0000171850 00000 n 
+trailer
+<< /Size 80 /Root 79 0 R >>
+startxref
+171901
+%%EOF

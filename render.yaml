@@ -12,4 +12,4 @@ services:
       - key: NODE_ENV
         value: production
       - key: DATABASE_URL
-        value: file:../data/dentalai.db
+        value: file:/opt/render/project/src/data/dentalai.db

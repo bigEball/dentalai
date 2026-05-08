@@ -1,40 +1,41 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import path from 'path';
+import { clientDistDir, uploadsDir } from './core/paths';
 
-import patientsRouter from './routes/patients';
-import appointmentsRouter from './routes/appointments';
-import notesRouter from './routes/notes';
-import insuranceRouter from './routes/insurance';
-import claimsRouter from './routes/claims';
-import billingRouter from './routes/billing';
-import recallRouter from './routes/recall';
-import dashboardRouter from './routes/dashboard';
-import activityRouter from './routes/activity';
-import settingsRouter from './routes/settings';
-import treatmentPlansRouter from './routes/treatmentPlans';
-import reportsRouter from './routes/reports';
-import communicationsRouter from './routes/communications';
-import preauthRouter from './routes/preauth';
-import paymentPlansRouter from './routes/paymentPlans';
-import formsRouter from './routes/forms';
-import followupsRouter from './routes/followups';
-import referralsRouter from './routes/referrals';
-import inventoryRouter from './routes/inventory';
-import inventoryImportRouter from './routes/inventoryImport';
-import perioRouter from './routes/perio';
-import scoresRouter from './routes/scores';
-import claimScrubberRouter from './routes/claimScrubber';
-import churnRouter from './routes/churn';
-import morningHuddleRouter from './routes/morningHuddle';
-import nurtureRouter from './routes/nurture';
-import feeScheduleRouter from './routes/feeSchedule';
-import schedulingRouter from './routes/scheduling';
-import procurementRouter from './routes/procurement';
-import decisionSupportRouter from './routes/decisionSupport';
-import complianceRouter from './routes/compliance';
-import multiLocationRouter from './routes/multiLocation';
-import demoRequestsRouter from './routes/demoRequests';
+import patientsRouter from './api/routes/patients';
+import appointmentsRouter from './api/routes/appointments';
+import notesRouter from './api/routes/notes';
+import insuranceRouter from './api/routes/insurance';
+import claimsRouter from './api/routes/claims';
+import billingRouter from './api/routes/billing';
+import recallRouter from './api/routes/recall';
+import dashboardRouter from './api/routes/dashboard';
+import activityRouter from './api/routes/activity';
+import settingsRouter from './api/routes/settings';
+import treatmentPlansRouter from './api/routes/treatmentPlans';
+import reportsRouter from './api/routes/reports';
+import communicationsRouter from './api/routes/communications';
+import preauthRouter from './api/routes/preauth';
+import paymentPlansRouter from './api/routes/paymentPlans';
+import formsRouter from './api/routes/forms';
+import followupsRouter from './api/routes/followups';
+import referralsRouter from './api/routes/referrals';
+import inventoryRouter from './api/routes/inventory';
+import inventoryImportRouter from './api/routes/inventoryImport';
+import perioRouter from './api/routes/perio';
+import scoresRouter from './api/routes/scores';
+import claimScrubberRouter from './api/routes/claimScrubber';
+import churnRouter from './api/routes/churn';
+import morningHuddleRouter from './api/routes/morningHuddle';
+import nurtureRouter from './api/routes/nurture';
+import feeScheduleRouter from './api/routes/feeSchedule';
+import schedulingRouter from './api/routes/scheduling';
+import procurementRouter from './api/routes/procurement';
+import decisionSupportRouter from './api/routes/decisionSupport';
+import complianceRouter from './api/routes/compliance';
+import multiLocationRouter from './api/routes/multiLocation';
+import demoRequestsRouter from './api/routes/demoRequests';
 
 const app = express();
 const PORT = process.env.PORT ?? 3001;
@@ -58,13 +59,11 @@ app.use((_req: Request, res: Response, next: NextFunction) => {
 });
 
 // Serve uploaded files statically
-const uploadsPath = path.resolve(__dirname, '../../data/uploads');
-app.use('/uploads', express.static(uploadsPath));
+app.use('/uploads', express.static(uploadsDir));
 
 // Serve client build in production
 if (process.env.NODE_ENV === 'production') {
-  const clientPath = path.resolve(__dirname, '../../client/dist');
-  app.use(express.static(clientPath));
+  app.use(express.static(clientDistDir));
 }
 
 // Request logger (development only)
@@ -117,13 +116,12 @@ app.use('/api/v1/demo-requests', demoRequestsRouter);
 
 // SPA fallback — serve index.html for non-API routes in production
 if (process.env.NODE_ENV === 'production') {
-  const clientPath = path.resolve(__dirname, '../../client/dist');
   app.get('*', (req: Request, res: Response, next: NextFunction) => {
     // Don't intercept API calls — let them fall through to 404
     if (req.path.startsWith('/api/')) {
       return next();
     }
-    res.sendFile(path.join(clientPath, 'index.html'));
+    res.sendFile(path.join(clientDistDir, 'index.html'));
   });
 }
 

@@ -9,7 +9,7 @@
  */
 
 import { prisma } from '../db/client';
-import { isLiveMode, getConfig } from '../config';
+import { isLiveMode, getConfig } from '../core/config';
 import { OpenDentalClient } from '../integrations/openDental/client';
 
 // ----------------------------------------------------------------

@@ -6,7 +6,7 @@
  * /api/tags for health checks and model listing.
  */
 
-import { getConfig } from '../../config';
+import { getConfig } from '../../core/config';
 
 // ----------------------------------------------------------------
 // Types

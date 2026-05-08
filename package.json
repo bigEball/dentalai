@@ -6,11 +6,15 @@
     "dev": "npx concurrently -n \"server,client\" -c \"blue,cyan\" \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
     "dev:server": "npm run dev --prefix server",
     "dev:client": "npm run dev --prefix client",
-    "db:seed": "cd server && npx tsx ../prisma/seed.ts",
-    "db:studio": "cd server && npx prisma studio --schema ../prisma/schema.prisma",
+    "db:seed": "npm run db:seed --prefix server",
+    "db:studio": "npm run db:studio --prefix server",
     "install:all": "npm install && npm install --prefix server && npm install --prefix client",
-    "build": "npm install --prefix client && npm run build --prefix client && npm install --prefix server && cd server && npx prisma generate --schema ../prisma/schema.prisma && npm run build",
-    "start": "cd server && npx prisma db push --accept-data-loss --schema ../prisma/schema.prisma && npx tsx ../prisma/seed.ts && node dist/index.js"
+    "docs:build": "npm run docs:legal && npm run docs:sales:playbook && npm run docs:sales:leavebehind",
+    "docs:legal": "node scripts/docs/build-service-agreement-packet.mjs",
+    "docs:sales:playbook": "node scripts/docs/render-sales-playbook-pdf.mjs",
+    "docs:sales:leavebehind": "node scripts/docs/render-office-leave-behind-pdf.mjs",
+    "build": "npm install --prefix client && npm run build --prefix client && npm install --prefix server && npm run db:generate --prefix server && npm run build --prefix server",
+    "start": "cd server && npx prisma db push --accept-data-loss --schema prisma/schema.prisma && npx tsx prisma/seed.ts && node dist/index.js"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
