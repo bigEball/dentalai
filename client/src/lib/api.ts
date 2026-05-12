@@ -36,12 +36,13 @@ function resolveMock(url: string, method: string, requestBody?: unknown): { data
   if (mock === undefined) return undefined;
 
   if (method !== 'get') {
-    let payload: unknown = mock;
+    let payload: unknown = Array.isArray(mock) ? {} : mock;
     try {
+      const fallbackId = `mock-${Date.now()}`;
       if (typeof requestBody === 'string' && requestBody.length > 0) {
-        payload = { ...(mock as object), ...JSON.parse(requestBody), id: `mock-${Date.now()}` };
+        payload = { ...(payload as object), ...JSON.parse(requestBody), id: fallbackId };
       } else if (requestBody && typeof requestBody === 'object') {
-        payload = { ...(mock as object), ...(requestBody as object), id: `mock-${Date.now()}` };
+        payload = { ...(payload as object), ...(requestBody as object), id: fallbackId };
       }
     } catch {
       /* use mock as-is */

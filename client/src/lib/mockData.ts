@@ -334,6 +334,62 @@ const WRITE_OFF_ANALYSIS = {
   })),
 };
 
+const FEE_OPTIMIZATION_REPORT = {
+  id: 'fee-report-demo',
+  scheduleId: FEE_SCHEDULE_DETAIL.id,
+  scheduleName: FEE_SCHEDULE_DETAIL.name,
+  generatedAt: new Date().toISOString(),
+  totalAnnualRevenue: FEE_SCHEDULE_DETAIL.entries.reduce((sum, entry) => sum + (entry.annualRevenue ?? 0), 0),
+  totalAnnualWriteOff: FEE_SCHEDULE_DETAIL.entries.reduce((sum, entry) => sum + (entry.annualWriteOff ?? 0), 0),
+  proceduresBelowP50: FEE_SCHEDULE_DETAIL.entries.filter((entry) => (entry.ucrPercentile ?? 0) < 50).length,
+  revenueOpportunity: 84250,
+  modeledRevenue: [
+    { percentile: 50, revenue: 246900, uplift: 11220 },
+    { percentile: 60, revenue: 264500, uplift: 28820 },
+    { percentile: 75, revenue: 320750, uplift: 85070 },
+    { percentile: 85, revenue: 356400, uplift: 120720 },
+    { percentile: 90, revenue: 374920, uplift: 139240 },
+  ],
+  entryAnalysis: FEE_SCHEDULE_DETAIL.entries.map((entry) => ({
+    code: entry.code,
+    description: entry.description,
+    currentFee: entry.ppoAllowedFee ?? entry.feeAmount,
+    ucrPercentile: entry.ucrPercentile ?? 50,
+    feeAtP50: Math.round(entry.feeAmount * 1.08),
+    feeAtP75: Math.round(entry.feeAmount * 1.22),
+    feeAtP90: Math.round(entry.feeAmount * 1.34),
+    annualVolume: entry.annualVolume,
+    upliftAtP75: Math.max(0, Math.round((entry.feeAmount * 1.22 - (entry.ppoAllowedFee ?? entry.feeAmount)) * entry.annualVolume)),
+    writeOff: entry.annualWriteOff ?? 0,
+    flag: (entry.ucrPercentile ?? 50) < 50
+      ? 'undercharging'
+      : (entry.ucrPercentile ?? 50) < 75
+        ? 'competitive'
+        : 'premium',
+  })),
+};
+
+const FEE_RENEGOTIATION_BRIEF = {
+  id: 'brief-demo',
+  scheduleId: FEE_SCHEDULE_DETAIL.id,
+  scheduleName: FEE_SCHEDULE_DETAIL.name,
+  generatedAt: new Date().toISOString(),
+  payerName: 'Demo PPO',
+  procedureCount: FEE_SCHEDULE_DETAIL.entries.length,
+  totalAnnualImpact: 84250,
+  text: [
+    'PPO FEE RENEGOTIATION BRIEF',
+    '',
+    'Payer: Demo PPO',
+    'Schedule: Standard UCR',
+    'Analysis: 4 high-volume procedures reviewed against current UCR benchmarks.',
+    '',
+    'The practice is absorbing material write-offs on preventive, restorative, and periodontal procedures. A targeted reimbursement adjustment toward the 75th percentile would reduce annual write-offs while keeping fees within market norms.',
+    '',
+    'Recommended next step: request updated allowed fees for D1110, D2740, D4341, and D2392 with supporting utilization and market-position data attached.',
+  ].join('\n'),
+};
+
 const COMPLIANCE_TASKS = [
   { id: 'ct-1', title: 'HIPAA risk assessment', category: 'hipaa', description: 'Annual privacy and security review.', frequency: 'Annual', lastCompleted: '2025-06-15', nextDue: '2026-06-15', status: 'due_soon', assignee: 'Office Manager', notes: 'Review access logs and vendor list.', evidence: 'Prior assessment PDF', priority: 'high' },
   { id: 'ct-2', title: 'OSHA bloodborne pathogen training', category: 'osha', description: 'Staff training renewal.', frequency: 'Annual', lastCompleted: '2025-04-10', nextDue: '2026-04-10', status: 'overdue', assignee: 'Clinical Lead', notes: 'Schedule makeup session.', evidence: 'Training roster', priority: 'critical' },
@@ -432,11 +488,18 @@ const EXACT: Record<string, Mock> = {
   '/fee-schedules': FEE_SCHEDULES,
   '/fee-schedules/fs-standard': FEE_SCHEDULE_DETAIL,
   '/fee-schedules/write-off-analysis': WRITE_OFF_ANALYSIS,
+  '/fee-schedules/fs-standard/analyze': FEE_SCHEDULE_DETAIL,
+  '/fee-schedules/fs-standard/optimize': FEE_OPTIMIZATION_REPORT,
+  '/fee-schedules/fs-standard/renegotiation-brief': FEE_RENEGOTIATION_BRIEF,
   '/compliance/dashboard': COMPLIANCE_DASHBOARD,
   '/compliance/tasks': COMPLIANCE_TASKS,
   '/compliance/training': COMPLIANCE_TRAINING,
   '/compliance/expiry-alerts': COMPLIANCE_ALERTS,
   '/compliance/audits': COMPLIANCE_AUDITS,
+  '/compliance/audit/full': COMPLIANCE_AUDITS[0],
+  '/compliance/audit/hipaa': { ...COMPLIANCE_AUDITS[0], id: 'audit-hipaa-demo', type: 'hipaa' },
+  '/compliance/audit/osha': { ...COMPLIANCE_AUDITS[0], id: 'audit-osha-demo', type: 'osha' },
+  '/compliance/audit/infection_control': { ...COMPLIANCE_AUDITS[0], id: 'audit-infection-control-demo', type: 'infection_control' },
   '/activity': ACTIVITY,
   '/settings': SETTINGS,
   '/settings/status': SYSTEM_STATUS,
@@ -481,6 +544,21 @@ export function getMockForPath(path: string): Mock | undefined {
       }
     }
   }
+
+  if (p.startsWith('/compliance/tasks/') && p.endsWith('/complete')) {
+    const taskId = segments[2];
+    const task = COMPLIANCE_TASKS.find((item) => item.id === taskId) ?? COMPLIANCE_TASKS[0];
+    return {
+      ...task,
+      status: 'compliant',
+      lastCompleted: new Date().toISOString().split('T')[0],
+      nextDue: new Date(Date.now() + 365 * 86400000).toISOString().split('T')[0],
+    };
+  }
+
+  if (p.startsWith('/fee-schedules/') && p.endsWith('/analyze')) return FEE_SCHEDULE_DETAIL;
+  if (p.startsWith('/fee-schedules/') && p.endsWith('/optimize')) return FEE_OPTIMIZATION_REPORT;
+  if (p.startsWith('/fee-schedules/') && p.endsWith('/renegotiation-brief')) return FEE_RENEGOTIATION_BRIEF;
 
   // Prefix matches for pages that supply their own mocks
   for (const prefix of EMPTY_OBJECT_PATHS) {
