@@ -118,6 +118,24 @@ interface WasteReport {
   totalWasteValue: number;
 }
 
+interface ApiWasteItem {
+  name: string;
+  type: 'expired' | 'expiring_soon' | 'overstocked';
+  currentStock: number;
+  maxStock: number;
+  unitCost: number;
+  costImpact: number;
+  expiryDate: string | null;
+}
+
+interface ApiWasteReport {
+  expired?: WasteExpired[];
+  overstocked?: WasteOverstocked[];
+  totalWasteValue?: number;
+  wasteItems?: ApiWasteItem[];
+  totalWasteCost?: number;
+}
+
 // ─── Mock Data ──────────────────────────────────────────────────────────────
 
 const MOCK_DASHBOARD: DashboardStats = {
@@ -269,6 +287,43 @@ const CHART_COLORS = ['#6366f1', '#f59e0b', '#10b981', '#ef4444', '#8b5cf6'];
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
+function normalizeWasteReport(data: ApiWasteReport): WasteReport {
+  if (Array.isArray(data.expired) && Array.isArray(data.overstocked)) {
+    return {
+      expired: data.expired,
+      overstocked: data.overstocked,
+      totalWasteValue: data.totalWasteValue ?? data.totalWasteCost ?? 0,
+    };
+  }
+
+  const wasteItems = Array.isArray(data.wasteItems) ? data.wasteItems : [];
+  const expired = wasteItems
+    .filter((item) => item.type === 'expired')
+    .map((item) => ({
+      name: item.name,
+      quantity: item.currentStock,
+      unitCost: item.unitCost,
+      totalLoss: item.costImpact,
+      expiryDate: item.expiryDate ?? '',
+    }));
+
+  const overstocked = wasteItems
+    .filter((item) => item.type === 'overstocked')
+    .map((item) => ({
+      name: item.name,
+      currentStock: item.currentStock,
+      maxStock: item.maxStock,
+      excess: Math.max(item.currentStock - item.maxStock, 0),
+      excessCost: item.costImpact,
+    }));
+
+  return {
+    expired,
+    overstocked,
+    totalWasteValue: data.totalWasteValue ?? data.totalWasteCost ?? 0,
+  };
+}
+
 function categoryBadge(category: string): string {
   switch (category) {
     case 'restorative': return 'bg-blue-50 text-blue-700';
@@ -406,8 +461,8 @@ export default function ProcurementPage() {
 
   const fetchWaste = useCallback(async () => {
     try {
-      const { data } = await api.get<WasteReport>('/procurement/waste');
-      setWaste(data);
+      const { data } = await api.get<ApiWasteReport>('/procurement/waste');
+      setWaste(normalizeWasteReport(data));
     } catch {
       setWaste(MOCK_WASTE);
     }

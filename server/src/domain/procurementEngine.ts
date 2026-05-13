@@ -506,7 +506,22 @@ export async function getConsumptionAnalysis(): Promise<{
  */
 export async function getWasteReport(): Promise<{
   wasteItems: WasteItem[];
+  expired: {
+    name: string;
+    quantity: number;
+    unitCost: number;
+    totalLoss: number;
+    expiryDate: string;
+  }[];
+  overstocked: {
+    name: string;
+    currentStock: number;
+    maxStock: number;
+    excess: number;
+    excessCost: number;
+  }[];
   totalWasteCost: number;
+  totalWasteValue: number;
   expiredCount: number;
   overstockedCount: number;
   expiringCount: number;
@@ -580,11 +595,33 @@ export async function getWasteReport(): Promise<{
   const expiredCount = wasteItems.filter((w) => w.type === 'expired').length;
   const overstockedCount = wasteItems.filter((w) => w.type === 'overstocked').length;
   const expiringCount = wasteItems.filter((w) => w.type === 'expiring_soon').length;
+  const expired = wasteItems
+    .filter((w) => w.type === 'expired')
+    .map((w) => ({
+      name: w.name,
+      quantity: w.currentStock,
+      unitCost: w.unitCost,
+      totalLoss: w.costImpact,
+      expiryDate: w.expiryDate ?? '',
+    }));
+  const overstocked = wasteItems
+    .filter((w) => w.type === 'overstocked')
+    .map((w) => ({
+      name: w.name,
+      currentStock: w.currentStock,
+      maxStock: w.maxStock,
+      excess: Math.max(w.currentStock - w.maxStock, 0),
+      excessCost: w.costImpact,
+    }));
   const totalWasteCost = wasteItems.reduce((sum, w) => sum + w.costImpact, 0);
+  const roundedTotalWasteCost = Math.round(totalWasteCost * 100) / 100;
 
   return {
     wasteItems,
-    totalWasteCost: Math.round(totalWasteCost * 100) / 100,
+    expired,
+    overstocked,
+    totalWasteCost: roundedTotalWasteCost,
+    totalWasteValue: roundedTotalWasteCost,
     expiredCount,
     overstockedCount,
     expiringCount,
