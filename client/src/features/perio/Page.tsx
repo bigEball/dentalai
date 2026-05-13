@@ -181,11 +181,20 @@ function createEmptyChartData(): Record<string, ToothData> {
 // Utility helpers
 // ---------------------------------------------------------------------------
 
-function parsePocketDepths(raw: string | Record<string, unknown>): Record<string, number[]> {
+function parsePocketDepths(raw: string | Record<string, unknown> | null | undefined): Record<string, number[]> {
+  if (!raw) return {};
   if (typeof raw === 'string') {
     try { return JSON.parse(raw); } catch { return {}; }
   }
   return raw as Record<string, number[]>;
+}
+
+function normalizeDepthValues(raw: unknown): number[] {
+  const values = Array.isArray(raw) ? raw : [];
+  return Array.from({ length: 6 }, (_, index) => {
+    const value = Number(values[index] ?? 0);
+    return Number.isFinite(value) ? value : 0;
+  });
 }
 
 function depthColor(depth: number): string {
@@ -798,7 +807,7 @@ function ToothRow({ teeth, depths }: { teeth: number[]; depths: Record<string, n
   return (
     <div className="flex gap-1 min-w-max">
       {teeth.map((tooth) => {
-        const toothDepths = depths[String(tooth)] || [0, 0, 0, 0, 0, 0];
+        const toothDepths = normalizeDepthValues(depths[String(tooth)]);
         const maxDepth = Math.max(...toothDepths);
 
         return (
@@ -850,8 +859,8 @@ function ComparisonView({ current, previous }: { current: PerioExam; previous: P
   let worsened = 0;
   let unchanged = 0;
   for (let tooth = 1; tooth <= 32; tooth++) {
-    const cd = currentDepths[String(tooth)] || [];
-    const pd = previousDepths[String(tooth)] || [];
+    const cd = normalizeDepthValues(currentDepths[String(tooth)]);
+    const pd = normalizeDepthValues(previousDepths[String(tooth)]);
     for (let i = 0; i < Math.min(cd.length, pd.length); i++) {
       if (cd[i] < pd[i]) improved++;
       else if (cd[i] > pd[i]) worsened++;
@@ -950,8 +959,8 @@ function ComparisonToothRow({
   return (
     <div className="flex gap-1 min-w-max">
       {teeth.map((tooth) => {
-        const cd = currentDepths[String(tooth)] || [0, 0, 0, 0, 0, 0];
-        const pd = previousDepths[String(tooth)] || [0, 0, 0, 0, 0, 0];
+        const cd = normalizeDepthValues(currentDepths[String(tooth)]);
+        const pd = normalizeDepthValues(previousDepths[String(tooth)]);
         const maxCurrent = Math.max(...cd);
         const maxPrevious = Math.max(...pd);
 

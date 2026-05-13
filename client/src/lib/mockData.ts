@@ -110,12 +110,78 @@ const BALANCES = [
 // ─── Recall ───────────────────────────────────────────────────────────────────
 
 const RECALL_TASKS = [
-  { id: 'rcl-001', patientId: 'pat-001', type: 'hygiene', dueDate: '2026-05-10', lastVisit: '2025-11-10', status: 'pending', contactedDate: null, scheduledDate: null, patient: pt(0) },
-  { id: 'rcl-002', patientId: 'pat-003', type: 'hygiene', dueDate: '2026-04-28', lastVisit: '2025-10-28', status: 'pending', contactedDate: null, scheduledDate: null, patient: pt(2) },
-  { id: 'rcl-003', patientId: 'pat-004', type: 'perio', dueDate: '2026-04-15', lastVisit: '2026-01-15', status: 'contacted', contactedDate: '2026-04-12', scheduledDate: null, patient: pt(3) },
-  { id: 'rcl-004', patientId: 'pat-008', type: 'hygiene', dueDate: '2026-04-20', lastVisit: '2025-10-20', status: 'scheduled', contactedDate: '2026-04-10', scheduledDate: '2026-05-02', patient: pt(7) },
-  { id: 'rcl-005', patientId: 'pat-009', type: 'hygiene', dueDate: '2026-05-05', lastVisit: '2025-11-05', status: 'pending', contactedDate: null, scheduledDate: null, patient: pt(8) },
-  { id: 'rcl-006', patientId: 'pat-011', type: 'perio', dueDate: '2026-05-12', lastVisit: '2026-02-12', status: 'pending', contactedDate: null, scheduledDate: null, patient: pt(10) },
+  {
+    id: 'rcl-001',
+    patientId: 'pat-001',
+    lastHygieneDate: '2025-11-10',
+    recallDueDate: '2026-05-10',
+    daysOverdue: 3,
+    contactAttempts: 0,
+    lastContactDate: null,
+    status: 'pending',
+    suggestedMessage: 'Hi Margaret, this is Summit Dental. You are due for your 6-month hygiene visit. We have openings this week if you would like to schedule your cleaning and check-up.',
+    patient: pt(0),
+  },
+  {
+    id: 'rcl-002',
+    patientId: 'pat-003',
+    lastHygieneDate: '2025-10-28',
+    recallDueDate: '2026-04-28',
+    daysOverdue: 15,
+    contactAttempts: 0,
+    lastContactDate: null,
+    status: 'pending',
+    suggestedMessage: 'Hi Aisha, you are a little overdue for your hygiene appointment. Reply here or call us and we can help find a time that works for your schedule.',
+    patient: pt(2),
+  },
+  {
+    id: 'rcl-003',
+    patientId: 'pat-004',
+    lastHygieneDate: '2026-01-15',
+    recallDueDate: '2026-04-15',
+    daysOverdue: 28,
+    contactAttempts: 1,
+    lastContactDate: '2026-04-12',
+    status: 'contacted',
+    suggestedMessage: 'Hi Thomas, this is a quick reminder that your periodontal maintenance visit is due. Staying on track helps protect your gums and avoid bigger treatment later.',
+    patient: pt(3),
+  },
+  {
+    id: 'rcl-004',
+    patientId: 'pat-008',
+    lastHygieneDate: '2025-10-20',
+    recallDueDate: '2026-04-20',
+    daysOverdue: 23,
+    contactAttempts: 1,
+    lastContactDate: '2026-04-10',
+    status: 'scheduled',
+    suggestedMessage: 'Hi Kevin, your cleaning is scheduled for May 2. Please call or reply if you need to change that appointment.',
+    patient: pt(7),
+  },
+  {
+    id: 'rcl-005',
+    patientId: 'pat-009',
+    lastHygieneDate: '2025-11-05',
+    recallDueDate: '2026-05-05',
+    daysOverdue: 8,
+    contactAttempts: 0,
+    lastContactDate: null,
+    status: 'pending',
+    suggestedMessage: 'Hi Susan, your hygiene recall is due. We would be happy to reserve an appointment for you this month.',
+    patient: pt(8),
+  },
+  {
+    id: 'rcl-006',
+    patientId: 'pat-011',
+    lastHygieneDate: '2026-02-12',
+    recallDueDate: '2026-05-12',
+    daysOverdue: 1,
+    contactAttempts: 0,
+    lastContactDate: null,
+    status: 'pending',
+    suggestedMessage: 'Hi Emily, your periodontal maintenance visit is due. Reply here or call us and we can get you scheduled.',
+    patient: pt(10),
+  },
 ];
 
 // ─── Treatment Plans ──────────────────────────────────────────────────────────
@@ -203,6 +269,66 @@ const INVENTORY = [
   { id: 'inv-010', name: 'Bonding Agent', category: 'restorative', currentStock: 6, unit: 'bottle', reorderPoint: 5, maxStock: 15, unitCost: 38, vendor: 'Henry Schein', lastOrderedDate: '2026-03-28' },
 ];
 
+function buildMockPriceResults(query: string) {
+  const suppliers = [
+    { name: 'Henry Schein', domain: 'henryschein.com' },
+    { name: 'Patterson Dental', domain: 'pattersondental.com' },
+    { name: 'Amazon Business', domain: 'amazon.com' },
+    { name: 'Net32 Dental', domain: 'net32.com' },
+    { name: 'Darby Dental', domain: 'darbydental.com' },
+    { name: 'Benco Dental', domain: 'benco.com' },
+    { name: 'Dental City', domain: 'dentalcity.com' },
+    { name: 'Safco Dental Supply', domain: 'safcodental.com' },
+  ];
+  const seed = query.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0);
+  const basePrice = 5 + (seed % 200);
+
+  return suppliers
+    .map((supplier, index) => {
+      const variance = 0.7 + ((seed * (index + 1)) % 60) / 100;
+      const price = Math.round(basePrice * variance * 100) / 100;
+      return {
+        supplier: supplier.name,
+        title: `${query} - ${supplier.name}`,
+        price,
+        originalPrice: index % 3 === 0 ? Math.round(price * 1.2 * 100) / 100 : undefined,
+        url: `https://www.${supplier.domain}/search?q=${encodeURIComponent(query)}`,
+        shipping: index % 2 === 0 ? 'Free shipping' : `$${(4.99 + index).toFixed(2)} shipping`,
+        rating: 3.5 + ((seed + index) % 15) / 10,
+        reviews: 10 + ((seed * index) % 500),
+        inStock: index !== 5,
+      };
+    })
+    .sort((a, b) => a.price - b.price);
+}
+
+function buildMockPriceSearch(query: string, item?: Record<string, unknown>) {
+  const results = buildMockPriceResults(query);
+  const cheapestPrice = results.length > 0 ? results[0].price : null;
+  const averagePrice = results.length > 0
+    ? Math.round((results.reduce((sum, result) => sum + result.price, 0) / results.length) * 100) / 100
+    : null;
+
+  return {
+    item: item
+      ? {
+          id: String(item.id ?? ''),
+          name: String(item.name ?? query),
+          currentUnitCost: Number(item.unitCost ?? 0),
+          supplier: String(item.vendor ?? item.supplier ?? ''),
+        }
+      : undefined,
+    query,
+    resultCount: results.length,
+    cheapestPrice,
+    averagePrice,
+    potentialSavings: item && cheapestPrice !== null
+      ? Math.round((Number(item.unitCost ?? 0) - cheapestPrice) * 100) / 100
+      : undefined,
+    results,
+  };
+}
+
 // ─── Clinical Notes ───────────────────────────────────────────────────────────
 
 const NOTES = [
@@ -215,9 +341,52 @@ const NOTES = [
 
 // ─── Perio ────────────────────────────────────────────────────────────────────
 
+function buildPerioPocketDepths(maxDepth: number): Record<string, number[]> {
+  const depths: Record<string, number[]> = {};
+  for (let tooth = 1; tooth <= 32; tooth++) {
+    const base = tooth % 5 === 0 ? Math.max(4, maxDepth - 1) : tooth % 3 === 0 ? 4 : 3;
+    depths[String(tooth)] = Array.from({ length: 6 }, (_, site) => {
+      if (site === 1 && tooth % 8 === 0) return maxDepth;
+      if (site === 4 && tooth % 6 === 0) return Math.max(4, maxDepth - 2);
+      return base;
+    });
+  }
+  return depths;
+}
+
 const PERIO_EXAMS = [
-  { id: 'pex-001', patientId: 'pat-011', examDate: '2026-02-10', avgPocketDepth: 5.4, maxPocketDepth: 8, bopPercentage: 89, classification: 'Stage III Grade C', patient: pt(10) },
-  { id: 'pex-002', patientId: 'pat-002', examDate: '2026-04-05', avgPocketDepth: 4.8, maxPocketDepth: 7, bopPercentage: 72, classification: 'Stage II Grade B', patient: pt(1) },
+  {
+    id: 'pex-001',
+    patientId: 'pat-011',
+    providerId: 'prov-demo',
+    examDate: '2026-02-10',
+    pocketDepths: JSON.stringify(buildPerioPocketDepths(8)),
+    bleeding: JSON.stringify({}),
+    recession: JSON.stringify({}),
+    notes: 'Stage III Grade C periodontal findings. Generalized bleeding on probing with multiple posterior sites 6mm or greater.',
+    avgPocketDepth: 5.4,
+    maxPocketDepth: 8,
+    bopPercentage: 89,
+    classification: 'Stage III Grade C',
+    patient: pt(10),
+    provider: { id: 'prov-demo', firstName: 'Sarah', lastName: 'Mitchell', title: 'DDS' },
+  },
+  {
+    id: 'pex-002',
+    patientId: 'pat-002',
+    providerId: 'prov-demo',
+    examDate: '2026-04-05',
+    pocketDepths: JSON.stringify(buildPerioPocketDepths(7)),
+    bleeding: JSON.stringify({}),
+    recession: JSON.stringify({}),
+    notes: 'Stage II Grade B periodontal findings. Localized posterior pocketing with moderate bleeding on probing.',
+    avgPocketDepth: 4.8,
+    maxPocketDepth: 7,
+    bopPercentage: 72,
+    classification: 'Stage II Grade B',
+    patient: pt(1),
+    provider: { id: 'prov-demo', firstName: 'Sarah', lastName: 'Mitchell', title: 'DDS' },
+  },
 ];
 
 // ─── Activity ─────────────────────────────────────────────────────────────────
@@ -524,7 +693,8 @@ const EMPTY_OBJECT_PATHS = [
  */
 export function getMockForPath(path: string): Mock | undefined {
   // Strip baseURL and query string
-  const p = path.replace(/^.*\/api\/v1/, '').split('?')[0];
+  const rawPath = path.replace(/^.*\/api\/v1/, '');
+  const [p, queryString = ''] = rawPath.split('?');
   if (p === undefined) return undefined;
 
   // Exact match first
@@ -532,6 +702,15 @@ export function getMockForPath(path: string): Mock | undefined {
 
   // GET /patients/:id, /insurance/plans/:id, etc. → return first item of collection
   const segments = p.split('/').filter(Boolean);
+  if (p === '/inventory/price-search') {
+    const query = new URLSearchParams(queryString).get('q')?.trim() || 'dental supplies';
+    return buildMockPriceSearch(query);
+  }
+  if (segments[0] === 'inventory' && segments[1] === 'price-search' && segments[2]) {
+    const item = INVENTORY.find((inventoryItem) => inventoryItem.id === segments[2]);
+    return buildMockPriceSearch(String(item?.name ?? 'dental supplies'), item);
+  }
+
   if (segments.length >= 2) {
     const collectionKey = '/' + segments.slice(0, -1).join('/');
     const last = segments[segments.length - 1]!;
@@ -554,6 +733,33 @@ export function getMockForPath(path: string): Mock | undefined {
       lastCompleted: new Date().toISOString().split('T')[0],
       nextDue: new Date(Date.now() + 365 * 86400000).toISOString().split('T')[0],
     };
+  }
+
+  if (p.startsWith('/recall/tasks/') && segments.length === 4) {
+    const taskId = segments[2];
+    const action = segments[3];
+    const task = RECALL_TASKS.find((item) => item.id === taskId) ?? RECALL_TASKS[0];
+    const today = new Date().toISOString().split('T')[0];
+
+    if (action === 'send-text' || action === 'send-email' || action === 'contact') {
+      return {
+        success: true,
+        task: {
+          ...task,
+          status: 'contacted',
+          contactAttempts: Number(task.contactAttempts ?? 0) + 1,
+          lastContactDate: today,
+        },
+      };
+    }
+
+    if (action === 'schedule') {
+      return {
+        ...task,
+        status: 'scheduled',
+        lastContactDate: task.lastContactDate ?? today,
+      };
+    }
   }
 
   if (p.startsWith('/fee-schedules/') && p.endsWith('/analyze')) return FEE_SCHEDULE_DETAIL;

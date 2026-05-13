@@ -17,6 +17,8 @@ import type {
   PatientForm,
   Referral,
   InventoryItem,
+  PriceResult,
+  PriceSearchResponse,
   Communication,
   FollowUp,
   PerioExam,
@@ -28,6 +30,20 @@ const api = axios.create({
   headers: { 'Content-Type': 'application/json' },
   timeout: 15000,
 });
+
+function requestUrlWithParams(config: { url?: string; params?: unknown } | undefined): string {
+  const url = config?.url ?? '';
+  const params = config?.params;
+  if (!params || typeof params !== 'object') return url;
+
+  const search = new URLSearchParams();
+  for (const [key, value] of Object.entries(params as Record<string, unknown>)) {
+    if (value !== undefined && value !== null) search.set(key, String(value));
+  }
+  const query = search.toString();
+  if (!query) return url;
+  return `${url}${url.includes('?') ? '&' : '?'}${query}`;
+}
 
 // If the backend is unreachable (static-only deploy), serve mock data
 // from the seed so every page renders a realistic demo state.
@@ -95,6 +111,52 @@ function normalizeTreatmentPlan(plan: TreatmentPlan | Record<string, unknown>): 
   };
 }
 
+function normalizePriceSearchResponse(data: unknown, queryFallback: string): PriceSearchResponse {
+  const raw = data && typeof data === 'object' ? data as Record<string, unknown> : {};
+  const rawResults = Array.isArray(raw.results) ? raw.results : [];
+  const results = rawResults
+    .reduce<PriceResult[]>((acc, result) => {
+      const row = result && typeof result === 'object' ? result as Record<string, unknown> : {};
+      const price = Number(row.price);
+      if (!Number.isFinite(price)) return acc;
+      acc.push({
+        supplier: String(row.supplier ?? 'Unknown supplier'),
+        title: String(row.title ?? queryFallback),
+        price,
+        originalPrice: Number.isFinite(Number(row.originalPrice)) ? Number(row.originalPrice) : undefined,
+        url: String(row.url ?? '#'),
+        imageUrl: typeof row.imageUrl === 'string' ? row.imageUrl : undefined,
+        shipping: typeof row.shipping === 'string' ? row.shipping : undefined,
+        rating: Number.isFinite(Number(row.rating)) ? Number(row.rating) : undefined,
+        reviews: Number.isFinite(Number(row.reviews)) ? Number(row.reviews) : undefined,
+        inStock: typeof row.inStock === 'boolean' ? row.inStock : undefined,
+      });
+      return acc;
+    }, [])
+    .sort((a, b) => a.price - b.price);
+
+  const cheapestPrice = Number.isFinite(Number(raw.cheapestPrice))
+    ? Number(raw.cheapestPrice)
+    : results.length > 0
+      ? results[0].price
+      : null;
+  const averagePrice = Number.isFinite(Number(raw.averagePrice))
+    ? Number(raw.averagePrice)
+    : results.length > 0
+      ? Math.round((results.reduce((sum, result) => sum + result.price, 0) / results.length) * 100) / 100
+      : null;
+
+  return {
+    item: raw.item as PriceSearchResponse['item'],
+    query: String(raw.query ?? queryFallback),
+    resultCount: Number.isFinite(Number(raw.resultCount)) ? Number(raw.resultCount) : results.length,
+    cheapestPrice,
+    averagePrice,
+    potentialSavings: Number.isFinite(Number(raw.potentialSavings)) ? Number(raw.potentialSavings) : undefined,
+    results,
+  };
+}
+
 api.interceptors.response.use(
   response => {
     // Netlify's SPA fallback could return index.html (HTML, 200) for an
@@ -106,7 +168,7 @@ api.interceptors.response.use(
       (typeof response.data === 'string' && response.data.trim().startsWith('<'));
 
     if (looksLikeHtml) {
-      const url: string = response.config?.url ?? '';
+      const url = requestUrlWithParams(response.config);
       const method: string = (response.config?.method ?? 'get').toLowerCase();
       const mock = resolveMock(url, method, response.config?.data);
       if (mock !== undefined) {
@@ -117,7 +179,7 @@ api.interceptors.response.use(
     return response;
   },
   error => {
-    const url: string = error?.config?.url ?? '';
+    const url = requestUrlWithParams(error?.config);
     const method: string = (error?.config?.method ?? 'get').toLowerCase();
     const mock = resolveMock(url, method, error?.config?.data);
 
@@ -589,14 +651,14 @@ export async function getInventoryAlerts(): Promise<InventoryItem[]> {
   return data;
 }
 
-export async function searchItemPrices(itemId: string): Promise<import('@/types').PriceSearchResponse> {
-  const { data } = await api.get<import('@/types').PriceSearchResponse>(`/inventory/price-search/${itemId}`);
-  return data;
+export async function searchItemPrices(itemId: string): Promise<PriceSearchResponse> {
+  const { data } = await api.get<PriceSearchResponse>(`/inventory/price-search/${itemId}`);
+  return normalizePriceSearchResponse(data, 'dental supplies');
 }
 
-export async function searchPricesByQuery(query: string): Promise<import('@/types').PriceSearchResponse> {
-  const { data } = await api.get<import('@/types').PriceSearchResponse>('/inventory/price-search', { params: { q: query } });
-  return data;
+export async function searchPricesByQuery(query: string): Promise<PriceSearchResponse> {
+  const { data } = await api.get<PriceSearchResponse>('/inventory/price-search', { params: { q: query } });
+  return normalizePriceSearchResponse(data, query);
 }
 
 export async function parseInventoryFile(file: File): Promise<import('@/types').InventoryImportPreview> {
@@ -635,7 +697,8 @@ export async function getScoreAlerts(): Promise<import('@/types').PatientScores[
 
 export async function getPerioExams(params?: { patientId?: string }): Promise<{ exams: PerioExam[]; total: number }> {
   const { data } = await api.get<PerioExam[]>('/perio', { params });
-  return { exams: data, total: data.length };
+  const exams = params?.patientId ? data.filter((exam) => exam.patientId === params.patientId) : data;
+  return { exams, total: exams.length };
 }
 
 export async function getPerioExam(id: string): Promise<PerioExam> {

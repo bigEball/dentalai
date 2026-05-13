@@ -5,9 +5,11 @@ import { logActivity } from '../../domain/activity';
 const router = Router();
 
 // GET /recall/tasks - list recall tasks with patient info
-router.get('/tasks', async (_req: Request, res: Response) => {
+router.get('/tasks', async (req: Request, res: Response) => {
   try {
+    const status = typeof req.query.status === 'string' ? req.query.status : undefined;
     const tasks = await prisma.recallTask.findMany({
+      where: status ? { status } : undefined,
       include: {
         patient: {
           select: {
@@ -39,6 +41,7 @@ router.patch('/tasks/:id/contact', async (req: Request, res: Response) => {
       data: {
         contactAttempts: { increment: 1 },
         lastContactDate: today,
+        status: 'contacted',
       },
       include: {
         patient: { select: { id: true, firstName: true, lastName: true } },
@@ -95,6 +98,7 @@ router.patch('/tasks/:id/send-text', async (req: Request, res: Response) => {
       data: {
         contactAttempts: { increment: 1 },
         lastContactDate: today,
+        status: 'contacted',
       },
       include: {
         patient: { select: { id: true, firstName: true, lastName: true, phone: true } },
@@ -126,6 +130,7 @@ router.patch('/tasks/:id/send-email', async (req: Request, res: Response) => {
       data: {
         contactAttempts: { increment: 1 },
         lastContactDate: today,
+        status: 'contacted',
       },
       include: {
         patient: {
