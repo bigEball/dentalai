@@ -197,9 +197,13 @@ export default function FeeSchedulePage() {
   const loadSchedules = useCallback(async () => {
     try {
       const { data } = await api.get('/fee-schedules');
-      setSchedules(data);
-      if (data.length > 0 && !selectedId) {
-        setSelectedId(data[0].id);
+      const feeSchedules = Array.isArray(data) ? data : [];
+      setSchedules(feeSchedules);
+      if (feeSchedules.length > 0 && !selectedId) {
+        setSelectedId(feeSchedules[0].id);
+      } else if (feeSchedules.length === 0) {
+        setSelectedId('');
+        setSchedule(null);
       }
     } catch {
       toast.error('Failed to load fee schedules');
@@ -218,7 +222,12 @@ export default function FeeSchedulePage() {
     if (!selectedId) return;
     try {
       const { data } = await api.get(`/fee-schedules/${selectedId}`);
-      setSchedule(data);
+      if (data && Array.isArray(data.entries)) {
+        setSchedule(data);
+      } else {
+        setSchedule(null);
+        toast.error('Fee schedule data is unavailable');
+      }
     } catch {
       toast.error('Failed to load schedule details');
     }
@@ -237,7 +246,11 @@ export default function FeeSchedulePage() {
   const loadWriteOffs = useCallback(async () => {
     try {
       const { data } = await api.get('/fee-schedules/write-off-analysis');
-      setWriteOffData(data);
+      if (data && Array.isArray(data.byPayer) && Array.isArray(data.details)) {
+        setWriteOffData(data);
+      } else {
+        setWriteOffData({ byPayer: [], details: [] });
+      }
     } catch {
       // silently fail — non-critical
     }
@@ -255,6 +268,8 @@ export default function FeeSchedulePage() {
     try {
       const { data } = await api.post(`/fee-schedules/${selectedId}/analyze`);
       setSchedule(data);
+      const reportResponse = await api.post(`/fee-schedules/${selectedId}/optimize`);
+      setReport(reportResponse.data);
       toast.success('UCR analysis complete');
       // Refresh write-offs too
       loadWriteOffs();

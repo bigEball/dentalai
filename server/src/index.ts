@@ -39,11 +39,27 @@ import demoRequestsRouter from './api/routes/demoRequests';
 
 const app = express();
 const PORT = process.env.PORT ?? 3001;
+const configuredOrigins = (process.env.CORS_ORIGIN ?? '')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+const devOriginPattern = /^https?:\/\/(localhost|127\.0\.0\.1):\d+$/;
 
 // Middleware
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+    origin: (origin, callback) => {
+      if (!origin) {
+        callback(null, true);
+        return;
+      }
+
+      const isAllowed =
+        configuredOrigins.includes(origin) ||
+        (process.env.NODE_ENV !== 'production' && devOriginPattern.test(origin));
+
+      callback(isAllowed ? null : new Error(`CORS blocked origin ${origin}`), isAllowed);
+    },
     credentials: true,
   })
 );
