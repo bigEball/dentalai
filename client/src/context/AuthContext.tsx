@@ -5,7 +5,7 @@ import type { DemoRole } from '@/lib/roles';
 
 interface AuthContextValue {
   user: AuthUser | null;
-  login: (email: string, password: string) => { success: boolean; error?: string };
+  login: (code: string) => { success: boolean; error?: string };
   logout: () => void;
   switchRole: (role: DemoRole) => void;
   isAuthenticated: boolean;
@@ -16,8 +16,8 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(() => auth.getUser());
 
-  const login = useCallback((email: string, password: string) => {
-    const result = auth.login(email, password);
+  const login = useCallback((code: string) => {
+    const result = auth.login(code);
     if (result.success) {
       setUser(auth.getUser());
     }

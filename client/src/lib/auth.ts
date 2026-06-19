@@ -20,20 +20,14 @@ const DEMO_USER: AuthUser = {
   office: 'Summit Demo Practice',
 };
 
-const DEMO_CREDENTIALS = {
-  email: 'demo@summitaisoftware.com',
-  password: 'demo',
-};
+const DEMO_CODE = 'demo';
 
-export function login(email: string, password: string): { success: boolean; error?: string } {
-  if (
-    email.toLowerCase() === DEMO_CREDENTIALS.email &&
-    password === DEMO_CREDENTIALS.password
-  ) {
+export function login(code: string): { success: boolean; error?: string } {
+  if (code === DEMO_CODE) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(DEMO_USER));
     return { success: true };
   }
-  return { success: false, error: 'Invalid email or password.' };
+  return { success: false, error: 'Invalid access code.' };
 }
 
 export function logout(): void {

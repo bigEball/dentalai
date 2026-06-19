@@ -7,9 +7,8 @@ export default function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
+  const [code, setCode] = useState('');
+  const [showCode, setShowCode] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -21,7 +20,7 @@ export default function LoginPage() {
     // Small delay to simulate network
     await new Promise((r) => setTimeout(r, 600));
 
-    const result = login(email, password);
+    const result = login(code);
     setLoading(false);
 
     if (result.success) {
@@ -75,40 +74,22 @@ export default function LoginPage() {
           style={{ backgroundColor: '#181b23', borderColor: 'rgba(255,255,255,0.07)' }}
         >
           <h2 className="text-lg font-semibold text-white mb-1">Sign in</h2>
-          <p className="text-sm text-gray-500 mb-6">Welcome back. Enter your credentials to continue.</p>
+          <p className="text-sm text-gray-500 mb-6">Welcome back. Enter your access code to continue.</p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-xs font-medium text-gray-400 mb-1.5">
-                Email address
-              </label>
-              <input
-                type="email"
-                autoComplete="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@practice.com"
-                className="w-full px-3 py-2.5 text-sm rounded-lg border focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors placeholder:text-gray-600 text-white"
-                style={{
-                  backgroundColor: '#0f1117',
-                  borderColor: 'rgba(255,255,255,0.1)',
-                }}
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-medium text-gray-400 mb-1.5">
-                Password
+                Access code
               </label>
               <div className="relative">
                 <input
-                  type={showPassword ? 'text' : 'password'}
-                  autoComplete="current-password"
+                  type={showCode ? 'text' : 'password'}
+                  autoComplete="off"
                   required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
+                  autoFocus
+                  value={code}
+                  onChange={(e) => setCode(e.target.value)}
+                  placeholder="Enter access code"
                   className="w-full px-3 py-2.5 pr-10 text-sm rounded-lg border focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors placeholder:text-gray-600 text-white"
                   style={{
                     backgroundColor: '#0f1117',
@@ -117,10 +98,10 @@ export default function LoginPage() {
                 />
                 <button
                   type="button"
-                  onClick={() => setShowPassword((v) => !v)}
+                  onClick={() => setShowCode((v) => !v)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
                 >
-                  {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
+                  {showCode ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
               </div>
             </div>
@@ -142,18 +123,9 @@ export default function LoginPage() {
             </button>
           </form>
 
-          {/* Demo hint */}
-          <div
-            className="mt-5 px-4 py-3 rounded-lg border"
-            style={{ backgroundColor: 'rgba(99,102,241,0.08)', borderColor: 'rgba(99,102,241,0.2)' }}
-          >
-            <p className="text-xs text-indigo-400 font-medium mb-0.5">Demo credentials</p>
-            <p className="text-xs text-gray-500 font-mono">demo@summitaisoftware.com / demo</p>
-          </div>
-
           <a
             href="/"
-            className="mt-4 w-full py-2.5 border border-white/10 hover:border-white/20 text-gray-300 hover:text-white text-sm font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
+            className="mt-5 w-full py-2.5 border border-white/10 hover:border-white/20 text-gray-300 hover:text-white text-sm font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
           >
             <ArrowLeft size={15} />
             Back to main site
