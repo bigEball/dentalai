@@ -37,6 +37,10 @@ const DEMO_INDEX = [
 
 const ANSWERS = [
   {
+    q: "What if it doesn't do something we need?",
+    a: 'Then we build that part. Writing custom software for groups is a large part of what we do — the software should fit how the office already runs, not the other way around.',
+  },
+  {
     q: 'What does it cost?',
     a: 'It depends on providers, locations, and how much you roll out. We go through numbers on a call, once we know what you actually need. No pricing table that turns out to be wrong.',
   },
