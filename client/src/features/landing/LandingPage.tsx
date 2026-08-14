@@ -15,6 +15,41 @@ export interface LandingPageProps {
   logoSrc?: string;
 }
 
+/** The actual screens in the demo, grouped the way the office thinks about them. */
+const DEMO_INDEX = [
+  {
+    group: 'Clinical',
+    items: ['AI Notes', 'Perio Charting', 'Treatment Plans', 'Clinical Decision Support', 'Patients'],
+  },
+  {
+    group: 'Front desk',
+    items: ['Smart Scheduling', 'Recall', 'Patient Forms', 'Communications', 'Follow-Ups', 'Referrals'],
+  },
+  {
+    group: 'Billing',
+    items: ['Insurance', 'Pre-Authorizations', 'Claim Scrubber', 'Billing', 'Payment Plans', 'Fee Optimizer'],
+  },
+  {
+    group: 'Running the place',
+    items: ['Morning Huddle', 'Reports & Analytics', 'Patient Retention', 'Inventory Management', 'Compliance'],
+  },
+];
+
+const ANSWERS = [
+  {
+    q: 'Is the demo the real thing?',
+    a: 'Yes. Same software, loaded with a sample practice. Nothing is a slideshow — open any screen and click around.',
+  },
+  {
+    q: 'What does it cost?',
+    a: 'It depends on providers, locations, and how much you roll out. We go through numbers on a call, once we know what you actually need. No pricing table that turns out to be wrong.',
+  },
+  {
+    q: 'How does it start?',
+    a: 'Look at the demo first. Then tell us how your office really works, and we will show you what maps directly and what we would build.',
+  },
+];
+
 /** Fades a section in the first time it reaches the viewport. */
 function Reveal({ children, className = '' }: { children: ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -141,6 +176,59 @@ export default function LandingPage({
             className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-black"
             aria-hidden="true"
           />
+        </section>
+
+        {/* What's in there */}
+        <section className="border-t border-white/10 px-6 py-24 sm:py-32">
+          <div className="mx-auto max-w-5xl">
+            <Reveal>
+              <h2 className="max-w-2xl text-[2rem] font-semibold tracking-[-0.03em] sm:text-[2.75rem]">
+                Everything here is in the demo.
+              </h2>
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-white/55">
+                Not a preview build. The whole thing, with a practice already in it.
+              </p>
+            </Reveal>
+
+            <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+              {DEMO_INDEX.map((column) => (
+                <Reveal key={column.group}>
+                  <h3 className="text-[11px] font-medium uppercase tracking-[0.18em] text-sky-300/70">
+                    {column.group}
+                  </h3>
+                  <ul className="mt-5 space-y-3 border-t border-white/10 pt-5">
+                    {column.items.map((item) => (
+                      <li key={item} className="text-[15px] text-white/70">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </Reveal>
+              ))}
+            </div>
+
+            <Reveal className="mt-14">
+              <DemoButton />
+            </Reveal>
+          </div>
+        </section>
+
+        {/* Straight answers */}
+        <section className="border-t border-white/10 px-6 py-24 sm:py-32">
+          <div className="mx-auto max-w-4xl">
+            {ANSWERS.map((item, i) => (
+              <Reveal key={item.q}>
+                <div
+                  className={`sm:grid sm:grid-cols-12 sm:gap-10 ${
+                    i === 0 ? '' : 'mt-12 border-t border-white/10 pt-12'
+                  }`}
+                >
+                  <h3 className="text-xl font-medium tracking-[-0.02em] sm:col-span-5">{item.q}</h3>
+                  <p className="mt-3 text-[17px] leading-8 text-white/55 sm:col-span-7 sm:mt-0">{item.a}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </section>
 
         {/* DSOs */}

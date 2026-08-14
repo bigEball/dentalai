@@ -1,6 +1,9 @@
 /* Summit landing — self-contained styles.
    Plain CSS (no Tailwind directives) so this file can be dropped into any app
-   alongside LandingPage.tsx. */
+   alongside LandingPage.tsx.
+
+   `--summit-s` is written by JarvisCore on scroll: 0 while the mark is centred,
+   easing toward 1 as it leaves the viewport. Layers open outward against it. */
 
 @keyframes summit-spin {
   from { transform: rotate(0deg); }
@@ -13,31 +16,15 @@
 }
 
 @keyframes summit-breathe {
-  0%, 100% { opacity: 0.5; }
+  0%, 100% { opacity: 0.55; }
   50% { opacity: 1; }
 }
 
-@keyframes summit-flicker {
-  0%, 100% { opacity: 0.3; }
-  40% { opacity: 0.95; }
-  60% { opacity: 0.45; }
-}
-
-@keyframes summit-blink {
-  0%, 44%, 100% { opacity: 0.85; }
-  50%, 94% { opacity: 0.15; }
-}
-
 @keyframes summit-scanline {
-  0% { transform: translateY(-130%); opacity: 0; }
-  8% { opacity: 1; }
-  92% { opacity: 1; }
-  100% { transform: translateY(130%); opacity: 0; }
-}
-
-@keyframes summit-meter {
-  0%, 100% { transform: scaleX(0.35); }
-  50% { transform: scaleX(1); }
+  0% { transform: translateY(-140%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(140%); opacity: 0; }
 }
 
 @keyframes summit-rise {
@@ -46,7 +33,7 @@
 }
 
 @keyframes summit-core-arrive {
-  from { opacity: 0; transform: scale(0.9); }
+  from { opacity: 0; transform: scale(0.92); }
   to { opacity: 1; transform: scale(1); }
 }
 
@@ -54,40 +41,55 @@
   animation: summit-core-arrive 1300ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* Rotating layers. Each ring gets its own rate and direction so the dial never
-   reads as one solid object. */
+/* Continuous rotation. Slow — the display idles, it doesn't spin. */
 .summit-spin-120 { transform-origin: 50% 50%; animation: summit-spin 120s linear infinite; }
-.summit-spin-72  { transform-origin: 50% 50%; animation: summit-spin 72s linear infinite; }
-.summit-spin-40  { transform-origin: 50% 50%; animation: summit-spin 40s linear infinite; }
-.summit-spin-16  { transform-origin: 50% 50%; animation: summit-spin 16s linear infinite; }
-.summit-spin-8   { transform-origin: 50% 50%; animation: summit-spin 8s linear infinite; }
-.summit-rev-90   { transform-origin: 50% 50%; animation: summit-spin-reverse 90s linear infinite; }
-.summit-rev-52   { transform-origin: 50% 50%; animation: summit-spin-reverse 52s linear infinite; }
-.summit-rev-28   { transform-origin: 50% 50%; animation: summit-spin-reverse 28s linear infinite; }
-.summit-rev-12   { transform-origin: 50% 50%; animation: summit-spin-reverse 12s linear infinite; }
+.summit-spin-90  { transform-origin: 50% 50%; animation: summit-spin 90s linear infinite; }
+.summit-spin-24  { transform-origin: 50% 50%; animation: summit-spin 24s linear infinite; }
+.summit-rev-110  { transform-origin: 50% 50%; animation: summit-spin-reverse 110s linear infinite; }
+.summit-rev-70   { transform-origin: 50% 50%; animation: summit-spin-reverse 70s linear infinite; }
 
-.summit-sweep { animation: summit-spin 9s linear infinite; }
-.summit-sweep-slow { animation: summit-spin-reverse 21s linear infinite; }
-
-.summit-breathe { animation: summit-breathe 5s ease-in-out infinite; }
-.summit-flicker { animation: summit-flicker 4.5s ease-in-out infinite; }
-.summit-blink { animation: summit-blink 2.6s steps(1, end) infinite; }
-.summit-blink-slow { animation: summit-blink 4.1s steps(1, end) infinite; }
-
-.summit-scanline {
-  animation: summit-scanline 6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-}
-
-.summit-meter {
-  transform-origin: left center;
-  animation: summit-meter 3.4s ease-in-out infinite;
-}
-
+.summit-sweep { animation: summit-spin 14s linear infinite; }
+.summit-breathe { animation: summit-breathe 6s ease-in-out infinite; }
+.summit-scanline { animation: summit-scanline 7s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
 .summit-rise { animation: summit-rise 900ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* Scroll-driven layers. Each wraps a continuously animating group, so the two
+   transforms compose instead of fighting over one element. */
+.summit-drift {
+  transform: translateY(calc(var(--summit-s, 0) * -42px)) scale(calc(1 - var(--summit-s, 0) * 0.05));
+  will-change: transform;
+}
+
+.summit-scroll-out {
+  transform-origin: 50% 50%;
+  transform: rotate(calc(var(--summit-s, 0) * 26deg)) scale(calc(1 + var(--summit-s, 0) * 0.1));
+  opacity: calc(1 - var(--summit-s, 0) * 0.45);
+}
+
+.summit-scroll-a {
+  transform-origin: 50% 50%;
+  transform: rotate(calc(var(--summit-s, 0) * -44deg)) scale(calc(1 + var(--summit-s, 0) * 0.07));
+}
+
+.summit-scroll-b {
+  transform-origin: 50% 50%;
+  transform: rotate(calc(var(--summit-s, 0) * 70deg)) scale(calc(1 + var(--summit-s, 0) * 0.045));
+}
+
+.summit-scroll-c {
+  transform-origin: 50% 50%;
+  transform: rotate(calc(var(--summit-s, 0) * -96deg)) scale(calc(1 - var(--summit-s, 0) * 0.06));
+}
+
+.summit-frame {
+  transform-origin: 50% 50%;
+  transform: scale(calc(1 + var(--summit-s, 0) * 0.14));
+  opacity: calc(1 - var(--summit-s, 0) * 0.7);
+}
 
 .summit-tooth {
   filter:
-    drop-shadow(0 0 26px rgba(125, 211, 252, 0.4))
+    drop-shadow(0 0 26px rgba(125, 211, 252, 0.35))
     drop-shadow(0 18px 40px rgba(0, 0, 0, 0.65));
 }
 
@@ -105,23 +107,24 @@
 @media (prefers-reduced-motion: reduce) {
   .summit-core,
   .summit-spin-120,
-  .summit-spin-72,
-  .summit-spin-40,
-  .summit-spin-16,
-  .summit-spin-8,
-  .summit-rev-90,
-  .summit-rev-52,
-  .summit-rev-28,
-  .summit-rev-12,
+  .summit-spin-90,
+  .summit-spin-24,
+  .summit-rev-110,
+  .summit-rev-70,
   .summit-sweep,
-  .summit-sweep-slow,
   .summit-breathe,
-  .summit-flicker,
-  .summit-blink,
-  .summit-blink-slow,
   .summit-scanline,
-  .summit-meter,
   .summit-rise {
     animation: none !important;
+  }
+
+  .summit-drift,
+  .summit-scroll-out,
+  .summit-scroll-a,
+  .summit-scroll-b,
+  .summit-scroll-c,
+  .summit-frame {
+    transform: none !important;
+    opacity: 1 !important;
   }
 }
