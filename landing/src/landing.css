@@ -1,0 +1,105 @@
+/* Summit landing — self-contained styles.
+   Plain CSS (no Tailwind directives) so this file can be dropped into any app
+   alongside LandingPage.tsx. */
+
+@keyframes summit-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes summit-spin-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes summit-breathe {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+@keyframes summit-flicker {
+  0%, 100% { opacity: 0.25; }
+  40% { opacity: 0.9; }
+  60% { opacity: 0.4; }
+}
+
+@keyframes summit-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes summit-core-arrive {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.summit-core {
+  animation: summit-core-arrive 1200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.summit-ring {
+  transform-origin: 50% 50%;
+  animation: summit-spin 90s linear infinite;
+}
+
+.summit-ring-fast {
+  transform-origin: 50% 50%;
+  animation: summit-spin 26s linear infinite;
+}
+
+.summit-ring-reverse {
+  transform-origin: 50% 50%;
+  animation: summit-spin-reverse 48s linear infinite;
+}
+
+.summit-ring-reverse-slow {
+  transform-origin: 50% 50%;
+  animation: summit-spin-reverse 120s linear infinite;
+}
+
+.summit-sweep {
+  animation: summit-spin 9s linear infinite;
+}
+
+.summit-breathe {
+  animation: summit-breathe 5s ease-in-out infinite;
+}
+
+.summit-flicker {
+  animation: summit-flicker 4.5s ease-in-out infinite;
+}
+
+.summit-rise {
+  animation: summit-rise 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.summit-tooth {
+  filter:
+    drop-shadow(0 0 26px rgba(125, 211, 252, 0.35))
+    drop-shadow(0 18px 40px rgba(0, 0, 0, 0.65));
+}
+
+/* A fine, unobtrusive top-to-bottom grain/scanline over the dark sections. */
+.summit-scanlines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.035) 0px,
+    rgba(255, 255, 255, 0.035) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .summit-core,
+  .summit-ring,
+  .summit-ring-fast,
+  .summit-ring-reverse,
+  .summit-ring-reverse-slow,
+  .summit-sweep,
+  .summit-breathe,
+  .summit-flicker,
+  .summit-rise {
+    animation: none !important;
+  }
+}
