@@ -37,10 +37,6 @@ const DEMO_INDEX = [
 
 const ANSWERS = [
   {
-    q: 'Is the demo the real thing?',
-    a: 'Yes. Same software, loaded with a sample practice. Nothing is a slideshow — open any screen and click around.',
-  },
-  {
     q: 'What does it cost?',
     a: 'It depends on providers, locations, and how much you roll out. We go through numbers on a call, once we know what you actually need. No pricing table that turns out to be wrong.',
   },
