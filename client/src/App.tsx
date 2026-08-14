@@ -1,5 +1,5 @@
 import React, { Component, type ErrorInfo, type ReactNode } from 'react';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from '@/context/AuthContext';
 import { isRouteAllowed, resolveRole } from '@/lib/roles';
 
@@ -42,7 +42,7 @@ class ErrorBoundary extends Component<
   }
 }
 import AppLayout from '@/layouts/AppLayout';
-import LandingPage from '@/features/landing/Page';
+import LandingPage from '@/features/landing/LandingPage';
 import LoginPage from '@/features/auth/LoginPage';
 import AccessDeniedPage from '@/features/auth/AccessDeniedPage';
 import DashboardPage from '@/features/dashboard/Page';
@@ -84,7 +84,16 @@ function RequireAuth({ children }: { children: React.ReactNode }) {
 }
 
 function HomeRoute() {
-  return <LandingPage />;
+  const navigate = useNavigate();
+  return (
+    <LandingPage
+      demoHref="/login"
+      onDemoClick={(e) => {
+        e.preventDefault();
+        navigate('/login');
+      }}
+    />
+  );
 }
 
 function RequireRole({ children }: { children: React.ReactNode }) {
