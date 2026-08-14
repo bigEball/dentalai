@@ -123,8 +123,8 @@ export default function LandingPage({
   }
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-black font-sans text-white antialiased">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur-xl">
+    <div className="min-h-screen overflow-x-hidden bg-[#080b11] font-sans text-white antialiased">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#080b11]/70 backdrop-blur-xl">
         <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
           <a href="/" className="flex items-center gap-2.5">
             <img src={logoSrc} alt="" className="h-7 w-auto object-contain" />
@@ -143,6 +143,14 @@ export default function LandingPage({
             className="summit-scanlines pointer-events-none absolute inset-0 opacity-40"
             aria-hidden="true"
           />
+          <div
+            className="pointer-events-none absolute inset-0"
+            aria-hidden="true"
+            style={{
+              background:
+                'radial-gradient(ellipse 70% 55% at 50% 0%, rgba(56,189,248,0.13) 0%, rgba(56,189,248,0.04) 45%, transparent 75%)',
+            }}
+          />
           <div className="relative mx-auto max-w-4xl text-center">
             <p className="summit-rise text-[13px] font-medium uppercase tracking-[0.2em] text-sky-300/70">
               Summit AI Services
@@ -154,7 +162,7 @@ export default function LandingPage({
               The practice, handled.
             </h1>
             <p
-              className="summit-rise mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/60 sm:text-xl"
+              className="summit-rise mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/70 sm:text-xl"
               style={{ animationDelay: '180ms' }}
             >
               Software that does the notes, the claims, and the front desk work your team
@@ -162,7 +170,7 @@ export default function LandingPage({
             </p>
             <div className="summit-rise mt-10" style={{ animationDelay: '270ms' }}>
               <DemoButton />
-              <p className="mt-4 text-[13px] text-white/40">
+              <p className="mt-4 text-[13px] text-white/50">
                 No signup. Nothing to install. It opens in your browser.
               </p>
             </div>
@@ -173,7 +181,7 @@ export default function LandingPage({
           </div>
 
           <div
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-black"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-[#080b11]"
             aria-hidden="true"
           />
         </section>
@@ -185,7 +193,7 @@ export default function LandingPage({
               <h2 className="max-w-2xl text-[2rem] font-semibold tracking-[-0.03em] sm:text-[2.75rem]">
                 Everything here is in the demo.
               </h2>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-white/55">
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-white/65">
                 Not a preview build. The whole thing, with a practice already in it.
               </p>
             </Reveal>
@@ -198,7 +206,7 @@ export default function LandingPage({
                   </h3>
                   <ul className="mt-5 space-y-3 border-t border-white/10 pt-5">
                     {column.items.map((item) => (
-                      <li key={item} className="text-[15px] text-white/70">
+                      <li key={item} className="text-[15px] text-white/75">
                         {item}
                       </li>
                     ))}
@@ -207,9 +215,6 @@ export default function LandingPage({
               ))}
             </div>
 
-            <Reveal className="mt-14">
-              <DemoButton />
-            </Reveal>
           </div>
         </section>
 
@@ -224,7 +229,7 @@ export default function LandingPage({
                   }`}
                 >
                   <h3 className="text-xl font-medium tracking-[-0.02em] sm:col-span-5">{item.q}</h3>
-                  <p className="mt-3 text-[17px] leading-8 text-white/55 sm:col-span-7 sm:mt-0">{item.a}</p>
+                  <p className="mt-3 text-[17px] leading-8 text-white/65 sm:col-span-7 sm:mt-0">{item.a}</p>
                 </div>
               </Reveal>
             ))}
@@ -255,11 +260,10 @@ export default function LandingPage({
                 reporting, your rollout across locations. One team, from the first
                 conversation to the last office.
               </p>
-              <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <DemoButton tone="light">See the demo first</DemoButton>
+              <div className="mt-10">
                 <a
                   href={`mailto:${contactEmail}`}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/25 px-8 py-4 text-[17px] font-medium tracking-tight text-white transition-colors duration-200 hover:border-white/60 hover:bg-white/5"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/30 px-8 py-4 text-[17px] font-medium tracking-tight text-white transition-colors duration-200 hover:border-white/70 hover:bg-white/5"
                 >
                   Talk to us
                 </a>
@@ -274,7 +278,7 @@ export default function LandingPage({
             <h2 className="text-[2.25rem] font-semibold tracking-[-0.035em] sm:text-6xl">
               See it for yourself.
             </h2>
-            <p className="mx-auto mt-5 max-w-xl text-lg text-white/55">
+            <p className="mx-auto mt-5 max-w-xl text-lg text-white/65">
               The full product, loaded with a working practice. Look around as long as you like.
             </p>
             <div className="mt-10">
@@ -285,7 +289,7 @@ export default function LandingPage({
       </main>
 
       <footer className="border-t border-white/10 px-6 py-10">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-[13px] text-white/40 sm:flex-row">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-[13px] text-white/50 sm:flex-row">
           <div className="flex items-center gap-2.5">
             <img src={logoSrc} alt="" className="h-5 w-auto object-contain opacity-70" />
             <span>Summit AI Services</span>
@@ -293,9 +297,6 @@ export default function LandingPage({
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
             <a href={`mailto:${contactEmail}`} className="transition-colors hover:text-white">
               {contactEmail}
-            </a>
-            <a href={demoHref} onClick={onDemoClick} className="transition-colors hover:text-white">
-              Demo
             </a>
           </div>
         </div>

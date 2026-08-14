@@ -116,7 +116,7 @@ export default function JarvisCore({ logoSrc = '/logo-mark.png' }: { logoSrc?: s
         aria-hidden="true"
         style={{
           background:
-            'radial-gradient(circle at 50% 50%, rgba(56,189,248,0.18) 0%, rgba(56,189,248,0.05) 40%, transparent 66%)',
+            'radial-gradient(circle at 50% 50%, rgba(56,189,248,0.24) 0%, rgba(56,189,248,0.08) 40%, transparent 66%)',
         }}
       />
 
@@ -126,7 +126,7 @@ export default function JarvisCore({ logoSrc = '/logo-mark.png' }: { logoSrc?: s
         aria-hidden="true"
         style={{
           background:
-            'conic-gradient(from 0deg, rgba(125,211,252,0.18) 0deg, rgba(125,211,252,0.04) 30deg, transparent 66deg, transparent 360deg)',
+            'conic-gradient(from 0deg, rgba(125,211,252,0.24) 0deg, rgba(125,211,252,0.06) 30deg, transparent 66deg, transparent 360deg)',
           WebkitMaskImage: 'radial-gradient(circle, transparent 42%, #000 56%, #000 96%, transparent 100%)',
           maskImage: 'radial-gradient(circle, transparent 42%, #000 56%, #000 96%, transparent 100%)',
         }}
@@ -134,26 +134,15 @@ export default function JarvisCore({ logoSrc = '/logo-mark.png' }: { logoSrc?: s
 
       <svg viewBox="0 0 400 400" className="absolute inset-0 h-full w-full" aria-hidden="true">
         <defs>
-          <pattern id="summit-hex" width="16" height="27.7" patternUnits="userSpaceOnUse">
-            <path
-              d="M8 0 L16 4.6 L16 13.85 L8 18.45 L0 13.85 L0 4.6 Z"
-              fill="none"
-              stroke={ICE}
-              strokeWidth={0.5}
-              strokeOpacity={0.6}
-            />
-          </pattern>
-          <radialGradient id="summit-hex-fade">
-            <stop offset="35%" stopColor="#fff" stopOpacity={0.5} />
-            <stop offset="100%" stopColor="#fff" stopOpacity={0} />
+          <radialGradient id="summit-well">
+            <stop offset="0%" stopColor="#bae6fd" stopOpacity={0.16} />
+            <stop offset="70%" stopColor="#38bdf8" stopOpacity={0.07} />
+            <stop offset="100%" stopColor="#38bdf8" stopOpacity={0} />
           </radialGradient>
-          <mask id="summit-hex-mask">
-            <circle cx={200} cy={200} r={96} fill="url(#summit-hex-fade)" />
-          </mask>
         </defs>
 
         {/* Frame corners. They pull apart as the page scrolls. */}
-        <g className="summit-frame" stroke={ICE} strokeOpacity={0.3} strokeWidth={1.1} fill="none">
+        <g className="summit-frame" stroke={ICE} strokeOpacity={0.38} strokeWidth={1.1} fill="none">
           {[
             'M6 34 L6 6 L34 6',
             'M366 6 L394 6 L394 34',
@@ -166,7 +155,7 @@ export default function JarvisCore({ logoSrc = '/logo-mark.png' }: { logoSrc?: s
 
         {/* Outer rim. */}
         <g className="summit-scroll-out">
-          <circle cx={200} cy={200} r={188} fill="none" stroke={ICE} strokeWidth={0.6} strokeOpacity={0.2} />
+          <circle cx={200} cy={200} r={188} fill="none" stroke={ICE} strokeWidth={0.6} strokeOpacity={0.26} />
           <g className="summit-spin-120">
             <circle
               cx={200}
@@ -175,7 +164,7 @@ export default function JarvisCore({ logoSrc = '/logo-mark.png' }: { logoSrc?: s
               fill="none"
               stroke={ICE}
               strokeWidth={0.7}
-              strokeOpacity={0.28}
+              strokeOpacity={0.34}
               pathLength={100}
               strokeDasharray="0.4 2.6"
             />
@@ -198,7 +187,7 @@ export default function JarvisCore({ logoSrc = '/logo-mark.png' }: { logoSrc?: s
                   y2={inner.y}
                   stroke={ICE}
                   strokeWidth={major ? 1.1 : 0.6}
-                  strokeOpacity={major ? 0.5 : 0.2}
+                  strokeOpacity={major ? 0.6 : 0.26}
                 />
               );
             })}
@@ -210,7 +199,7 @@ export default function JarvisCore({ logoSrc = '/logo-mark.png' }: { logoSrc?: s
                   x={p.x}
                   y={p.y}
                   fill={ICE}
-                  fillOpacity={0.35}
+                  fillOpacity={0.45}
                   fontSize={7}
                   letterSpacing={1.2}
                   textAnchor="middle"
@@ -227,8 +216,8 @@ export default function JarvisCore({ logoSrc = '/logo-mark.png' }: { logoSrc?: s
         {/* Segmented ring with a lit end cap. */}
         <g className="summit-scroll-b">
           <g className="summit-rev-70">
-            <Arc radius={136} pct={20} start={4} width={1.8} opacity={0.5} />
-            <Arc radius={136} pct={28} start={52} width={1.8} opacity={0.34} />
+            <Arc radius={136} pct={20} start={4} width={1.8} opacity={0.6} />
+            <Arc radius={136} pct={28} start={52} width={1.8} opacity={0.42} />
             {(() => {
               const head = polar(136, 90 + 24 * 3.6);
               return <circle cx={head.x} cy={head.y} r={2.2} fill="#e0f2fe" fillOpacity={0.8} />;
@@ -261,51 +250,35 @@ export default function JarvisCore({ logoSrc = '/logo-mark.png' }: { logoSrc?: s
               fill="none"
               stroke={ICE}
               strokeWidth={0.9}
-              strokeOpacity={0.22}
+              strokeOpacity={0.28}
               strokeDasharray="16 9"
             />
           </g>
         </g>
 
-        {/* Containment rings. */}
-        <circle cx={200} cy={200} r={95} fill="#0b1a26" fillOpacity={0.35} />
-        <circle cx={200} cy={200} r={95} fill="none" stroke={ICE} strokeWidth={0.9} strokeOpacity={0.32} />
-        <circle cx={200} cy={200} r={88} fill="none" stroke="#ffffff" strokeWidth={0.4} strokeOpacity={0.12} />
-
-        {/* Honeycomb field behind the tooth. */}
-        <g mask="url(#summit-hex-mask)">
-          <rect x={100} y={100} width={200} height={200} fill="url(#summit-hex)" />
-        </g>
+        {/* Containment rings, and a lit well the mark sits in. Nothing crosses it. */}
+        <circle cx={200} cy={200} r={95} fill="url(#summit-well)" />
+        <circle cx={200} cy={200} r={95} fill="none" stroke={ICE} strokeWidth={1} strokeOpacity={0.4} />
+        <circle cx={200} cy={200} r={88} fill="none" stroke="#ffffff" strokeWidth={0.4} strokeOpacity={0.16} />
 
         {/* Crosshair spurs. */}
         {[0, 90, 180, 270].map((angle) => {
           const a = polar(101, angle);
           const b = polar(90, angle);
           return (
-            <line key={angle} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={ICE} strokeWidth={1} strokeOpacity={0.5} />
+            <line key={angle} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={ICE} strokeWidth={1} strokeOpacity={0.6} />
           );
         })}
       </svg>
 
-      {/* The mark, with a scan line passing over it. */}
+      {/* The mark. */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="relative flex h-[45%] w-[45%] items-center justify-center overflow-hidden rounded-full">
-          <img
-            src={logoSrc}
-            alt="Summit AI Services"
-            className="summit-tooth h-[84%] w-auto select-none object-contain"
-            draggable={false}
-          />
-          <div
-            className="summit-scanline pointer-events-none absolute inset-x-0 top-1/2 h-px"
-            aria-hidden="true"
-            style={{
-              background:
-                'linear-gradient(90deg, transparent, rgba(224,242,254,0.7) 35%, rgba(224,242,254,0.7) 65%, transparent)',
-              boxShadow: '0 0 10px rgba(125,211,252,0.6)',
-            }}
-          />
-        </div>
+        <img
+          src={logoSrc}
+          alt="Summit AI Services"
+          className="summit-tooth h-[38%] w-auto select-none object-contain"
+          draggable={false}
+        />
       </div>
     </div>
   );
