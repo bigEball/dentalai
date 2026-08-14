@@ -15,21 +15,6 @@ export interface LandingPageProps {
   logoSrc?: string;
 }
 
-const CAPABILITIES = [
-  {
-    title: 'Notes write themselves.',
-    body: 'Talk through the visit. The chart note comes back structured, coded, and ready for your signature before the patient is out of the chair.',
-  },
-  {
-    title: 'Claims go out clean.',
-    body: 'Eligibility, attachments, and coding are checked before anything is submitted. Denials get worked automatically instead of stacking up.',
-  },
-  {
-    title: 'The front desk keeps up.',
-    body: 'Recall, confirmations, forms, and follow-up run in the background. Your team handles the patient in front of them.',
-  },
-];
-
 /** Fades a section in the first time it reaches the viewport. */
 function Reveal({ children, className = '' }: { children: ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -156,39 +141,6 @@ export default function LandingPage({
             className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-black"
             aria-hidden="true"
           />
-        </section>
-
-        {/* What it does */}
-        <section className="bg-white px-6 py-28 text-black sm:py-40">
-          <div className="mx-auto max-w-4xl">
-            <Reveal>
-              <h2 className="text-[2rem] font-semibold tracking-[-0.03em] sm:text-5xl">
-                Three jobs. Done quietly.
-              </h2>
-            </Reveal>
-
-            <div className="mt-16 space-y-16 sm:mt-24 sm:space-y-24">
-              {CAPABILITIES.map((item) => (
-                <Reveal key={item.title}>
-                  <div className="border-t border-black/10 pt-8 sm:grid sm:grid-cols-12 sm:gap-10">
-                    <h3 className="text-2xl font-semibold tracking-[-0.02em] sm:col-span-5 sm:text-[1.75rem]">
-                      {item.title}
-                    </h3>
-                    <p className="mt-3 text-lg leading-8 text-black/55 sm:col-span-7 sm:mt-0">
-                      {item.body}
-                    </p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-
-            <Reveal className="mt-20 text-center sm:mt-28">
-              <p className="text-lg text-black/50">Easier to see than to read about.</p>
-              <div className="mt-6">
-                <DemoButton tone="dark" />
-              </div>
-            </Reveal>
-          </div>
         </section>
 
         {/* DSOs */}

@@ -13,14 +13,31 @@
 }
 
 @keyframes summit-breathe {
-  0%, 100% { opacity: 0.55; }
+  0%, 100% { opacity: 0.5; }
   50% { opacity: 1; }
 }
 
 @keyframes summit-flicker {
-  0%, 100% { opacity: 0.25; }
-  40% { opacity: 0.9; }
-  60% { opacity: 0.4; }
+  0%, 100% { opacity: 0.3; }
+  40% { opacity: 0.95; }
+  60% { opacity: 0.45; }
+}
+
+@keyframes summit-blink {
+  0%, 44%, 100% { opacity: 0.85; }
+  50%, 94% { opacity: 0.15; }
+}
+
+@keyframes summit-scanline {
+  0% { transform: translateY(-130%); opacity: 0; }
+  8% { opacity: 1; }
+  92% { opacity: 1; }
+  100% { transform: translateY(130%); opacity: 0; }
+}
+
+@keyframes summit-meter {
+  0%, 100% { transform: scaleX(0.35); }
+  50% { transform: scaleX(1); }
 }
 
 @keyframes summit-rise {
@@ -29,57 +46,52 @@
 }
 
 @keyframes summit-core-arrive {
-  from { opacity: 0; transform: scale(0.92); }
+  from { opacity: 0; transform: scale(0.9); }
   to { opacity: 1; transform: scale(1); }
 }
 
 .summit-core {
-  animation: summit-core-arrive 1200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: summit-core-arrive 1300ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.summit-ring {
-  transform-origin: 50% 50%;
-  animation: summit-spin 90s linear infinite;
+/* Rotating layers. Each ring gets its own rate and direction so the dial never
+   reads as one solid object. */
+.summit-spin-120 { transform-origin: 50% 50%; animation: summit-spin 120s linear infinite; }
+.summit-spin-72  { transform-origin: 50% 50%; animation: summit-spin 72s linear infinite; }
+.summit-spin-40  { transform-origin: 50% 50%; animation: summit-spin 40s linear infinite; }
+.summit-spin-16  { transform-origin: 50% 50%; animation: summit-spin 16s linear infinite; }
+.summit-spin-8   { transform-origin: 50% 50%; animation: summit-spin 8s linear infinite; }
+.summit-rev-90   { transform-origin: 50% 50%; animation: summit-spin-reverse 90s linear infinite; }
+.summit-rev-52   { transform-origin: 50% 50%; animation: summit-spin-reverse 52s linear infinite; }
+.summit-rev-28   { transform-origin: 50% 50%; animation: summit-spin-reverse 28s linear infinite; }
+.summit-rev-12   { transform-origin: 50% 50%; animation: summit-spin-reverse 12s linear infinite; }
+
+.summit-sweep { animation: summit-spin 9s linear infinite; }
+.summit-sweep-slow { animation: summit-spin-reverse 21s linear infinite; }
+
+.summit-breathe { animation: summit-breathe 5s ease-in-out infinite; }
+.summit-flicker { animation: summit-flicker 4.5s ease-in-out infinite; }
+.summit-blink { animation: summit-blink 2.6s steps(1, end) infinite; }
+.summit-blink-slow { animation: summit-blink 4.1s steps(1, end) infinite; }
+
+.summit-scanline {
+  animation: summit-scanline 6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
 }
 
-.summit-ring-fast {
-  transform-origin: 50% 50%;
-  animation: summit-spin 26s linear infinite;
+.summit-meter {
+  transform-origin: left center;
+  animation: summit-meter 3.4s ease-in-out infinite;
 }
 
-.summit-ring-reverse {
-  transform-origin: 50% 50%;
-  animation: summit-spin-reverse 48s linear infinite;
-}
-
-.summit-ring-reverse-slow {
-  transform-origin: 50% 50%;
-  animation: summit-spin-reverse 120s linear infinite;
-}
-
-.summit-sweep {
-  animation: summit-spin 9s linear infinite;
-}
-
-.summit-breathe {
-  animation: summit-breathe 5s ease-in-out infinite;
-}
-
-.summit-flicker {
-  animation: summit-flicker 4.5s ease-in-out infinite;
-}
-
-.summit-rise {
-  animation: summit-rise 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
-}
+.summit-rise { animation: summit-rise 900ms cubic-bezier(0.16, 1, 0.3, 1) both; }
 
 .summit-tooth {
   filter:
-    drop-shadow(0 0 26px rgba(125, 211, 252, 0.35))
+    drop-shadow(0 0 26px rgba(125, 211, 252, 0.4))
     drop-shadow(0 18px 40px rgba(0, 0, 0, 0.65));
 }
 
-/* A fine, unobtrusive top-to-bottom grain/scanline over the dark sections. */
+/* A fine, unobtrusive scanline texture over the dark sections. */
 .summit-scanlines {
   background-image: repeating-linear-gradient(
     to bottom,
@@ -92,13 +104,23 @@
 
 @media (prefers-reduced-motion: reduce) {
   .summit-core,
-  .summit-ring,
-  .summit-ring-fast,
-  .summit-ring-reverse,
-  .summit-ring-reverse-slow,
+  .summit-spin-120,
+  .summit-spin-72,
+  .summit-spin-40,
+  .summit-spin-16,
+  .summit-spin-8,
+  .summit-rev-90,
+  .summit-rev-52,
+  .summit-rev-28,
+  .summit-rev-12,
   .summit-sweep,
+  .summit-sweep-slow,
   .summit-breathe,
   .summit-flicker,
+  .summit-blink,
+  .summit-blink-slow,
+  .summit-scanline,
+  .summit-meter,
   .summit-rise {
     animation: none !important;
   }
