@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
-import { Toaster } from 'react-hot-toast'
-import App from './App'
+import Root from './Root'
 import './index.css'
 
 // Catch unhandled errors that happen before React mounts
@@ -22,14 +21,24 @@ window.addEventListener('error', (e) => {
 });
 
 try {
-  ReactDOM.createRoot(document.getElementById('root')!).render(
+  const container = document.getElementById('root')!;
+  const tree = (
     <React.StrictMode>
       <BrowserRouter>
-        <App />
-        <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
+        <Root />
       </BrowserRouter>
-    </React.StrictMode>,
-  )
+    </React.StrictMode>
+  );
+
+  // The public pages ship with their markup already in the HTML, so they are
+  // adopted rather than rebuilt. Everything else — the app behind the sign-in,
+  // and `npm run dev`, which serves the unprerendered index.html — arrives with
+  // an empty root and mounts the usual way.
+  if (container.hasChildNodes()) {
+    ReactDOM.hydrateRoot(container, tree);
+  } else {
+    ReactDOM.createRoot(container).render(tree);
+  }
 } catch (err) {
   const root = document.getElementById('root');
   if (root) {

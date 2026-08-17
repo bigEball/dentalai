@@ -79,7 +79,12 @@ app.use('/uploads', express.static(uploadsDir));
 
 // Serve client build in production
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(clientDistDir));
+  // `redirect: false` because the public pages are prerendered to directories
+  // — dist/about/index.html and so on. Left at its default, express.static
+  // answers /about with a 301 to /about/, which is a different URL from the
+  // canonical the page itself declares, so every marketing page would advertise
+  // one address and redirect to another.
+  app.use(express.static(clientDistDir, { redirect: false }));
 }
 
 // Request logger (development only)
@@ -130,14 +135,24 @@ app.use('/api/v1/compliance', complianceRouter);
 app.use('/api/v1/multi-location', multiLocationRouter);
 app.use('/api/v1/demo-requests', demoRequestsRouter);
 
-// SPA fallback — serve index.html for non-API routes in production
+// SPA fallback for anything the static middleware above did not answer
 if (process.env.NODE_ENV === 'production') {
   app.get('*', (req: Request, res: Response, next: NextFunction) => {
     // Don't intercept API calls — let them fall through to 404
     if (req.path.startsWith('/api/')) {
       return next();
     }
-    res.sendFile(path.join(clientDistDir, 'index.html'));
+
+    // A public page has a prerendered file and was already served. What reaches
+    // here is /login and the application routes, which get the empty shell:
+    // index.html now holds the rendered landing page, and serving that to the
+    // dashboard would make React hydrate one tree against the markup of
+    // another. app.html is the same document with an empty root and a noindex.
+    res.sendFile(path.join(clientDistDir, 'app.html'), (err) => {
+      // Falls back to index.html if the client was built before app.html
+      // existed, so a stale dist still boots rather than 500s.
+      if (err) res.sendFile(path.join(clientDistDir, 'index.html'));
+    });
   });
 }
 
@@ -153,7 +168,7 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Summit AI Services server running on http://localhost:${PORT}`);
+  console.log(`Summit Tech server running on http://localhost:${PORT}`);
 });
 
 export default app;

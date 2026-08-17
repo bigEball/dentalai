@@ -1,0 +1,111 @@
+<!doctype html>
+<!--
+  Source for public/og-image.jpg — the 1200x630 card LinkedIn, Slack, iMessage
+  and X render when someone shares the site.
+
+  Checked in rather than left as a one-off export so the card can be corrected
+  when the headline changes. It is deliberately not part of `npm run build`:
+  regenerating it needs a browser, and making every deploy depend on a Chromium
+  download to rebuild an image that changes twice a year is a bad trade.
+
+  To regenerate, from client/:
+
+    cp public/logo-icon.jpg scripts/
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+      --headless --disable-gpu --hide-scrollbars --force-device-scale-factor=1 \
+      --window-size=1200,630 --virtual-time-budget=8000 \
+      --screenshot=/tmp/og-raw.png "file://$PWD/scripts/og-card.html"
+    sips -s format jpeg -s formatOptions 90 /tmp/og-raw.png --out public/og-image.jpg
+    rm scripts/logo-icon.jpg
+
+  The headline has to keep matching the <h1> on the landing page: a link preview
+  that promises a different sentence from the one on the page is the kind of
+  mismatch people bounce off.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1200px; height: 630px; }
+      body {
+        background: #0a1628;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif;
+        color: #f3f7fc;
+        position: relative;
+        overflow: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      /* The same cool wash the landing page hero sits under, so the card and
+         the page it links to read as one surface. */
+      .glow {
+        position: absolute;
+        width: 900px; height: 900px;
+        right: -260px; top: -380px;
+        background: radial-gradient(circle, rgba(43,124,214,0.28) 0%, rgba(10,22,40,0) 62%);
+      }
+      .glow2 {
+        position: absolute;
+        width: 700px; height: 700px;
+        left: -280px; bottom: -420px;
+        background: radial-gradient(circle, rgba(43,124,214,0.16) 0%, rgba(10,22,40,0) 65%);
+      }
+      .frame { position: relative; padding: 76px 84px; height: 100%; display: flex; flex-direction: column; }
+      .brand { display: flex; align-items: center; gap: 18px; }
+      .brand img { width: 60px; height: 60px; border-radius: 14px; object-fit: cover; }
+      .brand span { font-size: 27px; font-weight: 600; letter-spacing: -0.017em; }
+      h1 {
+        margin-top: auto;
+        font-size: 88px;
+        font-weight: 600;
+        letter-spacing: -0.042em;
+        line-height: 1.0;
+      }
+      p {
+        margin-top: 28px;
+        font-size: 29px;
+        line-height: 1.42;
+        color: #a9bcd4;
+        max-width: 880px;
+        letter-spacing: -0.011em;
+      }
+      .rule { margin-top: 44px; height: 1px; background: rgba(255,255,255,0.13); }
+      .foot {
+        margin-top: 26px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 22px;
+        color: #8fa5c0;
+        letter-spacing: -0.005em;
+      }
+      .foot b { color: #e8f0fa; font-weight: 500; }
+    </style>
+  </head>
+  <body>
+    <div class="glow"></div>
+    <div class="glow2"></div>
+    <div class="frame">
+      <div class="brand">
+        <img src="logo-icon.jpg" alt="" />
+        <span>Summit Tech</span>
+      </div>
+      <h1>The practice, handled.</h1>
+      <p>
+        The notes, the claims, and the front desk work your team does by hand —
+        written back into OpenDental.
+      </p>
+      <div class="rule"></div>
+      <div class="foot">
+        <span><b>26 tools.</b> All of them in the demo.</span>
+        <span>summitaisoftware.com</span>
+      </div>
+    </div>
+  </body>
+</html>

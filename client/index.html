@@ -2,14 +2,213 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/logo.png?v=2" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Summit AI Services</title>
+    <meta name="theme-color" content="#0a1628" />
+
+    <!-- Brand first, so it is the half that survives Safari truncating the tab
+         label once a few are open. The trailing phrase is what a search result
+         needs in order to say what the company sells, and a bare brand name
+         only ever ranked for people already searching the brand.
+
+         This is the home page's title and the fallback for a crawler that does
+         not run JavaScript. Every other public URL rewrites it from the route
+         table in src/features/landing/seo.ts — change the home entry there and
+         here together, or the two disagree for the first paint. -->
+    <title>Summit Tech — AI operations for dental practices</title>
+    <!-- Kept identical to the '/' entry in src/features/landing/seo.ts. The
+         prerender rewrites this tag from that table, so a different string here
+         only ever showed up in `npm run dev` — where it quietly disagreed with
+         what ships. -->
+    <meta
+      name="description"
+      content="Summit Tech writes the clinical notes, fills the schedule and scrubs the claims, then writes it all back into OpenDental. See all 26 tools in a live demo."
+    />
+    <link rel="canonical" href="https://summitaisoftware.com/" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Link previews: LinkedIn, Slack, iMessage and X all read these. Without
+         them a shared link renders as a bare URL with no title or image. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Summit Tech" />
+    <meta property="og:url" content="https://summitaisoftware.com/" />
+    <meta property="og:title" content="Summit Tech — AI operations for dental practices" />
+    <meta
+      property="og:description"
+      content="The notes, the claims, and the front desk work your team does by hand — handled. See all 26 tools in a live demo, no signup."
+    />
+    <!-- A designed 1200x630 card (scripts/og-card.html is its source), not the
+         bare logo. At this ratio LinkedIn, Slack and iMessage all render the
+         wide format; a square mark got letterboxed into a thumbnail beside the
+         title. Width and height are declared so the scrapers that reserve space
+         before fetching lay the card out correctly on first paint. -->
+    <meta property="og:image" content="https://summitaisoftware.com/og-image.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Summit Tech — The practice, handled. The notes, the claims, and the front desk work your team does by hand, written back into OpenDental."
+    />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Summit Tech — AI operations for dental practices" />
+    <meta
+      name="twitter:description"
+      content="The notes, the claims, and the front desk work your team does by hand — handled. See all 26 tools in a live demo, no signup."
+    />
+    <meta name="twitter:image" content="https://summitaisoftware.com/og-image.jpg" />
+
+    <!-- 9 kB rather than the 483 kB full-resolution logo the tab used to pull. -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/logo-mark.png" />
+
+    <!-- Structured data, written into the HTML rather than injected by the app.
+         The site is client-rendered, so a crawler that does not run JavaScript
+         sees an empty <div id="root"> at every URL — Google renders the page
+         and would find these either way, but the answer engines largely do not,
+         and this is the only description of the company they can read. Keep it
+         in step with public/llms.txt and with the copy on the page: structured
+         data that disagrees with the visible text is a manual-action risk. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://summitaisoftware.com/#organization",
+            "name": "Summit Tech",
+            "legalName": "SUMMIT TECH LLC",
+            "url": "https://summitaisoftware.com/",
+            "logo": "https://summitaisoftware.com/logo-mark.png",
+            "email": "contact@summitaisoftware.com",
+            "telephone": "+1-435-900-8455",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "1255 E 200 S, Apt 9",
+              "addressLocality": "Salt Lake City",
+              "addressRegion": "UT",
+              "postalCode": "84102",
+              "addressCountry": "US"
+            },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "sales",
+              "email": "contact@summitaisoftware.com",
+              "telephone": "+1-435-900-8455",
+              "areaServed": "US",
+              "availableLanguage": "English"
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://summitaisoftware.com/#website",
+            "url": "https://summitaisoftware.com/",
+            "name": "Summit Tech",
+            "publisher": { "@id": "https://summitaisoftware.com/#organization" },
+            "inLanguage": "en-US"
+          },
+          {
+            "@type": "SoftwareApplication",
+            "@id": "https://summitaisoftware.com/#software",
+            "name": "Summit Tech",
+            "applicationCategory": "BusinessApplication",
+            "applicationSubCategory": "Dental practice management software",
+            "operatingSystem": "Web browser",
+            "url": "https://summitaisoftware.com/",
+            "publisher": { "@id": "https://summitaisoftware.com/#organization" },
+            "description": "An AI operating layer that runs on top of OpenDental — writing clinical notes, filling the schedule and scrubbing insurance claims, then writing the result back into the chart. Built for dental practices and the groups that run them.",
+            "featureList": [
+              "AI clinical notes",
+              "Perio charting",
+              "Treatment plans",
+              "Clinical decision support",
+              "Patient scores",
+              "Smart scheduling",
+              "Recall and reactivation",
+              "Patient forms",
+              "Patient communications",
+              "Follow-ups",
+              "Referrals",
+              "Insurance",
+              "Claim reviewer",
+              "Billing",
+              "Payment plans",
+              "Fee optimizer",
+              "Patient retention",
+              "Morning huddle",
+              "Reporting",
+              "Inventory",
+              "Procurement intelligence",
+              "Compliance autopilot"
+            ],
+            "offers": {
+              "@type": "Offer",
+              "availability": "https://schema.org/InStock",
+              "priceCurrency": "USD",
+              "description": "Priced on the number of providers, locations and modules rolled out. Quoted on a call rather than published."
+            }
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://summitaisoftware.com/#faq",
+            "isPartOf": { "@id": "https://summitaisoftware.com/#website" },
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What if it doesn't do something we need?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Then we build that part. Writing custom software for groups is a large part of what we do — the software should fit how the office already runs, not the other way around."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What does it cost?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "It depends on providers, locations, and how much you roll out. We go through numbers on a call, once we know what you actually need. No pricing table that turns out to be wrong."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How does it start?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Look at the demo first. Then tell us how your office really works, and we will show you what maps directly and what we would build."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- 400/500/600/700 only: nothing in the build uses Light. -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
+    <!-- The public pages ship with their markup already rendered into #root,
+         but everything below the hero starts at opacity 0 and is revealed by an
+         IntersectionObserver once it scrolls into view. With scripting off that
+         observer never runs, so a fully populated document would render as a
+         hero above four screens of blank paper. This hands those readers the
+         static page instead — the same content, without the choreography. -->
+    <noscript>
+      <style>
+        .summit-reveal,
+        .summit-rise,
+        .summit-word {
+          opacity: 1 !important;
+          transform: none !important;
+          animation: none !important;
+        }
+      </style>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

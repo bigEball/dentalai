@@ -20,7 +20,16 @@ const DEMO_USER: AuthUser = {
   office: 'Summit Demo Practice',
 };
 
-const DEMO_CODE = 'demo';
+/**
+ * The one code that opens the demo.
+ *
+ * Exported because the sign-in screen prints it and pre-fills the field. Every
+ * call to action on the marketing site says "No signup. Nothing to install."
+ * and points here; a code box with no way to learn the code made that promise
+ * false and turned the page's only conversion path into a dead end. This is a
+ * public demo, not a credential — there is nothing behind it but seeded data.
+ */
+export const DEMO_CODE = 'demo';
 
 export function login(code: string): { success: boolean; error?: string } {
   if (code === DEMO_CODE) {
@@ -35,6 +44,19 @@ export function logout(): void {
 }
 
 export function getUser(): AuthUser | null {
+  // The prerender pass runs this in Node, which has no usable localStorage —
+  // and the catch below reaches for it too, so without this the failure escapes
+  // the try rather than being swallowed by it. Nobody is signed in while the
+  // build generates static HTML, so the honest answer during prerender is the
+  // same as for a first-time visitor.
+  //
+  // Tested by calling the method rather than by `typeof localStorage`: Node 22
+  // and later define the global as a stub that throws unless the runtime was
+  // started with a backing file, so the binding exists while the API does not.
+  if (typeof localStorage === 'undefined' || typeof localStorage.getItem !== 'function') {
+    return null;
+  }
+
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;

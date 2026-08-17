@@ -19,7 +19,13 @@
   to     = "/_api_not_found"
   status = 404
 
+# The public pages are prerendered to real files — dist/index.html,
+# dist/about/index.html and so on — and Netlify serves a matching file before
+# it consults these rules, so this only catches what is left: /login and the
+# application routes. It points at app.html rather than index.html because
+# index.html now carries the rendered landing page, and handing that to /login
+# would make React hydrate the dashboard against the marketing copy.
 [[redirects]]
   from   = "/*"
-  to     = "/index.html"
+  to     = "/app.html"
   status = 200
