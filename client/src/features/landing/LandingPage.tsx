@@ -1,6 +1,24 @@
-import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { useEffect, useId, useState, type MouseEvent, type ReactNode } from 'react';
+import { ArrowRight, ArrowUpRight, Plus } from 'lucide-react';
+import DemoFrame from './DemoFrame';
 import JarvisCore from './JarvisCore';
+import SiteNav, {
+  MODULE_COUNT,
+  MODULE_NAMES,
+  NAV_GROUPS,
+  NEW_MODULE_COUNT,
+  NewMark,
+} from './SiteNav';
+import SiteFooter, { type NavigateHandler } from './SiteFooter';
+import { COMPANY } from './company';
+import {
+  Reveal,
+  Words,
+  prefersReducedMotion,
+  useOnScreen,
+  usePointerDrift,
+  useSpotlight,
+} from './motion';
 import './landing.css';
 
 export interface LandingPageProps {
@@ -13,25 +31,43 @@ export interface LandingPageProps {
   onDemoClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
   contactEmail?: string;
   logoSrc?: string;
+  /** Hand footer link clicks to a router. Plain navigation without it. */
+  onNavigate?: NavigateHandler;
 }
 
-/** The actual screens in the demo, grouped the way the office thinks about them. */
-const DEMO_INDEX = [
+/** The four moments in a day the software is meant to take off someone's hands. */
+const MOMENTS = [
   {
-    group: 'Clinical',
-    items: ['AI Notes', 'Perio Charting', 'Treatment Plans', 'Clinical Decision Support', 'Patients'],
+    id: 'chair',
+    label: 'In the operatory',
+    title: 'Charting is finished with the appointment.',
+    body: 'Start the recording at the beginning of the visit. The note comes back in your format, with the perio numbers and the treatment plan attached, ready to review and sign before the next patient sits down. No charting left to catch up on at the end of the day.',
+    modules: ['AI Notes', 'Perio Chart', 'Clinical Decision Support'],
+    view: 'notes' as const,
   },
   {
-    group: 'Front desk',
-    items: ['Smart Scheduling', 'Recall', 'Patient Forms', 'Communications', 'Follow-Ups', 'Referrals'],
+    id: 'desk',
+    label: 'At the front desk',
+    title: 'Fewer empty chairs, fewer no-shows.',
+    body: 'Before an appointment is booked, your team can see how full the day is and how likely that patient is to miss it. Recall tracks who is overdue and who has already been reached, and reminders go out on their own.',
+    modules: ['Smart Scheduling', 'Recall', 'Follow-Ups'],
+    view: 'schedule' as const,
   },
   {
-    group: 'Billing',
-    items: ['Insurance', 'Pre-Authorizations', 'Claim Scrubber', 'Billing', 'Payment Plans', 'Fee Optimizer'],
+    id: 'claim',
+    label: 'After the visit',
+    title: 'Claims are checked before they are sent.',
+    body: 'Insurance coverage is verified ahead of the visit, and every claim is reviewed for the errors that lead to denials. Your billing coordinator only works the claims that need a person, instead of all of them.',
+    modules: ['Insurance', 'Claim Reviewer', 'Billing'],
+    view: 'claims' as const,
   },
   {
-    group: 'Running the place',
-    items: ['Morning Huddle', 'Reports & Analytics', 'Patient Retention', 'Inventory Management', 'Compliance'],
+    id: 'owner',
+    label: 'At the end of the month',
+    title: 'Reporting is ready when you are.',
+    body: 'Production by provider, patient retention, and the patients you are losing. The numbers an owner asks for at the end of the month are on a screen you open, not a report someone builds in a spreadsheet.',
+    modules: ['Reports', 'Patient Retention', 'Fee Optimizer'],
+    view: 'dashboard' as const,
   },
 ];
 
@@ -50,257 +86,538 @@ const ANSWERS = [
   },
 ];
 
-/** Fades a section in the first time it reaches the viewport. */
-function Reveal({ children, className = '' }: { children: ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [shown, setShown] = useState(false);
+const DSO_POINTS = [
+  ['Custom builds', 'The parts you need that nothing off the shelf does.'],
+  ['Your practice management system', 'We work with what you already run on.'],
+  ['Rollout across locations', 'One team, first conversation to last office.'],
+  ['Reporting for the group', 'Roll-ups the way your organization reads them.'],
+];
 
-  useEffect(() => {
-    const node = ref.current;
-    if (!node || typeof IntersectionObserver === 'undefined') {
-      setShown(true);
-      return;
-    }
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShown(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15 },
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+const DEMO_TONES = {
+  dark: 'summit-cta-primary bg-[#0a1628] text-white',
+  light: 'summit-cta-primary bg-white text-[#0a1628]',
+  quiet: 'summit-cta-quiet border border-[#8695ab] bg-white text-[#0a1628] hover:border-[#0b6bcb]/45',
+};
 
+const DEMO_SIZES = {
+  sm: 'px-5 py-2.5 text-[14px]',
+  lg: 'px-7 py-3.5 text-[17px]',
+};
+
+/**
+ * The one button this page is built around. Declared at module scope rather
+ * than inside `LandingPage`: a component defined in a render body is a new
+ * type on every render, so React unmounts and rebuilds the anchor each time
+ * instead of updating it — which throws away its hover state mid-interaction.
+ */
+function DemoButton({
+  href,
+  onClick,
+  children = 'Open the live demo',
+  tone = 'dark',
+  size = 'lg',
+}: {
+  href: string;
+  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
+  children?: ReactNode;
+  tone?: keyof typeof DEMO_TONES;
+  size?: keyof typeof DEMO_SIZES;
+}) {
   return (
-    <div
-      ref={ref}
-      className={`${className} transition-all duration-[900ms] ease-out ${
-        shown ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
-      }`}
+    <a
+      href={href}
+      onClick={onClick}
+      className={`summit-cta inline-flex items-center gap-2 rounded-full font-medium tracking-tight ${DEMO_TONES[tone]} ${DEMO_SIZES[size]}`}
     >
       {children}
-    </div>
+      <ArrowRight
+        className={`summit-cta-arrow ${size === 'lg' ? 'h-[17px] w-[17px]' : 'h-3.5 w-3.5'}`}
+      />
+    </a>
   );
 }
 
 export default function LandingPage({
   demoHref = '/login',
   onDemoClick,
-  contactEmail = 'omid@summitaisoftware.com',
+  contactEmail = COMPANY.email,
   logoSrc = '/logo-mark.png',
+  onNavigate,
 }: LandingPageProps) {
-  function DemoButton({
-    children = 'Open the live demo',
-    tone = 'light',
-    size = 'lg',
-  }: {
-    children?: ReactNode;
-    tone?: 'light' | 'dark' | 'quiet';
-    size?: 'sm' | 'lg';
-  }) {
-    const tones = {
-      light: 'bg-white text-black hover:bg-white/85',
-      dark: 'bg-black text-white hover:bg-black/85',
-      quiet: 'border border-white/25 text-white hover:border-white/60 hover:bg-white/5',
-    };
-    const sizes = {
-      sm: 'px-5 py-2 text-[13px]',
-      lg: 'px-8 py-4 text-[17px]',
-    };
-    return (
-      <a
-        href={demoHref}
-        onClick={onDemoClick}
-        className={`inline-flex items-center gap-2 rounded-full font-medium tracking-tight transition-colors duration-200 ${tones[tone]} ${sizes[size]}`}
-      >
-        {children}
-        <ArrowRight className={size === 'lg' ? 'h-[18px] w-[18px]' : 'h-3.5 w-3.5'} />
-      </a>
-    );
-  }
+  const coreRef = usePointerDrift<HTMLDivElement>(14);
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#080b11] font-sans text-white antialiased">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#080b11]/70 backdrop-blur-xl">
-        <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
-          <a href="/" className="flex items-center gap-2.5">
-            <img src={logoSrc} alt="" className="h-7 w-auto object-contain" />
-            <span className="text-[15px] font-medium tracking-tight">Summit</span>
-          </a>
-          <DemoButton tone="light" size="sm">
-            Demo
-          </DemoButton>
-        </nav>
-      </header>
+    <div className="summit-root min-h-screen overflow-x-hidden bg-[#eef2f8] font-sans text-[#0a1628] antialiased">
+      <a href="#main" className="summit-skip">
+        Skip to main content
+      </a>
 
-      <main>
-        {/* Hero */}
-        <section className="relative overflow-hidden px-6 pb-10 pt-32 sm:pb-16 sm:pt-40">
-          <div
-            className="summit-scanlines pointer-events-none absolute inset-0 opacity-40"
-            aria-hidden="true"
-          />
+      <SiteNav
+        demoHref={demoHref}
+        onDemoClick={onDemoClick}
+        contactEmail={contactEmail}
+        logoSrc={logoSrc}
+        onNavigate={onNavigate}
+      />
+
+      <main id="main" tabIndex={-1}>
+        {/* ── Hero. Text on the left; the instrument sits off the right edge,
+               masked so it dissolves into the page rather than sitting on it. ── */}
+        <section className="relative overflow-hidden">
+          <div className="summit-grid pointer-events-none absolute inset-0" aria-hidden="true" />
           <div
             className="pointer-events-none absolute inset-0"
             aria-hidden="true"
             style={{
               background:
-                'radial-gradient(ellipse 70% 55% at 50% 0%, rgba(56,189,248,0.13) 0%, rgba(56,189,248,0.04) 45%, transparent 75%)',
+                'radial-gradient(ellipse 60% 60% at 78% 45%, rgba(11,107,203,0.08) 0%, transparent 70%)',
             }}
           />
-          <div className="relative mx-auto max-w-4xl text-center">
-            <p className="summit-rise text-[13px] font-medium uppercase tracking-[0.2em] text-sky-300/70">
-              Summit AI Services
-            </p>
-            <h1
-              className="summit-rise mt-6 text-[2.75rem] font-semibold leading-[1.05] tracking-[-0.035em] sm:text-7xl"
-              style={{ animationDelay: '90ms' }}
-            >
-              The practice, handled.
-            </h1>
-            <p
-              className="summit-rise mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/70 sm:text-xl"
-              style={{ animationDelay: '180ms' }}
-            >
-              Software that does the notes, the claims, and the front desk work your team
-              does by hand. Built for dental practices and the groups that run them.
-            </p>
-            <div className="summit-rise mt-10" style={{ animationDelay: '270ms' }}>
-              <DemoButton />
-              <p className="mt-4 text-[13px] text-white/50">
-                No signup. Nothing to install. It opens in your browser.
-              </p>
+
+          <div
+            className="summit-hud-mask pointer-events-none absolute right-[-16%] top-1/2 hidden -translate-y-1/2 lg:block xl:right-[-9%]"
+            aria-hidden="true"
+          >
+            <div ref={coreRef} className="summit-parallax">
+              <JarvisCore logoSrc={logoSrc} className="w-[min(54vw,640px)]" />
             </div>
           </div>
 
-          <div className="relative mt-12 flex justify-center sm:mt-14">
-            <JarvisCore logoSrc={logoSrc} />
-          </div>
+          <div className="relative mx-auto max-w-6xl px-6 pb-16 pt-32 lg:flex lg:min-h-[41rem] lg:flex-col lg:justify-center lg:pb-20 lg:pt-28">
+            <div className="max-w-[36rem]">
+              <p className="summit-rise flex items-center gap-2.5 text-[13px] font-semibold uppercase tracking-[0.2em] text-[#0b6bcb]">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="summit-halo absolute inset-0 rounded-full bg-[#0b6bcb]" />
+                  <span className="summit-dot relative h-1.5 w-1.5 rounded-full bg-[#0b6bcb]" />
+                </span>
+                Summit Tech
+              </p>
+              <h1 className="mt-5 text-[2.9rem] font-semibold leading-[1.03] tracking-[-0.04em] sm:text-[4.2rem]">
+                <Words text="The practice, handled." delay={140} step={110} />
+              </h1>
+              <p
+                className="summit-rise mt-6 max-w-xl text-[18px] leading-8 text-[#4a5b73] sm:text-[19px]"
+                style={{ animationDelay: '560ms' }}
+              >
+                Software that does the notes, the claims, and the front desk work your team
+                does by hand. Built for dental practices and the groups that run them.
+              </p>
+              <div
+                className="summit-rise mt-9 flex flex-wrap items-center gap-4"
+                style={{ animationDelay: '700ms' }}
+              >
+                <DemoButton href={demoHref} onClick={onDemoClick} />
+                <span className="text-[14px] text-[#5d6b80]">
+                  No signup. Nothing to install.
+                </span>
+              </div>
+            </div>
 
-          <div
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-[#080b11]"
-            aria-hidden="true"
-          />
+            {/* On narrow screens the instrument comes back under the copy. */}
+            <div className="mt-12 flex justify-center lg:hidden">
+              <JarvisCore logoSrc={logoSrc} className="w-[min(82vw,380px)]" />
+            </div>
+          </div>
         </section>
 
-        {/* What's in there */}
-        <section className="border-t border-white/10 px-6 py-24 sm:py-32">
-          <div className="mx-auto max-w-5xl">
-            <Reveal>
-              <h2 className="max-w-2xl text-[2rem] font-semibold tracking-[-0.03em] sm:text-[2.75rem]">
-                Everything here is in the demo.
-              </h2>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-white/65">
-                Not a preview build. The whole thing, with a practice already in it.
-              </p>
-            </Reveal>
+        {/* ── Module ticker ── */}
+        {/* Stays on the hero's ground so the white section below it reads as
+            the first real block of content rather than more of the same. */}
+        <section className="border-y border-[#d8e1ed] py-5" aria-hidden="true">
+          <div className="summit-marquee-mask overflow-hidden">
+            <Ticker items={MODULE_NAMES} duration={90} />
+          </div>
+        </section>
 
-            <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-              {DEMO_INDEX.map((column) => (
-                <Reveal key={column.group}>
-                  <h3 className="text-[11px] font-medium uppercase tracking-[0.18em] text-sky-300/70">
-                    {column.group}
-                  </h3>
-                  <ul className="mt-5 space-y-3 border-t border-white/10 pt-5">
-                    {column.items.map((item) => (
-                      <li key={item} className="text-[15px] text-white/75">
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+        {/* ── The index of what's in there ──
+               Every module in the build, counted rather than claimed: the number
+               in the heading is `MODULE_NAMES.length`, so it cannot drift from
+               the list underneath it. ── */}
+        <section className="bg-white px-6 py-16 sm:py-20">
+          <div className="mx-auto max-w-6xl">
+            <SectionHead
+              title={`${MODULE_COUNT} tools. All of them in the demo.`}
+              body={`Not a preview build. The whole thing, with a practice already in it — every screen below, loaded and clickable. ${NEW_MODULE_COUNT} of them are new.`}
+            />
+
+            <div className="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+              {NAV_GROUPS.map((group, i) => {
+                const items = group.columns.flat();
+                return (
+                  <Reveal key={group.id} delay={i * 80}>
+                    <h3 className="flex items-baseline gap-2 text-[12px] font-semibold uppercase tracking-[0.18em] text-[#0b6bcb]">
+                      {group.label}
+                      <span className="text-[12px] font-medium tracking-normal text-[#8695ab]">
+                        {items.length}
+                      </span>
+                    </h3>
+                    <ul className="mt-4 space-y-0.5 border-t border-[#d0dbe9] pt-3">
+                      {items.map((item) => (
+                        <li key={item.name}>
+                          <a
+                            href={demoHref}
+                            onClick={onDemoClick}
+                            className="summit-row flex items-center gap-1.5 py-1.5 text-[16px] leading-6 text-[#4a5b73] hover:text-[#0a1628]"
+                          >
+                            {item.name}
+                            {item.isNew && <NewMark />}
+                            <ArrowUpRight className="summit-row-arrow h-3.5 w-3.5 shrink-0 text-[#0b6bcb]" />
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </Reveal>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* ── A day, in four moments ── */}
+        <Moments demoHref={demoHref} onDemoClick={onDemoClick} logoSrc={logoSrc} />
+
+        {/* ── Straight answers ── */}
+        <section className="bg-white px-6 py-16 sm:py-20">
+          <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-4">
+              <Reveal>
+                <h2 className="text-[2rem] font-semibold tracking-[-0.035em] sm:text-[2.4rem]">
+                  Straight answers.
+                </h2>
+                <p className="mt-4 max-w-sm text-[17px] leading-7 text-[#4a5b73]">
+                  The three questions every office asks, answered the way we would answer
+                  them on a call.
+                </p>
+              </Reveal>
+            </div>
+            <div className="lg:col-span-7 lg:col-start-6">
+              {ANSWERS.map((item, i) => (
+                <Reveal key={item.q} delay={i * 70}>
+                  <Answer question={item.q} answer={item.a} />
                 </Reveal>
               ))}
             </div>
-
           </div>
         </section>
 
-        {/* Straight answers */}
-        <section className="border-t border-white/10 px-6 py-24 sm:py-32">
-          <div className="mx-auto max-w-4xl">
-            {ANSWERS.map((item, i) => (
-              <Reveal key={item.q}>
-                <div
-                  className={`sm:grid sm:grid-cols-12 sm:gap-10 ${
-                    i === 0 ? '' : 'mt-12 border-t border-white/10 pt-12'
-                  }`}
-                >
-                  <h3 className="text-xl font-medium tracking-[-0.02em] sm:col-span-5">{item.q}</h3>
-                  <p className="mt-3 text-[17px] leading-8 text-white/65 sm:col-span-7 sm:mt-0">{item.a}</p>
+        {/* ── DSOs ── */}
+        <section className="relative overflow-hidden px-6 py-16 sm:py-20">
+          <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-5">
+              <Reveal>
+                <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#0b6bcb]">
+                  For DSOs
+                </p>
+                <h2 className="mt-4 text-[2rem] font-semibold tracking-[-0.035em] sm:text-[2.6rem]">
+                  Built around how your organization already runs.
+                </h2>
+                <p className="mt-5 text-[18px] leading-8 text-[#4a5b73]">
+                  Groups don't run on templates. We write software that fits your practice
+                  management system, your reporting, and your rollout schedule — one team,
+                  from the first conversation to the last office.
+                </p>
+                <div className="mt-8">
+                  <a
+                    href={`mailto:${contactEmail}`}
+                    className="summit-cta summit-cta-primary inline-flex items-center gap-2 rounded-full bg-[#0a1628] px-7 py-3.5 text-[17px] font-medium tracking-tight text-white"
+                  >
+                    Talk to us
+                    <ArrowRight className="summit-cta-arrow h-[17px] w-[17px]" />
+                  </a>
                 </div>
               </Reveal>
-            ))}
-          </div>
-        </section>
-
-        {/* DSOs */}
-        <section className="relative overflow-hidden px-6 py-28 sm:py-40">
-          <div
-            className="pointer-events-none absolute inset-0"
-            aria-hidden="true"
-            style={{
-              background:
-                'radial-gradient(ellipse 60% 50% at 50% 0%, rgba(56,189,248,0.14) 0%, transparent 70%)',
-            }}
-          />
-          <div className="relative mx-auto max-w-3xl text-center">
-            <Reveal>
-              <p className="text-[13px] font-medium uppercase tracking-[0.2em] text-sky-300/70">
-                For DSOs
-              </p>
-              <h2 className="mt-6 text-[2rem] font-semibold tracking-[-0.03em] sm:text-5xl">
-                We also build it your way.
-              </h2>
-              <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/60">
-                Groups don't run on templates. We write custom software around how your
-                organization actually works — your practice management system, your
-                reporting, your rollout across locations. One team, from the first
-                conversation to the last office.
-              </p>
-              <div className="mt-10">
-                <a
-                  href={`mailto:${contactEmail}`}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/30 px-8 py-4 text-[17px] font-medium tracking-tight text-white transition-colors duration-200 hover:border-white/70 hover:bg-white/5"
-                >
-                  Talk to us
-                </a>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
-        {/* Close */}
-        <section className="border-t border-white/10 px-6 py-28 text-center sm:py-40">
-          <Reveal>
-            <h2 className="text-[2.25rem] font-semibold tracking-[-0.035em] sm:text-6xl">
-              See it for yourself.
-            </h2>
-            <p className="mx-auto mt-5 max-w-xl text-lg text-white/65">
-              The full product, loaded with a working practice. Look around as long as you like.
-            </p>
-            <div className="mt-10">
-              <DemoButton />
             </div>
-          </Reveal>
+
+            <div className="lg:col-span-6 lg:col-start-7">
+              <Reveal delay={120}>
+                <DsoPanel />
+              </Reveal>
+            </div>
+          </div>
         </section>
       </main>
 
-      <footer className="border-t border-white/10 px-6 py-10">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-[13px] text-white/50 sm:flex-row">
-          <div className="flex items-center gap-2.5">
-            <img src={logoSrc} alt="" className="h-5 w-auto object-contain opacity-70" />
-            <span>Summit AI Services</span>
+      {/* ── Close and footer, on one dark band. Merging them saves a screen of
+             scrolling and gives the page a floor to land on. ── */}
+      <SiteFooter
+        logoSrc={logoSrc}
+        onNavigate={onNavigate}
+        top={
+          <Reveal className="text-center">
+            <h2 className="text-[2.25rem] font-semibold tracking-[-0.04em] sm:text-[3.4rem]">
+              See it for yourself.
+            </h2>
+            <p className="mx-auto mt-4 max-w-lg text-[18px] leading-8 text-white/60">
+              All {MODULE_COUNT} tools, loaded with a working practice. Look around as long as
+              you like.
+            </p>
+            <div className="mt-8">
+              <DemoButton href={demoHref} onClick={onDemoClick} tone="light" />
+            </div>
+          </Reveal>
+        }
+      />
+    </div>
+  );
+}
+
+/**
+ * Heading and standfirst side by side rather than stacked. It reads as one
+ * editorial line and costs about half the vertical space.
+ */
+function SectionHead({ title, body }: { title: string; body: string }) {
+  return (
+    <Reveal>
+      <div className="grid items-end gap-4 lg:grid-cols-12">
+        <h2 className="text-[2rem] font-semibold tracking-[-0.035em] sm:text-[2.6rem] lg:col-span-6">
+          {title}
+        </h2>
+        <p className="text-[17px] leading-7 text-[#4a5b73] lg:col-span-5 lg:col-start-8">{body}</p>
+      </div>
+    </Reveal>
+  );
+}
+
+/** One scrolling row of module names. Duplicated once so the loop is seamless. */
+function Ticker({ items, duration }: { items: string[]; duration: number }) {
+  const run = [...items, ...items];
+  return (
+    <div className="summit-marquee" style={{ ['--summit-dur' as string]: `${duration}s` }}>
+      {run.map((name, i) => (
+        <span key={`${name}-${i}`} className="flex items-center whitespace-nowrap">
+          <span className="px-5 text-[15px] tracking-tight text-[#5d6b80]">{name}</span>
+          <span className="h-1 w-1 rounded-full bg-[#0b6bcb]/25" />
+        </span>
+      ))}
+    </div>
+  );
+}
+
+/**
+ * The four moments. It advances on its own while it is on screen, pauses when
+ * the cursor is over it, and stops entirely once you pick a moment yourself —
+ * a carousel that keeps moving under your hand is an annoyance, not a feature.
+ */
+function Moments({
+  demoHref,
+  onDemoClick,
+  logoSrc,
+}: {
+  demoHref: string;
+  onDemoClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
+  logoSrc: string;
+}) {
+  const [ref, onScreen] = useOnScreen<HTMLDivElement>();
+  const [active, setActive] = useState(0);
+  // Which row has its paragraph expanded. Null until somebody clicks: the
+  // rotation moves the screen on the right, it does not open text under
+  // anyone. Only a click does that, and clicking the open row closes it.
+  const [open, setOpen] = useState<number | null>(null);
+  // `held` covers the cursor resting on the block and the keyboard being inside
+  // it. Advancing under someone who has tabbed in swaps the readout they are
+  // reading — the same interruption a hover pause exists to prevent.
+  const [held, setHeld] = useState(false);
+  const [taken, setTaken] = useState(false);
+  const hold = 8000;
+
+  useEffect(() => {
+    if (!onScreen || held || taken || prefersReducedMotion()) return;
+    const timer = window.setTimeout(() => setActive((i) => (i + 1) % MOMENTS.length), hold);
+    return () => window.clearTimeout(timer);
+  }, [onScreen, held, taken, active]);
+
+  const moment = MOMENTS[active];
+
+  return (
+    <section className="px-6 py-16 sm:py-20">
+      <div ref={ref} className="mx-auto max-w-6xl">
+        <SectionHead
+          title="Charting, scheduling, claims, and reporting."
+          body="Four parts of the practice where the work piles up. Pick one to see the screen your team would use."
+        />
+
+        <Reveal delay={100}>
+          <div
+            className="mt-12 grid items-start gap-12 lg:grid-cols-12"
+            onMouseEnter={() => setHeld(true)}
+            onMouseLeave={() => setHeld(false)}
+            onFocusCapture={() => setHeld(true)}
+            onBlurCapture={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget)) setHeld(false);
+            }}
+          >
+            {/* The list. Each row carries its own progress line. */}
+            <div className="lg:col-span-5">
+              {MOMENTS.map((item, i) => {
+                const isActive = i === active;
+                const isOpen = i === open;
+                return (
+                  <div
+                    key={item.id}
+                    data-active={isActive ? 'true' : 'false'}
+                    data-open={isOpen ? 'true' : 'false'}
+                    className="summit-acc summit-step border-t border-[#d8e1ed]"
+                    style={{ ['--summit-hold' as string]: `${hold}ms` }}
+                  >
+                    <button
+                      type="button"
+                      className="flex w-full items-start justify-between gap-6 py-4 text-left"
+                      aria-expanded={isOpen}
+                      aria-controls={`summit-moment-${item.id}`}
+                      onClick={() => {
+                        setActive(i);
+                        setTaken(true);
+                        setOpen((current) => (current === i ? null : i));
+                      }}
+                    >
+                      <span>
+                        <span
+                          className={`text-[12px] font-semibold uppercase tracking-[0.18em] ${
+                            isActive ? 'text-[#0b6bcb]' : 'text-[#5d6b80]'
+                          }`}
+                        >
+                          {item.label}
+                        </span>
+                        <span
+                          className={`mt-1.5 block text-[18px] font-medium leading-snug tracking-[-0.02em] transition-colors duration-500 ${
+                            isActive ? 'text-[#0a1628]' : 'text-[#5d6b80]'
+                          }`}
+                        >
+                          {item.title}
+                        </span>
+                      </span>
+                      {/* Nothing starts open now, so the row needs to say it can be
+                          opened. Same mark as the questions further down. */}
+                      <Plus className="summit-acc-mark summit-acc-mark-plus mt-4 h-4 w-4 shrink-0 text-[#8695ab]" />
+                    </button>
+
+                    <div id={`summit-moment-${item.id}`} className="summit-acc-body">
+                      <div>
+                        <p className="pb-4 text-[16px] leading-7 text-[#4a5b73]">{item.body}</p>
+                      </div>
+                    </div>
+
+                    <div className="h-0.5 w-full overflow-hidden">
+                      {/* The bar has to be held until the block is on screen. The
+                          CSS animation starts on mount, so without this it runs
+                          out while the section is still below the fold and leaves
+                          a filled blue line sitting under the first row. */}
+                      <div
+                        className="summit-step-bar h-0.5 rounded-full bg-[#0b6bcb]"
+                        style={{
+                          animationPlayState: onScreen && !held && !taken ? 'running' : 'paused',
+                        }}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+              <div className="border-t border-[#d8e1ed]" />
+            </div>
+
+            {/* The product itself. Redraws whenever the moment changes. */}
+            <div className="lg:col-span-7">
+              <DemoFrame view={moment.view} logoSrc={logoSrc} />
+              <div className="mt-5 flex flex-wrap items-center gap-2">
+                {moment.modules.map((name, i) => (
+                  <span
+                    key={name}
+                    className="summit-rise rounded-full border border-[#0b6bcb]/20 bg-[#eef5fd] px-3 py-1 text-[13px] font-medium tracking-tight text-[#0b6bcb]"
+                    style={{ animationDelay: `${120 + i * 80}ms` }}
+                  >
+                    {name}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-5">
+                <a
+                  href={demoHref}
+                  onClick={onDemoClick}
+                  className="summit-cta summit-cta-quiet inline-flex items-center gap-2 rounded-full border border-[#8695ab] bg-white px-5 py-2.5 text-[14px] font-medium text-[#0a1628] hover:border-[#0b6bcb]/45"
+                >
+                  See this in the demo
+                  <ArrowRight className="summit-cta-arrow h-3.5 w-3.5" />
+                </a>
+              </div>
+            </div>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-            <a href={`mailto:${contactEmail}`} className="transition-colors hover:text-white">
-              {contactEmail}
-            </a>
-          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/** The four things a group actually buys, as a lit card beside the pitch. */
+function DsoPanel() {
+  const spot = useSpotlight<HTMLDivElement>();
+
+  return (
+    <div
+      ref={spot.ref}
+      onPointerMove={spot.onPointerMove}
+      className="summit-spot overflow-hidden rounded-2xl border border-[#d8e1ed] bg-white p-8"
+    >
+      <ul className="relative divide-y divide-[#e6edf5]">
+        {DSO_POINTS.map(([name, note], i) => (
+          <li
+            key={name}
+            className="summit-rise flex gap-4 py-4 first:pt-0 last:pb-0"
+            style={{ animationDelay: `${120 + i * 90}ms` }}
+          >
+            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0b6bcb]" />
+            <span>
+              <span className="block text-[16px] font-medium tracking-tight text-[#0a1628]">
+                {name}
+              </span>
+              <span className="mt-0.5 block text-[15px] leading-6 text-[#5d6b80]">{note}</span>
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/** A question that opens. The mark rotates rather than swapping icons. */
+function Answer({
+  question,
+  answer,
+  defaultOpen = false,
+}: {
+  question: string;
+  answer: string;
+  defaultOpen?: boolean;
+}) {
+  const [open, setOpen] = useState(defaultOpen);
+  const id = useId();
+  const answerId = `${id}-answer`;
+
+  return (
+    <div
+      data-open={open ? 'true' : 'false'}
+      className="summit-acc border-t border-[#d0dbe9] last:border-b"
+    >
+      {/* The question is a heading as well as a control, so it shows up when
+          someone navigates this section by headings rather than by tabbing. */}
+      <h3>
+        <button
+          type="button"
+          className="flex w-full items-start justify-between gap-8 py-5 text-left"
+          aria-expanded={open}
+          aria-controls={answerId}
+          onClick={() => setOpen((was) => !was)}
+        >
+          <span className="text-[18px] font-medium tracking-[-0.02em] text-[#0a1628] sm:text-[20px]">
+            {question}
+          </span>
+          <Plus className="summit-acc-mark summit-acc-mark-plus mt-1 h-5 w-5 shrink-0 text-[#7b8aa0]" />
+        </button>
+      </h3>
+      <div id={answerId} className="summit-acc-body">
+        <div>
+          <p className="max-w-2xl pb-6 text-[17px] leading-8 text-[#4a5b73]">{answer}</p>
         </div>
-      </footer>
+      </div>
     </div>
   );
 }

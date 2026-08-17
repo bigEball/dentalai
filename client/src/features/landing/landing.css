@@ -2,8 +2,90 @@
    Plain CSS (no Tailwind directives) so this file can be dropped into any app
    alongside LandingPage.tsx.
 
+   PALETTE — light, on a tinted ground. Tailwind classes in the TSX use these
+   literals directly.
+     bar / footer  #0a1628      the two dark bands that bookend the page
+     page          #eef2f8      the default ground, not white
+     band          #ffffff      the lit sections, alternating with the ground
+     card          #ffffff      panels and readouts, which sit on the ground
+     ink           #0a1628      headings
+     body          #4a5b73      running text                     6.9:1 on white
+     muted         #5d6b80      labels, captions                 5.4:1 on white
+     quiet icon    #7b8aa0      icons that only indicate state   3.5:1 on white
+     hairline      #d8e1ed      dividers — decoration, exempt from 1.4.3
+     control edge  #8695ab      the outline button's boundary    3.0:1 on white
+     accent        #0b6bcb      eyebrows, arrows, hover states   5.3:1 on white
+     accent light  #8ec5f5      the same accent where it has to read on navy
+     hud line      #3d7ec4      the instrument's line-work
+     hud well      #0c1e35      the dark disc the mark sits in
+
+   Every text tone above clears WCAG 2.1 AA (4.5:1) against every ground it is
+   used on — white, the #eef2f8 page, and the #f6f9fd menu card. The muted tone
+   stays a step lighter than body text, so the hierarchy survives the floor.
+
+   The page is a tint rather than white so that white becomes a material: cards
+   and lit sections advance off the ground instead of dissolving into it.
+
+   Two rules hold the motion together:
+     1. One easing curve. Everything decelerates on the same cubic-bezier, so
+        separate animations read as one machine rather than a pile of effects.
+     2. Transform and opacity only. Nothing here animates layout, so the page
+        stays at frame rate on a laptop with twenty tabs open.
+
    `--summit-s` is written by JarvisCore on scroll: 0 while the mark is centred,
    easing toward 1 as it leaves the viewport. Layers open outward against it. */
+
+.summit-root {
+  --summit-accent: #0b6bcb;
+  --summit-hud: #3d7ec4;
+  --summit-focus: #0b6bcb;
+  --summit-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --summit-ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* Keyboard focus gets one consistent ring rather than the browser's default.
+   Solid, not a 55% tint: the tint measured 2.4:1 against white, under the 3:1
+   that 1.4.11 asks of a focus indicator. */
+.summit-root :focus-visible {
+  outline: 2px solid var(--summit-focus);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* The accent is nearly invisible on the two navy bands, so those swap in the
+   light accent — 9.9:1 there against 3.4:1 for the dark one. */
+.summit-header,
+.summit-footer {
+  --summit-focus: #8ec5f5;
+}
+
+/* First thing in the tab order, off-screen until it is focused. Without it the
+   only way past the header is 30-odd menu links. */
+.summit-skip {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 60;
+  border-radius: 9999px;
+  background: #ffffff;
+  padding: 0.625rem 1.25rem;
+  font-size: 14px;
+  font-weight: 500;
+  color: #0a1628;
+  box-shadow: 0 8px 24px -8px rgba(10, 22, 40, 0.55);
+  transform: translateY(calc(-100% - 1.5rem));
+  transition: transform 260ms var(--summit-ease);
+}
+
+.summit-skip:focus {
+  transform: none;
+}
+
+.summit-root ::selection {
+  background: rgba(11, 107, 203, 0.16);
+}
+
+/* ───────────────────────── keyframes ───────────────────────── */
 
 @keyframes summit-spin {
   from { transform: rotate(0deg); }
@@ -16,7 +98,7 @@
 }
 
 @keyframes summit-breathe {
-  0%, 100% { opacity: 0.55; }
+  0%, 100% { opacity: 0.5; }
   50% { opacity: 1; }
 }
 
@@ -26,12 +108,445 @@
 }
 
 @keyframes summit-core-arrive {
-  from { opacity: 0; transform: scale(0.92); }
+  from { opacity: 0; transform: scale(0.94); }
   to { opacity: 1; transform: scale(1); }
 }
 
+/* The headline. Each word lifts off its own baseline and resolves out of a
+   blur — the one place on the page where motion is allowed to be theatrical. */
+@keyframes summit-word-in {
+  from { opacity: 0; transform: translateY(0.5em) rotateX(-38deg); filter: blur(10px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+
+@keyframes summit-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes summit-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.8); }
+}
+
+@keyframes summit-halo {
+  0% { opacity: 0.5; transform: scale(1); }
+  70%, 100% { opacity: 0; transform: scale(2.6); }
+}
+
+@keyframes summit-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes summit-trace {
+  from { stroke-dashoffset: 240; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* ───────────────────────── reveal on scroll ───────────────────────── */
+
+/* Deliberately no blur here: a filter on a full section is expensive, and the
+   translate alone reads the same at this distance. `--summit-d` staggers a row
+   of siblings without a wrapper component. */
+.summit-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 850ms var(--summit-ease),
+    transform 850ms var(--summit-ease);
+  transition-delay: var(--summit-d, 0ms);
+  will-change: transform, opacity;
+}
+
+.summit-reveal.is-in {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+.summit-lines {
+  perspective: 900px;
+}
+
+.summit-word {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  animation: summit-word-in 1200ms var(--summit-ease) both;
+  animation-delay: var(--summit-d, 0ms);
+}
+
+.summit-rise {
+  animation: summit-rise 900ms var(--summit-ease) both;
+}
+
+/* ───────────────────────── page texture ───────────────────────── */
+
+/* A blueprint dot grid behind the hero. Faint enough that you read it as paper
+   texture rather than as a graphic. */
+.summit-grid {
+  background-image: radial-gradient(circle at 1px 1px, rgba(10, 22, 40, 0.07) 1px, transparent 0);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 20%, #000, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 20%, #000, transparent 75%);
+}
+
+/* The instrument dissolves into the page on its left edge, so the headline can
+   sit in front of it without a box around either. */
+.summit-hud-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.35) 20%, #000 48%);
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.35) 20%, #000 48%);
+}
+
+/* ───────────────────────── header ───────────────────────── */
+
+.summit-header {
+  transition:
+    background-color 500ms var(--summit-ease),
+    border-color 500ms var(--summit-ease),
+    box-shadow 500ms var(--summit-ease);
+}
+
+/* Reading progress. One hairline, scaled by scroll — no percentage counter, no
+   circle in the corner. */
+.summit-progress {
+  transform-origin: 0 50%;
+  transform: scaleX(var(--summit-p, 0));
+  transition: opacity 400ms ease;
+}
+
+.summit-navlink {
+  position: relative;
+  transition: color 240ms ease;
+}
+
+/* The lit underline slides between menu items instead of fading in under each
+   one, so moving across the nav feels like one object tracking the cursor. */
+.summit-indicator {
+  transition:
+    transform 520ms var(--summit-ease),
+    width 520ms var(--summit-ease),
+    opacity 260ms ease;
+}
+
+/* ───────────────────────── mega menu ───────────────────────── */
+
+.summit-scrim {
+  transition: opacity 500ms var(--summit-ease);
+}
+
+/* The card owns the height transition; the panels inside are stacked and
+   cross-faded. Switching menus therefore morphs one surface rather than
+   closing one box and opening another. */
+.summit-menu-card {
+  overflow: hidden;
+  transition:
+    height 540ms var(--summit-ease),
+    opacity 300ms var(--summit-ease),
+    transform 540ms var(--summit-ease);
+}
+
+.summit-menu-card[data-open='false'] {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.99);
+}
+
+.summit-menu-card[data-open='true'] {
+  opacity: 1;
+  transform: none;
+}
+
+/* `--dir` is -1 for panels sitting left of the open one and +1 for those to the
+   right, so the outgoing panel always leaves the way you came from. */
+.summit-menu-page {
+  opacity: 0;
+  transform: translateX(calc(var(--dir, 1) * 22px));
+  pointer-events: none;
+  transition:
+    opacity 320ms var(--summit-ease),
+    transform 460ms var(--summit-ease);
+}
+
+.summit-menu-page.is-active {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  transition-delay: 60ms;
+}
+
+/* Menu rows: a hairline grows down the left edge and the row steps toward it. */
+.summit-row {
+  position: relative;
+  transition: transform 420ms var(--summit-ease);
+}
+
+.summit-row::before {
+  content: '';
+  position: absolute;
+  left: -14px;
+  top: 50%;
+  width: 2px;
+  height: 0;
+  border-radius: 2px;
+  background: var(--summit-accent);
+  transform: translateY(-50%);
+  opacity: 0;
+  transition:
+    height 420ms var(--summit-ease),
+    opacity 300ms ease;
+}
+
+.summit-row:hover,
+.summit-row:focus-visible {
+  transform: translateX(4px);
+}
+
+.summit-row:hover::before,
+.summit-row:focus-visible::before {
+  height: 100%;
+  opacity: 1;
+}
+
+.summit-row-arrow {
+  opacity: 0;
+  transform: translateX(-6px);
+  transition:
+    opacity 320ms var(--summit-ease),
+    transform 420ms var(--summit-ease);
+}
+
+.summit-row:hover .summit-row-arrow,
+.summit-row:focus-visible .summit-row-arrow {
+  opacity: 1;
+  transform: none;
+}
+
+/* Mobile sheet.
+
+   `visibility` is what takes the closed sheet out of the tab order. Opacity
+   alone leaves its buttons focusable, so tabbing through a closed menu walked
+   the keyboard onto five invisible controls inside an `aria-hidden` container —
+   nothing to see, nothing announced, and no way to tell where focus had gone.
+   The 0s transition on a 400ms delay holds it visible until the fade finishes,
+   so closing still animates. */
+.summit-sheet {
+  transition:
+    opacity 400ms var(--summit-ease),
+    transform 500ms var(--summit-ease),
+    visibility 0s;
+}
+
+.summit-sheet[data-open='false'] {
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  visibility: hidden;
+  transition-delay: 0s, 0s, 400ms;
+}
+
+/* ───────────────────────── buttons ───────────────────────── */
+
+.summit-cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition:
+    transform 420ms var(--summit-ease),
+    box-shadow 500ms var(--summit-ease),
+    background-color 260ms ease,
+    border-color 260ms ease,
+    color 260ms ease;
+}
+
+.summit-cta:hover {
+  transform: translateY(-1px);
+}
+
+.summit-cta:active {
+  transform: translateY(0);
+  transition-duration: 90ms;
+}
+
+.summit-cta-primary {
+  box-shadow: 0 1px 2px rgba(10, 22, 40, 0.16), 0 8px 20px -10px rgba(10, 22, 40, 0.5);
+}
+
+.summit-cta-primary:hover {
+  box-shadow: 0 2px 4px rgba(10, 22, 40, 0.18), 0 18px 40px -14px rgba(11, 107, 203, 0.75);
+}
+
+/* A cool highlight tracks the cursor across the pill. It never fully arrives —
+   the gradient stays low so the button reads as lit, not animated. */
+.summit-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    130px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(11, 107, 203, 0.55),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 400ms var(--summit-ease);
+}
+
+.summit-cta:hover::before {
+  opacity: 1;
+}
+
+/* On the white outline button the same highlight has to be far weaker. */
+.summit-cta-quiet::before {
+  background: radial-gradient(
+    130px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(11, 107, 203, 0.1),
+    transparent 70%
+  );
+}
+
+.summit-cta-arrow {
+  transition: transform 420ms var(--summit-ease);
+}
+
+.summit-cta:hover .summit-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* ───────────────────────── surfaces ───────────────────────── */
+
+/* Cursor-lit card. One radial layer plus a shadow that deepens on approach. */
+.summit-spot {
+  position: relative;
+  box-shadow: 0 1px 2px rgba(10, 22, 40, 0.04), 0 12px 32px -18px rgba(10, 22, 40, 0.28);
+  transition:
+    border-color 450ms var(--summit-ease),
+    box-shadow 500ms var(--summit-ease),
+    transform 500ms var(--summit-ease);
+}
+
+.summit-spot:hover {
+  border-color: rgba(11, 107, 203, 0.28);
+  box-shadow: 0 2px 4px rgba(10, 22, 40, 0.05), 0 24px 60px -24px rgba(10, 22, 40, 0.3);
+}
+
+.summit-spot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    360px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(11, 107, 203, 0.08),
+    transparent 66%
+  );
+  opacity: 0;
+  transition: opacity 450ms var(--summit-ease);
+  pointer-events: none;
+}
+
+.summit-spot:hover::before {
+  opacity: 1;
+}
+
+.summit-dot {
+  animation: summit-dot 2.6s ease-in-out infinite;
+}
+
+.summit-halo {
+  animation: summit-halo 2.6s ease-out infinite;
+}
+
+/* ───────────────────────── marquee ───────────────────────── */
+
+/* Long fades at both ends. Anything shorter and a name is half-visible at the
+   edge, which reads as clipping rather than as a scroll. */
+.summit-marquee-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 20%, #000 80%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 20%, #000 80%, transparent);
+}
+
+.summit-marquee {
+  display: flex;
+  width: max-content;
+  animation: summit-marquee var(--summit-dur, 70s) linear infinite;
+  will-change: transform;
+}
+
+.summit-marquee-mask:hover .summit-marquee {
+  animation-play-state: paused;
+}
+
+/* ───────────────────────── accordion ───────────────────────── */
+
+/* 0fr → 1fr animates to the content's real height with no measuring code. */
+.summit-acc-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 520ms var(--summit-ease),
+    opacity 340ms var(--summit-ease);
+}
+
+.summit-acc-body > div {
+  overflow: hidden;
+}
+
+.summit-acc[data-open='true'] .summit-acc-body {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.summit-acc-mark {
+  transition: transform 500ms var(--summit-ease), color 280ms ease;
+}
+
+.summit-acc[data-open='true'] .summit-acc-mark {
+  transform: rotate(180deg);
+}
+
+/* A plus has to travel 45° to become a close mark, not 180°. */
+.summit-acc[data-open='true'] .summit-acc-mark-plus {
+  transform: rotate(45deg);
+  color: var(--summit-accent);
+}
+
+/* ───────────────────────── product stepper ───────────────────────── */
+
+.summit-step {
+  transition:
+    color 320ms var(--summit-ease),
+    opacity 320ms var(--summit-ease);
+}
+
+.summit-step-bar {
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+}
+
+.summit-step[data-active='true'] .summit-step-bar {
+  animation: summit-fill var(--summit-hold, 7s) linear both;
+}
+
+.summit-step-panel {
+  animation: summit-rise 700ms var(--summit-ease) both;
+}
+
+.summit-trace {
+  stroke-dasharray: 240;
+  animation: summit-trace 1500ms var(--summit-ease) both;
+}
+
+/* ───────────────────────── the HUD ───────────────────────── */
+
 .summit-core {
-  animation: summit-core-arrive 1300ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: summit-core-arrive 1400ms var(--summit-ease) both;
+}
+
+/* The mark drifts a few pixels toward the cursor. Lerped in JS, so the value
+   here is already smoothed — no transition, or it would smooth twice. */
+.summit-parallax {
+  transform: translate3d(var(--summit-px, 0px), var(--summit-py, 0px), 0);
 }
 
 /* Continuous rotation. Slow — the display idles, it doesn't spin. */
@@ -41,14 +556,13 @@
 .summit-rev-110  { transform-origin: 50% 50%; animation: summit-spin-reverse 110s linear infinite; }
 .summit-rev-70   { transform-origin: 50% 50%; animation: summit-spin-reverse 70s linear infinite; }
 
-.summit-sweep { animation: summit-spin 14s linear infinite; }
+.summit-sweep { animation: summit-spin 16s linear infinite; }
 .summit-breathe { animation: summit-breathe 6s ease-in-out infinite; }
-.summit-rise { animation: summit-rise 900ms cubic-bezier(0.16, 1, 0.3, 1) both; }
 
 /* Scroll-driven layers. Each wraps a continuously animating group, so the two
    transforms compose instead of fighting over one element. */
 .summit-drift {
-  transform: translateY(calc(var(--summit-s, 0) * -42px)) scale(calc(1 - var(--summit-s, 0) * 0.05));
+  transform: translateY(calc(var(--summit-s, 0) * -38px)) scale(calc(1 - var(--summit-s, 0) * 0.05));
   will-change: transform;
 }
 
@@ -79,23 +593,18 @@
   opacity: calc(1 - var(--summit-s, 0) * 0.7);
 }
 
+/* The mark keeps its cold glow because it sits on the one dark surface on the
+   page — the well at the centre of the instrument. */
 .summit-tooth {
   filter:
-    drop-shadow(0 0 30px rgba(125, 211, 252, 0.45))
-    drop-shadow(0 18px 40px rgba(0, 0, 0, 0.65));
+    drop-shadow(0 0 26px rgba(125, 211, 252, 0.5))
+    drop-shadow(0 14px 30px rgba(4, 12, 24, 0.7));
 }
 
-/* A fine, unobtrusive scanline texture over the dark sections. */
-.summit-scanlines {
-  background-image: repeating-linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.035) 0px,
-    rgba(255, 255, 255, 0.035) 1px,
-    transparent 1px,
-    transparent 4px
-  );
-}
+/* ───────────────────────── reduced motion ───────────────────────── */
 
+/* Everything above is decoration. Under this query the page still works, it
+   just holds still: content is visible, menus open, nothing moves on its own. */
 @media (prefers-reduced-motion: reduce) {
   .summit-core,
   .summit-spin-120,
@@ -105,11 +614,24 @@
   .summit-rev-70,
   .summit-sweep,
   .summit-breathe,
-  .summit-rise {
+  .summit-rise,
+  .summit-word,
+  .summit-marquee,
+  .summit-dot,
+  .summit-halo,
+  .summit-step-panel,
+  .summit-trace,
+  .summit-step[data-active='true'] .summit-step-bar {
     animation: none !important;
   }
 
+  .summit-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
   .summit-drift,
+  .summit-parallax,
   .summit-scroll-out,
   .summit-scroll-a,
   .summit-scroll-b,
@@ -117,5 +639,41 @@
   .summit-frame {
     transform: none !important;
     opacity: 1 !important;
+  }
+
+  .summit-menu-card,
+  .summit-menu-page,
+  .summit-row,
+  .summit-row-arrow,
+  .summit-cta,
+  .summit-cta-arrow,
+  .summit-cta::before,
+  .summit-indicator,
+  .summit-acc-body,
+  .summit-acc-mark,
+  .summit-sheet,
+  .summit-scrim,
+  .summit-skip,
+  .summit-spot,
+  .summit-spot::before,
+  .summit-progress {
+    transition-duration: 1ms !important;
+  }
+
+  /* The sheet's delayed visibility flip exists to let a 400ms fade finish.
+     With the fade gone there is nothing to wait for. */
+  .summit-sheet[data-open='false'] {
+    transition-delay: 0s !important;
+  }
+
+  .summit-word,
+  .summit-step-panel {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .summit-step[data-active='true'] .summit-step-bar {
+    transform: scaleX(1);
   }
 }

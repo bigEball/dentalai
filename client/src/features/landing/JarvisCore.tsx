@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useId, useRef } from 'react';
 
 /**
  * JarvisCore — the crowned-tooth mark inside a quiet heads-up display.
@@ -7,9 +7,13 @@ import { useEffect, useRef } from 'react';
  * canvas, no libraries. Layers run outside-in, each at its own slow rate, and
  * scroll position feeds a `--summit-s` variable (0 → 1) that the display opens
  * up against.
+ *
+ * On a white page the line-work is a mid blue at low opacity, and the mark sits
+ * in a dark well at the centre — the one dark surface on the page. Without it
+ * the mark, which is a white tooth, would disappear into the paper.
  */
 
-const ICE = '#7dd3fc';
+const LINE = '#3d7ec4';
 
 /** Polar → cartesian on a 400×400 canvas, 0° at twelve o'clock. */
 function polar(radius: number, degrees: number) {
@@ -27,7 +31,7 @@ function Arc({
   start = 0,
   width = 1,
   opacity = 0.5,
-  color = ICE,
+  color = LINE,
 }: {
   radius: number;
   pct: number;
@@ -56,8 +60,18 @@ function Arc({
 const TICKS = Array.from({ length: 60 }, (_, i) => i * 6);
 const CARDINALS = [0, 90, 180, 270];
 
-export default function JarvisCore({ logoSrc = '/logo-mark.png' }: { logoSrc?: string }) {
+export default function JarvisCore({
+  logoSrc = '/logo-mark.png',
+  className = 'w-[min(92vw,600px)]',
+}: {
+  logoSrc?: string;
+  /** Width of the square. The parent decides how big the instrument reads. */
+  className?: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
+  const uid = useId().replace(/:/g, '');
+  const wellId = `summit-well-${uid}`;
+  const haloId = `summit-halo-${uid}`;
 
   // Scroll drives `--summit-s`, smoothed so the display eases rather than snaps.
   useEffect(() => {
@@ -106,17 +120,14 @@ export default function JarvisCore({ logoSrc = '/logo-mark.png' }: { logoSrc?: s
   }, []);
 
   return (
-    <div
-      ref={ref}
-      className="summit-core summit-drift relative aspect-square w-full max-w-[min(92vw,600px)]"
-    >
-      {/* Cold light behind the assembly. */}
+    <div ref={ref} className={`summit-core summit-drift relative aspect-square ${className}`}>
+      {/* Cool light behind the assembly. Faint on paper — it is a tint, not a glow. */}
       <div
         className="summit-breathe absolute inset-0 rounded-full"
         aria-hidden="true"
         style={{
           background:
-            'radial-gradient(circle at 50% 50%, rgba(56,189,248,0.24) 0%, rgba(56,189,248,0.08) 40%, transparent 66%)',
+            'radial-gradient(circle at 50% 50%, rgba(11,107,203,0.10) 0%, rgba(11,107,203,0.04) 42%, transparent 68%)',
         }}
       />
 
@@ -126,7 +137,7 @@ export default function JarvisCore({ logoSrc = '/logo-mark.png' }: { logoSrc?: s
         aria-hidden="true"
         style={{
           background:
-            'conic-gradient(from 0deg, rgba(125,211,252,0.24) 0deg, rgba(125,211,252,0.06) 30deg, transparent 66deg, transparent 360deg)',
+            'conic-gradient(from 0deg, rgba(11,107,203,0.16) 0deg, rgba(11,107,203,0.05) 30deg, transparent 66deg, transparent 360deg)',
           WebkitMaskImage: 'radial-gradient(circle, transparent 42%, #000 56%, #000 96%, transparent 100%)',
           maskImage: 'radial-gradient(circle, transparent 42%, #000 56%, #000 96%, transparent 100%)',
         }}
@@ -134,15 +145,24 @@ export default function JarvisCore({ logoSrc = '/logo-mark.png' }: { logoSrc?: s
 
       <svg viewBox="0 0 400 400" className="absolute inset-0 h-full w-full" aria-hidden="true">
         <defs>
-          <radialGradient id="summit-well">
-            <stop offset="0%" stopColor="#bae6fd" stopOpacity={0.16} />
-            <stop offset="70%" stopColor="#38bdf8" stopOpacity={0.07} />
-            <stop offset="100%" stopColor="#38bdf8" stopOpacity={0} />
+          {/* The well: a dark disc, so the white mark has something to sit on.
+              The id is per-instance — the page renders this component twice
+              (desktop and mobile) and duplicate SVG ids resolve to whichever
+              comes first in the document. */}
+          <radialGradient id={wellId}>
+            <stop offset="0%" stopColor="#1b3b5c" />
+            <stop offset="70%" stopColor="#102743" />
+            <stop offset="100%" stopColor="#0c1e35" />
+          </radialGradient>
+          <radialGradient id={haloId}>
+            <stop offset="60%" stopColor="#0b6bcb" stopOpacity={0} />
+            <stop offset="88%" stopColor="#0b6bcb" stopOpacity={0.16} />
+            <stop offset="100%" stopColor="#0b6bcb" stopOpacity={0} />
           </radialGradient>
         </defs>
 
         {/* Frame corners. They pull apart as the page scrolls. */}
-        <g className="summit-frame" stroke={ICE} strokeOpacity={0.38} strokeWidth={1.1} fill="none">
+        <g className="summit-frame" stroke={LINE} strokeOpacity={0.38} strokeWidth={1.1} fill="none">
           {[
             'M6 34 L6 6 L34 6',
             'M366 6 L394 6 L394 34',
@@ -155,14 +175,14 @@ export default function JarvisCore({ logoSrc = '/logo-mark.png' }: { logoSrc?: s
 
         {/* Outer rim. */}
         <g className="summit-scroll-out">
-          <circle cx={200} cy={200} r={188} fill="none" stroke={ICE} strokeWidth={0.6} strokeOpacity={0.26} />
+          <circle cx={200} cy={200} r={188} fill="none" stroke={LINE} strokeWidth={0.6} strokeOpacity={0.26} />
           <g className="summit-spin-120">
             <circle
               cx={200}
               cy={200}
               r={181}
               fill="none"
-              stroke={ICE}
+              stroke={LINE}
               strokeWidth={0.7}
               strokeOpacity={0.34}
               pathLength={100}
@@ -185,7 +205,7 @@ export default function JarvisCore({ logoSrc = '/logo-mark.png' }: { logoSrc?: s
                   y1={outer.y}
                   x2={inner.x}
                   y2={inner.y}
-                  stroke={ICE}
+                  stroke={LINE}
                   strokeWidth={major ? 1.1 : 0.6}
                   strokeOpacity={major ? 0.6 : 0.26}
                 />
@@ -198,7 +218,7 @@ export default function JarvisCore({ logoSrc = '/logo-mark.png' }: { logoSrc?: s
                   key={angle}
                   x={p.x}
                   y={p.y}
-                  fill={ICE}
+                  fill={LINE}
                   fillOpacity={0.45}
                   fontSize={7}
                   letterSpacing={1.2}
@@ -220,7 +240,7 @@ export default function JarvisCore({ logoSrc = '/logo-mark.png' }: { logoSrc?: s
             <Arc radius={136} pct={28} start={52} width={1.8} opacity={0.42} />
             {(() => {
               const head = polar(136, 90 + 24 * 3.6);
-              return <circle cx={head.x} cy={head.y} r={2.2} fill="#e0f2fe" fillOpacity={0.8} />;
+              return <circle cx={head.x} cy={head.y} r={2.4} fill="#0b6bcb" fillOpacity={0.85} />;
             })()}
           </g>
         </g>
@@ -228,11 +248,11 @@ export default function JarvisCore({ logoSrc = '/logo-mark.png' }: { logoSrc?: s
         {/* One quiet traveller. */}
         <g className="summit-scroll-c">
           <g className="summit-spin-24">
-            <Arc radius={124} pct={4} start={0} width={1.8} opacity={0.55} color="#e0f2fe" />
-            <Arc radius={124} pct={9} start={-11} width={1.3} opacity={0.16} />
+            <Arc radius={124} pct={4} start={0} width={1.8} opacity={0.8} color="#0b6bcb" />
+            <Arc radius={124} pct={9} start={-11} width={1.3} opacity={0.2} />
             {(() => {
               const head = polar(124, 90 + 4 * 3.6);
-              return <circle cx={head.x} cy={head.y} r={2.4} fill="#fff" fillOpacity={0.75} />;
+              return <circle cx={head.x} cy={head.y} r={2.6} fill="#0b6bcb" />;
             })()}
           </g>
         </g>
@@ -248,7 +268,7 @@ export default function JarvisCore({ logoSrc = '/logo-mark.png' }: { logoSrc?: s
                 })
                 .join(' ')}
               fill="none"
-              stroke={ICE}
+              stroke={LINE}
               strokeWidth={0.9}
               strokeOpacity={0.28}
               strokeDasharray="16 9"
@@ -256,17 +276,20 @@ export default function JarvisCore({ logoSrc = '/logo-mark.png' }: { logoSrc?: s
           </g>
         </g>
 
-        {/* Containment rings, and a lit well the mark sits in. Nothing crosses it. */}
-        <circle cx={200} cy={200} r={95} fill="url(#summit-well)" />
-        <circle cx={200} cy={200} r={95} fill="none" stroke={ICE} strokeWidth={1} strokeOpacity={0.4} />
-        <circle cx={200} cy={200} r={88} fill="none" stroke="#ffffff" strokeWidth={0.4} strokeOpacity={0.16} />
+        {/* The well the mark sits in. Nothing crosses it. Kept small enough to
+            read as a lens in the middle of the instrument rather than as a
+            black disc dropped on the page. */}
+        <circle cx={200} cy={200} r={104} fill={`url(#${haloId})`} />
+        <circle cx={200} cy={200} r={76} fill={`url(#${wellId})`} />
+        <circle cx={200} cy={200} r={76} fill="none" stroke="#0b6bcb" strokeWidth={1.2} strokeOpacity={0.45} />
+        <circle cx={200} cy={200} r={70} fill="none" stroke="#ffffff" strokeWidth={0.5} strokeOpacity={0.16} />
 
         {/* Crosshair spurs. */}
         {[0, 90, 180, 270].map((angle) => {
-          const a = polar(101, angle);
-          const b = polar(90, angle);
+          const a = polar(90, angle);
+          const b = polar(80, angle);
           return (
-            <line key={angle} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={ICE} strokeWidth={1} strokeOpacity={0.6} />
+            <line key={angle} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={LINE} strokeWidth={1} strokeOpacity={0.6} />
           );
         })}
       </svg>
@@ -275,8 +298,8 @@ export default function JarvisCore({ logoSrc = '/logo-mark.png' }: { logoSrc?: s
       <div className="absolute inset-0 flex items-center justify-center">
         <img
           src={logoSrc}
-          alt="Summit AI Services"
-          className="summit-tooth h-[38%] w-auto select-none object-contain"
+          alt="Summit Tech"
+          className="summit-tooth h-[29%] w-auto select-none object-contain"
           draggable={false}
         />
       </div>

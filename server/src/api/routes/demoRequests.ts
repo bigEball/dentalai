@@ -17,6 +17,12 @@ interface DemoRequest {
   providers: string;
   source: string;
   message: string;
+  /**
+   * Whether the sender ticked the SMS opt-in box. The published privacy policy
+   * promises timestamped records of every opt-in action, and `submittedAt` is
+   * that timestamp — so this has to be stored, not just read off the request.
+   */
+  smsConsent: boolean;
   submittedAt: string;
 }
 
@@ -37,7 +43,8 @@ function saveRequests(requests: DemoRequest[]): void {
 
 // POST /api/v1/demo-requests — submit a demo booking request
 router.post('/', (req: Request, res: Response) => {
-  const { name, email, practice, phone, locations, providers, source, message } = req.body as Partial<DemoRequest>;
+  const { name, email, practice, phone, locations, providers, source, message, smsConsent } =
+    req.body as Partial<DemoRequest>;
 
   if (!name || !email || !practice) {
     res.status(400).json({ error: 'name, email, and practice are required' });
@@ -54,6 +61,7 @@ router.post('/', (req: Request, res: Response) => {
     providers: providers ? String(providers) : '',
     source: source ? String(source) : '',
     message: message ? String(message).trim() : '',
+    smsConsent: smsConsent === true,
     submittedAt: new Date().toISOString(),
   };
 

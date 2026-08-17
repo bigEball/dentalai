@@ -1,0 +1,58 @@
+# Summit Tech — https://summitaisoftware.com
+#
+# The site is a single-page app: every URL below is served the same
+# index.html and only differs once JavaScript has run. The application
+# screens are behind a sign-in and hold nothing a search result should ever
+# land on, so they are closed off here rather than left to burn crawl budget
+# on 28 URLs that render an identical empty shell to a crawler.
+
+User-agent: *
+Allow: /
+
+# Not public: a sign-in form, a confirmation screen, and the demo preview.
+Disallow: /login
+Disallow: /demo/
+Disallow: /thank-you
+Disallow: /ai-assistant
+Disallow: /ai-assistant-preview
+
+# Application screens, all of them behind RequireAuth.
+Disallow: /dashboard
+Disallow: /patients
+Disallow: /notes
+Disallow: /insurance
+Disallow: /billing
+Disallow: /recall
+Disallow: /treatment-plans
+Disallow: /reports
+Disallow: /communications
+Disallow: /preauth
+Disallow: /payment-plans
+Disallow: /forms
+Disallow: /follow-ups
+Disallow: /referrals
+Disallow: /inventory
+Disallow: /perio
+Disallow: /patient-scores
+Disallow: /claim-scrubber
+Disallow: /patient-retention
+Disallow: /morning-huddle
+Disallow: /nurture-sequences
+Disallow: /fee-optimizer
+Disallow: /smart-scheduling
+Disallow: /procurement
+Disallow: /decision-support
+Disallow: /compliance
+Disallow: /tools
+Disallow: /settings
+
+# The answer-engine crawlers — GPTBot, OAI-SearchBot, ClaudeBot,
+# PerplexityBot, Google-Extended, Applebot-Extended — are deliberately left
+# to the group above, which allows them the public pages and closes the same
+# application screens. They are not given groups of their own on purpose: a
+# named group replaces the wildcard rather than adding to it, so spelling one
+# out per crawler would hand each of them the 28 URLs just disallowed.
+# Getting quoted by these is the point of llms.txt and the JSON-LD in the
+# page head. Blocking any of them is a business decision, not a default.
+
+Sitemap: https://summitaisoftware.com/sitemap.xml

@@ -1,0 +1,89 @@
+# Summit Tech
+
+> AI software for dental practices that runs on top of OpenDental, does the
+> clinical notes, front desk work and insurance claims a team would otherwise
+> do by hand, and writes the results back into the chart. OpenDental stays the
+> system of record.
+
+Summit Tech is a product of SUMMIT TECH LLC, based in Salt Lake City, Utah.
+It is sold to individual dental practices and to the groups and DSOs that
+run several locations.
+
+This file exists because the site is a client-rendered single-page app: a
+crawler that does not execute JavaScript sees an empty document at every URL.
+Everything below is a plain-text restatement of what those pages say, so it
+has to be corrected whenever the pages themselves change.
+
+## What it does
+
+Summit Tech is a layer over the practice management system an office already
+runs on, not a replacement for it. It reads the chart, does work against it,
+and writes the result back. The product covers 26 modules in four groups:
+
+- Clinical: AI Notes, Perio Chart, Treatment Plans, Clinical Decision Support,
+  Patients, Patient Scores
+- Front desk: Smart Scheduling, Recall, Patient Forms, Communications,
+  Follow-Ups, Referrals, Treatment Follow-Up
+- Billing: Insurance, Claim Reviewer, Billing, Payment Plans, Fee Optimizer,
+  Patient Retention
+- Operations: Dashboard, Morning Huddle, Reports, Inventory, Procurement
+  Intelligence, Compliance Autopilot, Settings
+
+Named mechanisms: SOAP note generation, a signed attestation trail, two-way
+OpenDental writeback, churn scoring, PPO analytics, write-off recapture, a
+jurisdiction-aware regulatory checklist, and sterilizer logs.
+
+## Integrations
+
+OpenDental is the only practice management system Summit Tech currently
+claims support for. Other systems are handled as custom work rather than as
+shipped integrations.
+
+## Compliance
+
+Compliance Autopilot tracks HIPAA, OSHA and state-law obligations, dated and
+filed. The website targets WCAG 2.1 Level AA; the accessibility statement
+lists what has been tested and what is known not to conform yet.
+
+## Common questions
+
+**What if it doesn't do something we need?**
+Then Summit Tech builds that part. Writing custom software for groups is a
+large part of what the company does — the software should fit how the office
+already runs, not the other way around.
+
+**What does it cost?**
+Pricing is not published. It depends on the number of providers, the number
+of locations, and how much of the product is rolled out. Numbers are worked
+through on a call once the scope is known, rather than shown as a table that
+turns out to be wrong.
+
+**How does it start?**
+Look at the demo first — it needs no signup and nothing to install. Then
+describe how the office actually works, and Summit Tech shows what maps to
+existing modules and what would be built.
+
+**Who is it for?**
+Individual dental practices, and multi-location groups and DSOs. For groups
+it covers custom builds, working with the system already in use, rollout
+across locations, and roll-up reporting for the organization.
+
+## Pages
+
+- [Home](https://summitaisoftware.com/): what the product does, all 26 tools,
+  a four-step walkthrough from the operatory to month-end, and the demo.
+- [Services](https://summitaisoftware.com/services): every module and what
+  each one does.
+- [About](https://summitaisoftware.com/about): the company, how the software
+  is built, and the practices it fits.
+- [Contact](https://summitaisoftware.com/contact): demo requests and rollout
+  enquiries.
+- [Privacy Policy](https://summitaisoftware.com/privacy)
+- [Terms of Service](https://summitaisoftware.com/terms)
+- [Accessibility Statement](https://summitaisoftware.com/accessibility)
+
+## Contact
+
+- Email: contact@summitaisoftware.com
+- Phone: +1 435-900-8455
+- Address: 1255 E 200 S, Apt 9, Salt Lake City, UT 84102
