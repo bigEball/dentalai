@@ -259,7 +259,7 @@ const TOOLS: Tool[] = [
 const ADD_ON_TOOLS: Tool[] = [
   {
     label: 'AI Assistant',
-    description: 'Beta employee chatbot preview for Open Dental guidance and Summit AI Services workflow support. Paid add-on, not included in any package.',
+    description: 'Beta employee chatbot preview for Open Dental guidance and Summit Tech workflow support. Paid add-on, not included in any package.',
     icon: Bot,
     route: '/ai-assistant-preview',
     category: 'ai',

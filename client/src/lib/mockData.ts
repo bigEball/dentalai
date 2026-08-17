@@ -119,7 +119,7 @@ const RECALL_TASKS = [
     contactAttempts: 0,
     lastContactDate: null,
     status: 'pending',
-    suggestedMessage: 'Hi Margaret, this is Summit Dental. You are due for your 6-month hygiene visit. We have openings this week if you would like to schedule your cleaning and check-up.',
+    suggestedMessage: 'Hi Margaret, this is Summit Demo Practice. You are due for your 6-month hygiene visit. We have openings this week if you would like to schedule your cleaning and check-up.',
     patient: pt(0),
   },
   {
@@ -203,7 +203,7 @@ const COMMUNICATIONS = [
   { id: 'cmm-004', patientId: 'pat-007', channel: 'phone', direction: 'outbound', subject: 'Pre-auth follow-up', body: 'Left voicemail — called regarding denied claim on 03/15 exam, need to discuss coverage lapse.', timestamp: '2026-04-12T11:15:00Z', status: 'logged', patient: pt(6) },
   { id: 'cmm-005', patientId: 'pat-005', channel: 'sms', direction: 'outbound', subject: null, body: 'Hi Linda — just a reminder your crown seat appointment is tomorrow at 10am. Please arrive 10 minutes early.', timestamp: '2026-04-19T16:00:00Z', status: 'delivered', patient: pt(4) },
   { id: 'cmm-006', patientId: 'pat-008', channel: 'portal', direction: 'inbound', subject: 'Question about x-rays', body: 'Do I need a new set of x-rays at my appointment next week? My last ones were in October.', timestamp: '2026-04-15T20:10:00Z', status: 'unread', patient: pt(7) },
-  { id: 'cmm-007', patientId: 'pat-010', channel: 'email', direction: 'outbound', subject: 'Thanks for visiting us', body: 'Hi Carlos, thanks for visiting Summit Dental today. If you have any questions about your treatment plan, just reply to this email.', timestamp: '2026-04-12T17:30:00Z', status: 'opened', patient: pt(9) },
+  { id: 'cmm-007', patientId: 'pat-010', channel: 'email', direction: 'outbound', subject: 'Thanks for visiting us', body: 'Hi Carlos, thanks for visiting Summit Demo Practice today. If you have any questions about your treatment plan, just reply to this email.', timestamp: '2026-04-12T17:30:00Z', status: 'opened', patient: pt(9) },
   { id: 'cmm-008', patientId: 'pat-011', channel: 'sms', direction: 'outbound', subject: null, body: 'Hi Emily — your balance of $1,450 is 52 days past due. We offer payment plans — please call us at (312) 555-0100.', timestamp: '2026-04-01T10:00:00Z', status: 'delivered', patient: pt(10) },
 ];
 

@@ -286,7 +286,7 @@ export default function TreatmentPlansPage() {
       const itemCount = sendPlan.items?.length ?? 0;
       const fakeLink = `https://summitaisoftware.com/treatment-plans/view/demo-${sendPlan.id}`;
       const fakeMsg =
-        `Hi ${patientFirst}! 😊 Summit AI Services here. Your dentist has prepared a treatment plan for you — ` +
+        `Hi ${patientFirst}! 😊 Summit Tech here. Your dentist has prepared a treatment plan for you — ` +
         `"${sendPlan.title}" with ${itemCount} procedure${itemCount !== 1 ? 's' : ''} ` +
         `(estimated patient cost: ${formatCurrency(sendPlan.patientEst)}).\n\n` +
         `Review it here: ${fakeLink}\n\n` +
@@ -693,7 +693,7 @@ export default function TreatmentPlansPage() {
                 Text message preview
               </p>
               <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-100 text-sm text-gray-700 leading-relaxed whitespace-pre-line">
-                Hi {sendPlan.patient?.firstName}! 😊 Summit AI Services here. Your dentist has prepared a treatment plan for you — "{sendPlan.title}" with {sendPlan.items?.length ?? 0} procedure{(sendPlan.items?.length ?? 0) !== 1 ? 's' : ''} (estimated patient cost: {formatCurrency(sendPlan.patientEst)}).
+                Hi {sendPlan.patient?.firstName}! 😊 Summit Tech here. Your dentist has prepared a treatment plan for you — "{sendPlan.title}" with {sendPlan.items?.length ?? 0} procedure{(sendPlan.items?.length ?? 0) !== 1 ? 's' : ''} (estimated patient cost: {formatCurrency(sendPlan.patientEst)}).
                 {'\n\n'}
                 <span className="text-indigo-600 underline">https://summitaisoftware.com/treatment-plans/view/...</span>
                 {'\n\n'}

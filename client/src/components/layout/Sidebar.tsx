@@ -170,12 +170,14 @@ export default function Sidebar() {
       <div className="px-5 py-5 border-b border-white/5">
         <div className="flex items-center gap-2.5">
           <img
-            src="/logo.png"
-            alt="Summit AI Services"
+            src="/logo-icon.jpg"
+            alt="Summit Tech"
+            width={36}
+            height={36}
             className="h-9 w-9 rounded-lg object-cover flex-shrink-0"
           />
           <div>
-            <p className="text-sm font-semibold text-white leading-none">Summit AI Services</p>
+            <p className="text-sm font-semibold text-white leading-none">Summit Tech</p>
             <p className="text-[10px] text-gray-500 mt-0.5">AI Operations Layer</p>
           </div>
         </div>

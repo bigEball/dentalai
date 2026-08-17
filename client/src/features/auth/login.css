@@ -1,0 +1,465 @@
+/* Sign-in — the dark counterpart to the landing page.
+   The landing page is light on a tinted ground; this is the inverse, a night
+   sky the product's instrument hangs in. Everything here is generated: layered
+   gradients, one inline SVG grain tile, and the rings drawn in LoginPage.tsx.
+   No image requests beyond the logo, so the page paints on the first frame.
+
+   PALETTE
+     void        #05080f    the floor of the sky
+     deep        #0a1020    the ground the card sits against
+     azure       #38bdf8    the cold accent — rings, focus, the grid
+     indigo      #6366f1    the warm accent — glows, the button
+     violet      #a855f7    the third aurora, used sparingly
+
+   Two rules, borrowed from landing.css so the two pages read as one machine:
+     1. One easing curve on everything that decelerates.
+     2. Transform and opacity only — nothing here animates layout or paint, so
+        the whole stage stays on the compositor. */
+
+.login-root {
+  --login-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --login-azure: #38bdf8;
+  --login-indigo: #6366f1;
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: #05080f;
+  isolation: isolate;
+}
+
+.login-root :focus-visible {
+  outline: 2px solid var(--login-azure);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+.login-root ::selection {
+  background: rgba(56, 189, 248, 0.28);
+}
+
+/* Every backdrop layer shares this: pinned, inert, behind the form. */
+.login-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ───────────────────────── aurora ─────────────────────────
+   Three blurred blobs on long, mutually-prime durations, so the composite
+   never visibly repeats. They are the only source of colour in the room. */
+
+.login-aurora::before,
+.login-aurora::after,
+.login-aurora > i {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  will-change: transform;
+}
+
+.login-aurora::before {
+  top: -22%;
+  left: 8%;
+  width: 58vw;
+  height: 58vw;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.5), transparent 68%);
+  animation: login-drift-a 26s ease-in-out infinite;
+}
+
+.login-aurora::after {
+  right: -6%;
+  bottom: -24%;
+  width: 52vw;
+  height: 52vw;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.38), transparent 68%);
+  animation: login-drift-b 34s ease-in-out infinite;
+}
+
+.login-aurora > i {
+  left: 42%;
+  bottom: 6%;
+  width: 34vw;
+  height: 34vw;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.3), transparent 66%);
+  animation: login-drift-c 42s ease-in-out infinite;
+}
+
+@keyframes login-drift-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(6vw, 5vh, 0) scale(1.14); }
+}
+
+@keyframes login-drift-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.08); }
+  50% { transform: translate3d(-7vw, -6vh, 0) scale(0.92); }
+}
+
+@keyframes login-drift-c {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(0.95); }
+  50% { transform: translate3d(-4vw, -8vh, 0) scale(1.2); }
+}
+
+/* ───────────────────────── starfield ─────────────────────────
+   Two planes of pin-lights at different sizes, breathing out of phase. Drawn
+   as a stack of tiny radial gradients rather than DOM nodes or box-shadows —
+   one element, one paint. */
+
+.login-stars {
+  background-repeat: no-repeat;
+  background-image:
+    radial-gradient(1.6px 1.6px at 12% 18%, rgba(255, 255, 255, 0.85), transparent),
+    radial-gradient(1.4px 1.4px at 27% 62%, rgba(186, 230, 253, 0.7), transparent),
+    radial-gradient(1.1px 1.1px at 41% 22%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1.7px 1.7px at 58% 78%, rgba(199, 210, 254, 0.75), transparent),
+    radial-gradient(1.2px 1.2px at 69% 34%, rgba(255, 255, 255, 0.65), transparent),
+    radial-gradient(1.5px 1.5px at 83% 12%, rgba(186, 230, 253, 0.8), transparent),
+    radial-gradient(1.3px 1.3px at 91% 55%, rgba(255, 255, 255, 0.55), transparent),
+    radial-gradient(1.1px 1.1px at 8% 84%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1.6px 1.6px at 34% 91%, rgba(199, 210, 254, 0.6), transparent),
+    radial-gradient(1.2px 1.2px at 76% 68%, rgba(255, 255, 255, 0.55), transparent);
+  animation: login-twinkle 7s ease-in-out infinite;
+}
+
+.login-stars-far {
+  background-repeat: no-repeat;
+  background-image:
+    radial-gradient(1px 1px at 19% 41%, rgba(255, 255, 255, 0.45), transparent),
+    radial-gradient(1px 1px at 48% 9%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 63% 52%, rgba(186, 230, 253, 0.4), transparent),
+    radial-gradient(1px 1px at 88% 39%, rgba(255, 255, 255, 0.35), transparent),
+    radial-gradient(1px 1px at 24% 74%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 55% 88%, rgba(199, 210, 254, 0.35), transparent),
+    radial-gradient(1px 1px at 95% 80%, rgba(255, 255, 255, 0.3), transparent);
+  animation: login-twinkle 11s ease-in-out infinite reverse;
+}
+
+@keyframes login-twinkle {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 1; }
+}
+
+/* ───────────────────────── horizon grid ─────────────────────────
+   A plane laid flat under the card and rotated away from the camera, sliding
+   toward the viewer one cell at a time. The slide is a transform on the plane
+   itself — animating background-position would repaint the whole floor. */
+
+/* Geometry note: the plane is rotated about its own top edge, which is pinned
+   to the horizon, so it tilts up out of the screen as it comes down the page —
+   near the bottom, close to the camera. That puts a singularity at
+   `perspective / sin(angle)` px down the plane; past it, points fall behind the
+   camera and Chrome drops them. Hence the deep perspective and the bounded
+   plane height: everything drawn stays in front of the lens. */
+.login-floor {
+  position: absolute;
+  top: 54%;
+  right: -30%;
+  bottom: -4%;
+  left: -30%;
+  overflow: hidden;
+  perspective: 900px;
+  perspective-origin: 50% 0%;
+  pointer-events: none;
+  z-index: 0;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 16%, rgba(0, 0, 0, 0.6) 86%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 16%, rgba(0, 0, 0, 0.6) 86%, transparent);
+}
+
+.login-floor::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: -60%;
+  left: 0;
+  background-image:
+    linear-gradient(to right, rgba(56, 189, 248, 0.45) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.45) 1px, transparent 1px);
+  background-size: 90px 90px;
+  transform: rotateX(64deg) translate3d(0, 0, 0);
+  transform-origin: 50% 0;
+  animation: login-floor 7s linear infinite;
+  will-change: transform;
+}
+
+/* One cell per cycle, so the loop is seamless. */
+@keyframes login-floor {
+  from { transform: rotateX(64deg) translate3d(0, 0, 0); }
+  to { transform: rotateX(64deg) translate3d(0, 90px, 0); }
+}
+
+/* The bright seam where the plane meets the sky. Sits at the floor's leading
+   edge, so it passes behind the card and reads only out at the margins. */
+.login-horizon {
+  position: absolute;
+  top: 54%;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(56, 189, 248, 0.55) 30%, rgba(165, 243, 252, 0.75) 50%, rgba(56, 189, 248, 0.55) 70%, transparent);
+  box-shadow: 0 0 40px 6px rgba(56, 189, 248, 0.22);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ───────────────────────── rings ─────────────────────────
+   The landing page's instrument, stripped to its line-work and parked behind
+   the card as scenery. Each ring turns at its own rate, outside-in. */
+
+.login-rings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.62;
+}
+
+.login-rings svg {
+  width: min(128vw, 820px);
+  height: auto;
+}
+
+.login-ring-slow { animation: login-spin 150s linear infinite; transform-origin: 200px 200px; }
+.login-ring-mid { animation: login-spin-reverse 84s linear infinite; transform-origin: 200px 200px; }
+.login-ring-fast { animation: login-spin 44s linear infinite; transform-origin: 200px 200px; }
+.login-ring-pulse { animation: login-breathe 5.5s ease-in-out infinite; transform-origin: 200px 200px; }
+
+@keyframes login-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes login-spin-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes login-breathe {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+
+/* ───────────────────────── grain + vignette ─────────────────────────
+   Flat gradients on a large dark field band badly on 8-bit panels. A fractal
+   noise tile at 3.5% breaks the bands up and gives the whole stage a film
+   surface. It is one inline SVG, so it costs no request. */
+
+.login-grain {
+  z-index: 1;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>");
+}
+
+.login-vignette {
+  z-index: 1;
+  background:
+    radial-gradient(ellipse 92% 74% at 50% 45%, transparent 45%, rgba(5, 8, 15, 0.62) 100%),
+    linear-gradient(to bottom, rgba(5, 8, 15, 0.5), transparent 26%, transparent 74%, rgba(5, 8, 15, 0.4));
+}
+
+/* ───────────────────────── card ─────────────────────────
+   Glass over the sky. The border is a gradient rather than a flat hairline —
+   lit from the top-left, the way a physical panel would catch the room. */
+
+.login-card {
+  position: relative;
+  border-radius: 22px;
+  background: linear-gradient(160deg, rgba(20, 27, 45, 0.86), rgba(9, 13, 24, 0.9));
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  backdrop-filter: blur(22px) saturate(140%);
+  box-shadow:
+    0 40px 90px -30px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+  animation: login-rise 700ms var(--login-ease) 90ms both;
+}
+
+/* The lit edge. Painted into the border box with a mask so it reads as one
+   hairline rather than a second, slightly larger card behind the first. */
+.login-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(150deg, rgba(125, 211, 252, 0.55), rgba(99, 102, 241, 0.22) 38%, transparent 62%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* A slow sheen crossing the glass, clipped to the card. */
+.login-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, 0.06) 48%, transparent 58%);
+  background-size: 260% 100%;
+  animation: login-sheen 9s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes login-sheen {
+  0%, 62% { background-position: 130% 0; }
+  100% { background-position: -30% 0; }
+}
+
+@keyframes login-rise {
+  from { opacity: 0; transform: translateY(18px) scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Header block, arriving a beat before the card. */
+.login-head {
+  animation: login-rise 700ms var(--login-ease) both;
+}
+
+/* ───────────────────────── logo ───────────────────────── */
+
+.login-mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+/* The halo behind the mark — a soft disc that breathes with the rings. */
+.login-mark::before {
+  content: '';
+  position: absolute;
+  inset: -46%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.45), rgba(56, 189, 248, 0.12) 55%, transparent 72%);
+  filter: blur(14px);
+  animation: login-breathe 5.5s ease-in-out infinite;
+}
+
+.login-mark img {
+  position: relative;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 18px 40px -14px rgba(56, 189, 248, 0.55);
+}
+
+/* ───────────────────────── field ───────────────────────── */
+
+.login-field {
+  background: rgba(5, 8, 15, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transition:
+    border-color 220ms var(--login-ease),
+    box-shadow 220ms var(--login-ease),
+    background-color 220ms var(--login-ease);
+}
+
+.login-field::placeholder {
+  color: #55617a;
+}
+
+.login-field:focus {
+  outline: none;
+  background: rgba(5, 8, 15, 0.9);
+  border-color: rgba(56, 189, 248, 0.65);
+  box-shadow:
+    0 0 0 3px rgba(56, 189, 248, 0.16),
+    0 0 26px -4px rgba(56, 189, 248, 0.5);
+}
+
+/* Keyboard users get the ring from :focus-visible instead of the browser's, so
+   suppress the doubled-up outline on the field itself. */
+.login-field:focus-visible {
+  outline: none;
+}
+
+/* ───────────────────────── submit ───────────────────────── */
+
+.login-submit {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(120deg, #4f46e5, #6366f1 45%, #0ea5e9);
+  color: #fff;
+  box-shadow:
+    0 12px 30px -12px rgba(79, 70, 229, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  transition: transform 220ms var(--login-ease), box-shadow 220ms var(--login-ease), filter 220ms var(--login-ease);
+}
+
+.login-submit:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow:
+    0 18px 40px -14px rgba(79, 70, 229, 1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.login-submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.login-submit:disabled {
+  filter: saturate(0.65) brightness(0.85);
+  cursor: not-allowed;
+}
+
+/* Light travelling across the button on hover. */
+.login-submit::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 40%, rgba(255, 255, 255, 0.32) 50%, transparent 60%);
+  background-size: 300% 100%;
+  background-position: 130% 0;
+  transition: background-position 700ms var(--login-ease);
+  pointer-events: none;
+}
+
+.login-submit:hover:not(:disabled)::after {
+  background-position: -30% 0;
+}
+
+/* ───────────────────────── ghost link ───────────────────────── */
+
+.login-ghost {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #b3bed2;
+  transition: border-color 220ms var(--login-ease), color 220ms var(--login-ease), background-color 220ms var(--login-ease);
+}
+
+.login-ghost:hover {
+  border-color: rgba(56, 189, 248, 0.45);
+  background: rgba(56, 189, 248, 0.07);
+  color: #fff;
+}
+
+/* ───────────────────────── error ───────────────────────── */
+
+.login-error {
+  animation: login-shake 420ms var(--login-ease) both;
+}
+
+@keyframes login-shake {
+  0% { transform: translateX(0); }
+  22% { transform: translateX(-6px); }
+  46% { transform: translateX(5px); }
+  70% { transform: translateX(-3px); }
+  100% { transform: translateX(0); }
+}
+
+/* ───────────────────────── reduced motion ─────────────────────────
+   Everything above is decoration. Someone who has asked the OS for less motion
+   keeps the whole composition — colour, depth, glass — and loses only the
+   movement. */
+
+@media (prefers-reduced-motion: reduce) {
+  .login-root *,
+  .login-root *::before,
+  .login-root *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

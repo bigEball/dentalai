@@ -285,7 +285,7 @@ export default function FormsPage() {
       const patientFirst = sendForm.patient?.firstName || 'Patient';
       const fakeLink = `https://summitaisoftware.com/forms/fill/demo-${sendForm.id}`;
       const fakeMsg =
-        `Hi ${patientFirst}! 😊 Summit AI Services here. We have some paperwork for your upcoming visit. ` +
+        `Hi ${patientFirst}! 😊 Summit Tech here. We have some paperwork for your upcoming visit. ` +
         `Please fill it out at your convenience:\n\n${fakeLink}\n\n` +
         `It only takes a few minutes and helps us make the most of your appointment time. See you soon!`;
       setSentPreview({ message: fakeMsg, link: fakeLink });
@@ -660,7 +660,7 @@ export default function FormsPage() {
                 Text message preview
               </p>
               <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-100 text-sm text-gray-700 leading-relaxed whitespace-pre-line">
-                Hi {sendForm.patient?.firstName}! 😊 Summit AI Services here. We have some paperwork for your upcoming visit. Please fill it out at your convenience:
+                Hi {sendForm.patient?.firstName}! 😊 Summit Tech here. We have some paperwork for your upcoming visit. Please fill it out at your convenience:
                 {'\n\n'}
                 <span className="text-indigo-600 underline">https://summitaisoftware.com/forms/fill/...</span>
                 {'\n\n'}
